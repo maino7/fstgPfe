@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <f:metadata>
+            <f:viewAction action="#{searchEtudiantController.initView()}"/>
+        </f:metadata>
+        <ui:define name="title">
+            FSTG | Recherche des Etudiants
+        </ui:define>
+        <ui:define name="content">
+
+
+            <h:form id="etudForm">
+
+                <h1><h:outputText value="Recherche Etudiant"/></h1>
+                <p:panelGrid columns="4">
+                    <p:outputLabel value="Cne:" for="cne" />
+                    <p:inputText id="cne" value="#{searchEtudiantController.selectedEtud.cne}" title="Cne" />
+                    <p:outputLabel value="Nom:" for="nom" />
+                    <p:inputText id="nom" value="#{searchEtudiantController.selectedEtud.nom}" title="Nom" />
+                    <p:outputLabel value="Prenom:" for="prenom" />
+                    <p:inputText id="prenom" value="#{searchEtudiantController.selectedEtud.prenom}" title="Prenom" />
+                    <p:outputLabel value="Email:" for="email" />
+                    <p:inputText id="email" value="#{searchEtudiantController.selectedEtud.email}" title="Email" />
+                    <p:outputLabel value="Annee :" for="anneeScolaire" />
+                    <p:selectOneMenu id="anneeScolaire" value="#{searchEtudiantController.annee.id}" >
+                        <f:selectItems value="#{anneeController.items}" var="item" itemValue="#{item.id}" itemLabel="Annee #{item.libelle}"/>
+                        <p:ajax process="anneeScolaire"  update="semestreActuel"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Semestre Actuel:" for="semestreActuel" />
+                    <p:selectOneMenu  id="semestreActuel" value="#{searchEtudiantController.selectedEtud.semestreActuel}" >
+                        <f:selectItem itemValue="#{null}" itemLabel="Select..."/>
+                        <f:selectItems value="#{searchEtudiantController.findSemestreByAnnee}" var="item" itemValue="#{item}" itemLabel="Semestre #{item.libelle}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Gender:" for="gender" />
+                    <p:selectOneMenu id="gender" value="#{searchEtudiantController.selectedEtud.gender}" label="Gender" >
+                        <f:selectItem itemValue="" itemLabel="Select..."/>
+                        <f:selectItem itemValue="m" itemLabel="Male"/>
+                        <f:selectItem itemValue="f" itemLabel="Female"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Date Naissance:" for="dateNaissance" />
+                    <p:calendar id="dateNaissance" value="#{searchEtudiantController.selectedEtud.dateNaissance}" pattern="dd/MM/yyyy" title="DateNaissance" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </p:calendar>
+
+                </p:panelGrid>
+                <p:commandButton id="searchbtn" value="Search" actionListener="#{searchEtudiantController.searchFormFiliere()}" update=":etudListForm:etudList"/>
+            </h:form>
+
+
+
+
+
+            <h:form id="etudListForm">
+                <br/>
+
+                <p:dataTable id="etudList" value="#{searchEtudiantController.elems}" var="item"
+                             paginator="true" rows="10"
+                                 >
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cne"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cne}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nom"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nom}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Prenom"/>
+                        </f:facet>
+                        <h:outputText value="#{item.prenom}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Semestre Actuel"/>
+                        </f:facet>
+                        <h:outputText value="#{item.semestreActuel.libelle}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date Naissance"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dateNaissance}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Semestre"/>
+                        </f:facet>
+                        <p:selectOneMenu id="semestreChosen" value="#{searchEtudiantController.semestreNumber}" label="SemestreNumber" >
+                            <f:selectItems value="#{searchEtudiantController.getEtudSemetres(item)}" var="etudItem" itemValue="#{etudItem}" itemLabel="S#{etudItem.libelle}"/>
+                    </p:selectOneMenu>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Operation"/>
+                        </f:facet>
+                        <p:menuButton value="Options">
+                        <p:menuitem  icon="ui-icon-pdf"  action="#{searchEtudiantController.generateCSPdf(item)}" value="Certificat Scolaire" ajax="false" />
+                        <p:menuitem  icon="ui-icon-pdf"  action="#{searchEtudiantController.generateReleveePdf(item)}" value="Relevee Notes" ajax="false" />
+                        <p:menuitem  icon="ui-icon-pdf"  action="#{searchEtudiantController.generateAttestationPdf(item)}" value="Attestation DEUST" ajax="false" />
+    </p:menuButton>
+                     </p:column>
+                </p:dataTable>
+            </h:form>
+
+           
+
+
+        </ui:define>
+    </ui:composition>
+</html>
+

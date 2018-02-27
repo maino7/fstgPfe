@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PieceCreateDlg" widgetVar="PieceCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePieceTitle}">
+            <h:form id="PieceCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pieceController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePieceLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{pieceController.selected.id}" title="#{bundle.CreatePieceTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreatePieceLabel_titre}" for="titre" />
+                        <p:inputText id="titre" value="#{pieceController.selected.titre}" title="#{bundle.CreatePieceTitle_titre}" />
+                        <p:outputLabel value="#{bundle.CreatePieceLabel_nationalite}" for="nationalite" />
+                        <p:inputText id="nationalite" value="#{pieceController.selected.nationalite}" title="#{bundle.CreatePieceTitle_nationalite}" />
+                        <p:outputLabel value="#{bundle.CreatePieceLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{pieceController.selected.nombre}" title="#{bundle.CreatePieceTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreatePieceLabel_fonctionnare}" for="fonctionnare" />
+                        <p:inputText id="fonctionnare" value="#{pieceController.selected.fonctionnare}" title="#{bundle.CreatePieceTitle_fonctionnare}" />
+                        <p:outputLabel value="#{bundle.CreatePieceLabel_typeInscription}" for="typeInscription" />
+                        <p:inputText id="typeInscription" value="#{pieceController.selected.typeInscription}" title="#{bundle.CreatePieceTitle_typeInscription}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pieceController.create}" value="#{bundle.Save}" update="display,:PieceListForm:datalist,:growl" oncomplete="handleSubmit(args,'PieceCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PieceCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

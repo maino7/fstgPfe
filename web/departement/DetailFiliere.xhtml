@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css"/>
+    </h:head>
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Tous les filières"/>
+        </ui:define>
+
+        <ui:define name="content">
+
+           <div class="row3">
+                <div class="rounded">
+                    <div class="sidebar one_quarter first"> <br></br><br></br>
+                        <h6>FACULTE</h6><br></br>
+                        <nav class="sdb_holder">
+
+                            <li><p:commandLink value="Mot du doyen"/></li>
+                            <li><p:commandLink value="Organisation"/></li>
+                            <li><p:commandLink value="FSTG en bref"/></li>
+                            <li><p:commandLink value="FSTG rn chiffre"/></li>
+
+                        </nav><br></br>
+                    </div></div></div><br></br>
+
+            <div class="container">     
+                <div class="col-lg-6">
+
+                    <div class="card">
+                        <div class="card-header" role="tab">
+                            <h5 class="mb-0">
+                                <a data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapseOne">
+                                    OBJECTIF DE LA FORMATION :
+                                </a>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="card-block" style="color: #000;">
+                                #{departementController.filiere.objectif}
+                            </div>
+                        </div>
+                    </div><br></br>
+                    <div class="card">
+                        <div class="card-header" role="tab">
+                            <h5 class="mb-0">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="collapseTwo">
+                                    CONTENU :
+                                </a>
+                            </h5>
+                        </div>
+                        <div class="card-block">
+                            <c:forEach items="#{departementController.semestres}" var="semestre">
+                                <p:panel style="margin-right: 50px;">
+                                    <h:form >
+                                        <p:dataTable id="dataTable" value="#{semestre.modules}" var="module" 
+                                                     class="table table-hover"
+                                                     >
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Semestre #{semestre.libelle}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{module.nom}"/>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </h:form>
+                                </p:panel><p:separator></p:separator>
+                            </c:forEach>
+                        </div>
+                    </div></div></div>
+        </ui:define>
+    </ui:composition>
+</html>
+

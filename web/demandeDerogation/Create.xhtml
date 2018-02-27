@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandeDerogationCreateDlg" widgetVar="DemandeDerogationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDemandeDerogationTitle}">
+            <h:form id="DemandeDerogationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandeDerogationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{demandeDerogationController.selected.id}" title="#{bundle.CreateDemandeDerogationTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_etudiant}" for="etudiant" />
+                        <p:selectOneMenu id="etudiant" value="#{demandeDerogationController.selected.etudiant}" >
+                            <f:selectItems value="#{etudiantController.itemsAvailableSelectOne}"
+                                           var="etudiantItem"
+                                           itemValue="#{etudiantItem}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{demandeDerogationController.selected.description}" title="#{bundle.CreateDemandeDerogationTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_anne_baccalaureat}" for="anne_baccalaureat" />
+                        <p:inputText id="anne_baccalaureat" value="#{demandeDerogationController.selected.anne_baccalaureat}" title="#{bundle.CreateDemandeDerogationTitle_anne_baccalaureat}" />
+                        <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_anne_etude}" for="anne_etude" />
+                        <p:selectOneMenu id="anne_etude" value="#{demandeDerogationController.selected.anne_etude}" >
+                            <f:selectItem itemValue="0" itemLabel="Select Année d'etude "/>
+                            <f:selectItem itemValue="1" itemLabel="Premier Année"/>
+                            <f:selectItem itemValue="2" itemLabel="Deuxieme Année"/>
+                            <f:selectItem itemValue="3" itemLabel="Troixieme Année"/>
+                            <f:selectItem itemValue="4" itemLabel="Quatrieme Année"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_nombreSemestresValide}" for="nombreSemestresValide" />
+                        <p:inputText id="nombreSemestresValide" value="#{demandeDerogationController.selected.nombreSemestresValide}" title="#{bundle.CreateDemandeDerogationTitle_nombreSemestresValide}" />
+                        <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_nombreMdulesValide}" for="nombreMdulesValide" />
+                        <p:inputText id="nombreMdulesValide" value="#{demandeDerogationController.selected.nombreMdulesValide}" title="#{bundle.CreateDemandeDerogationTitle_nombreMdulesValide}" />
+                        <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_filiere}" for="filiere" />
+                        <p:selectOneMenu id="filiere" value="#{demandeDerogationController.selected.filiere}" >
+                            <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
+                                           var="filiereItem"
+                                           itemValue="#{filiereItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{demandeDerogationController.create}" value="#{bundle.Save}" update="display,:DemandeDerogationListForm:datalist,:growl" oncomplete="handleSubmit(args,'DemandeDerogationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DemandeDerogationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

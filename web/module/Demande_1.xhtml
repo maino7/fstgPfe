@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition template="/template/simpleTemplate.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListDemandeItemTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            #{moduleController.preparDemande()}
+            <h:form id="ModuleListForm"  >
+                <p:growl life="3000"/>
+                <i class="glyphicon glyphicon-alert" style="color: black">
+                    <h:outputText style="color:red;font-size: 20px" value=" S'il vous plaît ne vous précipitez pas à choisir car vous pouvez pas changer votre choix."/></i>
+                    <br></br><br></br><br></br>
+                    <div class="row">
+                    <div class="col-md-6" >
+
+
+
+                        <h:outputText value="Sélectionner sept modules au maximum:" style="font-size: 20px" />
+                        <br></br>
+                        #{moduleController.modulsSmestreActuel()}
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="glyphicon glyphicon-list"></i></span> 
+                                <p:selectCheckboxMenu id="multiple" value="#{moduleController.selectedModulsToStudy}" label="select Moduls to Study this Semestre" multiple="true" 
+                                                      filter="true" filterMatchMode="startsWith" panelStyle="width:250px"  style="width: 100%;height: 100%">
+                                    <f:selectItem itemLabel="--Sélectionner--"/>
+
+                                    <f:selectItems value="#{moduleController.modulsNV}" itemLabel="#{item.nom} (S#{item.semestre.libelle})" var="item" />
+                                </p:selectCheckboxMenu>
+                            </div></div>
+
+
+                    </div>
+                    <div class="col-md-6" >
+                        <div class="form-group">
+                            <label class="control-label">Ecrire les raisons pour votre choix:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="glyphicon glyphicon-pencil"></i></span>
+                                <p:inputTextarea  autoResize="true" style="width:100% " rows="12" value="#{moduleController.descriptionDemande}"/>
+                            </div></div>
+                        <b:commandButton actionListener="#{moduleController.addToDemande()}"  value="Envoyer" />
+
+                    </div>
+                </div>  
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

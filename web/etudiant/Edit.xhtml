@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EtudiantEditDlg" widgetVar="EtudiantEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEtudiantTitle}">
+            <h:form id="EtudiantEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{etudiantController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEtudiantLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{etudiantController.selected.password}" title="#{bundle.EditEtudiantTitle_password}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantLabel_nbrCnx}" for="nbrCnx" />
+                        <p:inputText id="nbrCnx" value="#{etudiantController.selected.nbrCnx}" title="#{bundle.EditEtudiantTitle_nbrCnx}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantLabel_semestreActuel}" for="semestreActuel" />
+                        <p:selectOneMenu id="semestreActuel" value="#{etudiantController.selected.semestreActuel}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"
+                                           var="semestreActuelItem"
+                                           itemValue="#{semestreActuelItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtudiantLabel_dateNaissance}" for="dateNaissance" />
+                        <p:calendar id="dateNaissance" pattern="MM/dd/yyyy" value="#{etudiantController.selected.dateNaissance}" title="#{bundle.EditEtudiantTitle_dateNaissance}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEtudiantLabel_filiere}" for="filiere" />
+                        <p:selectOneMenu id="filiere" value="#{etudiantController.selected.filiere}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
+                                           var="filiereItem"
+                                           itemValue="#{filiereItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtudiantLabel_equipeRecherche}" for="equipeRecherche" />
+                        <p:selectOneMenu id="equipeRecherche" value="#{etudiantController.selected.equipeRecherche}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{equipeRechercheController.itemsAvailableSelectOne}"
+                                           var="equipeRechercheItem"
+                                           itemValue="#{equipeRechercheItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtudiantLabel_cne}" for="cne" />
+                        <p:inputText id="cne" value="#{etudiantController.selected.cne}" title="#{bundle.EditEtudiantTitle_cne}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{etudiantController.selected.nom}" title="#{bundle.EditEtudiantTitle_nom}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{etudiantController.selected.prenom}" title="#{bundle.EditEtudiantTitle_prenom}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{etudiantController.selected.email}" title="#{bundle.EditEtudiantTitle_email}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantLabel_gender}" for="gender" />
+                        <p:inputText id="gender" value="#{etudiantController.selected.gender}" title="#{bundle.EditEtudiantTitle_gender}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{etudiantController.update}" value="#{bundle.Save}" update="display,:EtudiantListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EtudiantEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EtudiantEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

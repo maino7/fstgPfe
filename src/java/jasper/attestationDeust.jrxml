@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e26844bc-4841-46c2-9de5-a1b58ac83b90">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="77"/>
+	<parameter name="anneeUniversitaire" class="java.lang.String"/>
+	<parameter name="specialite" class="java.lang.String"/>
+	<parameter name="diplome" class="java.lang.String"/>
+	<parameter name="attestation" class="java.lang.String"/>
+	<parameter name="cne" class="java.lang.String"/>
+	<parameter name="cin" class="java.lang.String"/>
+	<parameter name="nom" class="java.lang.String"/>
+	<parameter name="naissance" class="java.lang.String"/>
+	<parameter name="moyenne" class="java.lang.String"/>
+	<parameter name="mention" class="java.lang.String"/>
+	<parameter name="duree" class="java.lang.String"/>
+	<parameter name="jury" class="java.lang.String"/>
+	<parameter name="faite" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="233" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="be972a68-1f66-4ace-9ea7-04b2293e1c78" x="208" y="0" width="138" height="14"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[UNIVERSITE CADI AYYAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="be972a68-1f66-4ace-9ea7-04b2293e1c78" x="169" y="14" width="233" height="14"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FACULTE DES SCIENCES ET TECHNIQUES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="be972a68-1f66-4ace-9ea7-04b2293e1c78" x="214" y="28" width="138" height="14"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[GUELIZ - MARRAKECH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0ecde050-9665-4beb-be54-a8ff85f76aff" x="176" y="48" width="203" height="38"/>
+				<textElement>
+					<font fontName="Source Sans Pro Black" size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATTESTATION]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="1d0b8ba0-6e89-4668-bfba-c75d70884bc7" x="95" y="92" width="444" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{anneeUniversitaire}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="90d28b5e-357c-4144-96bf-d27a560c2fb9" x="95" y="132" width="444" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{specialite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b06ecf99-9c15-491e-a18d-9c771cdc99be" x="95" y="112" width="444" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{diplome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="89396962-cd4d-45bd-ae77-d8b5cd41e517" x="22" y="165" width="203" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{attestation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c7c5caba-d010-46d0-9943-aa84ab26c13e" x="22" y="185" width="203" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cne}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c59fc9be-16bb-4096-adbf-7d31801931f1" x="22" y="205" width="203" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="373" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0807707a-b8ba-431e-aaab-2c3d3ffb6bd3" x="22" y="26" width="462" height="42"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Le Doyen de la Faculté des Sciences et Techniques - Gueliz Marrakech certifie que l'étudiant (e)]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="a7d63a4e-5941-4074-87e8-77f4fa9b534d" x="113" y="43" width="239" height="24"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7eca5498-f34c-4644-900e-39cbd5e0ea6f" x="22" y="86" width="462" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{naissance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3ab6e168-d6c4-4f74-ad6e-42d3ac709056" x="144" y="241" width="340" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{moyenne}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9fae2cfb-92ca-40fd-b050-c58e9fd1542f" x="144" y="278" width="340" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mention}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b49741bb-670c-4463-a9ff-d88a89b6774f" x="144" y="318" width="340" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{duree}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a4eec61b-a3a5-41cf-9402-26090eab1e3e" x="22" y="163" width="462" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{specialite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c72895f3-ab03-4682-98bf-13d898b1ccd5" x="22" y="197" width="462" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{jury}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="873857d9-b77f-4aac-ae7a-247b910f611d" x="22" y="143" width="462" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{diplome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2d588275-17a7-48bb-bd03-91ddc781c6ca" x="22" y="113" width="373" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Est declaré :                                                     ADMIS (E)]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement uuid="19cc53db-3d66-4355-8ca4-54a222b58f3d" x="346" y="22" width="193" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{faite}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

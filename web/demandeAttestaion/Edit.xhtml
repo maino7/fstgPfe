@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandeAttestaionEditDlg" widgetVar="DemandeAttestaionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDemandeAttestaionTitle}">
+            <h:form id="DemandeAttestaionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandeAttestaionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDemandeAttestaionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{demandeAttestaionController.selected.id}" title="#{bundle.EditDemandeAttestaionTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditDemandeAttestaionLabel_etudiant}" for="etudiant" />
+                        <p:selectOneMenu id="etudiant" value="#{demandeAttestaionController.selected.etudiant}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{etudiantController.itemsAvailableSelectOne}"
+                                           var="etudiantItem"
+                                           itemValue="#{etudiantItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandeAttestaionLabel_attestationDeust}" for="attestationDeust" />
+                        <p:inputText id="attestationDeust" value="#{demandeAttestaionController.selected.attestationDeust}" title="#{bundle.EditDemandeAttestaionTitle_attestationDeust}" />
+                        <p:outputLabel value="#{bundle.EditDemandeAttestaionLabel_attestationLicence}" for="attestationLicence" />
+                        <p:inputText id="attestationLicence" value="#{demandeAttestaionController.selected.attestationLicence}" title="#{bundle.EditDemandeAttestaionTitle_attestationLicence}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{demandeAttestaionController.update}" value="#{bundle.Save}" update="display,:DemandeAttestaionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandeAttestaionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DemandeAttestaionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

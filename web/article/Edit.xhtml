@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ArticleEditDlg" widgetVar="ArticleEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditArticleTitle}">
+            <h:form id="ArticleEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{articleController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditArticleLabel_file}" for="file" />
+                        <p:inputText id="file" value="#{articleController.selected.file}" title="#{bundle.EditArticleTitle_file}" />
+                        <p:outputLabel value="#{bundle.EditArticleLabel_priority}" for="priority" />
+                        <p:inputText id="priority" value="#{articleController.selected.priority}" title="#{bundle.EditArticleTitle_priority}" />
+                        <p:outputLabel value="#{bundle.EditArticleLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{articleController.selected.type}" title="#{bundle.EditArticleTitle_type}" />
+                        <p:outputLabel value="#{bundle.EditArticleLabel_auteur}" for="auteur" />
+                        <p:selectOneMenu id="auteur" value="#{articleController.selected.auteur}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{enseignantController.itemsAvailableSelectOne}"
+                                           var="auteurItem"
+                                           itemValue="#{auteurItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditArticleLabel_dateCreation}" for="dateCreation" />
+                        <p:calendar id="dateCreation" pattern="MM/dd/yyyy" value="#{articleController.selected.dateCreation}" title="#{bundle.EditArticleTitle_dateCreation}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditArticleLabel_dateDebut}" for="dateDebut" />
+                        <p:calendar id="dateDebut" pattern="MM/dd/yyyy" value="#{articleController.selected.dateDebut}" title="#{bundle.EditArticleTitle_dateDebut}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditArticleLabel_dateExpiration}" for="dateExpiration" />
+                        <p:calendar id="dateExpiration" pattern="MM/dd/yyyy" value="#{articleController.selected.dateExpiration}" title="#{bundle.EditArticleTitle_dateExpiration}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditArticleLabel_contenu}" for="contenu" />
+                        <p:inputText id="contenu" value="#{articleController.selected.contenu}" title="#{bundle.EditArticleTitle_contenu}" />
+                        <p:outputLabel value="#{bundle.EditArticleLabel_titre}" for="titre" />
+                        <p:inputText id="titre" value="#{articleController.selected.titre}" title="#{bundle.EditArticleTitle_titre}" />
+                        <p:outputLabel value="#{bundle.EditArticleLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{articleController.selected.id}" title="#{bundle.EditArticleTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{articleController.update}" value="#{bundle.Save}" update="display,:ArticleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ArticleEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ArticleEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

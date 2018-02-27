@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition>
+        <style>
+            /* Start by setting display:none to make this hidden.
+            Then we position it in relation to the viewport window
+            with position:fixed. Width, height, top and left speak
+            for themselves. Background we set to 80% white with
+            our animation centered, and no-repeating */
+            .modal {
+                display:    none;
+                position:   fixed;
+                z-index:    1000;
+                top:        0;
+                left:       0;
+                height:     100%;
+                width:      100%;
+                background: rgba( 240, 240, 240, .2 ) 
+
+
+                    no-repeat;
+            }
+            .modal .inModal{
+                color: #cf8618;
+                margin-top:  15%;
+                margin-left:  43%;
+                margin-right: 43%;
+            }
+            /* When the body has the loading class, we turn
+            the scrollbar off with overflow:hidden */
+            body.loading {
+                overflow: hidden;   
+            }
+
+            /* Anytime the body has the loading class, our
+            modal element will be visible */
+            body.loading .modal {
+                display: block;
+            }
+        </style>
+
+        <div class="modal">
+            <div class="inModal" style=" ">
+                <center>
+
+                    <img src="images/ripple.svg"   alt=""/>
+                    <br/>
+                    <b>Veuillez Patientez SVP..</b>
+                </center>
+            </div>
+        </div>
+
+        <script>
+            $body = $("body");
+
+            $(document).on({
+                ajaxStart: function () {
+                    $body.addClass("loading");
+                },
+                ajaxStop: function () {
+                    $body.removeClass("loading");
+                }
+            });
+
+        </script>
+
+    </ui:composition>
+</html>
+

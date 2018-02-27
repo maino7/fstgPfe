@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OuvrageEditDlg" widgetVar="OuvrageEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditOuvrageTitle}">
+            <h:form id="OuvrageEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ouvrageController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditOuvrageLabel_auteur}" for="auteur" />
+                        <p:inputText id="auteur" value="#{ouvrageController.selected.auteur}" title="#{bundle.EditOuvrageTitle_auteur}" />
+                        <p:outputLabel value="#{bundle.EditOuvrageLabel_edition}" for="edition" />
+                        <p:inputText id="edition" value="#{ouvrageController.selected.edition}" title="#{bundle.EditOuvrageTitle_edition}" />
+                        <p:outputLabel value="#{bundle.EditOuvrageLabel_rubrique}" for="rubrique" />
+                        <p:selectOneMenu id="rubrique" value="#{ouvrageController.selected.rubrique}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{rubriqueController.itemsAvailableSelectOne}"
+                                           var="rubriqueItem"
+                                           itemValue="#{rubriqueItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditOuvrageLabel_numero}" for="numero" />
+                        <p:inputText id="numero" value="#{ouvrageController.selected.numero}" title="#{bundle.EditOuvrageTitle_numero}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ouvrageController.update}" value="#{bundle.Save}" update="display,:OuvrageListForm:datalist,:growl" oncomplete="handleSubmit(args, 'OuvrageEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OuvrageEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

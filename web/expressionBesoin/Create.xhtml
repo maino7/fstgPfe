@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ExpressionBesoinCreateDlg" widgetVar="ExpressionBesoinCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateExpressionBesoinTitle}">
+            <h:form id="ExpressionBesoinCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{expressionBesoinController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateExpressionBesoinLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{expressionBesoinController.selected.id}" title="#{bundle.CreateExpressionBesoinTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateExpressionBesoinLabel_dateExpressionBesoin}" for="dateExpressionBesoin" />
+                        <p:calendar id="dateExpressionBesoin" pattern="MM/dd/yyyy" value="#{expressionBesoinController.selected.dateExpressionBesoin}" title="#{bundle.EditExpressionBesoinTitle_dateExpressionBesoin}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateExpressionBesoinLabel_user}" for="user" />
+                        <p:selectOneMenu id="user" value="#{expressionBesoinController.selected.user}" >
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userItem"
+                                           itemValue="#{userItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{expressionBesoinController.create}" value="#{bundle.Save}" update="display,:ExpressionBesoinListForm:datalist,:growl" oncomplete="handleSubmit(args,'ExpressionBesoinCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ExpressionBesoinCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

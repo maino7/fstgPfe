@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="/template/sideBarTemplate.xhtml">
+
+        <ui:define name="content">
+            <b:form id="ArticleCreateForm1">
+                <b:panel title="MyArticle">
+                    <b:panelGrid columns="4" >
+                        <p:outputLabel value="#{bundle.CreateArticleLabel_priority}"  />
+                        <b:selectOneMenu id="priority" value="#{articleAdminController.article.priority}" title="#{bundle.CreateArticleTitle_priority}" >
+                            <f:selectItem itemValue="#{null}" itemLabel="Select your Priority"/>
+                            <f:selectItem itemValue="0" itemLabel="Max"/>
+                            <f:selectItem itemValue="1" itemLabel="Trés Fort"/>
+                            <f:selectItem itemValue="2" itemLabel="Fort"/>
+                            <f:selectItem itemValue="3" itemLabel="Normal"/>
+                            <f:selectItem itemValue="4" itemLabel="Faible"/>
+                            <f:selectItem itemValue="5" itemLabel="Trés Faible"/>
+                            <f:selectItem itemValue="6" itemLabel="Min"/>
+                        </b:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateArticleLabel_type}"  />
+                        <b:selectOneMenu id="type" value="#{articleAdminController.article.type}" title="#{bundle.CreateArticleTitle_type}" >
+                            <f:selectItem itemValue="#{null}" itemLabel="Select your Type"/>
+                            <f:selectItem itemValue="Gauche" itemLabel="Gauche"/>
+                            <f:selectItem itemValue="Milieu" itemLabel="Milieu "/>
+                            <f:selectItem itemValue="Droit" itemLabel="Droit"/>
+                        </b:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateArticleLabel_auteur}"  />
+                        <b:selectOneMenu id="auteur" value="#{articleAdminController.article.auteur}" >
+                            <f:selectItems value="#{enseignantController.itemsAvailableSelectOne}"
+                                           var="auteurItem"
+                                           itemValue="#{auteurItem}" />
+                        </b:selectOneMenu>
+                        <b:dateTimePicker id="dateCreation"  mode="inline" value="#{articleAdminController.article.dateCreation}" title="#{bundle.EditArticleTitle_dateCreation}"  />
+                        <p:outputLabel value="#{bundle.CreateArticleLabel_dateDebut}"  />
+                        <b:dateTimePicker id="dateDebut"  value="#{articleAdminController.article.dateDebut}" title="#{bundle.EditArticleTitle_dateDebut}"   />
+                        <p:outputLabel value="#{bundle.CreateArticleLabel_dateExpiration}" />
+                        <b:dateTimePicker id="dateExpiration" value="#{articleAdminController.article.dateExpiration}" title="#{bundle.EditArticleTitle_dateExpiration}" />
+                        <p:outputLabel value="#{bundle.CreateArticleLabel_contenu}" />
+    
+    
+                        <p:inputText id="contenu" value="#{articleAdminController.article.contenu}" title="#{bundle.CreateArticleTitle_contenu}" />
+                        <p:outputLabel value="#{bundle.CreateArticleLabel_titre}"  />
+                        <p:inputText id="titre" value="#{articleAdminController.article.titre}" title="#{bundle.CreateArticleTitle_titre}" />
+                        <p:outputLabel value="#{bundle.CreateArticleLabel_id}"  />
+                        <p:inputText id="id" value="#{articleAdminController.article.id}" title="#{bundle.CreateArticleTitle_id}" />
+                    </b:panelGrid>
+
+                    <b:commandButton action="#{articleAdminController.create()}"  icon=""
+                                     class="btnm btnm-large waves-button-input glyphicon glyphicon-send waves-effect "
+                                     value="#{bundle.Save}"  onclick="ArticleCreateDialog.hide()"  ></b:commandButton>
+                                     <b:commandButton value="#{bundle.Cancel}"   class="btn btn-default" onclick="ArticleCreateDialog.hide()" update="ArticleCreateForm1" />
+                </b:panel>
+            </b:form>
+            <ui:include src="List.xhtml"/>
+        </ui:define>
+
+    </ui:composition>
+</html>

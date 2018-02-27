@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <ui:define name="head">
+            <f:metadata>
+                <f:viewAction action="#{templateController.redirect()}"></f:viewAction>
+            </f:metadata>
+        </ui:define>
+        <ui:define name="title">
+            FSTG | Etudiant Connexion 
+        </ui:define>
+        <ui:define name="content">
+            <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+            <div >
+                <div class="col-lg-offset-1 ">
+
+                    <img src="../resources/images/logo12.png" alt="" class="pull-left"/>
+                </div>
+
+                <div class="col-lg-6 col-lg-offset-1">
+                    <h:form class="form-group">
+                        <h1><h:outputText value="Connection Etudiant"/></h1>
+                        <!--<p:panelGrid columns="2">-->
+                        <p:outputLabel value="Cne:" for="cne" />
+                        <p:inputText id="cne" class="form-control" value="#{connectionController.selectedEtud.cne}" title="Cne" />
+                        <p:outputLabel value="Password:" for="password" />
+                        <p:password id="password" class="form-control" value="#{connectionController.selectedEtud.password}" title="Password" />
+                        N.B: Pour la premiere connexion essayer votre date de naissance comme mot de passe sous cette forme "jjMMaaaa" (ex.11/03/1995 devient 11031995) .
+                        <!--</p:panelGrid>-->
+                        <br/>
+                        <p:commandButton value="Se Connecter" style="background-color: #00cc33" class="btn center" action="#{connectionController.signInEtud()}" update="" />
+                        <br/>
+                        <br/>
+                        <p:commandLink value="Mot De Passe Oublié?" action="#{connectionController.redirect('../etudiant/forgotpassword.xhtml')}"></p:commandLink>
+                        <br/>
+                        <!--<p:outputLabel id="messageConnection" value="# {connectionController.messageConnection}" />-->
+                    </h:form>
+
+                </div>
+            </div >
+
+        </ui:define>
+    </ui:composition>
+</html>
+

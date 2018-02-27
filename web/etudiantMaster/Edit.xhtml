@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EtudiantMasterEditDlg" widgetVar="EtudiantMasterEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEtudiantMasterTitle}">
+            <h:form id="EtudiantMasterEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{etudiantMasterController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{etudiantMasterController.selected.id}" title="#{bundle.EditEtudiantMasterTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_cne}" for="cne" />
+                        <p:inputText id="cne" value="#{etudiantMasterController.selected.cne}" title="#{bundle.EditEtudiantMasterTitle_cne}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_cin}" for="cin" />
+                        <p:inputText id="cin" value="#{etudiantMasterController.selected.cin}" title="#{bundle.EditEtudiantMasterTitle_cin}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_nomLat}" for="nomLat" />
+                        <p:inputText id="nomLat" value="#{etudiantMasterController.selected.nomLat}" title="#{bundle.EditEtudiantMasterTitle_nomLat}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_prenomLat}" for="prenomLat" />
+                        <p:inputText id="prenomLat" value="#{etudiantMasterController.selected.prenomLat}" title="#{bundle.EditEtudiantMasterTitle_prenomLat}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_sexe}" for="sexe" />
+                        <p:inputText id="sexe" value="#{etudiantMasterController.selected.sexe}" title="#{bundle.EditEtudiantMasterTitle_sexe}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{etudiantMasterController.selected.email}" title="#{bundle.EditEtudiantMasterTitle_email}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_telephone}" for="telephone" />
+                        <p:inputText id="telephone" value="#{etudiantMasterController.selected.telephone}" title="#{bundle.EditEtudiantMasterTitle_telephone}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_nomAr}" for="nomAr" />
+                        <p:inputText id="nomAr" value="#{etudiantMasterController.selected.nomAr}" title="#{bundle.EditEtudiantMasterTitle_nomAr}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_prenomAr}" for="prenomAr" />
+                        <p:inputText id="prenomAr" value="#{etudiantMasterController.selected.prenomAr}" title="#{bundle.EditEtudiantMasterTitle_prenomAr}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_dateNaissance}" for="dateNaissance" />
+                        <p:calendar id="dateNaissance" pattern="MM/dd/yyyy" value="#{etudiantMasterController.selected.dateNaissance}" title="#{bundle.EditEtudiantMasterTitle_dateNaissance}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_lieuNaissance}" for="lieuNaissance" />
+                        <p:inputText id="lieuNaissance" value="#{etudiantMasterController.selected.lieuNaissance}" title="#{bundle.EditEtudiantMasterTitle_lieuNaissance}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_anneeBac}" for="anneeBac" />
+                        <p:inputText id="anneeBac" value="#{etudiantMasterController.selected.anneeBac}" title="#{bundle.EditEtudiantMasterTitle_anneeBac}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_dateInscription}" for="dateInscription" />
+                        <p:calendar id="dateInscription" pattern="HH:mm:ss" value="#{etudiantMasterController.selected.dateInscription}" title="#{bundle.EditEtudiantMasterTitle_dateInscription}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_photo}" for="photo" />
+                        <p:inputText id="photo" value="#{etudiantMasterController.selected.photo}" title="#{bundle.EditEtudiantMasterTitle_photo}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_ip}" for="ip" />
+                        <p:inputText id="ip" value="#{etudiantMasterController.selected.ip}" title="#{bundle.EditEtudiantMasterTitle_ip}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_adresse}" for="adresse" />
+                        <p:inputText id="adresse" value="#{etudiantMasterController.selected.adresse}" title="#{bundle.EditEtudiantMasterTitle_adresse}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_lieuAr}" for="lieuAr" />
+                        <p:inputText id="lieuAr" value="#{etudiantMasterController.selected.lieuAr}" title="#{bundle.EditEtudiantMasterTitle_lieuAr}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_lastPdf}" for="lastPdf" />
+                        <p:inputText id="lastPdf" value="#{etudiantMasterController.selected.lastPdf}" title="#{bundle.EditEtudiantMasterTitle_lastPdf}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_anneeInscriptionEnsSup}" for="anneeInscriptionEnsSup" />
+                        <p:inputText id="anneeInscriptionEnsSup" value="#{etudiantMasterController.selected.anneeInscriptionEnsSup}" title="#{bundle.EditEtudiantMasterTitle_anneeInscriptionEnsSup}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_anneeInscriptionUniv}" for="anneeInscriptionUniv" />
+                        <p:inputText id="anneeInscriptionUniv" value="#{etudiantMasterController.selected.anneeInscriptionUniv}" title="#{bundle.EditEtudiantMasterTitle_anneeInscriptionUniv}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_anneeInscriptionEtab}" for="anneeInscriptionEtab" />
+                        <p:inputText id="anneeInscriptionEtab" value="#{etudiantMasterController.selected.anneeInscriptionEtab}" title="#{bundle.EditEtudiantMasterTitle_anneeInscriptionEtab}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_etablissementPreInsc}" for="etablissementPreInsc" />
+                        <p:inputText id="etablissementPreInsc" value="#{etudiantMasterController.selected.etablissementPreInsc}" title="#{bundle.EditEtudiantMasterTitle_etablissementPreInsc}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_secret}" for="secret" />
+                        <p:inputText id="secret" value="#{etudiantMasterController.selected.secret}" title="#{bundle.EditEtudiantMasterTitle_secret}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_filiereMaster}" for="filiereMaster" />
+                        <p:selectOneMenu id="filiereMaster" value="#{etudiantMasterController.selected.filiereMaster}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{filiereMasterController.itemsAvailableSelectOne}"
+                                           var="filiereMasterItem"
+                                           itemValue="#{filiereMasterItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_professionPere}" for="professionPere" />
+                        <p:selectOneMenu id="professionPere" value="#{etudiantMasterController.selected.professionPere}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{professionController.itemsAvailableSelectOne}"
+                                           var="professionPereItem"
+                                           itemValue="#{professionPereItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_professionMere}" for="professionMere" />
+                        <p:selectOneMenu id="professionMere" value="#{etudiantMasterController.selected.professionMere}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{professionController.itemsAvailableSelectOne}"
+                                           var="professionMereItem"
+                                           itemValue="#{professionMereItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_typeDernierDiplome}" for="typeDernierDiplome" />
+                        <p:inputText id="typeDernierDiplome" value="#{etudiantMasterController.selected.typeDernierDiplome}" title="#{bundle.EditEtudiantMasterTitle_typeDernierDiplome}" />
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_pays}" for="pays" />
+                        <p:selectOneMenu id="pays" value="#{etudiantMasterController.selected.pays}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{paysController.itemsAvailableSelectOne}"
+                                           var="paysItem"
+                                           itemValue="#{paysItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_mentionBac}" for="mentionBac" />
+                        <p:selectOneMenu id="mentionBac" value="#{etudiantMasterController.selected.mentionBac}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{mentionBacController.itemsAvailableSelectOne}"
+                                           var="mentionBacItem"
+                                           itemValue="#{mentionBacItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_optionBac}" for="optionBac" />
+                        <p:selectOneMenu id="optionBac" value="#{etudiantMasterController.selected.optionBac}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{optionBacController.itemsAvailableSelectOne}"
+                                           var="optionBacItem"
+                                           itemValue="#{optionBacItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_lycee}" for="lycee" />
+                        <p:selectOneMenu id="lycee" value="#{etudiantMasterController.selected.lycee}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{lyceeController.itemsAvailableSelectOne}"
+                                           var="lyceeItem"
+                                           itemValue="#{lyceeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_province}" for="province" />
+                        <p:selectOneMenu id="province" value="#{etudiantMasterController.selected.province}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{lieuController.itemsAvailableSelectOne}"
+                                           var="provinceItem"
+                                           itemValue="#{provinceItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEtudiantMasterLabel_academie}" for="academie" />
+                        <p:selectOneMenu id="academie" value="#{etudiantMasterController.selected.academie}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{academieController.itemsAvailableSelectOne}"
+                                           var="academieItem"
+                                           itemValue="#{academieItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{etudiantMasterController.update}" value="#{bundle.Save}" update="display,:EtudiantMasterListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EtudiantMasterEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EtudiantMasterEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

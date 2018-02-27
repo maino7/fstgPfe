@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        
+        <ui:define name="title">
+            FSTG | Demande List
+        </ui:define>
+        <ui:define name="content">
+
+
+
+            <p:tabView id="tabView" >
+                <p:tab title="Les Nouveau demandes" id="tab1">
+
+                    <h:form id="demandeForm">
+                        <div class="row">
+                            <div class="col-md-6" >
+                                <p:dataTable id="demandeList" paginator="true" rows="5" value="#{demandeTraitementController.allNewDemandes}" var="item" >
+                                    <p:column>
+                                        <f:facet name="header"  >
+                                            <h:outputText value="Etudiant"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.etudiant}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header"  >
+                                            <h:outputText value="Description"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.description}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Action"/>
+                                        </f:facet>
+                                        <b:commandButton actionListener="#{demandeTraitementController.findByDemande(item)}" style="color: blue" iconAwesome="fa fa-search" value=""  update=":tabView:tab1:demandeForm:demandeItemList" />
+                                        <b:commandButton value="" iconAwesome="fa fa-check" style="color: green"  actionListener="#{demandeTraitementController.accepterDem(item)}" update=":tabView:tab1:demandeForm, :tabView:tab2:doneDemandeList"/>
+                                        <b:commandButton value="" iconAwesome="fa fa-remove" style="color: red" actionListener="#{demandeTraitementController.declineDem(item)}" update=":tabView:tab1:demandeForm, :tabView:tab2:doneDemandeList" />
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                            <div class="col-md-4" >
+                                <p:dataTable id="demandeItemList" value="#{demandeTraitementController.elems}" var="item2"
+                                             >
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Module" />
+                                        </f:facet>
+                                        <h:outputText value="#{item2.module.nom}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Semstre"/>
+                                        </f:facet>
+                                        <h:outputText value="Semestre #{item2.semestre.libelle}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </div>
+                    </h:form>
+                </p:tab>
+
+                <p:tab title="Ancien Demandes" id="tab2">
+                    <p:dataTable id="doneDemandeList" value="#{demandeTraitementController.doneDemandes}" var="item3" >
+                        <p:column width="15%">
+                            <f:facet name="header"  >
+                                <h:outputText value="Etudiant"/>
+                            </f:facet>
+                            <h:outputText value="#{item3.etudiant.cne}"/><br/>
+                            <h:outputText value="#{item3.etudiant.nom}"/><br/>
+                            <h:outputText value="#{item3.etudiant.prenom}"/><br/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header"  >
+                                <h:outputText value="Description"/>
+                            </f:facet>
+                            <h:outputText value="#{item3.description}"/>
+                        </p:column>
+                        <p:column width="10%">
+                            <f:facet name="header" >
+                                <h:outputText value="Etat"/>
+                            </f:facet>
+
+                            <h:outputText value="#{item3.etat&lt;0?'Refused':'Acceptd'}" style="color :#{item3.etat&lt;0?'red':'green'}; font-weight: bold"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Details"/>
+                            </f:facet>
+                            <p:dataTable id="demandeItemList" value="#{demandeTraitementController.doneItems(item3)}" var="itemDem"
+                                         >
+                                <p:column>
+                                   
+                                    <h:outputText value="#{itemDem.module.nom}"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputText value=" Semestre #{itemDem.semestre.libelle}"/>
+                                </p:column>
+                            </p:dataTable>
+
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+            </p:tabView>
+        </ui:define>
+    </ui:composition>
+</html>
+

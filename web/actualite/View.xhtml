@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ActualiteViewDlg" widgetVar="ActualiteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewActualiteTitle}">
+            <h:form id="ActualiteViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{actualiteController.selected != null}">
+                        <h:outputText value="#{bundle.ViewActualiteLabel_position}"/>
+                        <h:outputText value="#{actualiteController.selected.position}" title="#{bundle.ViewActualiteTitle_position}"/>
+                        <h:outputText value="#{bundle.ViewActualiteLabel_contenue}"/>
+                        <h:outputText value="#{actualiteController.selected.contenue}" title="#{bundle.ViewActualiteTitle_contenue}"/>
+                        <h:outputText value="#{bundle.ViewActualiteLabel_titre}"/>
+                        <h:outputText value="#{actualiteController.selected.titre}" title="#{bundle.ViewActualiteTitle_titre}"/>
+                        <h:outputText value="description"/>
+                        <h:outputText value="#{actualiteController.selected.description}" title="description"/>
+                        <h:outputText value="#{bundle.ViewActualiteLabel_priority}"/>
+                        <h:outputText value="#{actualiteController.selected.priority}" title="#{bundle.ViewActualiteTitle_priority}"/>
+                        <h:outputText value="#{bundle.ViewActualiteLabel_auteur}"/>
+                        <h:outputText value="#{actualiteController.selected.auteur}" title="#{bundle.ViewActualiteTitle_auteur}"/>
+                        <h:outputText value="#{bundle.ViewActualiteLabel_dateCreation}"/>
+                        <h:outputText value="#{actualiteController.selected.dateCreation}" title="#{bundle.ViewActualiteTitle_dateCreation}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewActualiteLabel_dateDebut}"/>
+                        <h:outputText value="#{actualiteController.selected.dateDebut}" title="#{bundle.ViewActualiteTitle_dateDebut}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewActualiteLabel_dateExpiration}"/>
+                        <h:outputText value="#{actualiteController.selected.dateExpiration}" title="#{bundle.ViewActualiteTitle_dateExpiration}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewActualiteLabel_id}"/>
+                        <h:outputText value="#{actualiteController.selected.id}" title="#{bundle.ViewActualiteTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ActualiteViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

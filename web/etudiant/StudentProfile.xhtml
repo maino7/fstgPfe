@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <ui:define name="content">
+            <h:form id="EtudiantViewForm">
+                <h:panelGroup id="display">
+                    #{etudiantController.initStudent()}
+                    #{etudiantController.initEns()}
+                    <div class="row">
+                        <div class="col-md-6" >
+                            <p:outputLabel value="Info Etudiant " style="color: darkblue;color: white;margin-left: 40%" class="label-primary" />
+
+                        </div>
+                        <div class="col-md-6" >
+                            <p:outputLabel value="Info Enseinent " style="color: darkblue;color: white;margin-left: 40%" class="label-primary" />
+
+                        </div> 
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 panel panel-primary" >
+                            <b:panelGrid columns="2"  rendered="#{etudiantController.selected != null}">
+                                <p:outputLabel value="Cne:" style="color: black ;border-color: black" />
+                                <p:outputLabel value="#{etudiantController.selected.cne}" title="#{bundle.ViewEtudiantTitle_cne}"/>
+                                <p:outputLabel value="Semestre actuel :" style="color: black" />
+                                <p:outputLabel value="#{etudiantController.selected.semestreActuel.libelle}" title="semestreActuel"/>
+                                <p:outputLabel value="Nom :" style="color: black"/>
+                                <p:outputLabel value="#{etudiantController.selected.nom}" title="#{bundle.ViewEtudiantTitle_nom}"/>
+                                <p:outputLabel value="Prenom:" style="color: black"/>
+                                <p:outputLabel value="#{etudiantController.selected.prenom}" title="#{bundle.ViewEtudiantTitle_prenom}"/>
+                                <p:outputLabel value="Email:" style="color: black"/>
+                                <p:outputLabel value="#{etudiantController.selected.email}" title="#{bundle.ViewEtudiantTitle_email}"/>
+                                <p:outputLabel value="Gender:" style="color: black"/>
+                                <p:outputLabel value="#{etudiantController.selected.gender}" title="#{bundle.ViewEtudiantTitle_gender}"/>
+                                <p:outputLabel value="Date de naissance:" style="color: black"/>
+                                <p:outputLabel value="#{etudiantController.selected.dateNaissance}" title="#{bundle.ViewEtudiantTitle_dateNaissance}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </p:outputLabel>
+                                <p:outputLabel value="Filère:" style="color: black"/>
+                                <p:outputLabel value="#{etudiantController.selected.filiere.libelle}" title="#{bundle.ViewEtudiantTitle_filiere}"/>
+                            </b:panelGrid>
+                        </div>
+
+                        <div class="col-md-6 panel panel-primary" >
+                            <b:panelGrid columns="2" rendered="#{etudiantController.enseignant != null}">
+                                <h:outputText value="#{bundle.ViewEnseignantLabel_cin}" style="color: black;font-weight: bold"/>
+                                <h:outputText value="#{etudiantController.enseignant.cin}" title="#{bundle.ViewEnseignantTitle_cin}"/>
+                                <h:outputText value="#{bundle.ViewEnseignantLabel_nom}" style="color: black;font-weight: bold"/>
+                                <h:outputText value="#{etudiantController.enseignant.nom}" title="#{bundle.ViewEnseignantTitle_nom}"/>
+                                <h:outputText value="#{bundle.ViewEnseignantLabel_prenom}" style="color: black;font-weight: bold"/>
+                                <h:outputText value="#{etudiantController.enseignant.prenom}" title="#{bundle.ViewEnseignantTitle_prenom}"/>
+                                <h:outputText value="#{bundle.ViewEnseignantLabel_email}" style="color: black;font-weight: bold"/>
+                                <h:outputText value="#{etudiantController.enseignant.email}" title="#{bundle.ViewEnseignantTitle_email}"/>
+                                <h:outputText value="#{bundle.ViewEnseignantLabel_filiere}" style="color: black;font-weight: bold"/>
+                                <h:outputText value="#{etudiantController.enseignant.filiere.libelle}" title="#{bundle.ViewEnseignantTitle_filiere}"/>
+                            </b:panelGrid>
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListEtudiantMasterTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="EtudiantMasterListForm">
+                <p:panel header="#{bundle.ListEtudiantMasterTitle}">
+                    <p:dataTable id="datalist" value="#{etudiantMasterController.items}" var="item"
+                                 selectionMode="single" selection="#{etudiantMasterController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.cne}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_cne}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cne}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_cin}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cin}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_nomLat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nomLat}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_prenomLat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prenomLat}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_sexe}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sexe}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_email}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.email}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_telephone}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telephone}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_nomAr}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nomAr}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_prenomAr}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prenomAr}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_dateNaissance}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateNaissance}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_lieuNaissance}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lieuNaissance}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_anneeBac}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.anneeBac}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_dateInscription}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateInscription}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_photo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.photo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_ip}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ip}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_adresse}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.adresse}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_lieuAr}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lieuAr}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_lastPdf}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lastPdf}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_anneeInscriptionEnsSup}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.anneeInscriptionEnsSup}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_anneeInscriptionUniv}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.anneeInscriptionUniv}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_anneeInscriptionEtab}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.anneeInscriptionEtab}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_etablissementPreInsc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etablissementPreInsc}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_secret}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.secret}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_filiereMaster}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.filiereMaster}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_professionPere}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.professionPere}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_professionMere}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.professionMere}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_typeDernierDiplome}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.typeDernierDiplome}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_pays}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pays}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_mentionBac}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mentionBac}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_optionBac}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.optionBac}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_lycee}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lycee}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_province}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.province}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantMasterTitle_academie}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.academie}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{etudiantMasterController.prepareCreate}" update=":EtudiantMasterCreateForm" oncomplete="PF('EtudiantMasterCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":EtudiantMasterViewForm" oncomplete="PF('EtudiantMasterViewDialog').show()" disabled="#{empty etudiantMasterController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EtudiantMasterEditForm" oncomplete="PF('EtudiantMasterEditDialog').show()" disabled="#{empty etudiantMasterController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{etudiantMasterController.destroy}" update=":growl,datalist" disabled="#{empty etudiantMasterController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

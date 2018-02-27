@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ExpressionBesoinViewDlg" widgetVar="ExpressionBesoinViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewExpressionBesoinTitle}">
+            <h:form id="ExpressionBesoinViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{expressionBesoinController.selected != null}">
+                        <h:outputText value="#{bundle.ViewExpressionBesoinLabel_id}"/>
+                        <h:outputText value="#{expressionBesoinController.selected.id}" title="#{bundle.ViewExpressionBesoinTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewExpressionBesoinLabel_dateExpressionBesoin}"/>
+                        <h:outputText value="#{expressionBesoinController.selected.dateExpressionBesoin}" title="#{bundle.ViewExpressionBesoinTitle_dateExpressionBesoin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewExpressionBesoinLabel_user}"/>
+                        <h:outputText value="#{expressionBesoinController.selected.user}" title="#{bundle.ViewExpressionBesoinTitle_user}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ExpressionBesoinViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

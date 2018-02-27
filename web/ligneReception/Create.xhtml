@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LigneReceptionCreateDlg" widgetVar="LigneReceptionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateLigneReceptionTitle}">
+            <h:form id="LigneReceptionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ligneReceptionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateLigneReceptionLabel_quantiteRecu}" for="quantiteRecu" />
+                        <p:inputText id="quantiteRecu" value="#{ligneReceptionController.selected.quantiteRecu}" title="#{bundle.CreateLigneReceptionTitle_quantiteRecu}" />
+                        <p:outputLabel value="#{bundle.CreateLigneReceptionLabel_reception}" for="reception" />
+                        <p:selectOneMenu id="reception" value="#{ligneReceptionController.selected.reception}" >
+                            <f:selectItems value="#{receptionController.itemsAvailableSelectOne}"
+                                           var="receptionItem"
+                                           itemValue="#{receptionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateLigneReceptionLabel_produit}" for="produit" />
+                        <p:selectOneMenu id="produit" value="#{ligneReceptionController.selected.produit}" >
+                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
+                                           var="produitItem"
+                                           itemValue="#{produitItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateLigneReceptionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{ligneReceptionController.selected.id}" title="#{bundle.CreateLigneReceptionTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ligneReceptionController.create}" value="#{bundle.Save}" update="display,:LigneReceptionListForm:datalist,:growl" oncomplete="handleSubmit(args,'LigneReceptionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LigneReceptionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

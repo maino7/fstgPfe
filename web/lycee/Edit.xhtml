@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LyceeEditDlg" widgetVar="LyceeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLyceeTitle}">
+            <h:form id="LyceeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{lyceeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLyceeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{lyceeController.selected.id}" title="#{bundle.EditLyceeTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditLyceeLabel_titre}" for="titre" />
+                        <p:inputText id="titre" value="#{lyceeController.selected.titre}" title="#{bundle.EditLyceeTitle_titre}" />
+                        <p:outputLabel value="#{bundle.EditLyceeLabel_numApg}" for="numApg" />
+                        <p:inputText id="numApg" value="#{lyceeController.selected.numApg}" title="#{bundle.EditLyceeTitle_numApg}" />
+                        <p:outputLabel value="#{bundle.EditLyceeLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{lyceeController.selected.type}" title="#{bundle.EditLyceeTitle_type}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{lyceeController.update}" value="#{bundle.Save}" update="display,:LyceeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LyceeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LyceeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

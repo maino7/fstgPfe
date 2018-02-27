@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PvNoteModulaireItemCreateDlg" widgetVar="PvNoteModulaireItemCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePvNoteModulaireItemTitle}">
+            <h:form id="PvNoteModulaireItemCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pvNoteModulaireItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePvNoteModulaireItemLabel_noteModulaire}" for="noteModulaire" />
+                        <p:selectOneMenu id="noteModulaire" value="#{pvNoteModulaireItemController.selected.noteModulaire}" >
+                            <f:selectItems value="#{noteModulaireController.itemsAvailableSelectOne}"
+                                           var="noteModulaireItem"
+                                           itemValue="#{noteModulaireItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePvNoteModulaireItemLabel_pvNoteSemestreItem}" for="pvNoteSemestreItem" />
+                        <p:selectOneMenu id="pvNoteSemestreItem" value="#{pvNoteModulaireItemController.selected.pvNoteSemestreItem}" >
+                            <f:selectItems value="#{pvNoteSemestreItemController.itemsAvailableSelectOne}"
+                                           var="pvNoteSemestreItemItem"
+                                           itemValue="#{pvNoteSemestreItemItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePvNoteModulaireItemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{pvNoteModulaireItemController.selected.id}" title="#{bundle.CreatePvNoteModulaireItemTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pvNoteModulaireItemController.create}" value="#{bundle.Save}" update="display,:PvNoteModulaireItemListForm:datalist,:growl" oncomplete="handleSubmit(args,'PvNoteModulaireItemCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PvNoteModulaireItemCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

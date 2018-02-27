@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EquipeRechercheEditDlg" widgetVar="EquipeRechercheEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEquipeRechercheTitle}">
+            <h:form id="EquipeRechercheEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{equipeRechercheController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEquipeRechercheLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{equipeRechercheController.selected.id}" title="#{bundle.EditEquipeRechercheTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditEquipeRechercheLabel_laboratoire}" for="laboratoire" />
+                        <p:selectOneMenu id="laboratoire" value="#{equipeRechercheController.selected.laboratoire}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{laboratoireController.itemsAvailableSelectOne}"
+                                           var="laboratoireItem"
+                                           itemValue="#{laboratoireItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEquipeRechercheLabel_etudiants}" for="etudiants" />
+                        <p:inputText id="etudiants" value="#{equipeRechercheController.selected.etudiants}" title="#{bundle.EditEquipeRechercheTitle_etudiants}" />
+                        <p:outputLabel value="#{bundle.EditEquipeRechercheLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{equipeRechercheController.selected.nom}" title="#{bundle.EditEquipeRechercheTitle_nom}" />
+                        <p:outputLabel value="#{bundle.EditEquipeRechercheLabel_chefEquipe}" for="chefEquipe" />
+                        <p:selectOneMenu id="chefEquipe" value="#{equipeRechercheController.selected.chefEquipe}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{enseignantController.itemsAvailableSelectOne}"
+                                           var="chefEquipeItem"
+                                           itemValue="#{chefEquipeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{equipeRechercheController.update}" value="#{bundle.Save}" update="display,:EquipeRechercheListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EquipeRechercheEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EquipeRechercheEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

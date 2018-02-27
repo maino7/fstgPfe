@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserStockCreateDlg" widgetVar="UserStockCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUserStockTitle}">
+            <h:form id="UserStockCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userStockController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUserStockLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{userStockController.selected.id}" title="#{bundle.CreateUserStockTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateUserStockLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{userStockController.selected.nom}" title="#{bundle.CreateUserStockTitle_nom}" />
+                        <p:outputLabel value="#{bundle.CreateUserStockLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{userStockController.selected.prenom}" title="#{bundle.CreateUserStockTitle_prenom}" />
+                        <p:outputLabel value="#{bundle.CreateUserStockLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{userStockController.selected.email}" title="#{bundle.CreateUserStockTitle_email}" />
+                        <p:outputLabel value="#{bundle.CreateUserStockLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{userStockController.selected.password}" title="#{bundle.CreateUserStockTitle_password}" />
+                        <p:outputLabel value="#{bundle.CreateUserStockLabel_telephone}" for="telephone" />
+                        <p:inputText id="telephone" value="#{userStockController.selected.telephone}" title="#{bundle.CreateUserStockTitle_telephone}" />
+                        <p:outputLabel value="#{bundle.CreateUserStockLabel_gender}" for="gender" />
+                        <p:inputText id="gender" value="#{userStockController.selected.gender}" title="#{bundle.CreateUserStockTitle_gender}" />
+                        <p:outputLabel value="#{bundle.CreateUserStockLabel_dateNaissance}" for="dateNaissance" />
+                        <p:calendar id="dateNaissance" pattern="MM/dd/yyyy" value="#{userStockController.selected.dateNaissance}" title="#{bundle.EditUserStockTitle_dateNaissance}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateUserStockLabel_nbrCnx}" for="nbrCnx" />
+                        <p:inputText id="nbrCnx" value="#{userStockController.selected.nbrCnx}" title="#{bundle.CreateUserStockTitle_nbrCnx}" />
+                        <p:outputLabel value="#{bundle.CreateUserStockLabel_grade}" for="grade" />
+                        <p:inputText id="grade" value="#{userStockController.selected.grade}" title="#{bundle.CreateUserStockTitle_grade}" />
+                        <p:outputLabel value="#{bundle.CreateUserStockLabel_entiteAdministrative}" for="entiteAdministrative" />
+                        <p:selectOneMenu id="entiteAdministrative" value="#{userStockController.selected.entiteAdministrative}" >
+                            <f:selectItems value="#{entiteAdministrativeController.itemsAvailableSelectOne}"
+                                           var="entiteAdministrativeItem"
+                                           itemValue="#{entiteAdministrativeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userStockController.create}" value="#{bundle.Save}" update="display,:UserStockListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserStockCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UserStockCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

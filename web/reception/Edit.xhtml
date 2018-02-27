@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReceptionEditDlg" widgetVar="ReceptionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditReceptionTitle}">
+            <h:form id="ReceptionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{receptionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditReceptionLabel_dateReception}" for="dateReception" />
+                        <p:calendar id="dateReception" pattern="MM/dd/yyyy" value="#{receptionController.selected.dateReception}" title="#{bundle.EditReceptionTitle_dateReception}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditReceptionLabel_expressionBesoin}" for="expressionBesoin" />
+                        <p:selectOneMenu id="expressionBesoin" value="#{receptionController.selected.expressionBesoin}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{expressionBesoinController.itemsAvailableSelectOne}"
+                                           var="expressionBesoinItem"
+                                           itemValue="#{expressionBesoinItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditReceptionLabel_user}" for="user" />
+                        <p:selectOneMenu id="user" value="#{receptionController.selected.user}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userItem"
+                                           itemValue="#{userItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditReceptionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{receptionController.selected.id}" title="#{bundle.EditReceptionTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{receptionController.update}" value="#{bundle.Save}" update="display,:ReceptionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ReceptionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReceptionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

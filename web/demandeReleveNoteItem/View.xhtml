@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandeReleveNoteItemViewDlg" widgetVar="DemandeReleveNoteItemViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDemandeReleveNoteItemTitle}">
+            <h:form id="DemandeReleveNoteItemViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandeReleveNoteItemController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDemandeReleveNoteItemLabel_id}"/>
+                        <h:outputText value="#{demandeReleveNoteItemController.selected.id}" title="#{bundle.ViewDemandeReleveNoteItemTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewDemandeReleveNoteItemLabel_demandeReleveNote}"/>
+                        <h:outputText value="#{demandeReleveNoteItemController.selected.demandeReleveNote}" title="#{bundle.ViewDemandeReleveNoteItemTitle_demandeReleveNote}"/>
+                        <h:outputText value="#{bundle.ViewDemandeReleveNoteItemLabel_semestre}"/>
+                        <h:outputText value="#{demandeReleveNoteItemController.selected.semestre}" title="#{bundle.ViewDemandeReleveNoteItemTitle_semestre}"/>
+                        <h:outputText value="#{bundle.ViewDemandeReleveNoteItemLabel_delivred}"/>
+                        <h:outputText value="#{demandeReleveNoteItemController.selected.delivred}" title="#{bundle.ViewDemandeReleveNoteItemTitle_delivred}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DemandeReleveNoteItemViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

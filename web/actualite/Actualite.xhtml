@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <ui:composition template="/template/simpleTemplate.xhtml">
+            <ui:define name="title">
+
+                FSTG | Actualité 
+            </ui:define>
+
+        <ui:define name="content">
+
+
+            <h3>#{myActualiteController.selected.titre}</h3>
+            <hr/>
+
+            <h:panelGrid columns="2" cellpadding="10">
+
+                <img src="../resources/MyFilesImages/#{myActualiteController.selected.file}" height="200 px" >
+                    <h:outputText
+                        value="#{myActualiteController.selected.contenue}"  escape="false"/>  </img>
+            </h:panelGrid>
+
+
+
+        </ui:define>
+    </ui:composition>
+</html>

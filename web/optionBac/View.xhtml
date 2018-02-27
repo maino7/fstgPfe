@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OptionBacViewDlg" widgetVar="OptionBacViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewOptionBacTitle}">
+            <h:form id="OptionBacViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{optionBacController.selected != null}">
+                        <h:outputText value="#{bundle.ViewOptionBacLabel_id}"/>
+                        <h:outputText value="#{optionBacController.selected.id}" title="#{bundle.ViewOptionBacTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewOptionBacLabel_titre}"/>
+                        <h:outputText value="#{optionBacController.selected.titre}" title="#{bundle.ViewOptionBacTitle_titre}"/>
+                        <h:outputText value="#{bundle.ViewOptionBacLabel_numApg}"/>
+                        <h:outputText value="#{optionBacController.selected.numApg}" title="#{bundle.ViewOptionBacTitle_numApg}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="OptionBacViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

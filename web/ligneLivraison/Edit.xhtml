@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LigneLivraisonEditDlg" widgetVar="LigneLivraisonEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLigneLivraisonTitle}">
+            <h:form id="LigneLivraisonEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ligneLivraisonController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLigneLivraisonLabel_quantite}" for="quantite" />
+                        <p:inputText id="quantite" value="#{ligneLivraisonController.selected.quantite}" title="#{bundle.EditLigneLivraisonTitle_quantite}" />
+                        <p:outputLabel value="#{bundle.EditLigneLivraisonLabel_livraison}" for="livraison" />
+                        <p:selectOneMenu id="livraison" value="#{ligneLivraisonController.selected.livraison}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{livraisonController.itemsAvailableSelectOne}"
+                                           var="livraisonItem"
+                                           itemValue="#{livraisonItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLigneLivraisonLabel_produit}" for="produit" />
+                        <p:selectOneMenu id="produit" value="#{ligneLivraisonController.selected.produit}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
+                                           var="produitItem"
+                                           itemValue="#{produitItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLigneLivraisonLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{ligneLivraisonController.selected.id}" title="#{bundle.EditLigneLivraisonTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ligneLivraisonController.update}" value="#{bundle.Save}" update="display,:LigneLivraisonListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LigneLivraisonEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LigneLivraisonEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

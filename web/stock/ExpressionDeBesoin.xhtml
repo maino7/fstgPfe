@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!-- Bootstrap core CSS-->
+    <link href="template1/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+    <!-- Custom fonts for this template-->
+    <link href="template1/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
+    <!-- Custom styles for this template-->
+    <link href="template1/css/sb-admin.css" rel="stylesheet"></link>
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+
+    Hello from Facelets
+    <ui:composition template="../template/simpleTemplate.xhtml">
+        <ui:define name="content">
+
+            <h:form id="a">
+
+                <p:growl id="growl" sticky="true" showDetail="true"/>
+
+                <body class="bg-dark">
+                    <div class="container">
+                        <div class="card card-register mx-auto mt-5">
+                            <h1> <div class="card-header">Expression de besoin</div></h1> 
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <h1> <label for="exampleInputName">Date</label></h1>
+                                                <!-- <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter first name"> -->
+                                                <input class="form-control" type="date" id="myDate" ></input>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h1>  <label for="exampleInputLastName">Entile admin</label></h1>
+                                                <!-- <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Enter last name"> --><select class="form-control">
+                                                    <option>--SELECT--</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h1>  <label for="exampleInputPassword1">Membre</label></h1>
+                                                <!--  <input class="form-control" id="membre" type="password" placeholder="Password"> -->
+                                                <select class="form-control">
+                                                    <option>--SELECT--</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="card card-register mx-auto mt-5">
+                            <h1>    <div class="card-header">Expression de besoin</div></h1>
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="col-md-4">
+                                                <h1>   <label for="exampleInputName">Categorie produit</label></h1>
+                                                <select class="form-control">
+                                                    <option>--SELECT--</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h1>    <label for="exampleInputLastName">Produit</label></h1>
+                                                <select class="form-control">
+                                                    <option>--SELECT--</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h1>    <label for="exampleInputPassword1">Quantité</label></h1>
+                                                <input class="form-control" type="number" name="quantity" min="1" max="1000" placeholder="entrer la Quantité"></input>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <a class="btn btn-primary btn-block" >Ajouter</a>
+                    <br></br>
+                    <div class="container">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <!--                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Categorie Produit</th>
+                                                                                <th>Produit</th>
+                                                                                <th>Quantité</th>
+                                                                            </tr>
+                                    
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <th>Scanner</th>
+                                                                                <th>Scqanner HP</th>
+                                                                                <th>12</th>
+                                    
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th>PC</th>
+                                                                                <th>MAC IOS 17   </th>
+                                                                                <th>20</th>
+                                    
+                                                                            </tr>
+                                    
+                                                                        </tbody>
+                                                                    </table>-->
+                                    <div class="container">
+                                        <h2>Expression De Besoin</h2>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Categorie Produit</th>
+                                                    <th>Produit</th>
+                                                    <th>Quantité</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Scanner</td>
+                                                    <td>Scqanner HP</td>
+                                                    <td>12</td>
+                                                </tr>      
+                                                <tr class="success">
+                                                    <td>PC</td>
+                                                    <td>MAC IOS 17  </td>
+                                                    <td>20</td>
+                                                </tr>
+                                                <tr class="danger">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr class="info">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr class="warning">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr class="active">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <a  class="btn btn-primary btn-block"  >Valider</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bootstrap core JavaScript-->
+                    <script src="vendor/jquery/jquery.min.js"></script>
+                    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                    <!-- Core plugin JavaScript-->
+                    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+                </body>
+
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

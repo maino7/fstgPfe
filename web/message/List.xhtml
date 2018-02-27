@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="Liste de tous les messages"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+
+            <h:form id="MessageListForm">
+
+                <b:panel title="Rechercher un message : " class="panel-success" >
+                    <b:panelGrid columns="4" >
+                        <h:outputLabel value="Date Max :" for="dateMan" />
+                        <p:calendar id="dateMan" pattern="dd/MM/yyyy" value="#{messageController.datMax}"  showOn="button" />
+
+                        <h:outputLabel value="Lu / Non lu :" for="luMsg" />
+                        <p:selectOneMenu id="luMsg" value="#{messageController.lu}" >
+                            <f:selectItem itemValue="-1" itemLabel=" -------- SELECT ---------"/>
+                            <f:selectItem itemLabel="Non lu" itemValue="0"/>
+                            <f:selectItem itemLabel="Lu" itemValue="1"/>
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Date Min :" for="dateMin" />
+                        <p:calendar id="dateMin" pattern="dd/MM/yyyy" value="#{messageController.datMin}"  showOn="button" />
+                        <h:outputLabel value="Sujet :" for="sujet" />
+                        <p:selectOneMenu id="sujet" value="#{messageController.sujet}" >
+                            <f:selectItem itemLabel=" --------SELECT--------"/>
+                            <f:selectItem itemValue="Demande d'information" itemLabel="Demande d'information"/>
+                            <f:selectItem itemValue="Reclamation" itemLabel="Reclamation"/>
+                            <f:selectItem itemValue="Prise de RDV" itemLabel="Prise de RDV"/>
+                            <f:selectItem itemValue="Autre" itemLabel="Autre"/>
+                        </p:selectOneMenu>
+
+                    </b:panelGrid><br></br><br></br>
+                    <div align="center">
+                        <b:commandButton value="Rechecher"  icon="glyphicon glyphicon-search" actionListener="#{messageController.findMsg()}" update="datalist"></b:commandButton>
+                    </div>
+                </b:panel><br></br>
+                <b:panel title=" Les messages " class="panel-success"   >
+                    <p:dataTable id="datalist"  value="#{messageController.items}" var="message"
+                                 selectionMode="single">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText  value="Situation"/>
+                            </f:facet>
+                            <h:outputText value="#{message.lu==false?'Non lu':'lu'}" style="color:#{message.lu==true ? 'green' : 'red'}; font-weight: bold"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Prenom"/>
+                            </f:facet>
+                            <h:outputText value="#{message.prenom}"/>
+                        </p:column>
+                        <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nom"/>
+                        </f:facet>
+                        <h:outputText value="#{message.nom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Adresse E-mail"/>
+                            </f:facet>
+                            <h:outputText value="#{message.email}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Date d'envoi"/>
+                            </f:facet>
+                            <h:outputText value="#{message.dateEnvoi}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Action"/>
+                            </f:facet>
+                            <b:commandButton id="viewButton" icon="ui-icon-search" value="Message ici" actionListener="#{messageController.prepareLu(message)}" disabled="#{empty messageController.selected}" update=":MessageViewForm,MessageListForm" oncomplete="PF('MessageViewDialog').show()"/>
+                            <b:commandButton id="deleteButton" icon="ui-icon-trash"  value="Supprimer" actionListener="#{messageController.destroy(message)}" update="datalist" disabled="#{empty departementController.selected}"/>
+                        </p:column>
+                    </p:dataTable>
+                </b:panel>
+            </h:form>
+
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

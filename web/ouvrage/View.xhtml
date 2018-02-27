@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OuvrageViewDlg" widgetVar="OuvrageViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewOuvrageTitle}">
+            <h:form id="OuvrageViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ouvrageController.selected != null}">
+                        <h:outputText value="#{bundle.ViewOuvrageLabel_auteur}"/>
+                        <h:outputText value="#{ouvrageController.selected.auteur}" title="#{bundle.ViewOuvrageTitle_auteur}"/>
+                        <h:outputText value="#{bundle.ViewOuvrageLabel_edition}"/>
+                        <h:outputText value="#{ouvrageController.selected.edition}" title="#{bundle.ViewOuvrageTitle_edition}"/>
+                        <h:outputText value="#{bundle.ViewOuvrageLabel_rubrique}"/>
+                        <h:outputText value="#{ouvrageController.selected.rubrique}" title="#{bundle.ViewOuvrageTitle_rubrique}"/>
+                        <h:outputText value="#{bundle.ViewOuvrageLabel_numero}"/>
+                        <h:outputText value="#{ouvrageController.selected.numero}" title="#{bundle.ViewOuvrageTitle_numero}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="OuvrageViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

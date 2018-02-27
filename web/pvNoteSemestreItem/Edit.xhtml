@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PvNoteSemestreItemEditDlg" widgetVar="PvNoteSemestreItemEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPvNoteSemestreItemTitle}">
+            <h:form id="PvNoteSemestreItemEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pvNoteSemestreItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPvNoteSemestreItemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{pvNoteSemestreItemController.selected.id}" title="#{bundle.EditPvNoteSemestreItemTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditPvNoteSemestreItemLabel_noteSemestre}" for="noteSemestre" />
+                        <p:selectOneMenu id="noteSemestre" value="#{pvNoteSemestreItemController.selected.noteSemestre}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{noteSemestreController.itemsAvailableSelectOne}"
+                                           var="noteSemestreItem"
+                                           itemValue="#{noteSemestreItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPvNoteSemestreItemLabel_pv}" for="pv" />
+                        <p:selectOneMenu id="pv" value="#{pvNoteSemestreItemController.selected.pv}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{pvController.itemsAvailableSelectOne}"
+                                           var="pvItem"
+                                           itemValue="#{pvItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pvNoteSemestreItemController.update}" value="#{bundle.Save}" update="display,:PvNoteSemestreItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PvNoteSemestreItemEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PvNoteSemestreItemEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

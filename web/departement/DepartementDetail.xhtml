@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <ui:define name="title">
+            <h:outputText value="departements"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <link type="text/css" rel="stylesheet" href="../resources/materialize/css/materialize.css" media="screen,projection"/>
+
+            <div class="row3">
+                <div class="rounded">
+                    <div class="sidebar one_quarter first"> <br></br><br></br>
+                        <h6>FACULTE</h6><br></br>
+                        <nav class="sdb_holder">
+
+                            <li><p:commandLink value="Mot du doyen"/></li>
+                            <li><p:commandLink value="Organisation"/></li>
+                            <li><p:commandLink value="FSTG en bref"/></li>
+                            <li><p:commandLink value="FSTG rn chiffre"/></li>
+
+                        </nav><br></br>
+                    </div></div></div>
+
+            <div class="container">
+                <div class="col-lg-10">
+                    <b:panel class="panel-warning">
+                        <h:outputText value="Departement de #{departementController.selected.intitule}" class="titleGlobal"/>
+                        <p:separator></p:separator>
+                        <h:outputText value="Description :" class="outpuText"/><br></br><br></br>
+                        <h:outputText value="#{departementController.selected.description}"/><br></br><br></br>
+                        <h:outputText value="Les enseignants de ce departement : " class="outpuText"/><br></br><br></br>
+
+                        <p:dataTable class="table table-hover" id="datalist" value="#{departementController.enseignants}" var="enseignant"
+                                     selectionMode="single"
+                                     paginator="false" 
+                                     rowKey="#{enseignant.cin}"
+                                     >
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Abreviation"/>
+                                </f:facet>
+                                <h:outputText value="#{enseignant.toString()}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Abreviation"/>
+                                </f:facet>
+                                <h:outputText value="#{enseignant.grade}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Abreviation"/>
+                                </f:facet>
+                                <h:outputText value="#{enseignant.email}"/>
+                            </p:column>
+                        </p:dataTable>
+                        <br></br>
+                        <h:form>
+                            <h:outputText value="Liste des filieres de ce departement :" class="outpuText"/><br></br>
+                            <ul class="collapsible popout col-10" data-collapsible="accordion">
+                                <li>
+                                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>Tron commun </div>
+                                    <c:forEach items="#{departementController.tc}" var="tc">
+                                        <div class="collapsible-body"><p:commandLink value="#{tc.libelle}" actionListener="#{departementController.toDetailFilier(tc)}"/></div>
+                                    </c:forEach>
+                                </li>
+                                <li type="definition">
+                                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>Licence </div>
+                                    <c:forEach items="#{departementController.licences}" var="licence">
+                                        <div class="collapsible-body"><p:commandLink value="#{licence.libelle}" action="#{departementController.toDetailFilier(licence)}"/></div>
+
+                                    </c:forEach>
+                                </li>
+                                <li>
+                                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>Cycle d'ingénieurs </div>
+                                    <c:forEach items="#{departementController.cycle}" var="cycle">
+                                        <div class="collapsible-body"><p:commandLink value="#{cycle.libelle}" action="#{departementController.toDetailFilier(cycle)}"/></div>
+
+                                    </c:forEach>
+                                </li>
+                                <li>
+                                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>Master</div>
+                                    <c:forEach items="#{departementController.master}" var="master">
+                                        <div class="collapsible-body"><p:commandLink value="#{master.libelle}" action="#{departementController.toDetailFilier(master)}"/></div>
+
+                                    </c:forEach>
+                                </li>
+                            </ul>
+                        </h:form>
+                    </b:panel>
+                </div>
+            </div>
+            <style>
+                .titleGlobal{
+                    font-size: 20px;
+                    color: salmon;
+                }
+                .outpuText{
+                    color: #004d40;
+                    font-size: 20px;
+                }
+                .collapsible-header{
+                    color: #0059bc;
+                }
+                .collapsible-body{
+                    color: #82B1FF
+                }
+            </style>
+
+            <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"/>
+            <script type="text/javascript" src="../resources/materialize/js/materialize.js"/>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"/>
+
+        </ui:define>
+    </ui:composition>
+</html>

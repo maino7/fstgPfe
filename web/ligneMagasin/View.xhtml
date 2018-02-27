@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LigneMagasinViewDlg" widgetVar="LigneMagasinViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewLigneMagasinTitle}">
+            <h:form id="LigneMagasinViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ligneMagasinController.selected != null}">
+                        <h:outputText value="#{bundle.ViewLigneMagasinLabel_quantite}"/>
+                        <h:outputText value="#{ligneMagasinController.selected.quantite}" title="#{bundle.ViewLigneMagasinTitle_quantite}"/>
+                        <h:outputText value="#{bundle.ViewLigneMagasinLabel_quantitaDef}"/>
+                        <h:outputText value="#{ligneMagasinController.selected.quantitaDef}" title="#{bundle.ViewLigneMagasinTitle_quantitaDef}"/>
+                        <h:outputText value="#{bundle.ViewLigneMagasinLabel_produit}"/>
+                        <h:outputText value="#{ligneMagasinController.selected.produit}" title="#{bundle.ViewLigneMagasinTitle_produit}"/>
+                        <h:outputText value="#{bundle.ViewLigneMagasinLabel_magasin}"/>
+                        <h:outputText value="#{ligneMagasinController.selected.magasin}" title="#{bundle.ViewLigneMagasinTitle_magasin}"/>
+                        <h:outputText value="#{bundle.ViewLigneMagasinLabel_id}"/>
+                        <h:outputText value="#{ligneMagasinController.selected.id}" title="#{bundle.ViewLigneMagasinTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="LigneMagasinViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandeLicenceItemEditDlg" widgetVar="DemandeLicenceItemEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDemandeLicenceItemTitle}">
+            <h:form id="DemandeLicenceItemEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandeLicenceItemController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDemandeLicenceItemLabel_licence}" for="licence" />
+                        <p:selectOneMenu id="licence" value="#{demandeLicenceItemController.selected.licence}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{licenceController.itemsAvailableSelectOne}"
+                                           var="licenceItem"
+                                           itemValue="#{licenceItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandeLicenceItemLabel_demandeLicence}" for="demandeLicence" />
+                        <p:selectOneMenu id="demandeLicence" value="#{demandeLicenceItemController.selected.demandeLicence}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{demandeLicenceController.itemsAvailableSelectOne}"
+                                           var="demandeLicenceItem"
+                                           itemValue="#{demandeLicenceItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandeLicenceItemLabel_priorite}" for="priorite" />
+                        <p:inputText id="priorite" value="#{demandeLicenceItemController.selected.priorite}" title="#{bundle.EditDemandeLicenceItemTitle_priorite}" />
+                        <p:outputLabel value="#{bundle.EditDemandeLicenceItemLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{demandeLicenceItemController.selected.id}" title="#{bundle.EditDemandeLicenceItemTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{demandeLicenceItemController.update}" value="#{bundle.Save}" update="display,:DemandeLicenceItemListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandeLicenceItemEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DemandeLicenceItemEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

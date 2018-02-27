@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandeReleveNoteEditDlg" widgetVar="DemandeReleveNoteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditDemandeReleveNoteTitle}">
+            <h:form id="DemandeReleveNoteEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandeReleveNoteController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDemandeReleveNoteLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{demandeReleveNoteController.selected.id}" title="#{bundle.EditDemandeReleveNoteTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditDemandeReleveNoteLabel_etudiant}" for="etudiant" />
+                        <p:selectOneMenu id="etudiant" value="#{demandeReleveNoteController.selected.etudiant}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{etudiantController.itemsAvailableSelectOne}"
+                                           var="etudiantItem"
+                                           itemValue="#{etudiantItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{demandeReleveNoteController.update}" value="#{bundle.Save}" update="display,:DemandeReleveNoteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandeReleveNoteEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DemandeReleveNoteEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

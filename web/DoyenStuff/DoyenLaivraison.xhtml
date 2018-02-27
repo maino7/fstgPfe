@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition template="/template/simpleTemplate.xhtml">
+
+
+
+
+        <ui:define name="content" >
+            <h:form id="a"  rendered="#{demandeDerogationController.findDerogation()!=null}">
+                <br></br>
+                <br></br>
+                #{demandeDerogationController.dDemandeEtud()}
+                <p:outputLabel value="vous avez deja envoyez une demande " class="info" style=" font-size: 20px;color: #D17B4E"></p:outputLabel>
+                <br></br><br></br>
+
+                <b:dataTable id="datalist" value="#{demandeDerogationController.demandeEtud}" var="item" 
+                             paginated="false" searching="false"
+                             >
+
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <h:outputText value="Etat D'emande"/>
+                        </f:facet>
+                        <h:outputText value="#{demandeDerogationController.msg}" style="color :#{item.etat==-1?'red':'green'}; font-weight: bold"/>
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListDemandeDerogationTitle_etudiant}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.etudiant}"/>
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListDemandeDerogationTitle_description}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListDemandeDerogationTitle_anne_baccalaureat}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.anne_baccalaureat}"/>
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListDemandeDerogationTitle_anne_etude}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.anne_etude}"/>
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListDemandeDerogationTitle_nombreSemestresValide}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombreSemestresValide}"/>
+                    </b:dataTableColumn>
+                    <b:dataTableColumn>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListDemandeDerogationTitle_nombreMdulesValide}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombreMdulesValide}"/>
+                    </b:dataTableColumn>
+
+
+                </b:dataTable>
+
+
+
+
+            </h:form>
+
+            <h:form id="x"  rendered="#{demandeDerogationController.findDerogation()==null}">
+                <div class="col-lg-10">
+
+                    <p:messages for="successInfo" showDetail="false"/>
+                </div>
+                <div class="row">
+                    <h:panelGroup id="display">
+                        <div class="col-md-6" >
+                            #{demandeDerogationController.prepareCreate()} 
+                            <div class="form-group">
+                                <label class="control-label">Etudiant:</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <b:inputText id="etudiant" value="#{demandeDerogationController.selected.etudiant}" disabled="true" required="true" requiredMessage="Veuillez saisir votre cin !" />
+                                </div>
+                                <p:messages for="etudiant" showDetail="false" autoUpdate="true" closable="true" />
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Année d'obtention du baccalauréat:</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    <b:inputText id="anne_baccalaureat" value="#{demandeDerogationController.selected.anne_baccalaureat}" title="#{bundle.CreateDemandeDerogationTitle_anne_baccalaureat}" required="true" requiredMessage="Veuillez saisir votre anne de baccalaureat!"/></div>
+                                <p:messages for="anne_baccalaureat" showDetail="false" autoUpdate="true" closable="true" />
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">L'année d'étude : </label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="glyphicon glyphicon-list"></i></span> 
+                                    <b:selectOneMenu id="anne_etude" value="#{demandeDerogationController.selected.anne_etude}" required="true" requiredMessage="Veuillez choisz votre anne d'etude !">
+                                        <f:selectItem itemLabel="--Sélectionner l'année d'étude--" itemValue=""/>
+                                        <f:selectItem itemValue="1" itemLabel="Un an"/>
+                                        <f:selectItem itemValue="2" itemLabel="Deux ans"/>
+                                        <f:selectItem itemValue="3" itemLabel="Trois ans"/>
+                                        <f:selectItem itemValue="4" itemLabel="Quatre ans"/>
+                                    </b:selectOneMenu>
+                                </div>
+                                <p:messages for="anne_etude" showDetail="false" autoUpdate="true" closable="true" />
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Nombre de semestre validés:</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-italic"></i></span>
+                                    <b:inputText id="nombreSemestresValide" value="#{demandeDerogationController.selected.nombreSemestresValide}" title="#{bundle.CreateDemandeDerogationTitle_nombreSemestresValide}" required="true" requiredMessage="Veuillez saisir le nombre des semestre validé !" />
+                                </div>
+                                <p:messages for="nombreSemestresValide" showDetail="false" autoUpdate="true" closable="true" />
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Nombre de modules non validés:</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-italic"></i></span>
+                                    <b:inputText id="nombreMdulesValide" value="#{demandeDerogationController.selected.nombreMdulesValide}" title="#{bundle.CreateDemandeDerogationTitle_nombreMdulesValide}" required="true" requiredMessage="Veuillez saisir le nombre des moduls validé !" />
+                                </div>
+                                <p:messages for="nombreMdulesValide" showDetail="false" autoUpdate="true" closable="true" />
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Filière:</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="glyphicon glyphicon-list"></i></span>
+                                    <b:selectOneMenu id="filiere" value="#{demandeDerogationController.selected.filiere}" required="true" requiredMessage="Veuillez choisez une filier !">
+                                        <f:selectItem itemLabel="--Sélectionner la filière--" itemValue=""/>
+                                        <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
+                                                       var="filiereItem"
+                                                       itemValue="#{filiereItem}"/>
+                                    </b:selectOneMenu>
+                                </div>
+                                <p:messages for="filiere" showDetail="false" autoUpdate="true" closable="true" />
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-6" >
+                            <div class="form-group">
+                                <label class="control-label">Sollicite une autorisation de se réinscrire en Licence pour les raisons suivantes:</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"> <i class="glyphicon glyphicon-pencil"></i></span>
+                                    <p:inputTextarea  autoResize="true" style="width:100% " rows="12" value="#{demandeDerogationController.selected.description}"/>
+                                </div>
+
+                            </div>
+                            <b:commandButton actionListener="#{demandeDerogationController.send()}"  value="Envoyer" style="color: black" />
+
+                        </div>
+                    </h:panelGroup >
+
+                </div> 
+                <i class="glyphicon glyphicon-alert" style="color: red">
+
+                    <h:outputText  style="color: red;font-size: 20px" value="Attention :  Cette dérogation sera accepté une seule fois. "/></i>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

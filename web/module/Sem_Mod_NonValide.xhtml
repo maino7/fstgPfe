@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <f:metadata>
+            <f:viewAction action="#{moduleController.initSemestres()}" />
+            <!--<f:viewAction action="# {moduleController.initModuls()}" />-->
+
+        </f:metadata>
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListModuleTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content" >
+            <h:form id="ModuleListForm" >
+                <p:tabView>
+                    <p:tab title="Semestre 1">
+                        #{moduleController.initTabPane(1)}
+                        <h:panelGrid >
+                            <p:dataTable id="datalistNote1" value="#{moduleController.noteModulaires}" var="item"
+                                         >
+                                <f:facet name="header">
+                                    <h:outputText value="[#{moduleController.etudiant.cne}] #{moduleController.etudiant.nom} #{moduleController.etudiant.prenom}"/>
+                                </f:facet>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Module"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.module.nom}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Note"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.note}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mention"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mention}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat==0?'Not Valide':'Valide'}" style="color :#{item.etat==0?'red':'green'}; font-weight: bold"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <h:outputText value="Moyenne du Semestre 1 = #{searchEtudiantController.noteSemestre.note} "/><br/>
+                                    <h:outputText value="Mention : #{searchEtudiantController.noteSemestre.etat==0?'Non Valide':'Valide'} " style="color :#{searchEtudiantController.noteSemestre.etat==0?'red':'green'}; font-weight: bold"/>
+                                </f:facet>
+                            </p:dataTable>
+
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Semestre 2">       
+                 #{moduleController.initTabPane(2)}
+
+                        <h:panelGrid >
+                            <p:dataTable id="datalistNote2" value="#{moduleController.noteModulaires}" var="item"
+                                         >
+                                <f:facet name="header">
+                                    <h:outputText value="[#{moduleController.etudiant.cne}] #{moduleController.etudiant.nom} #{moduleController.etudiant.prenom}"/>
+                                </f:facet>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Module"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.module.nom}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Note"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.note}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mention"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mention}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat==0?'Not Valide':'Valide'}" style="color :#{item.etat==0?'red':'green'}; font-weight: bold"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <h:outputText value="Moyenne du Semestre 2 = #{searchEtudiantController.noteSemestre.note} "/><br/>
+                                    <h:outputText value="Mention : #{searchEtudiantController.noteSemestre.etat==0?'Non Valide':'Valide'} " style="color :#{searchEtudiantController.noteSemestre.etat==0?'red':'green'}; font-weight: bold"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </h:panelGrid>
+                    </p:tab>
+                   <p:tab title="Semestre 3">
+                        #{moduleController.initTabPane(3)}
+
+                        <h:panelGrid >
+                            <p:dataTable id="datalistNote3" value="#{moduleController.noteModulaires}" var="item"
+                                         >
+                                <f:facet name="header">
+                                    <h:outputText value="[#{moduleController.etudiant.cne}] #{moduleController.etudiant.nom} #{moduleController.etudiant.prenom}"/>
+                                </f:facet>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Module"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.module.nom}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Note"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.note}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mention"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mention}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat==0?'Not Valide':'Valide'}" style="color :#{item.etat==0?'red':'green'}; font-weight: bold"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <h:outputText value="Moyenne du Semestre 3 = #{searchEtudiantController.noteSemestre.note} "/><br/>
+                                    <h:outputText value="Mention : #{searchEtudiantController.noteSemestre.etat==0?'Non Valide':'Valide'} " style="color :#{searchEtudiantController.noteSemestre.etat==0?'red':'green'}; font-weight: bold"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </h:panelGrid>
+                    </p:tab>
+                   <p:tab title="Semestre 4">
+                        #{moduleController.initTabPane(4)}
+
+                        <h:panelGrid >
+                            <p:dataTable id="datalistNote4" value="#{moduleController.noteModulaires}" var="item"
+                                         >
+                                <f:facet name="header">
+                                    <h:outputText value="[#{moduleController.etudiant.cne}] #{moduleController.etudiant.nom} #{moduleController.etudiant.prenom}"/>
+                                </f:facet>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Module"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.module.nom}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Note"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.note}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mention"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mention}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat==0?'Not Valide':'Valide'}" style="color :#{item.etat==0?'red':'green'}; font-weight: bold"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <h:outputText value="Moyenne du Semestre 4 = #{searchEtudiantController.noteSemestre.note} "/><br/>
+                                    <h:outputText value="Mention : #{searchEtudiantController.noteSemestre.etat==0?'Non Valide':'Valide'} " style="color :#{searchEtudiantController.noteSemestre.etat==0?'red':'green'}; font-weight: bold"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Semestre 5">
+                        #{moduleController.initTabPane(5)}
+
+                        <h:panelGrid >
+                            <p:dataTable id="datalistNote5" value="#{moduleController.noteModulaires}" var="item"
+                                         >
+                                <f:facet name="header">
+                                    <h:outputText value="[#{moduleController.etudiant.cne}] #{moduleController.etudiant.nom} #{moduleController.etudiant.prenom}"/>
+                                </f:facet>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Module"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.module.nom}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Note"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.note}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mention"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mention}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat==0?'Not Valide':'Valide'}" style="color :#{item.etat==0?'red':'green'}; font-weight: bold"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <h:outputText value="Moyenne du Semestre 5 = #{searchEtudiantController.noteSemestre.note} "/><br/>
+                                    <h:outputText value="Mention : #{searchEtudiantController.noteSemestre.etat==0?'Non Valide':'Valide'} " style="color :#{searchEtudiantController.noteSemestre.etat==0?'red':'green'}; font-weight: bold"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Semestre 6">
+                        #{moduleController.initTabPane(6)}
+
+                        <h:panelGrid >
+                            <p:dataTable id="datalistNote6" value="#{moduleController.noteModulaires}" var="item"
+                                         >
+                                <f:facet name="header">
+                                    <h:outputText value="[#{moduleController.etudiant.cne}] #{moduleController.etudiant.nom} #{moduleController.etudiant.prenom}"/>
+                                </f:facet>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Module"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.module.nom}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Note"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.note}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mention"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mention}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat==0?'Not Valide':'Valide'}" style="color :#{item.etat==0?'red':'green'}; font-weight: bold"/>
+                                </p:column>
+                                <f:facet name="footer">
+                                    <h:outputText value="Moyenne du Semestre 6 = #{moduleController.noteSemestre.note} "/><br/>
+                                    <h:outputText value="Mention : #{moduleController.noteSemestre.etat==0?'Non Valide':'Valide'} " style="color :#{searchEtudiantController.noteSemestre.etat==0?'red':'green'}; font-weight: bold"/>
+                                </f:facet>
+                            </p:dataTable>
+                        </h:panelGrid>
+                    </p:tab>
+                </p:tabView>
+
+
+
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>
+

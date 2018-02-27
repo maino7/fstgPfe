@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+
+        <ui:define name="title">
+            FSTG | Etudiant Connexion 
+        </ui:define>
+        <ui:define name="content">
+            <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+            <p:growl life="5000" />
+            <ui:include src="WaitPage.xhtml"/>
+            <h:form id="uploadInsc">
+                <!--            <p:growl life="5000" />-->
+                #{pvController.filiere=null}
+                <h:outputText  value="INSCRIPTION DES NOUNEAUX ETUDIANTS" class="h2 center-block"/>
+                <div class="container">
+                    <p>
+                        Cette page est resever pour ajouter des nouveaux etudiants selon leurs filiere, <br/>
+                        et aussi la creation de leurs comptes electronique.
+                        <div class="warning" >
+
+                        </div>
+                    </p>
+                </div>
+
+                <h:outputText value="Filiere: " class="h2"></h:outputText>
+                <p:selectOneMenu id="filiere"  value="#{pvController.filiere}" required="true" converter="filiereConverter" >
+                    <f:selectItem itemValue="#{null}" itemLabel="Select Filiere.." />
+                    <f:selectItems value="#{filiereController.itemsAvailableSelectOne}" var="item"
+                                   itemValue="#{item}" itemLabel="#{item.abreviation}"/>
+                </p:selectOneMenu>
+                <div>
+
+                </div>
+
+
+<!--<p:checkbox disabled="#{pvController.semestre!=null}" > je confirme que la strucute du PV est comme</p:checkbox>-->
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                <p:fileUpload id="upload"  label="Ajouter un fichier des Nouveaux etudiants .xls "
+                              dragDropSupport="true" fileLimit="1" 
+                              fileLimitMessage="Uploader un seule fichier PV de type .xls"
+                              fileUploadListener="#{pvController.uploadInscr}"
+                              allowTypes="/(\.|\/)(xls)$/"  sizeLimit="10000000000" />
+            </h:form>
+           
+        </ui:define>
+    </ui:composition>
+</html>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LieuEditDlg" widgetVar="LieuEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLieuTitle}">
+            <h:form id="LieuEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{lieuController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLieuLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{lieuController.selected.id}" title="#{bundle.EditLieuTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditLieuLabel_numApg}" for="numApg" />
+                        <p:inputText id="numApg" value="#{lieuController.selected.numApg}" title="#{bundle.EditLieuTitle_numApg}" />
+                        <p:outputLabel value="#{bundle.EditLieuLabel_titre}" for="titre" />
+                        <p:inputText id="titre" value="#{lieuController.selected.titre}" title="#{bundle.EditLieuTitle_titre}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{lieuController.update}" value="#{bundle.Save}" update="display,:LieuListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LieuEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LieuEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserStockViewDlg" widgetVar="UserStockViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUserStockTitle}">
+            <h:form id="UserStockViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userStockController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUserStockLabel_id}"/>
+                        <h:outputText value="#{userStockController.selected.id}" title="#{bundle.ViewUserStockTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewUserStockLabel_nom}"/>
+                        <h:outputText value="#{userStockController.selected.nom}" title="#{bundle.ViewUserStockTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewUserStockLabel_prenom}"/>
+                        <h:outputText value="#{userStockController.selected.prenom}" title="#{bundle.ViewUserStockTitle_prenom}"/>
+                        <h:outputText value="#{bundle.ViewUserStockLabel_email}"/>
+                        <h:outputText value="#{userStockController.selected.email}" title="#{bundle.ViewUserStockTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewUserStockLabel_password}"/>
+                        <h:outputText value="#{userStockController.selected.password}" title="#{bundle.ViewUserStockTitle_password}"/>
+                        <h:outputText value="#{bundle.ViewUserStockLabel_telephone}"/>
+                        <h:outputText value="#{userStockController.selected.telephone}" title="#{bundle.ViewUserStockTitle_telephone}"/>
+                        <h:outputText value="#{bundle.ViewUserStockLabel_gender}"/>
+                        <h:outputText value="#{userStockController.selected.gender}" title="#{bundle.ViewUserStockTitle_gender}"/>
+                        <h:outputText value="#{bundle.ViewUserStockLabel_dateNaissance}"/>
+                        <h:outputText value="#{userStockController.selected.dateNaissance}" title="#{bundle.ViewUserStockTitle_dateNaissance}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewUserStockLabel_nbrCnx}"/>
+                        <h:outputText value="#{userStockController.selected.nbrCnx}" title="#{bundle.ViewUserStockTitle_nbrCnx}"/>
+                        <h:outputText value="#{bundle.ViewUserStockLabel_grade}"/>
+                        <h:outputText value="#{userStockController.selected.grade}" title="#{bundle.ViewUserStockTitle_grade}"/>
+                        <h:outputText value="#{bundle.ViewUserStockLabel_entiteAdministrative}"/>
+                        <h:outputText value="#{userStockController.selected.entiteAdministrative}" title="#{bundle.ViewUserStockTitle_entiteAdministrative}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UserStockViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+
+        <ui:define name="title">
+            FSTG | Etudiant Connexion 
+        </ui:define>
+        <ui:define name="content">
+            <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+            <p:growl life="5000" />
+            <ui:include src="WaitPage.xhtml"/>
+            <h:form id="uploadPv">
+                <h:outputText  value="AJOUT PV" class="h2 center-block"/>
+                <!--            <p:growl life="5000" />-->
+                <div class="container">
+                    <p>
+                        Cette page est resever pour ajouter des PVs au semestre de votre filiere,<br/>
+                        vous pouver a tout moment ajouter un PV en choisissant la semestre et Uploader le fichier correspondant,
+                        <div class="warning" >
+
+                            Notez que le PV du semestre doit respecter la structure suivante:
+                            <p:graphicImage class="col-lg-5 " value="../resources/images/PvSkeleton.JPG"  alt="" height="100px" width="200px"/>
+
+                        </div>
+                    </p>
+                </div>
+                <!--<p:panelGrid  columns="2">-->
+
+
+
+                <h:outputText value="Filiere : " class="h2 col-lg-2"></h:outputText>
+                <p:selectOneMenu id="filiere"  class="h2 col-lg-2" value="#{pvController.filiere}" converter="filiereConverter" >
+                    <f:selectItem itemValue="#{null}" itemLabel="Select Filiere.."/>
+                    <f:selectItems value="#{filiereController.itemsAvailableSelectOne}" var="item"
+                                   itemValue="#{item}" itemLabel="Filliere #{item.abreviation}"/>
+                    <p:ajax process="filiere" listener="#{pvController.findItemsByFiliere()}" update="semestre"/>
+                </p:selectOneMenu>
+                <!--<br/>-->
+                <h:outputText value="Ajout Du PV Du Semestre: " class="h2 col-lg-2" ></h:outputText>
+                <p:selectOneMenu id="semestre" class="h2 col-lg-2"  value="#{pvController.semestre}" >
+                    <f:selectItem itemValue="#{null}" itemLabel="Select Semestre.."/>
+                    <f:selectItems value="#{pvController.semestres}" var="item"
+                                   itemValue="#{item}" itemLabel="Semestre #{item.libelle}"/>
+                    <p:ajax process="semestre" />
+                </p:selectOneMenu>
+                <!--</p:panelGrid>-->
+                <div>
+
+                </div>
+                <br/>
+                <br/>
+
+                <!--<p:checkbox disabled="# {pvController.semestre!=null}" > je confirme que la strucute du PV est comme</p:checkbox>-->
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                <p:fileUpload id="upload" label="Ajouter un fichier de Pv .xls "
+
+                              dragDropSupport="true" fileLimit="1" 
+                              fileLimitMessage="Uploader un seule fichier PV de type .xls"
+                              fileUploadListener="#{pvController.upload}"
+                              allowTypes="/(\.|\/)(xls)$/"  sizeLimit="10000000000" />
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

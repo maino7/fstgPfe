@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>User login</title>
+
+        <!-- Custom CSS -->
+        <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="css/heroic-features.css" rel="stylesheet"></link>
+        <link href="../resources/css/layout.css" rel="stylesheet" type="text/css" media="all"/>
+
+    </h:head>
+    <h:body style="background-image: url(../resources/images/demo/body-bg41.png); background-attachment: fixed;">
+        <!-- Navigation -->
+        <p:growl id="growl" life="3000" />
+
+        <style>
+            .kira{
+                background-color: rgba(40,40,40,0.4);
+            }
+            .thumbnail{
+                background-color: rgba(240,240,240,0.6); 
+            }
+            .thumbnail:hover{
+                background-color: rgb(255,255,255); 
+            }
+        </style>
+
+        <ui:include src="../template/Header.xhtml"/>
+
+        <!-- Page Content -->
+        <div class="">
+
+            <!-- Jumbotron Header -->
+
+
+            <!--<div class="page-header" >-->
+            <div class="alert  kira" style="text-align: center;">
+                <h2 class="" style="color: white"  > </h2>
+            </div>
+            <!--</div>-->
+            <!-- Title -->
+
+            <!-- /.row -->
+            <h:form class="wrapper">
+                <!-- Page Features -->
+                <div class="row text-center">
+
+
+
+
+                    <div class="col-md-2 col-lg-push-1">
+                        <div class="thumbnail" >
+                            <div class="caption">
+                                <p:commandLink   action="ExpressionDeBesoin.xhtml?faces-redirect=true"  >
+                                    <img src="images/expression.png"  height="200" width="200"></img>
+                                    <br></br>
+                                    <h3>Expression de Besoin</h3>
+                                </p:commandLink>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-2 col-lg-push-1">
+                        <div class="thumbnail" >
+                            <div class="caption">
+                                <p:commandLink  action="/DoyenStuff/DoyenLaivraison.xhtml?faces-redirect=true"  >
+                                    <img src="images/recherche.png"  height="1000" width="200"></img>
+                                    <h3>Ancien Expression de Besoin</h3>
+                                </p:commandLink>
+                            </div>  
+                        </div>
+                    </div>
+                      <div class="col-md-2 col-lg-push-1">
+                        <div class="thumbnail" >
+                            <div class="caption">
+                                <p:commandLink  action="/DoyenStuff/DoyenBesoin.xhtml?faces-redirect=true"  >
+                                    <img src="images/reception.png"  height="90" width="200"></img>
+                                    <br></br>
+                                    <br></br>
+                                    <h3>Reception</h3>
+                                </p:commandLink>
+                            </div>  
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-2 col-lg-push-1 ">
+                        <div class="thumbnail" >
+                            <div class="caption">
+                                <p:commandLink  action="/DoyenStuff/DoyenFactures.xhtml?faces-redirect=true"   > 
+                                    <img src="images/livraison.jpg"   height="90" width="200"></img>
+                                    <br></br>
+                                    <br></br>
+                                    <br></br>
+                                    <h3> Livraison </h3>
+
+                                </p:commandLink> 
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    
+                    
+                    <a href="Menu.xhtml"></a>
+                
+                    
+                </div>
+
+
+
+
+
+            </h:form>
+
+            <!-- /.row -->
+            <!-- Footer -->
+            <footer>
+                <div class="alert alert-info kira" style="color: white; text-align: right;">
+                    <p>Copyright &copy; FSTG-Marrakech - PFE LST SIR 2016-2017</p>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.container -->
+
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+
+    </h:body>
+</html>
+

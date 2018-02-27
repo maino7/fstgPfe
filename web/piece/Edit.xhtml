@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PieceEditDlg" widgetVar="PieceEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPieceTitle}">
+            <h:form id="PieceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pieceController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPieceLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{pieceController.selected.id}" title="#{bundle.EditPieceTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditPieceLabel_titre}" for="titre" />
+                        <p:inputText id="titre" value="#{pieceController.selected.titre}" title="#{bundle.EditPieceTitle_titre}" />
+                        <p:outputLabel value="#{bundle.EditPieceLabel_nationalite}" for="nationalite" />
+                        <p:inputText id="nationalite" value="#{pieceController.selected.nationalite}" title="#{bundle.EditPieceTitle_nationalite}" />
+                        <p:outputLabel value="#{bundle.EditPieceLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{pieceController.selected.nombre}" title="#{bundle.EditPieceTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditPieceLabel_fonctionnare}" for="fonctionnare" />
+                        <p:inputText id="fonctionnare" value="#{pieceController.selected.fonctionnare}" title="#{bundle.EditPieceTitle_fonctionnare}" />
+                        <p:outputLabel value="#{bundle.EditPieceLabel_typeInscription}" for="typeInscription" />
+                        <p:inputText id="typeInscription" value="#{pieceController.selected.typeInscription}" title="#{bundle.EditPieceTitle_typeInscription}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pieceController.update}" value="#{bundle.Save}" update="display,:PieceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PieceEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PieceEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

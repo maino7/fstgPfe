@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandeDerogationViewDlg" widgetVar="DemandeDerogationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDemandeDerogationTitle}">
+            <h:form id="DemandeDerogationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandeDerogationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDemandeDerogationLabel_id}"/>
+                        <h:outputText value="#{demandeDerogationController.selected.id}" title="#{bundle.ViewDemandeDerogationTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewDemandeDerogationLabel_etudiant}"/>
+                        <h:outputText value="#{demandeDerogationController.selected.etudiant}" title="#{bundle.ViewDemandeDerogationTitle_etudiant}"/>
+                        <h:outputText value="#{bundle.ViewDemandeDerogationLabel_description}"/>
+                        <h:outputText value="#{demandeDerogationController.selected.description}" title="#{bundle.ViewDemandeDerogationTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewDemandeDerogationLabel_anne_baccalaureat}"/>
+                        <h:outputText value="#{demandeDerogationController.selected.anne_baccalaureat}" title="#{bundle.ViewDemandeDerogationTitle_anne_baccalaureat}"/>
+                        <h:outputText value="#{bundle.ViewDemandeDerogationLabel_anne_etude}"/>
+                        <h:outputText value="#{demandeDerogationController.selected.anne_etude}" title="#{bundle.ViewDemandeDerogationTitle_anne_etude}"/>
+                        <h:outputText value="#{bundle.ViewDemandeDerogationLabel_nombreSemestresValide}"/>
+                        <h:outputText value="#{demandeDerogationController.selected.nombreSemestresValide}" title="#{bundle.ViewDemandeDerogationTitle_nombreSemestresValide}"/>
+                        <h:outputText value="#{bundle.ViewDemandeDerogationLabel_nombreMdulesValide}"/>
+                        <h:outputText value="#{demandeDerogationController.selected.nombreMdulesValide}" title="#{bundle.ViewDemandeDerogationTitle_nombreMdulesValide}"/>
+                        <h:outputText value="#{bundle.ViewDemandeDerogationLabel_filiere}"/>
+                        <h:outputText value="#{demandeDerogationController.selected.filiere}" title="#{bundle.ViewDemandeDerogationTitle_filiere}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DemandeDerogationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

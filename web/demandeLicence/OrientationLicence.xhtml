@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="Orientation vers licence"/>
+        </ui:define>
+        <ui:define name="content">
+
+            <div class="container">
+                <div class="col-lg-10">
+                    <h:form id="globalForm">
+                    <h:form rendered="#{demandeLicenceController.formCreat}" id="createForm">
+                        <b:panel>
+                            <div style="margin-left:230px;">
+                                <h:outputText value="Nom et Prénom : #{demandeLicenceController.etudiant.nom} #{demandeLicenceController.etudiant.prenom}"/><br/><br/>
+                                <h:outputText value="C.N.E : #{demandeLicenceController.etudiant.cne}"/><br/><br/>
+                            </div>
+                            Orientation en ligne : Classez par ordre de choix #{demandeLicenceController.priorityChoix()}
+                            <div style="margin: 30px;">
+                                <c:forEach items="#{demandeLicenceController.demandeLicenceItems}" var="demandeItem">
+                                    <div class="row" >
+                                        <div class="col-lg-1">
+                                            <p:inputText title="priorite" value="#{demandeItem.priorite}" maxlength="1" style="width: 35px;"/>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <h:outputText value="#{demandeItem.licence.nom}"/><br/><br/>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                            <p:commandButton value="Envoyer" update="errorMessage,succesMessage,errorMessage2" actionListener="#{demandeLicenceController.sendDemande()}" disabled="#{demandeLicenceController.disablButton()}" style="margin-left: 30px;"/>
+                            <p:messages showDetail="false" id="errorMessage" for="errorMessage"/>
+                            <p:messages showDetail="false" id="errorMessage2" for="errorMessage2"/>
+                            <p:messages showDetail="false" id="succesMessage" for="successInfo"/>
+                        </b:panel>
+                    </h:form >
+                    <h:form rendered="#{demandeLicenceController.formEdit}" id="editForm">
+                        <b:panel>
+                            <div style="margin-left:230px;">
+                                <h:outputText value="Nom et Prénom : #{demandeLicenceController.etudiant.nom} #{demandeLicenceController.etudiant.prenom}"/><br/><br/>
+                                <h:outputText value="C.N.E : #{demandeLicenceController.connectedEtud().cne}"/><br/><br/>
+                            </div>
+                            Vous avez deja remplir le formulaire d'orientation vers la licence science et technique de la FSTG par l'ordre suivant :
+                            <div style="margin: 30px;">
+                                <c:forEach items="#{demandeLicenceController.demandeLicenceItems1}" var="demandeItem1">
+                                    <div class="row" >
+                                        <div class="col-lg-1">
+                                            <p:outputLabel value="#{demandeItem1.priorite}"/>
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <h:outputText value="#{demandeItem1.licence.nom}"/>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                </c:forEach>
+                            </div>
+                            <p:commandButton value="Modifier" actionListener="#{demandeLicenceController.editDemandeLicence()}" update=":globalForm" style="margin-left: 30px;"/>
+                        </b:panel>
+                    </h:form>
+                    </h:form>
+                </div>
+            </div>
+            <style>
+                .row{
+                    color: #000;
+                }
+            </style>
+        </ui:define>
+    </ui:composition>
+</html>
+

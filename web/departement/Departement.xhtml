@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Departements</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.css"/>
+    </h:head>
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <ui:define name="title">
+            <h:outputText value="departements"></h:outputText>
+        </ui:define>
+
+
+        <ui:define name="content">
+
+            <h:form id="form">
+           
+                    <div class="row3">
+                        <div class="rounded">
+                            <div class="sidebar one_quarter first"> <br></br><br></br>
+                                <h6>FACULTE</h6><br></br>
+                                <nav class="sdb_holder">
+
+                                    <li><p:commandLink value="Mot du doyen"/></li>
+                                    <li><p:commandLink value="Organisation"/></li>
+                                    <li><p:commandLink value="FSTG en bref"/></li>
+                                    <li><p:commandLink value="FSTG rn chiffre"/></li>
+
+                                </nav><br></br>
+                            </div></div></div>
+
+                    <div class="container">
+                        <div class="col-lg-7">
+                            <c:forEach items="#{departementController.items}" var="departement">
+                                <b:panel class="panel-warning">
+                                    <div class="card mb-3">
+                                        <img class="card-img-top" src="..."/><br></br><br></br>
+                                        <div class="card-block">
+                                            <p:commandLink class="card-title" value="#{departement.intitule}" action="#{departementController.toDetail(departement)}"/>
+                                            <p:separator></p:separator>
+                                            <div class="card-text">
+                                                Chef departement : <h:outputText class="chefDepartm" value="#{departement.chefDepartement.toString()}"/><br></br>
+                                            </div>
+                                            <div class="card-text">
+                                                Adresse E-mail : <h:outputText value="#{departement.chefDepartement.email}"/><br></br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </b:panel>
+                            </c:forEach>
+                        </div>
+
+                    </div>
+                    <style>
+
+                        .card-img-top {
+                            width: 100%;
+                            height: 200px;
+                            background-color: white;
+                            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                        }
+                        .card-text{
+                            color: #004d40;
+                            font-weight: bold;
+                        }
+                        .card-title{
+
+                            color: salmon;
+                            text-decoration: underline;
+                            text-transform: uppercase; 
+                            font-size: 30px;
+                        }
+                        .chefDepartm{
+                            text-transform: uppercase;
+                        }
+                    </style>
+            </h:form>
+        </ui:define>
+    </ui:composition>    
+
+</html>

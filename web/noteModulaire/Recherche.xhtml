@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+         <h:form>
+                <h1><h:outputText value="SEMESTRE"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Etudiant:" for="etudiant" />
+                    <h:selectOneMenu id="etudiant" value="#{noteModulaireController.etudiant}"  class="form-control" >
+                                <f:selectItem  itemValue="#{null}" itemLabel="--Select--"/>
+                                <f:selectItems value="#{etudiantController.itemsAvailableSelectOne}"
+                                               var="etudiantItem"
+                                               itemValue="#{etudiantItem}"/>
+                            </h:selectOneMenu>
+                    <p:outputLabel value="Semestre:" for="semestre" />
+                    <h:selectOneMenu id="semestre" value="#{noteModulaireController.semestre}"  class="form-control" >
+                                <f:selectItem  itemValue="#{null}" itemLabel="--Select--"/>
+                                <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"
+                                               var="configurationItem"
+                                               itemValue="#{semestreItem}"/>
+                            </h:selectOneMenu>
+                </p:panelGrid>
+                <p:commandButton actionListener="#{noteModulaireController.recherche()}" value="RECHERCHE" update=":datalist:list"/>
+               
+            </h:form>
+        
+            <h:form id="datalist">
+                <h1><h:outputText value="Les module Non Valides"/></h1>
+                <p:dataTable id="list" value="#{noteModulaireController.items}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Module"/>
+                        </f:facet>
+                        <h:outputText value="#{item.module.nom}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Note"/>
+                        </f:facet>
+                        <h:outputText value="#{item.note}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="x"/>
+                        </f:facet>
+                        <h:outputText value="#{item.note}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        
+    </h:body>
+</html>
+

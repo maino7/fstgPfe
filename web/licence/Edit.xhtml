@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LicenceEditDlg" widgetVar="LicenceEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLicenceTitle}">
+            <h:form id="LicenceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{licenceController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLicenceLabel_filiere}" for="filiere" />
+                        <p:selectOneMenu id="filiere" value="#{licenceController.selected.filiere}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
+                                           var="filiereItem"
+                                           itemValue="#{filiereItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLicenceLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{licenceController.selected.nom}" title="#{bundle.EditLicenceTitle_nom}" />
+                        <p:outputLabel value="#{bundle.EditLicenceLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{licenceController.selected.id}" title="#{bundle.EditLicenceTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{licenceController.update}" value="#{bundle.Save}" update="display,:LicenceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LicenceEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LicenceEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

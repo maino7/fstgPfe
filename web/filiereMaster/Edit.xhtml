@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FiliereMasterEditDlg" widgetVar="FiliereMasterEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFiliereMasterTitle}">
+            <h:form id="FiliereMasterEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{filiereMasterController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFiliereMasterLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{filiereMasterController.selected.id}" title="#{bundle.EditFiliereMasterTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditFiliereMasterLabel_abrApg}" for="abrApg" />
+                        <p:inputText id="abrApg" value="#{filiereMasterController.selected.abrApg}" title="#{bundle.EditFiliereMasterTitle_abrApg}" />
+                        <p:outputLabel value="#{bundle.EditFiliereMasterLabel_titre}" for="titre" />
+                        <p:inputText id="titre" value="#{filiereMasterController.selected.titre}" title="#{bundle.EditFiliereMasterTitle_titre}" />
+                        <p:outputLabel value="#{bundle.EditFiliereMasterLabel_diplome}" for="diplome" />
+                        <p:inputText id="diplome" value="#{filiereMasterController.selected.diplome}" title="#{bundle.EditFiliereMasterTitle_diplome}" />
+                        <p:outputLabel value="#{bundle.EditFiliereMasterLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{filiereMasterController.selected.type}" title="#{bundle.EditFiliereMasterTitle_type}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{filiereMasterController.update}" value="#{bundle.Save}" update="display,:FiliereMasterListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FiliereMasterEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FiliereMasterEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

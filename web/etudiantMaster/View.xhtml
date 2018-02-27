@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EtudiantMasterViewDlg" widgetVar="EtudiantMasterViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEtudiantMasterTitle}">
+            <h:form id="EtudiantMasterViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{etudiantMasterController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_id}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.id}" title="#{bundle.ViewEtudiantMasterTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_cne}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.cne}" title="#{bundle.ViewEtudiantMasterTitle_cne}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_cin}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.cin}" title="#{bundle.ViewEtudiantMasterTitle_cin}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_nomLat}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.nomLat}" title="#{bundle.ViewEtudiantMasterTitle_nomLat}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_prenomLat}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.prenomLat}" title="#{bundle.ViewEtudiantMasterTitle_prenomLat}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_sexe}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.sexe}" title="#{bundle.ViewEtudiantMasterTitle_sexe}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_email}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.email}" title="#{bundle.ViewEtudiantMasterTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_telephone}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.telephone}" title="#{bundle.ViewEtudiantMasterTitle_telephone}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_nomAr}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.nomAr}" title="#{bundle.ViewEtudiantMasterTitle_nomAr}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_prenomAr}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.prenomAr}" title="#{bundle.ViewEtudiantMasterTitle_prenomAr}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_dateNaissance}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.dateNaissance}" title="#{bundle.ViewEtudiantMasterTitle_dateNaissance}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_lieuNaissance}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.lieuNaissance}" title="#{bundle.ViewEtudiantMasterTitle_lieuNaissance}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_anneeBac}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.anneeBac}" title="#{bundle.ViewEtudiantMasterTitle_anneeBac}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_dateInscription}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.dateInscription}" title="#{bundle.ViewEtudiantMasterTitle_dateInscription}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_photo}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.photo}" title="#{bundle.ViewEtudiantMasterTitle_photo}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_ip}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.ip}" title="#{bundle.ViewEtudiantMasterTitle_ip}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_adresse}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.adresse}" title="#{bundle.ViewEtudiantMasterTitle_adresse}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_lieuAr}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.lieuAr}" title="#{bundle.ViewEtudiantMasterTitle_lieuAr}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_lastPdf}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.lastPdf}" title="#{bundle.ViewEtudiantMasterTitle_lastPdf}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_anneeInscriptionEnsSup}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.anneeInscriptionEnsSup}" title="#{bundle.ViewEtudiantMasterTitle_anneeInscriptionEnsSup}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_anneeInscriptionUniv}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.anneeInscriptionUniv}" title="#{bundle.ViewEtudiantMasterTitle_anneeInscriptionUniv}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_anneeInscriptionEtab}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.anneeInscriptionEtab}" title="#{bundle.ViewEtudiantMasterTitle_anneeInscriptionEtab}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_etablissementPreInsc}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.etablissementPreInsc}" title="#{bundle.ViewEtudiantMasterTitle_etablissementPreInsc}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_secret}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.secret}" title="#{bundle.ViewEtudiantMasterTitle_secret}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_filiereMaster}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.filiereMaster}" title="#{bundle.ViewEtudiantMasterTitle_filiereMaster}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_professionPere}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.professionPere}" title="#{bundle.ViewEtudiantMasterTitle_professionPere}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_professionMere}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.professionMere}" title="#{bundle.ViewEtudiantMasterTitle_professionMere}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_typeDernierDiplome}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.typeDernierDiplome}" title="#{bundle.ViewEtudiantMasterTitle_typeDernierDiplome}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_pays}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.pays}" title="#{bundle.ViewEtudiantMasterTitle_pays}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_mentionBac}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.mentionBac}" title="#{bundle.ViewEtudiantMasterTitle_mentionBac}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_optionBac}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.optionBac}" title="#{bundle.ViewEtudiantMasterTitle_optionBac}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_lycee}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.lycee}" title="#{bundle.ViewEtudiantMasterTitle_lycee}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_province}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.province}" title="#{bundle.ViewEtudiantMasterTitle_province}"/>
+                        <h:outputText value="#{bundle.ViewEtudiantMasterLabel_academie}"/>
+                        <h:outputText value="#{etudiantMasterController.selected.academie}" title="#{bundle.ViewEtudiantMasterTitle_academie}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EtudiantMasterViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

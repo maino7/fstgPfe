@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <ui:define name="title">
+            FSTG | Enseignant Change Data 
+        </ui:define>
+        <ui:define name="content">
+
+
+            <h:form id="modiForm" rendered="#{enseignantController.notPass}">
+                <h1><h:outputText value="Modification Enseignant"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Password:" for="password" />
+                    <p:inputText id="password" value="#{enseignantController.selected.password}" title="Password" >
+                        <!--<p:ajax process="password" update="email" />-->
+                    </p:inputText>
+                    <p:outputLabel value="Email:" for="email" rendered="#{!enseignantController.hasEmail()}" />
+                    <p:inputText id="email" value="#{enseignantController.selected.email}" title="Email" rendered="#{!enseignantController.hasEmail()}" />
+                </p:panelGrid>
+                <p:commandButton value="OK" actionListener="#{enseignantController.changeData()}"  onclick="document.getElementById('modiForm').style.display='none';" />
+                <br/>
+            </h:form>
+          
+              <ui:include  src="../secure/SecureEns.xhtml" />
+           
+        </ui:define>
+    </ui:composition>
+</html>
+

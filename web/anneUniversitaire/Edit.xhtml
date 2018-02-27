@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AnneUniversitaireEditDlg" widgetVar="AnneUniversitaireEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAnneUniversitaireTitle}">
+            <h:form id="AnneUniversitaireEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{anneUniversitaireController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAnneUniversitaireLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{anneUniversitaireController.selected.id}" title="#{bundle.EditAnneUniversitaireTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditAnneUniversitaireLabel_anneeMin}" for="anneeMin" />
+                        <p:selectOneMenu id="anneeMin" value="#{anneUniversitaireController.selected.anneeMin}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{anneeController.itemsAvailableSelectOne}"
+                                           var="anneeMinItem"
+                                           itemValue="#{anneeMinItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAnneUniversitaireLabel_anneeMax}" for="anneeMax" />
+                        <p:selectOneMenu id="anneeMax" value="#{anneUniversitaireController.selected.anneeMax}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{anneeController.itemsAvailableSelectOne}"
+                                           var="anneeMaxItem"
+                                           itemValue="#{anneeMaxItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{anneUniversitaireController.update}" value="#{bundle.Save}" update="display,:AnneUniversitaireListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AnneUniversitaireEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AnneUniversitaireEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Tous les laboratoires"/>
+        </ui:define>
+
+        <ui:define name="content">
+            <link type="text/css" rel="stylesheet" href="../resources/materialize/css/materialize.css" media="screen,projection"/>
+
+            <div class="row3">
+                <div class="rounded">
+                    <div class="sidebar one_quarter first"> <br></br><br></br>
+                        <h6>RECHERCHES SCIENTIFIQUES </h6><br></br>
+                        <nav class="sdb_holder">
+
+                            <li><p:commandLink value="Bourse d'Excellence"></p:commandLink></li>
+                            <li><p:commandLink value="CED-SI"></p:commandLink></li>
+                            <li><p:commandLink value="UFR"></p:commandLink></li>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">  
+                <div class="col-lg-10">
+                    <div class="panel panel-primary">
+                        <div class="panel-body"><h:outputText value="Tous les laboratoires de la FSTG >>" style="text-transform: uppercase; color: #0059bc;"/></div>
+                    </div>
+                    <h:form class="col-12">
+                        <ul class="collapsible popout col-12" data-collapsible="accordion">
+                            <c:forEach items="#{laboratoireController.items}" var="labo">
+                                <li>
+                                    <div class="collapsible-header" style="height: 100%;"><i class="material-icons">filter_drama</i>
+                                        <h:outputText value="#{labo.nom}" style="font-weight: bold;color: #000"/>
+                                    </div>
+                                    <div class="collapsible-body" style="color: #000000">
+                                        <h:outputText value="Directeur : " style="text-decoration: underline"/>
+                                        <h:outputText value="#{labo.directeur.toString()}"/><br></br>
+                                        <h:outputText value="Tel : " style="text-decoration: underline"/>
+                                        <h:outputText value="#{labo.directeur.telephone}"/><br></br>
+                                        <h:outputText value="Adresse mail : " style="text-decoration: underline"/>
+                                        <h:outputText value="#{labo.directeur.email}"/><p:separator></p:separator>
+                                        <b:commandButton class="btn-primary" value="Plus d'info ici >> " action="#{laboratoireController.toDetailLabo(labo)}"/>
+                                    </div>
+                                </li>
+                            </c:forEach>
+                        </ul></h:form>
+                </div>
+            </div>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"/>
+            <script type="text/javascript" src="../resources/materialize/js/materialize.js"/>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"/>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

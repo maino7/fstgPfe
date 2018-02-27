@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+
+        <ui:define name="title">
+            FSTG | Demande List
+        </ui:define>
+        <ui:define name="content">
+
+
+
+            <h:form id='derogation'>
+
+                <h1><h:outputText value="Les Nouveaux Demandes"/></h1>
+                <p:dataTable value="#{gestionDerogationController.  derogations}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Etudiant"/>
+                        </f:facet>
+                        <h:outputText value="#{item.etudiant}"/>
+                    </p:column>
+                    <p:column width="25%">
+                        <f:facet name="header">
+                            <h:outputText value="Description"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Annee du Baccalaureat"/>
+                        </f:facet>
+                        <h:outputText value="#{item.anne_baccalaureat}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Annee D'etude"/>
+                        </f:facet>
+                        <h:outputText value="#{item.anne_etude}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre Semestres Valide"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombreSemestresValide}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre Modules Valide"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombreMdulesValide}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Action"/>
+                        </f:facet>
+                        <b:commandButton value="" iconAwesome="fa fa-check" style="color: green"  actionListener="#{gestionDerogationController.accept(item)}" update="derogation"/>
+                        <b:commandButton value="" iconAwesome="fa fa-remove" style="color: red" actionListener="#{gestionDerogationController.decline(item)}" update="derogation" />
+                    </p:column>
+                </p:dataTable>
+
+            </h:form>
+            <h:form id='allDerogation'>
+
+                <h1><h:outputText value="Les anciens Demandes"/></h1>
+                <p:dataTable class="dero" value="#{gestionDerogationController.allDerogations}" var="item" >
+                    <p:column>
+
+                        <f:facet name="header">
+                            <h:outputText value="Etudiant"/>
+                        </f:facet>
+                        <h:outputText value="#{item.etudiant}"/>
+                    </p:column>
+                    <p:column width="25%">
+                        <f:facet name="header">
+                            <h:outputText value="Description"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Annee du Baccalaureat"/>
+                        </f:facet>
+                        <h:outputText value="#{item.anne_baccalaureat}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Annee D'etude"/>
+                        </f:facet>
+                        <h:outputText value="#{item.anne_etude}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre Semestres Valide"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombreSemestresValide}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre Modules Valide"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombreMdulesValide}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Etat"/>
+                        </f:facet>
+                        <h:outputText value="#{item.etat&lt;0?'Not Accepted':'Accepted'}" style="color: #{item.etat&lt;0?'red':'green'}; font-weight: bold;"/>
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+
+
+
+
+        </ui:define>
+    </ui:composition>
+</html>
+

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+
+        <ui:define name="title">
+            FSTG | Etudiant Connexion 
+        </ui:define>
+        <ui:define name="content">
+            <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+            <p:growl life="5000" />
+            <ui:include src="WaitPage.xhtml"/>
+            <h:form id="uploadDeust">
+                #{pvController.filiere=null}
+                <h:outputText  value="AFFECTAION DECISIONS DEUST" class="h2 center-block"/>
+<!--            <p:growl life="5000" />-->
+                <div class="container">
+                    <p>
+                        Cette page est resever our ajouter des resultats des etudiants selon leurs filiere,<br/>
+                        cet operation s'encharge d'affecter la decision des jurys au etudiants (admis, Aj. Reins., Aj. Non Reins.)<br/>
+                        vous pouver a tout moment ajouter un PV en choisissant la la filiere et Uploader le fichier correspondant,
+                        <div class="warning" >
+
+                            
+                            <!--<p:graphicImage class="col-lg-5 " value="../resources/images/PvSkeleton.JPG"  alt="" height="100px" width="200px"/>-->
+
+                        </div>
+                    </p>
+                </div>
+
+                <h:outputText value="Filiere: " class="h2"></h:outputText>
+                <p:selectOneMenu id="filiere" required="true" value="#{pvController.filiere}"  converter="filiereConverter">
+                    <f:selectItem itemValue="#{null}" itemLabel="Select filiere.."/>
+                    <f:selectItems value="#{filiereController.itemsAvailableSelectOne}" var="item"
+                                   itemValue="#{item}" itemLabel="#{item.abreviation}"/>
+                </p:selectOneMenu>
+                <div>
+
+                </div>
+
+
+<!--<p:checkbox disabled="#{pvController.semestre!=null}" > je confirme que la strucute du PV est comme</p:checkbox>-->
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                <p:fileUpload id="upload"  label="Ajouter un fichier de Deust .xls "
+
+                              dragDropSupport="true" fileLimit="1" 
+                              fileLimitMessage="Uploader un seule fichier PV de type .xls"
+                              fileUploadListener="#{pvController.uploadDeust}"
+                              allowTypes="/(\.|\/)(xls)$/"  sizeLimit="10000000000" />
+            </h:form>
+            
+        </ui:define>
+    </ui:composition>
+</html>
+

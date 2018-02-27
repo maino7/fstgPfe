@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserStockEditDlg" widgetVar="UserStockEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUserStockTitle}">
+            <h:form id="UserStockEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userStockController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditUserStockLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{userStockController.selected.id}" title="#{bundle.EditUserStockTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditUserStockLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{userStockController.selected.nom}" title="#{bundle.EditUserStockTitle_nom}" />
+                        <p:outputLabel value="#{bundle.EditUserStockLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{userStockController.selected.prenom}" title="#{bundle.EditUserStockTitle_prenom}" />
+                        <p:outputLabel value="#{bundle.EditUserStockLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{userStockController.selected.email}" title="#{bundle.EditUserStockTitle_email}" />
+                        <p:outputLabel value="#{bundle.EditUserStockLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{userStockController.selected.password}" title="#{bundle.EditUserStockTitle_password}" />
+                        <p:outputLabel value="#{bundle.EditUserStockLabel_telephone}" for="telephone" />
+                        <p:inputText id="telephone" value="#{userStockController.selected.telephone}" title="#{bundle.EditUserStockTitle_telephone}" />
+                        <p:outputLabel value="#{bundle.EditUserStockLabel_gender}" for="gender" />
+                        <p:inputText id="gender" value="#{userStockController.selected.gender}" title="#{bundle.EditUserStockTitle_gender}" />
+                        <p:outputLabel value="#{bundle.EditUserStockLabel_dateNaissance}" for="dateNaissance" />
+                        <p:calendar id="dateNaissance" pattern="MM/dd/yyyy" value="#{userStockController.selected.dateNaissance}" title="#{bundle.EditUserStockTitle_dateNaissance}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditUserStockLabel_nbrCnx}" for="nbrCnx" />
+                        <p:inputText id="nbrCnx" value="#{userStockController.selected.nbrCnx}" title="#{bundle.EditUserStockTitle_nbrCnx}" />
+                        <p:outputLabel value="#{bundle.EditUserStockLabel_grade}" for="grade" />
+                        <p:inputText id="grade" value="#{userStockController.selected.grade}" title="#{bundle.EditUserStockTitle_grade}" />
+                        <p:outputLabel value="#{bundle.EditUserStockLabel_entiteAdministrative}" for="entiteAdministrative" />
+                        <p:selectOneMenu id="entiteAdministrative" value="#{userStockController.selected.entiteAdministrative}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{entiteAdministrativeController.itemsAvailableSelectOne}"
+                                           var="entiteAdministrativeItem"
+                                           itemValue="#{entiteAdministrativeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userStockController.update}" value="#{bundle.Save}" update="display,:UserStockListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserStockEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UserStockEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

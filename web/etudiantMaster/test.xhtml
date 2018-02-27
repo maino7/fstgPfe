@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+
+    Hello from Facelets
+    <ui:composition template="../template/simpleTemplate.xhtml">
+        <ui:define name="content">
+
+            <h:form id="a">
+
+                <p:growl id="growl" sticky="true" showDetail="true"/>
+
+                <p:wizard flowListener="#{etudiantMasterController.onFlowProcess}" >
+                    <p:tab  title="etape 1">
+                        <p:panel header="etape 1">
+                            <p:messages />
+                            <b:panelGrid columns="2" >
+                                <p:outputLabel value="Nationalité Marocaine " />
+                                <p:selectBooleanButton id="value2" value="#{etudiantMasterController.natio}" onLabel="No" offLabel="Yes"  style="width:60px">
+                                    <p:ajax update="a" process="value2" />
+                                </p:selectBooleanButton>
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_nomLat}"  />
+                                <b:inputText id="nomLat" value="#{etudiantMasterController.selected.nomLat}"  />
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_prenomLat}"  />
+                                <b:inputText id="prenomLat" value="#{etudiantMasterController.selected.prenomLat}" title="#{bundle.CreateEtudiantMasterTitle_prenomLat}" />
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_adresse}"  />
+                                <b:inputText id="adresse" value="#{etudiantMasterController.selected.adresse}" title="#{bundle.CreateEtudiantMasterTitle_adresse}" />
+                                <p:outputLabel value="CIN ou N° PASSPORT(Etrangére):"  />
+                                <b:inputText id="cin" value="#{etudiantMasterController.selected.cin}" title="#{bundle.CreateEtudiantMasterTitle_cin}" />
+
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_email}" />
+                                <b:inputText id="email" value="#{etudiantMasterController.selected.email}" title="#{bundle.CreateEtudiantMasterTitle_email}" />
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_telephone}"  />
+                                <b:inputText id="telephone" value="#{etudiantMasterController.selected.telephone}" title="#{bundle.CreateEtudiantMasterTitle_telephone}" />
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_lieuNaissance}"  />
+                                <b:inputText id="lieuNaissance" value="#{etudiantMasterController.selected.lieuNaissance}" title="#{bundle.CreateEtudiantMasterTitle_lieuNaissance}" />
+
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_nomAr}"  />
+                                <b:inputText id="nomAr" value="#{etudiantMasterController.selected.nomAr}" title="#{bundle.CreateEtudiantMasterTitle_nomAr}" disabled="#{etudiantMasterController.natio==false}"/>
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_prenomAr}"  />
+                                <b:inputText id="prenomAr" value="#{etudiantMasterController.selected.prenomAr}" title="#{bundle.CreateEtudiantMasterTitle_prenomAr}" disabled="#{etudiantMasterController.natio==false}" />
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_lieuAr}"  />
+                                <b:inputText id="lieuAr" value="#{etudiantMasterController.selected.lieuAr}" title="#{bundle.CreateEtudiantMasterTitle_lieuAr}" disabled="#{etudiantMasterController.natio==false}"/>
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_cne}"   />
+
+                                <b:inputText id="cne" value="#{etudiantMasterController.selected.cne}" title="#{bundle.CreateEtudiantMasterTitle_cne}" disabled="#{etudiantMasterController.natio==false}"/>
+
+
+                            </b:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab  title="etape 2">
+                        <p:panel header="etape 2">
+                            <p:messages />
+                            <b:panelGrid columns="2" >
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_sexe}"  />
+                                <b:selectOneMenu id="sexe" value="#{etudiantMasterController.selected.sexe}" >
+                                    <f:selectItem itemLabel="Homme" itemValue="1" />
+                                    <f:selectItem itemLabel="Femme" itemValue="2" />
+                                </b:selectOneMenu>
+                                <p:outputLabel value="Handicap"  />
+                                <b:selectOneMenu id="handi" value="#{etudiantMasterController.selected.handicap}">
+
+                                    <f:selectItem itemLabel="oui" itemValue="true" />
+                                    <f:selectItem itemLabel="non" itemValue="false" />
+                                </b:selectOneMenu>
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_professionPere}"  />
+                                <b:selectOneMenu id="professionPere" value="#{etudiantMasterController.selected.professionPere}" >
+                                    <f:selectItems value="#{professionController.itemsAvailableSelectOne}"
+                                                   var="professionPereItem"
+                                                   itemValue="#{professionPereItem}"/>
+                                </b:selectOneMenu>
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_professionMere}"  />
+                                <b:selectOneMenu id="professionMere" value="#{etudiantMasterController.selected.professionMere}" >
+                                    <f:selectItems value="#{professionController.itemsAvailableSelectOne}"
+                                                   var="professionMereItem"
+                                                   itemValue="#{professionMereItem}"/>
+                                </b:selectOneMenu>
+                                <p:outputLabel value="etat"  />
+                                <p:selectBooleanCheckbox value="#{etudiantMasterController.selected.fonctionnaire}"  >  je suis fanctionaire  </p:selectBooleanCheckbox>
+
+                            </b:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab  title="Etape 3">
+                        <p:panel header="Etape 3">
+                            <p:messages />
+                            <b:panelGrid columns="2" >
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_typeDernierDiplome}"  />
+                                <b:selectOneMenu id="typeDernierDiplome" value="#{etudiantMasterController.selected.typeDernierDiplome}" >
+                                    <f:selectItems value="#{dernierDiplomeController.itemsAvailableSelectOne}"
+                                                   var="paysItem"
+                                                   itemValue="#{paysItem}"/>
+                                </b:selectOneMenu>
+                                <p:outputLabel value="1ére Inscription dans: L'Enseignement supérieur"  />
+                                <b:inputText id="anneeInscriptionEnsSup" value="#{etudiantMasterController.selected.anneeInscriptionEnsSup}" title="#{bundle.CreateEtudiantMasterTitle_anneeInscriptionEnsSup}" />
+                                <p:outputLabel value="1ére Inscription Dans notre Université Cady Ayyad (UCA)"  />
+                                <b:inputText id="anneeInscriptionUniv" value="#{etudiantMasterController.selected.anneeInscriptionUniv}" title="#{bundle.CreateEtudiantMasterTitle_anneeInscriptionUniv}" />
+                                <p:outputLabel value="1ére Inscription Dans: Notre Etablissement FSTG"  />
+                                <b:inputText id="anneeInscriptionEtab" value="#{etudiantMasterController.selected.anneeInscriptionEtab}" title="#{bundle.CreateEtudiantMasterTitle_anneeInscriptionEtab}" />
+
+                            </b:panelGrid>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab  title="Etape 4">
+                        <p:panel header="Etape 4">
+                            <p:messages />
+                            <b:panelGrid columns="2" >
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_dateNaissance}"  />
+                                <p:calendar id="dateNaissance"  value="#{etudiantMasterController.selected.dateNaissance}" title="#{bundle.EditEtudiantMasterTitle_dateNaissance}"  showOn="button"/>
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_pays}"  />
+                                <b:selectOneMenu id="pays" value="#{etudiantMasterController.selected.pays}" >
+                                    <f:selectItems value="#{paysController.itemsAvailableSelectOne}"
+                                                   var="paysItem"
+                                                   itemValue="#{paysItem}"/>
+                                </b:selectOneMenu>
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_mentionBac}"  />
+                                <b:selectOneMenu id="mentionBac" value="#{etudiantMasterController.selected.mentionBac}" >
+                                    <f:selectItems value="#{mentionBacController.itemsAvailableSelectOne}"
+                                                   var="mentionBacItem"
+                                                   itemValue="#{mentionBacItem}"/>
+                                </b:selectOneMenu>
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_optionBac}"  />
+                                <b:selectOneMenu id="optionBac" value="#{etudiantMasterController.selected.optionBac}" >
+                                    <f:selectItems value="#{optionBacController.itemsAvailableSelectOne}"
+                                                   var="optionBacItem"
+                                                   itemValue="#{optionBacItem}"/>
+                                </b:selectOneMenu>
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_anneeBac}"  />
+                                <b:inputText id="anneeBac" value="#{etudiantMasterController.selected.anneeBac}" title="#{bundle.CreateEtudiantMasterTitle_anneeBac}" />
+                                <p:outputLabel value="type d'inscription" />
+
+                                <b:selectOneMenu id="typeinsc" value="#{etudiantMasterController.selected.typeInscription}"  >
+
+                                    <f:selectItem itemLabel="Cycle d'ingénieur" itemValue="true" />
+                                    <f:selectItem itemLabel="Master" itemValue="false" />
+
+
+
+                                </b:selectOneMenu>
+                            </b:panelGrid>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab  title="Etape 5">
+                        <p:panel header="Etape 5">
+                            <p:messages />
+
+                            <b:panelGrid columns="2" >
+                                <p:outputLabel value="Type de Lyceé"  />
+                                <b:selectOneMenu id="type" value="#{etudiantMasterController.selected.lycee.type}" >
+
+                                    <f:selectItem itemLabel="Libre" itemValue="1" />
+                                    <f:selectItem itemLabel="Privé" itemValue="2" />
+                                    <f:selectItem itemLabel="Public" itemValue="3" />
+                                </b:selectOneMenu>
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_lycee}"  />
+                                <b:selectOneMenu id="lycee" value="#{etudiantMasterController.selected.lycee}" >
+                                    <f:selectItems value="#{lyceeController.itemsAvailableSelectOne}"
+                                                   var="lyceeItem"
+                                                   itemValue="#{lyceeItem}"/>
+                                </b:selectOneMenu>
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_province}"  />
+                                <b:selectOneMenu id="province" value="#{etudiantMasterController.selected.province}" >
+                                    <f:selectItems value="#{lieuController.itemsAvailableSelectOne}"
+                                                   var="provinceItem"
+                                                   itemValue="#{provinceItem}"/>
+                                </b:selectOneMenu>
+
+
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_academie}" />
+                                <b:selectOneMenu id="academie" value="#{etudiantMasterController.selected.academie}" >
+                                    <f:selectItems value="#{academieController.itemsAvailableSelectOne}"
+                                                   var="academieItem"
+                                                   itemValue="#{academieItem}"/>
+                                </b:selectOneMenu>
+
+
+                                <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_filiereMaster}"  />
+                                <b:selectOneMenu id="filiereMaster" value="#{etudiantMasterController.selected.filiereMaster}" >
+                                    <f:selectItems value="#{etudiantMasterController.initIns()}"
+                                                   var="filiereMasterItem"
+                                                   itemValue="#{filiereMasterItem}"/>
+                                </b:selectOneMenu>
+
+                            </b:panelGrid>
+
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="confirm" title="Confirmation">
+                        <p:panel header="Confirmation">
+                            <!--                            <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                                                            <h:panelGrid columns="2" columnClasses="label, value">
+                            
+                                                            </h:panelGrid>
+                            
+                                                            <h:panelGrid columns="2" columnClasses="label, value">
+                            
+                                                            </h:panelGrid>
+                            
+                                                            <h:panelGrid columns="2" columnClasses="label, value">
+                            
+                                                            </h:panelGrid>
+                                                        </h:panelGrid>-->
+                            <p:commandButton actionListener="#{etudiantMasterController.create}" value="#{bundle.Save}"  update="growl" oncomplete="handleSubmit(args,'EtudiantMasterCreateDialog');"/>
+
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

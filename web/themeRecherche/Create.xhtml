@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ThemeRechercheCreateDlg" widgetVar="ThemeRechercheCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateThemeRechercheTitle}">
+            <h:form id="ThemeRechercheCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{themeRechercheController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateThemeRechercheLabel_equipeRecherche}" for="equipeRecherche" />
+                        <p:selectOneMenu id="equipeRecherche" value="#{themeRechercheController.selected.equipeRecherche}" >
+                            <f:selectItems value="#{equipeRechercheController.itemsAvailableSelectOne}"
+                                           var="equipeRechercheItem"
+                                           itemValue="#{equipeRechercheItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Titre" for="nom" />
+                        <p:inputTextarea id="nom" value="#{themeRechercheController.selected.nom}" title="#{bundle.CreateThemeRechercheTitle_nom}" />
+                        <p:outputLabel value="#{bundle.CreateThemeRechercheLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{themeRechercheController.selected.id}" title="#{bundle.CreateThemeRechercheTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{themeRechercheController.create}" value="#{bundle.Save}" update="display,:ThemeRechercheListForm:datalist,:growl" oncomplete="handleSubmit(args,'ThemeRechercheCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ThemeRechercheCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

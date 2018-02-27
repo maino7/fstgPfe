@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <ui:define name="title">FSTG | Releve Des Notes</ui:define>
+        <ui:define name="content">
+            
+        <h:form>
+            <h1><h:outputText value="SEMESTRE"/></h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Etudiant:" for="etudiant" />
+                <p:selectOneMenu  id="etudiant" value="#{releveDeNoteController.etudiant}"  class="form-control" >
+                    <f:selectItem  itemValue="#{null}" itemLabel="--Select--"/>
+                    <f:selectItems value="#{etudiantController.itemsAvailableSelectOne}"
+                                   var="etudiantItem"
+                                   itemValue="#{etudiantItem}"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="Semestre:" for="semestre" />
+                <p:selectOneMenu id="semestre" value="#{releveDeNoteController.semestre}"  class="form-control" >
+                    <f:selectItem  itemValue="#{null}" itemLabel="--Select--"/>
+                    <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"
+                                   var="semestreItem"
+                                   itemValue="#{semestreItem}"/>
+                </p:selectOneMenu>
+            </p:panelGrid>
+            <p:commandButton actionListener="#{releveDeNoteController.noteEtu()}" value="RECHERCHE" update=":datalist:list"/>
+             <p:commandButton id="pdf" icon="ui-icon-pdf" value="Export" action="#{releveDeNoteController.generatPdf()}" ajax="false"/>
+        </h:form>
+
+
+        <h:form id="datalist">
+            <h1><h:outputText value="Notes"/></h1>
+            <p:dataTable  id="list" value="#{releveDeNoteController.items}" var="item">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Module"/>
+                    </f:facet>
+                    <h:outputText value="#{item.module.nom}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Note"/>
+                    </f:facet>
+                    <h:outputText value="#{item.note}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Mention"/>
+                    </f:facet>
+                    <h:outputText value="#{item.mention}"/>
+                </p:column>
+                <f:facet name="footer">
+                </f:facet>
+
+            </p:dataTable>
+
+        </h:form>
+
+        </ui:define>
+    </ui:composition>
+ 
+</html>
+

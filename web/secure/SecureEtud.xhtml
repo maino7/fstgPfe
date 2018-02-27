@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+      
+
+
+        <h:form id="secureForm" rendered="#{!etudiantController.hasSecure()}">
+                <h1><h:outputText value="Verification en 2 etapes"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Question:" for="quest" />
+                    <p:inputText id="quest" value="#{secureController.selected.quest}" title="Quest" />
+                    <p:outputLabel value="Reponse:" for="resp" />
+                    <p:inputText id="resp" value="#{secureController.selected.resp}" title="Resp" />
+                </p:panelGrid>
+                <p:commandButton id="addbtn" value="Ajouter" actionListener="#{secureController.addSecureEtud()}" update=":secureListForm"></p:commandButton>
+            </h:form>
+      
+       
+
+
+            <h:form id="secureListForm" rendered="#{!etudiantController.hasSecure()}">
+                 #{secureController.helloEtud()}
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable id="secureList" value="#{secureController.items}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Question"/>
+                        </f:facet>
+                        <h:outputText value="#{item.quest}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Reponse"/>
+                        </f:facet>
+                        <h:outputText value="#{item.resp}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Operation"/>
+                        </f:facet>
+                        <p:commandButton value="Supprimer" actionListener="#{secureController.minusSecure(item)}" update=":secureListForm:secureList"/>
+                    </p:column>
+                    <f:facet id="vldface" name="footer">
+                        <p:outputLabel value="Attention : une fois vous validez, s'il vous plait Prenez un ScreenShot avant de valider vos Question et Reponses" style="color: red" />
+                        <br/>
+                        <!--<p:commandButton id="pdfbtn" value="Save PDF" action="{secureController.generatePdfEtud()}"   disabled="#!empty secureController.items}"  ajax="false"/>-->
+                        <p:commandButton id="valbtn" value="VALIDER" action="#{secureController.okEtud()}"  disabled="#{!secureController.itemsMoreThanThree}" />
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+       
+
+
+
+
+    </h:body>
+</html>
+

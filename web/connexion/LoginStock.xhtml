@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <ui:define name="head">
+            <f:metadata>
+                <f:viewAction action="#{templateController.redirect()}"></f:viewAction>
+            </f:metadata>
+        </ui:define>
+        <ui:define name="title">
+            FSTG | Connexion Enseignant (STOCK)
+        </ui:define>
+        <ui:define name="content">
+            <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+            <div >
+                <div class="col-lg-offset-1  ">
+                    <img src="../resources/images/logo12.png" alt="" class="pull-left"/>
+                </div>
+
+                <div class="col-lg-6 col-lg-offset-1">
+                    <h:form class="form-group">
+                        <h1><h:outputText value="Connection Enseignant"/></h1>
+                        <!--<p:panelGrid columns="2">-->
+                        <p:outputLabel value="CIN:" for="id" />
+                        <p:inputText id="id" class="form-control" value="#{connectionController.selectedUserStock.id}" />
+                        <p:outputLabel value="Password:" for="password" />
+                        <p:password id="password" class="form-control" value="#{connectionController.selectedUserStock.password}" title="Password" />
+                        <!--</p:panelGrid>-->
+                        <br/>
+                        <br/>
+                        <p:commandButton value="OK" action="#{connectionController.signInStock()}" />
+                        <br/>
+                        <br/>
+                        <p:commandLink value="forgot password ?" action="#{connectionController.redirect('../enseignant/forgotpassword.xhtml')}"></p:commandLink>
+                        <br/>
+                        <!--<p:outputLabel id="messageConnection" value="# {connectionController.messageConnection}" />-->
+                    </h:form>
+
+                </div>
+            </div >
+
+        </ui:define>
+    </ui:composition>
+</html>
+

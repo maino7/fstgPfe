@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FactureCreateDlg" widgetVar="FactureCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFactureTitle}">
+            <h:form id="FactureCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{factureController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFactureLabel_prixTotale}" for="prixTotale" />
+                        <p:inputText id="prixTotale" value="#{factureController.selected.prixTotale}" title="#{bundle.CreateFactureTitle_prixTotale}" />
+                        <p:outputLabel value="#{bundle.CreateFactureLabel_dateFacture}" for="dateFacture" />
+                        <p:calendar id="dateFacture" pattern="MM/dd/yyyy" value="#{factureController.selected.dateFacture}" title="#{bundle.EditFactureTitle_dateFacture}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateFactureLabel_commande}" for="commande" />
+                        <p:selectOneMenu id="commande" value="#{factureController.selected.commande}" >
+                            <f:selectItems value="#{commandeController.itemsAvailableSelectOne}"
+                                           var="commandeItem"
+                                           itemValue="#{commandeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateFactureLabel_fournisseur}" for="fournisseur" />
+                        <p:selectOneMenu id="fournisseur" value="#{factureController.selected.fournisseur}" >
+                            <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
+                                           var="fournisseurItem"
+                                           itemValue="#{fournisseurItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateFactureLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{factureController.selected.id}" title="#{bundle.CreateFactureTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{factureController.create}" value="#{bundle.Save}" update="display,:FactureListForm:datalist,:growl" oncomplete="handleSubmit(args,'FactureCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FactureCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

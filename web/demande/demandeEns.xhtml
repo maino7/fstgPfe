@@ -1,0 +1,337 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <ui:define name="title">
+            FSTG | Connexion Staff
+        </ui:define>
+        <ui:define name="content">
+
+
+            <h:form id="etudForm">
+
+
+                <h1><h:outputText value="Recherche Etudiant"/></h1>
+                <p:panelGrid columns="4">
+                    <p:outputLabel value="Cne:" for="cne" />
+                    <p:inputText id="cne" value="#{searchEtudiantController.selectedEtud.cne}" title="Cne" />
+                    <p:outputLabel value="Nom:" for="nom" />
+                    <p:inputText id="nom" value="#{searchEtudiantController.selectedEtud.nom}" title="Nom" />
+                    <p:outputLabel value="Prenom:" for="prenom" />
+                    <p:inputText id="prenom" value="#{searchEtudiantController.selectedEtud.prenom}" title="Prenom" />
+                    <p:outputLabel value="Email:" for="email" />
+                    <p:inputText id="email" value="#{searchEtudiantController.selectedEtud.email}" title="Email" />
+                    <p:outputLabel value="Semestre Actuel:" for="semestreActuel" />
+                    <p:selectOneMenu id="semestreActuel" value="#{searchEtudiantController.selectedEtud.semestreActuel}" >
+                        <f:selectItems value="#{semestreController.items}" var="item" itemValue="#{item}" itemLabel="S#{item.libelle}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Gender:" for="gender" />
+                    <p:selectOneRadio id="gender" value="#{searchEtudiantController.selectedEtud.gender}" label="Gender" >
+                        <f:selectItem itemValue="m" itemLabel="Male"/>
+                        <f:selectItem itemValue="f" itemLabel="Female"/>
+                    </p:selectOneRadio>
+                    <p:outputLabel value="Date Naissance:" for="dateNaissance" />
+                    <p:inputText id="dateNaissance" value="#{searchEtudiantController.selectedEtud.dateNaissance}" title="DateNaissance" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </p:inputText>
+                    <p:outputLabel value="Filiere:" for="filiere" />
+                    <p:selectOneRadio id="filiere" value="#{searchEtudiantController.selectedEtud.filiere}"  >
+                        <f:selectItem itemValue="#{enseignantController.whatFiliere()}" itemLabel="#{enseignantController.whatFiliere().libelle}"/>
+                    </p:selectOneRadio>
+                </p:panelGrid>
+                <p:commandButton id="searchbtn" value="Search" actionListener="#{searchEtudiantController.searchFormFiliere()}" update=":etudListForm:etudList  :notemodulaireform"/>
+            </h:form>
+
+
+
+
+
+            <h:form id="etudListForm">
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable id="etudList" value="#{searchEtudiantController.elems}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cne"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cne}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nom"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nom}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Prenom"/>
+                        </f:facet>
+                        <h:outputText value="#{item.prenom}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Email"/>
+                        </f:facet>
+                        <h:outputText value="#{item.email}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Semestre Actuel"/>
+                        </f:facet>
+                        <h:outputText value="#{item.semestreActuel.libelle}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Gender"/>
+                        </f:facet>
+                        <h:outputText value="#{item.gender}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date Naissance"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dateNaissance}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Operation"/>
+                        </f:facet>
+
+                        <p:commandButton value="Detail" action="#{searchEtudiantController.findByEtudiantAndSemestre(item, item.semestreActuel)}" update=":notemodulaireform"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+
+
+            <h:form id="notemodulaireform">
+                <h1><h:outputText value="List des Notes"/></h1>
+                <p:tabView>
+                    <p:tab title="Semestre 1" rendered="#{!searchEtudiantController.hasSemestre(1)}">
+                        #{searchEtudiantController.initTabPane(1)}
+                        <h:panelGrid >
+                            <b:dataTable id="datalistNote1" value="#{searchEtudiantController.items}" var="item"
+                                         selectionMode="single"  searching="false" paginated="false"
+                                         >
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Module"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.module.nom}"/>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Note"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.note}"/>
+                                </b:dataTableColumn>
+
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mention"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mention}"/>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat==0?'Not Valide':'Valide'}" style="color :#{item.etat==0?'red':'green'}; font-weight: bold"/>
+                                </b:dataTableColumn>
+                            </b:dataTable>
+
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Semestre 2" rendered="#{!searchEtudiantController.hasSemestre(2)}">       
+                        #{searchEtudiantController.initTabPane(2)}
+
+                        <h:panelGrid >
+                            <b:dataTable id="datalistNote2" value="#{searchEtudiantController.items}" var="item"
+                                         selectionMode="single"  searching="false" paginated="false"
+                                         >
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Module"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.module.nom}"/>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Note"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.note}"/>
+                                </b:dataTableColumn>
+
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mention"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mention}"/>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat==0?'Not Valide':'Valide'}" style="color :#{item.etat==0?'red':'green'}; font-weight: bold"/>
+                                </b:dataTableColumn>
+                            </b:dataTable>
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Semestre 3" rendered="#{!searchEtudiantController.hasSemestre(3)}">
+                        #{searchEtudiantController.initTabPane(3)}
+
+                        <h:panelGrid >
+                            <b:dataTable id="datalistNote3" value="#{searchEtudiantController.items}" var="item"
+                                         selectionMode="single"  searching="false" paginated="false"
+                                         >
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Module"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.module.nom}"/>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Note"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.note}"/>
+                                </b:dataTableColumn>
+
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mention"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mention}"/>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat==0?'Not Valide':'Valide'}" style="color :#{item.etat==0?'red':'green'}; font-weight: bold"/>
+                                </b:dataTableColumn>
+                            </b:dataTable>
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Semestre 4" rendered="#{!searchEtudiantController.hasSemestre(4)}">
+                        #{searchEtudiantController.initTabPane(4)}
+
+                        <h:panelGrid >
+                            <b:dataTable id="datalistNote4" value="#{searchEtudiantController.items}" var="item"
+                                         selectionMode="single"  searching="false" paginated="false"
+                                         >
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Module"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.module.nom}"/>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Note"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.note}"/>
+                                </b:dataTableColumn>
+
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mention"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mention}"/>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat==0?'Not Valide':'Valide'}" style="color :#{item.etat==0?'red':'green'}; font-weight: bold"/>
+                                </b:dataTableColumn>
+                            </b:dataTable>
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Semestre 5" rendered="#{!searchEtudiantController.hasSemestre(5)}">
+                        #{searchEtudiantController.initTabPane(5)}
+
+                        <h:panelGrid >
+                            <b:dataTable id="datalistNote5" value="#{searchEtudiantController.items}" var="item"
+                                         selectionMode="single"  searching="false" paginated="false"
+                                         >
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Module"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.module.nom}"/>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Note"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.note}"/>
+                                </b:dataTableColumn>
+
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mention"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mention}"/>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat==0?'Not Valide':'Valide'}" style="color :#{item.etat==0?'red':'green'}; font-weight: bold"/>
+                                </b:dataTableColumn>
+                            </b:dataTable>
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Semestre 6" rendered="#{!searchEtudiantController.hasSemestre(6)}">
+                        #{searchEtudiantController.initTabPane(6)}
+
+                        <h:panelGrid >
+                            <b:dataTable id="datalistNote6" value="#{searchEtudiantController.items}" var="item"
+                                         selectionMode="single"  searching="false" paginated="false"
+                                         >
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Module"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.module.nom}"/>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Note"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.note}"/>
+                                </b:dataTableColumn>
+
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mention"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mention}"/>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Etat"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.etat==0?'Not Valide':'Valide'}" style="color :#{item.etat==0?'red':'green'}; font-weight: bold"/>
+                                </b:dataTableColumn>
+                            </b:dataTable>
+                        </h:panelGrid>
+                    </p:tab>
+                </p:tabView>
+
+            </h:form>
+
+
+
+
+        </ui:define>
+    </ui:composition>
+</html>
+

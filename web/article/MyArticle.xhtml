@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h:form id="formAnswerReply">        
+            <div align="left" style="background-color: #F3F3F3; border: 1px solid #E2E2E2; margin: 0 5px 5px; padding: 10px; margin-left: 40px; margin-right: 40px">
+                <h:panelGrid columcolumns="1" cellspacing="5" style="padding-left: 30px">
+                    <!--<p:tabView  backLabel="Anterior" nextLabel="Siguiente" id="wizarAnswer">-->
+                    <c:forEach items="#" var="quizChapter">
+                        <strong> 
+                            <h:outputText value="#" style="font-size: 15px; font-style: italic"/>                            
+                        </strong> 
+                        <c:forEach items="#" var="chapterQuestion">
+                            <h:outputText value="#" 
+                                          style="padding-left: 15px; font-style: italic;"/>
+                           <!-- <h:inputText value="#{chapterQuestion.id}"/>-->
+                            <h:panelGrid columns="2" style="margin-bottom: 10px" cellpadding="5">
+                                <c:set value="#" var="value"/>
+                                <c:if test="${value == true}">
+                                    <h:selectManyCheckbox id="checkBoxAternative" value="#" required="true" style="margin-left: 35px; margin-right: 6px">
+                                        <f:selectItems value="#"
+                                                       var="choiceID"                                                      
+                                                       itemLabel="#" 
+                                                       itemValue="#"/>
+                                    </h:selectManyCheckbox>
+                                </c:if>
+                                <c:if test="${value == false}">
+                                    <p:selectOneRadio id="radioButtonAlternative" value="#" required="true" style="margin-left: 35px; margin-right: 6px">
+                                        <f:selectItems value="#" 
+                                                       var="choiceID"
+                                                       itemLabel="#" itemValue="#"/>
+                                    </p:selectOneRadio>
+                                </c:if>                               
+                            </h:panelGrid>                       
+                        </c:forEach>
+                    </c:forEach>                       
+                </h:panelGrid><br/><br/>   
+            </div>
+            <div align="right" style="margin-right: 40px">
+                <p:commandButton value="Enviar Encuesta" icon="ui-icon-disk"/>
+                <p:commandButton id="idSaveQuestions" value="Responder" icon="ui-icon-check" action="#">                  
+                </p:commandButton>
+            </div>
+        </h:form>
+    </body>
+  
+
+
+</html>
+
