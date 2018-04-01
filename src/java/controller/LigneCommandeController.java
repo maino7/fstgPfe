@@ -1,11 +1,17 @@
 package controller;
 
+import bean.Commande;
 import bean.LigneCommande;
+import bean.UserStock;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.SessionUtil;
 import service.LigneCommandeFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,10 +20,12 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import service.CommandeFacade;
 
 @Named("ligneCommandeController")
 @SessionScoped
@@ -25,13 +33,37 @@ public class LigneCommandeController implements Serializable {
 
     @EJB
     private service.LigneCommandeFacade ejbFacade;
+    @EJB
+    private CommandeFacade commandeFacade;
     private List<LigneCommande> items = null;
+    private List<LigneCommande> commandeItems = new ArrayList<>();
     private LigneCommande selected;
+    private String cmdId;
+    private Long ligneId = 1L;
 
     public LigneCommandeController() {
     }
 
+    public String getCmdId() {
+        return cmdId;
+    }
+
+    public Long getLigneId() {
+        return ligneId;
+    }
+
+    public void setLigneId(Long ligneId) {
+        this.ligneId = ligneId;
+    }
+
+    public void setCmdId(String cmdId) {
+        this.cmdId = cmdId;
+    }
+
     public LigneCommande getSelected() {
+        if (selected == null) {
+            selected = new LigneCommande();
+        }
         return selected;
     }
 
@@ -62,6 +94,44 @@ public class LigneCommandeController implements Serializable {
         }
     }
 
+    public void ajouterLigneCommande() {
+        LigneCommande ligneClone = ejbFacade.clone(selected);
+        ligneClone.setId(ligneId);
+        commandeItems.add(ligneClone);
+        ligneId++;
+        setSelected(null);
+    }
+
+    public void vider() {
+        setSelected(null);
+        commandeItems.clear();
+    }
+
+    public void supprimerLigne() {
+        commandeItems.remove(selected);
+        setSelected(null);
+    }
+
+    public void validerCommande() {
+        if (commandeItems.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la commande avant de valider !"));
+        } else {
+            Commande commande = commandeFacade.addCommande();
+            for (int i = 0; i < commandeItems.size(); i++) {
+                LigneCommande commandeItem = commandeItems.get(i);
+                ejbFacade.createLigneCommande(commande.getId(), commandeItem.getQuantite(), commandeItem.getProduit());
+            }
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre commande a été validée avec succès. Le numéro de la commande est " + commande.getId()));
+            vider();
+        }
+    }
+
+    public void testButton() {
+        System.out.println("the test is working positively !!!!");
+        String idTest = ((UserStock) SessionUtil.getConnectedUser()).getId();
+        System.out.println(idTest);
+    }
+
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("LigneCommandeUpdated"));
     }
@@ -79,6 +149,17 @@ public class LigneCommandeController implements Serializable {
             items = getFacade().findAll();
         }
         return items;
+    }
+
+    public List<LigneCommande> getCommandeItems() {
+        if (commandeItems == null) {
+            commandeItems = new ArrayList();
+        }
+        return commandeItems;
+    }
+
+    public void setCommandeItems(List<LigneCommande> commandeItems) {
+        this.commandeItems = commandeItems;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
@@ -119,6 +200,7 @@ public class LigneCommandeController implements Serializable {
 
     public List<LigneCommande> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+
     }
 
     @FacesConverter(forClass = LigneCommande.class)

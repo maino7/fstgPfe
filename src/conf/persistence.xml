@@ -70,6 +70,7 @@
     <class>bean.User</class>
     <class>bean.UserMaster</class>
     <class>bean.UserStock</class>
+    <class>bean.Role</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

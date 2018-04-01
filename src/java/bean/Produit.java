@@ -29,6 +29,7 @@ public class Produit implements Serializable {
     private String libelle;
     private String description;
     private double prix;
+    private double seuilAlert;
     @ManyToOne
     private Categorie categorie;
     @ManyToOne
@@ -65,6 +66,14 @@ public class Produit implements Serializable {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    public double getSeuilAlert() {
+        return seuilAlert;
+    }
+
+    public void setSeuilAlert(double seuilAlert) {
+        this.seuilAlert = seuilAlert;
     }
 
     public String getDescription() {

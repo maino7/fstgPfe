@@ -2,10 +2,10 @@
 -- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 27, 2018 at 08:27 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Client :  127.0.0.1
+-- Généré le :  Dim 01 Avril 2018 à 17:55
+-- Version du serveur :  5.6.17
+-- Version de PHP :  5.5.12
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `pfe_fstgproject`
+-- Base de données :  `pfe_fstgproject`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `academie`
+-- Structure de la table `academie`
 --
 
 CREATE TABLE IF NOT EXISTS `academie` (
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `academie` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
--- Dumping data for table `academie`
+-- Contenu de la table `academie`
 --
 
 INSERT INTO `academie` (`id`, `titre`) VALUES
@@ -61,7 +61,7 @@ INSERT INTO `academie` (`id`, `titre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `actualite`
+-- Structure de la table `actualite`
 --
 
 CREATE TABLE IF NOT EXISTS `actualite` (
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `actualite` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `actualite`
+-- Contenu de la table `actualite`
 --
 
 INSERT INTO `actualite` (`ID`, `CONTENUE`, `DATECREATION`, `DATEDEBUT`, `DATEEXPIRATION`, `DESCRIPTION`, `ETAT`, `FILE`, `PATH`, `POSITION`, `PRIORITY`, `TITRE`, `AUTEUR_CIN`) VALUES
@@ -108,7 +108,7 @@ INSERT INTO `actualite` (`ID`, `CONTENUE`, `DATECREATION`, `DATEDEBUT`, `DATEEXP
 -- --------------------------------------------------------
 
 --
--- Table structure for table `annee`
+-- Structure de la table `annee`
 --
 
 CREATE TABLE IF NOT EXISTS `annee` (
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `annee` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `annee`
+-- Contenu de la table `annee`
 --
 
 INSERT INTO `annee` (`ID`, `LIBELLE`) VALUES
@@ -131,7 +131,7 @@ INSERT INTO `annee` (`ID`, `LIBELLE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `anneeinscription`
+-- Structure de la table `anneeinscription`
 --
 
 CREATE TABLE IF NOT EXISTS `anneeinscription` (
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `anneeinscription` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `anneuniversitaire`
+-- Structure de la table `anneuniversitaire`
 --
 
 CREATE TABLE IF NOT EXISTS `anneuniversitaire` (
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `anneuniversitaire` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article`
+-- Structure de la table `article`
 --
 
 CREATE TABLE IF NOT EXISTS `article` (
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `article` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `article`
+-- Contenu de la table `article`
 --
 
 INSERT INTO `article` (`ID`, `CONTENT`, `DATEPUBLICATION`, `IMAGES`, `TITLE`, `TYPE`) VALUES
@@ -190,7 +190,7 @@ INSERT INTO `article` (`ID`, `CONTENT`, `DATEPUBLICATION`, `IMAGES`, `TITLE`, `T
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorie`
+-- Structure de la table `categorie`
 --
 
 CREATE TABLE IF NOT EXISTS `categorie` (
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `categorie`
+-- Contenu de la table `categorie`
 --
 
 INSERT INTO `categorie` (`ID`, `LIBELLE`) VALUES
@@ -213,12 +213,14 @@ INSERT INTO `categorie` (`ID`, `LIBELLE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commande`
+-- Structure de la table `commande`
 --
 
 CREATE TABLE IF NOT EXISTS `commande` (
   `ID` varchar(255) NOT NULL,
   `DATECOMMANDE` date DEFAULT NULL,
+  `LIVREE` int(11) DEFAULT NULL,
+  `NOMBRECOMMANDE` int(11) DEFAULT NULL,
   `USER_ID` varchar(255) DEFAULT NULL,
   `USERSTOCK_ID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -227,20 +229,23 @@ CREATE TABLE IF NOT EXISTS `commande` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `commande`
+-- Contenu de la table `commande`
 --
 
-INSERT INTO `commande` (`ID`, `DATECOMMANDE`, `USER_ID`, `USERSTOCK_ID`) VALUES
-('Cmd01', '2018-02-15', 'chaachai', 'SH184344'),
-('Cmd02', '2018-02-04', 'abderrahim', 'JK521637'),
-('Cmd03', '2018-02-28', 'al.amine', 'JH34141'),
-('Cmd04', '2018-02-20', 'yougata10', 'JM63082'),
-('Cmd05', '2018-02-17', 'zahid', 'JH36620');
+INSERT INTO `commande` (`ID`, `DATECOMMANDE`, `LIVREE`, `NOMBRECOMMANDE`, `USER_ID`, `USERSTOCK_ID`) VALUES
+('CMD-2018-1', '2018-04-01', 0, 1, NULL, 'SH184344'),
+('CMD-2018-2', '2018-04-01', 0, 2, NULL, 'SH184344'),
+('CMD-2018-3', '2018-04-01', 0, 3, NULL, 'SH184344'),
+('CMD-2018-4', '2018-04-01', 0, 4, NULL, 'SH184344'),
+('CMD-2018-5', '2018-04-01', 0, 5, NULL, 'SH184344'),
+('CMD-2018-6', '2018-04-01', 0, 6, NULL, 'SH184344'),
+('CMD-2018-7', '2018-04-01', 0, 7, NULL, 'SH184344'),
+('CMD-2018-8', '2018-04-01', 0, 8, NULL, 'SH184344');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demande`
+-- Structure de la table `demande`
 --
 
 CREATE TABLE IF NOT EXISTS `demande` (
@@ -253,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `demande` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `demande`
+-- Contenu de la table `demande`
 --
 
 INSERT INTO `demande` (`ID`, `DESCRIPTION`, `ETAT`, `ETUDIANT_CNE`) VALUES
@@ -265,7 +270,7 @@ INSERT INTO `demande` (`ID`, `DESCRIPTION`, `ETAT`, `ETUDIANT_CNE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demandeattestaion`
+-- Structure de la table `demandeattestaion`
 --
 
 CREATE TABLE IF NOT EXISTS `demandeattestaion` (
@@ -280,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `demandeattestaion` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demandederogation`
+-- Structure de la table `demandederogation`
 --
 
 CREATE TABLE IF NOT EXISTS `demandederogation` (
@@ -299,7 +304,7 @@ CREATE TABLE IF NOT EXISTS `demandederogation` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `demandederogation`
+-- Contenu de la table `demandederogation`
 --
 
 INSERT INTO `demandederogation` (`ID`, `ANNE_BACCALAUREAT`, `ANNE_ETUDE`, `DESCRIPTION`, `ETAT`, `NOMBREMDULESVALIDE`, `NOMBRESEMESTRESVALIDE`, `ETUDIANT_CNE`, `FILIERE_ID`) VALUES
@@ -308,7 +313,7 @@ INSERT INTO `demandederogation` (`ID`, `ANNE_BACCALAUREAT`, `ANNE_ETUDE`, `DESCR
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demandeitem`
+-- Structure de la table `demandeitem`
 --
 
 CREATE TABLE IF NOT EXISTS `demandeitem` (
@@ -323,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `demandeitem` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
--- Dumping data for table `demandeitem`
+-- Contenu de la table `demandeitem`
 --
 
 INSERT INTO `demandeitem` (`ID`, `DEMANDE_ID`, `MODULE_ID`, `SEMESTRE_ID`) VALUES
@@ -349,7 +354,7 @@ INSERT INTO `demandeitem` (`ID`, `DEMANDE_ID`, `MODULE_ID`, `SEMESTRE_ID`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demandelicence`
+-- Structure de la table `demandelicence`
 --
 
 CREATE TABLE IF NOT EXISTS `demandelicence` (
@@ -360,7 +365,7 @@ CREATE TABLE IF NOT EXISTS `demandelicence` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
--- Dumping data for table `demandelicence`
+-- Contenu de la table `demandelicence`
 --
 
 INSERT INTO `demandelicence` (`ID`, `ETUDIANT_CNE`) VALUES
@@ -369,7 +374,7 @@ INSERT INTO `demandelicence` (`ID`, `ETUDIANT_CNE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demandelicenceitem`
+-- Structure de la table `demandelicenceitem`
 --
 
 CREATE TABLE IF NOT EXISTS `demandelicenceitem` (
@@ -383,7 +388,7 @@ CREATE TABLE IF NOT EXISTS `demandelicenceitem` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
--- Dumping data for table `demandelicenceitem`
+-- Contenu de la table `demandelicenceitem`
 --
 
 INSERT INTO `demandelicenceitem` (`ID`, `PRIORITE`, `DEMANDELICENCE_ID`, `LICENCE_ID`) VALUES
@@ -396,7 +401,7 @@ INSERT INTO `demandelicenceitem` (`ID`, `PRIORITE`, `DEMANDELICENCE_ID`, `LICENC
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demanderelevenote`
+-- Structure de la table `demanderelevenote`
 --
 
 CREATE TABLE IF NOT EXISTS `demanderelevenote` (
@@ -408,7 +413,7 @@ CREATE TABLE IF NOT EXISTS `demanderelevenote` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `demanderelevenote`
+-- Contenu de la table `demanderelevenote`
 --
 
 INSERT INTO `demanderelevenote` (`ID`, `ETAT`, `ETUDIANT_CNE`) VALUES
@@ -419,7 +424,7 @@ INSERT INTO `demanderelevenote` (`ID`, `ETAT`, `ETUDIANT_CNE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `demanderelevenoteitem`
+-- Structure de la table `demanderelevenoteitem`
 --
 
 CREATE TABLE IF NOT EXISTS `demanderelevenoteitem` (
@@ -432,7 +437,7 @@ CREATE TABLE IF NOT EXISTS `demanderelevenoteitem` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `demanderelevenoteitem`
+-- Contenu de la table `demanderelevenoteitem`
 --
 
 INSERT INTO `demanderelevenoteitem` (`ID`, `DEMANDERELEVENOTE_ID`, `SEMESTRE_ID`) VALUES
@@ -442,7 +447,7 @@ INSERT INTO `demanderelevenoteitem` (`ID`, `DEMANDERELEVENOTE_ID`, `SEMESTRE_ID`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departement`
+-- Structure de la table `departement`
 --
 
 CREATE TABLE IF NOT EXISTS `departement` (
@@ -456,7 +461,7 @@ CREATE TABLE IF NOT EXISTS `departement` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `departement`
+-- Contenu de la table `departement`
 --
 
 INSERT INTO `departement` (`ID`, `DESCRIPTION`, `IMG`, `INTITULE`, `CHEFDEPARTEMENT_CIN`) VALUES
@@ -469,7 +474,7 @@ INSERT INTO `departement` (`ID`, `DESCRIPTION`, `IMG`, `INTITULE`, `CHEFDEPARTEM
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dernierdiplome`
+-- Structure de la table `dernierdiplome`
 --
 
 CREATE TABLE IF NOT EXISTS `dernierdiplome` (
@@ -480,7 +485,7 @@ CREATE TABLE IF NOT EXISTS `dernierdiplome` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=248 ;
 
 --
--- Dumping data for table `dernierdiplome`
+-- Contenu de la table `dernierdiplome`
 --
 
 INSERT INTO `dernierdiplome` (`id`, `numapg`, `titre`) VALUES
@@ -514,7 +519,7 @@ INSERT INTO `dernierdiplome` (`id`, `numapg`, `titre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `device`
+-- Structure de la table `device`
 --
 
 CREATE TABLE IF NOT EXISTS `device` (
@@ -531,10 +536,10 @@ CREATE TABLE IF NOT EXISTS `device` (
   KEY `FK_DEVICE_USER_CIN` (`USER_CIN`),
   KEY `FK_DEVICE_ETUDIANT_CNE` (`ETUDIANT_CNE`),
   KEY `fk_device` (`USERSTOCK_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
--- Dumping data for table `device`
+-- Contenu de la table `device`
 --
 
 INSERT INTO `device` (`ID`, `ADRESSEMAC`, `BROWSER`, `DATECREATION`, `DEVICECATEGORIE`, `OPERATINGSYSTEM`, `ETUDIANT_CNE`, `USER_CIN`, `USERSTOCK_ID`) VALUES
@@ -550,12 +555,38 @@ INSERT INTO `device` (`ID`, `ADRESSEMAC`, `BROWSER`, `DATECREATION`, `DEVICECATE
 (13, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
 (14, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
 (15, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
-(16, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL);
+(16, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(17, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(18, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(19, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(20, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(21, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(22, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(23, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(24, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(25, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(26, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(27, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(28, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(29, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(30, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(31, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(32, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(33, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(34, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(35, 'A4-DB-30-96-88-81', 'Chrome', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(36, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(37, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(38, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(39, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(40, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(41, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(42, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `enseignant`
+-- Structure de la table `enseignant`
 --
 
 CREATE TABLE IF NOT EXISTS `enseignant` (
@@ -580,7 +611,7 @@ CREATE TABLE IF NOT EXISTS `enseignant` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `enseignant`
+-- Contenu de la table `enseignant`
 --
 
 INSERT INTO `enseignant` (`CIN`, `ADMINE`, `BLOCKED`, `DATENAISSANCE`, `EMAIL`, `GENDER`, `GRADE`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TELEPHONE`, `DEPARTEMENT_ID`, `FILIERE_ID`) VALUES
@@ -600,7 +631,7 @@ INSERT INTO `enseignant` (`CIN`, `ADMINE`, `BLOCKED`, `DATENAISSANCE`, `EMAIL`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `entiteadministrative`
+-- Structure de la table `entiteadministrative`
 --
 
 CREATE TABLE IF NOT EXISTS `entiteadministrative` (
@@ -612,7 +643,7 @@ CREATE TABLE IF NOT EXISTS `entiteadministrative` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `entiteadministrative`
+-- Contenu de la table `entiteadministrative`
 --
 
 INSERT INTO `entiteadministrative` (`ID`, `LIBELLE`, `MAGASIN_ID`) VALUES
@@ -623,7 +654,7 @@ INSERT INTO `entiteadministrative` (`ID`, `LIBELLE`, `MAGASIN_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `equiperecherche`
+-- Structure de la table `equiperecherche`
 --
 
 CREATE TABLE IF NOT EXISTS `equiperecherche` (
@@ -637,7 +668,7 @@ CREATE TABLE IF NOT EXISTS `equiperecherche` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
--- Dumping data for table `equiperecherche`
+-- Contenu de la table `equiperecherche`
 --
 
 INSERT INTO `equiperecherche` (`ID`, `NOM`, `CHEFEQUIPE_CIN`, `LABORATOIRE_ID`) VALUES
@@ -654,7 +685,7 @@ INSERT INTO `equiperecherche` (`ID`, `NOM`, `CHEFEQUIPE_CIN`, `LABORATOIRE_ID`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etablissementtype`
+-- Structure de la table `etablissementtype`
 --
 
 CREATE TABLE IF NOT EXISTS `etablissementtype` (
@@ -665,7 +696,7 @@ CREATE TABLE IF NOT EXISTS `etablissementtype` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=34 ;
 
 --
--- Dumping data for table `etablissementtype`
+-- Contenu de la table `etablissementtype`
 --
 
 INSERT INTO `etablissementtype` (`id`, `abrapg`, `titre`) VALUES
@@ -706,7 +737,7 @@ INSERT INTO `etablissementtype` (`id`, `abrapg`, `titre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etudiant`
+-- Structure de la table `etudiant`
 --
 
 CREATE TABLE IF NOT EXISTS `etudiant` (
@@ -731,7 +762,7 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `etudiant`
+-- Contenu de la table `etudiant`
 --
 
 INSERT INTO `etudiant` (`CNE`, `BLOCKED`, `DATENAISSANCE`, `EMAIL`, `ETATDEUST`, `GENDER`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `EQUIPERECHERCHE_ID`, `FILIERE_ID`, `SEMESTREACTUEL_ID`) VALUES
@@ -744,7 +775,7 @@ INSERT INTO `etudiant` (`CNE`, `BLOCKED`, `DATENAISSANCE`, `EMAIL`, `ETATDEUST`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etudiantmaster`
+-- Structure de la table `etudiantmaster`
 --
 
 CREATE TABLE IF NOT EXISTS `etudiantmaster` (
@@ -791,7 +822,7 @@ CREATE TABLE IF NOT EXISTS `etudiantmaster` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=798 ;
 
 --
--- Dumping data for table `etudiantmaster`
+-- Contenu de la table `etudiantmaster`
 --
 
 INSERT INTO `etudiantmaster` (`id`, `nomlat`, `prenomlat`, `sexe`, `handicap`, `CNE`, `CIN`, `email`, `telephone`, `professionpere_id`, `professionmere_id`, `TypeDernierDiplome_id`, `etablissementPreInsc`, `anneeInscriptionEnsSup`, `anneeInscriptionUniv`, `anneeInscriptionEtab`, `nomar`, `prenomar`, `datenaissance`, `lieunaissance`, `pays_id`, `mentionbac_id`, `optionbac_id`, `anneebac`, `lycee_id`, `province_id`, `academie_id`, `typeInscription`, `photo`, `dateInscription`, `ip`, `secret`, `adresse`, `filiereMaster_id`, `etat`, `fonctionnaire`, `lieuar`, `lastpdf`, `export`) VALUES
@@ -1517,7 +1548,7 @@ INSERT INTO `etudiantmaster` (`id`, `nomlat`, `prenomlat`, `sexe`, `handicap`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etudiant_secure`
+-- Structure de la table `etudiant_secure`
 --
 
 CREATE TABLE IF NOT EXISTS `etudiant_secure` (
@@ -1530,12 +1561,13 @@ CREATE TABLE IF NOT EXISTS `etudiant_secure` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `expressionbesoin`
+-- Structure de la table `expressionbesoin`
 --
 
 CREATE TABLE IF NOT EXISTS `expressionbesoin` (
   `ID` bigint(20) NOT NULL,
   `DATEEXPRESSIONBESOIN` date DEFAULT NULL,
+  `RECU` int(11) DEFAULT NULL,
   `USER_ID` varchar(255) DEFAULT NULL,
   `USERSTOCK_ID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -1544,18 +1576,20 @@ CREATE TABLE IF NOT EXISTS `expressionbesoin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `expressionbesoin`
+-- Contenu de la table `expressionbesoin`
 --
 
-INSERT INTO `expressionbesoin` (`ID`, `DATEEXPRESSIONBESOIN`, `USER_ID`, `USERSTOCK_ID`) VALUES
-(1, '2018-02-21', 'abderrahim', 'JK521637'),
-(2, '2018-02-05', 'chaachai', 'SH184344'),
-(3, '2018-02-19', 'yougata10', 'JM63082');
+INSERT INTO `expressionbesoin` (`ID`, `DATEEXPRESSIONBESOIN`, `RECU`, `USER_ID`, `USERSTOCK_ID`) VALUES
+(1, '2018-02-21', 0, 'abderrahim', 'JK521637'),
+(2, '2018-02-05', 0, 'chaachai', 'SH184344'),
+(3, '2018-02-19', 0, 'yougata10', 'JM63082'),
+(401, '2018-03-19', 0, NULL, 'JH36620'),
+(452, '2018-03-19', 0, NULL, 'JM63082');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `facture`
+-- Structure de la table `facture`
 --
 
 CREATE TABLE IF NOT EXISTS `facture` (
@@ -1569,19 +1603,10 @@ CREATE TABLE IF NOT EXISTS `facture` (
   KEY `FK_FACTURE_FOURNISSEUR_ID` (`FOURNISSEUR_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `facture`
---
-
-INSERT INTO `facture` (`ID`, `DATEFACTURE`, `PRIXTOTALE`, `COMMANDE_ID`, `FOURNISSEUR_ID`) VALUES
-('F01', '2018-02-28', 75000, 'Cmd01', 'Fr01'),
-('F02', '2018-03-16', 15000, 'Cmd02', 'Fr01'),
-('F03', '2018-03-07', 20000, 'Cmd03', 'Fr02');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `filiere`
+-- Structure de la table `filiere`
 --
 
 CREATE TABLE IF NOT EXISTS `filiere` (
@@ -1599,7 +1624,7 @@ CREATE TABLE IF NOT EXISTS `filiere` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
--- Dumping data for table `filiere`
+-- Contenu de la table `filiere`
 --
 
 INSERT INTO `filiere` (`ID`, `ABREVIATION`, `LIBELLE`, `OBJECTIF`, `TYPEFILIERE`, `TYPEFORMATION`, `DEPARTEMENT_ID`, `RESPONSABLEFILIERE_CIN`) VALUES
@@ -1616,7 +1641,7 @@ INSERT INTO `filiere` (`ID`, `ABREVIATION`, `LIBELLE`, `OBJECTIF`, `TYPEFILIERE`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `filieremaster`
+-- Structure de la table `filieremaster`
 --
 
 CREATE TABLE IF NOT EXISTS `filieremaster` (
@@ -1629,7 +1654,7 @@ CREATE TABLE IF NOT EXISTS `filieremaster` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
--- Dumping data for table `filieremaster`
+-- Contenu de la table `filieremaster`
 --
 
 INSERT INTO `filieremaster` (`id`, `abrapg`, `titre`, `type`, `Diplome`) VALUES
@@ -1657,7 +1682,7 @@ INSERT INTO `filieremaster` (`id`, `abrapg`, `titre`, `type`, `Diplome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fournisseur`
+-- Structure de la table `fournisseur`
 --
 
 CREATE TABLE IF NOT EXISTS `fournisseur` (
@@ -1669,7 +1694,7 @@ CREATE TABLE IF NOT EXISTS `fournisseur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `fournisseur`
+-- Contenu de la table `fournisseur`
 --
 
 INSERT INTO `fournisseur` (`ID`, `ADRESSE`, `NOM`, `TELEPHONE`) VALUES
@@ -1679,7 +1704,7 @@ INSERT INTO `fournisseur` (`ID`, `ADRESSE`, `NOM`, `TELEPHONE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `laboratoire`
+-- Structure de la table `laboratoire`
 --
 
 CREATE TABLE IF NOT EXISTS `laboratoire` (
@@ -1692,7 +1717,7 @@ CREATE TABLE IF NOT EXISTS `laboratoire` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `laboratoire`
+-- Contenu de la table `laboratoire`
 --
 
 INSERT INTO `laboratoire` (`ID`, `DESCRIPTION`, `NOM`, `DIRECTEUR_CIN`) VALUES
@@ -1705,7 +1730,7 @@ INSERT INTO `laboratoire` (`ID`, `DESCRIPTION`, `NOM`, `DIRECTEUR_CIN`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `licence`
+-- Structure de la table `licence`
 --
 
 CREATE TABLE IF NOT EXISTS `licence` (
@@ -1717,7 +1742,7 @@ CREATE TABLE IF NOT EXISTS `licence` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
--- Dumping data for table `licence`
+-- Contenu de la table `licence`
 --
 
 INSERT INTO `licence` (`ID`, `NOM`, `FILIERE_ID`) VALUES
@@ -1738,7 +1763,7 @@ INSERT INTO `licence` (`ID`, `NOM`, `FILIERE_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lieu`
+-- Structure de la table `lieu`
 --
 
 CREATE TABLE IF NOT EXISTS `lieu` (
@@ -1749,7 +1774,7 @@ CREATE TABLE IF NOT EXISTS `lieu` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=97 ;
 
 --
--- Dumping data for table `lieu`
+-- Contenu de la table `lieu`
 --
 
 INSERT INTO `lieu` (`id`, `numapg`, `titre`) VALUES
@@ -1851,7 +1876,7 @@ INSERT INTO `lieu` (`id`, `numapg`, `titre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lignecommande`
+-- Structure de la table `lignecommande`
 --
 
 CREATE TABLE IF NOT EXISTS `lignecommande` (
@@ -1865,18 +1890,25 @@ CREATE TABLE IF NOT EXISTS `lignecommande` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `lignecommande`
+-- Contenu de la table `lignecommande`
 --
 
 INSERT INTO `lignecommande` (`ID`, `QUANTITE`, `COMMANDE_ID`, `PRODUIT_ID`) VALUES
-(51, 1, 'Cmd01', 'P01'),
-(52, 2, 'Cmd02', 'P02'),
-(53, 10, 'Cmd01', 'P03');
+(651, 6, 'CMD-2018-1', 'P01'),
+(652, 10, 'CMD-2018-1', 'P02'),
+(653, 13, 'CMD-2018-1', 'P03'),
+(654, 1, 'CMD-2018-2', 'P01'),
+(701, 1, 'CMD-2018-3', 'P01'),
+(702, 1, 'CMD-2018-4', 'P02'),
+(703, 26, 'CMD-2018-5', 'P01'),
+(751, 2, 'CMD-2018-7', 'P01'),
+(752, 2, 'CMD-2018-7', 'P03'),
+(801, 3, 'CMD-2018-8', 'P02');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ligneexpressionbesoin`
+-- Structure de la table `ligneexpressionbesoin`
 --
 
 CREATE TABLE IF NOT EXISTS `ligneexpressionbesoin` (
@@ -1890,18 +1922,20 @@ CREATE TABLE IF NOT EXISTS `ligneexpressionbesoin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ligneexpressionbesoin`
+-- Contenu de la table `ligneexpressionbesoin`
 --
 
 INSERT INTO `ligneexpressionbesoin` (`ID`, `QUANTITE`, `EXPRESSIONBESOIN_ID`, `PRODUIT_ID`) VALUES
 (54, 1, 1, 'P01'),
 (55, 2, 2, 'P02'),
-(56, 10, 3, 'P03');
+(56, 10, 3, 'P03'),
+(402, 1, 401, 'P02'),
+(453, 2, 452, 'P02');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lignefacture`
+-- Structure de la table `lignefacture`
 --
 
 CREATE TABLE IF NOT EXISTS `lignefacture` (
@@ -1914,19 +1948,10 @@ CREATE TABLE IF NOT EXISTS `lignefacture` (
   KEY `FK_LIGNEFACTURE_FACTURE_ID` (`FACTURE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `lignefacture`
---
-
-INSERT INTO `lignefacture` (`ID`, `QUANTITE`, `FACTURE_ID`, `PRODUIT_ID`) VALUES
-(57, 1, 'F01', 'P01'),
-(58, 2, 'F02', 'P02'),
-(59, 10, 'F03', 'P03');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lignelivraison`
+-- Structure de la table `lignelivraison`
 --
 
 CREATE TABLE IF NOT EXISTS `lignelivraison` (
@@ -1939,19 +1964,10 @@ CREATE TABLE IF NOT EXISTS `lignelivraison` (
   KEY `FK_LIGNELIVRAISON_PRODUIT_ID` (`PRODUIT_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `lignelivraison`
---
-
-INSERT INTO `lignelivraison` (`ID`, `QUANTITE`, `LIVRAISON_ID`, `PRODUIT_ID`) VALUES
-(60, 1, 1, 'P01'),
-(61, 2, 2, 'P02'),
-(62, 0, 3, 'P03');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lignemagasin`
+-- Structure de la table `lignemagasin`
 --
 
 CREATE TABLE IF NOT EXISTS `lignemagasin` (
@@ -1966,7 +1982,7 @@ CREATE TABLE IF NOT EXISTS `lignemagasin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `lignemagasin`
+-- Contenu de la table `lignemagasin`
 --
 
 INSERT INTO `lignemagasin` (`ID`, `QUANTITADEF`, `QUANTITE`, `MAGASIN_ID`, `PRODUIT_ID`) VALUES
@@ -1977,7 +1993,7 @@ INSERT INTO `lignemagasin` (`ID`, `QUANTITADEF`, `QUANTITE`, `MAGASIN_ID`, `PROD
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lignereception`
+-- Structure de la table `lignereception`
 --
 
 CREATE TABLE IF NOT EXISTS `lignereception` (
@@ -1991,7 +2007,7 @@ CREATE TABLE IF NOT EXISTS `lignereception` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `lignereception`
+-- Contenu de la table `lignereception`
 --
 
 INSERT INTO `lignereception` (`ID`, `QUANTITERECU`, `PRODUIT_ID`, `RECEPTION_ID`) VALUES
@@ -2002,7 +2018,7 @@ INSERT INTO `lignereception` (`ID`, `QUANTITERECU`, `PRODUIT_ID`, `RECEPTION_ID`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `livraison`
+-- Structure de la table `livraison`
 --
 
 CREATE TABLE IF NOT EXISTS `livraison` (
@@ -2017,19 +2033,10 @@ CREATE TABLE IF NOT EXISTS `livraison` (
   KEY `FK_livraison` (`USERSTOCK_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `livraison`
---
-
-INSERT INTO `livraison` (`ID`, `DATELIVRAISON`, `COMMANDE_ID`, `USER_ID`, `USERSTOCK_ID`) VALUES
-(1, '2018-02-20', 'Cmd01', 'chaachai', 'SH184344'),
-(2, '2018-02-08', 'Cmd02', 'abderrahim', 'JK521637'),
-(3, '2018-02-24', 'Cmd03', 'al.amine', 'JH34141');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lycee`
+-- Structure de la table `lycee`
 --
 
 CREATE TABLE IF NOT EXISTS `lycee` (
@@ -2041,7 +2048,7 @@ CREATE TABLE IF NOT EXISTS `lycee` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
 --
--- Dumping data for table `lycee`
+-- Contenu de la table `lycee`
 --
 
 INSERT INTO `lycee` (`id`, `numapg`, `titre`, `type`) VALUES
@@ -2101,7 +2108,7 @@ INSERT INTO `lycee` (`id`, `numapg`, `titre`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `magasin`
+-- Structure de la table `magasin`
 --
 
 CREATE TABLE IF NOT EXISTS `magasin` (
@@ -2112,7 +2119,7 @@ CREATE TABLE IF NOT EXISTS `magasin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `magasin`
+-- Contenu de la table `magasin`
 --
 
 INSERT INTO `magasin` (`ID`, `STOCK_ID`) VALUES
@@ -2124,7 +2131,7 @@ INSERT INTO `magasin` (`ID`, `STOCK_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `marque`
+-- Structure de la table `marque`
 --
 
 CREATE TABLE IF NOT EXISTS `marque` (
@@ -2134,7 +2141,7 @@ CREATE TABLE IF NOT EXISTS `marque` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `marque`
+-- Contenu de la table `marque`
 --
 
 INSERT INTO `marque` (`ID`, `LIBELLE`) VALUES
@@ -2149,7 +2156,7 @@ INSERT INTO `marque` (`ID`, `LIBELLE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mentionbac`
+-- Structure de la table `mentionbac`
 --
 
 CREATE TABLE IF NOT EXISTS `mentionbac` (
@@ -2160,7 +2167,7 @@ CREATE TABLE IF NOT EXISTS `mentionbac` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `mentionbac`
+-- Contenu de la table `mentionbac`
 --
 
 INSERT INTO `mentionbac` (`id`, `numapg`, `titre`) VALUES
@@ -2173,7 +2180,7 @@ INSERT INTO `mentionbac` (`id`, `numapg`, `titre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message`
+-- Structure de la table `message`
 --
 
 CREATE TABLE IF NOT EXISTS `message` (
@@ -2189,7 +2196,7 @@ CREATE TABLE IF NOT EXISTS `message` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `message`
+-- Contenu de la table `message`
 --
 
 INSERT INTO `message` (`ID`, `DATEENVOI`, `EMAIL`, `LU`, `NOM`, `PRENOM`, `SUJET`, `TEXTMESSAGE`) VALUES
@@ -2198,7 +2205,7 @@ INSERT INTO `message` (`ID`, `DATEENVOI`, `EMAIL`, `LU`, `NOM`, `PRENOM`, `SUJET
 -- --------------------------------------------------------
 
 --
--- Table structure for table `module`
+-- Structure de la table `module`
 --
 
 CREATE TABLE IF NOT EXISTS `module` (
@@ -2214,7 +2221,7 @@ CREATE TABLE IF NOT EXISTS `module` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
--- Dumping data for table `module`
+-- Contenu de la table `module`
 --
 
 INSERT INTO `module` (`ID`, `NOM`, `ENSEIGNANT_CIN`, `FILIERE_ID`, `SEMESTRE_ID`) VALUES
@@ -2250,7 +2257,7 @@ INSERT INTO `module` (`ID`, `NOM`, `ENSEIGNANT_CIN`, `FILIERE_ID`, `SEMESTRE_ID`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `noteannuelle`
+-- Structure de la table `noteannuelle`
 --
 
 CREATE TABLE IF NOT EXISTS `noteannuelle` (
@@ -2267,7 +2274,7 @@ CREATE TABLE IF NOT EXISTS `noteannuelle` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notemodulaire`
+-- Structure de la table `notemodulaire`
 --
 
 CREATE TABLE IF NOT EXISTS `notemodulaire` (
@@ -2286,7 +2293,7 @@ CREATE TABLE IF NOT EXISTS `notemodulaire` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
 
 --
--- Dumping data for table `notemodulaire`
+-- Contenu de la table `notemodulaire`
 --
 
 INSERT INTO `notemodulaire` (`ID`, `ETAT`, `MENTION`, `NOTE`, `PTJURY`, `ETUDIANT_CNE`, `MODULE_ID`, `NOTEBEFOREJURY`, `mentionBeforeJury`) VALUES
@@ -2358,7 +2365,7 @@ INSERT INTO `notemodulaire` (`ID`, `ETAT`, `MENTION`, `NOTE`, `PTJURY`, `ETUDIAN
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notesemestre`
+-- Structure de la table `notesemestre`
 --
 
 CREATE TABLE IF NOT EXISTS `notesemestre` (
@@ -2377,7 +2384,7 @@ CREATE TABLE IF NOT EXISTS `notesemestre` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
--- Dumping data for table `notesemestre`
+-- Contenu de la table `notesemestre`
 --
 
 INSERT INTO `notesemestre` (`ID`, `ETAT`, `ETATRELEVE`, `MENTION`, `NBRMODULEVALIDE`, `NOTE`, `TOTAL`, `ETUDIANT_CNE`, `SEMESTRE_ID`) VALUES
@@ -2393,7 +2400,7 @@ INSERT INTO `notesemestre` (`ID`, `ETAT`, `ETATRELEVE`, `MENTION`, `NBRMODULEVAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `optionbac`
+-- Structure de la table `optionbac`
 --
 
 CREATE TABLE IF NOT EXISTS `optionbac` (
@@ -2404,7 +2411,7 @@ CREATE TABLE IF NOT EXISTS `optionbac` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=70 ;
 
 --
--- Dumping data for table `optionbac`
+-- Contenu de la table `optionbac`
 --
 
 INSERT INTO `optionbac` (`id`, `numapg`, `titre`) VALUES
@@ -2456,7 +2463,7 @@ INSERT INTO `optionbac` (`id`, `numapg`, `titre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ouvrage`
+-- Structure de la table `ouvrage`
 --
 
 CREATE TABLE IF NOT EXISTS `ouvrage` (
@@ -2471,7 +2478,7 @@ CREATE TABLE IF NOT EXISTS `ouvrage` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pays`
+-- Structure de la table `pays`
 --
 
 CREATE TABLE IF NOT EXISTS `pays` (
@@ -2482,7 +2489,7 @@ CREATE TABLE IF NOT EXISTS `pays` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=222 ;
 
 --
--- Dumping data for table `pays`
+-- Contenu de la table `pays`
 --
 
 INSERT INTO `pays` (`id`, `titre`, `numapg`) VALUES
@@ -2710,7 +2717,7 @@ INSERT INTO `pays` (`id`, `titre`, `numapg`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `piece`
+-- Structure de la table `piece`
 --
 
 CREATE TABLE IF NOT EXISTS `piece` (
@@ -2724,7 +2731,7 @@ CREATE TABLE IF NOT EXISTS `piece` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
--- Dumping data for table `piece`
+-- Contenu de la table `piece`
 --
 
 INSERT INTO `piece` (`id`, `titre`, `nationalite`, `fonctionnaire`, `typeInscription`, `nombre`) VALUES
@@ -2749,7 +2756,7 @@ INSERT INTO `piece` (`id`, `titre`, `nationalite`, `fonctionnaire`, `typeInscrip
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pieceetudiant`
+-- Structure de la table `pieceetudiant`
 --
 
 CREATE TABLE IF NOT EXISTS `pieceetudiant` (
@@ -2761,7 +2768,7 @@ CREATE TABLE IF NOT EXISTS `pieceetudiant` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9975 ;
 
 --
--- Dumping data for table `pieceetudiant`
+-- Contenu de la table `pieceetudiant`
 --
 
 INSERT INTO `pieceetudiant` (`id`, `etudiantmaster_id`, `piece_id`, `nombre`) VALUES
@@ -12746,7 +12753,7 @@ INSERT INTO `pieceetudiant` (`id`, `etudiantmaster_id`, `piece_id`, `nombre`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `produit`
+-- Structure de la table `produit`
 --
 
 CREATE TABLE IF NOT EXISTS `produit` (
@@ -12754,6 +12761,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `LIBELLE` varchar(255) DEFAULT NULL,
   `PRIX` double DEFAULT NULL,
+  `SEUILALERT` double DEFAULT NULL,
   `CATEGORIE_ID` bigint(20) DEFAULT NULL,
   `MARQUE_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -12762,18 +12770,18 @@ CREATE TABLE IF NOT EXISTS `produit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `produit`
+-- Contenu de la table `produit`
 --
 
-INSERT INTO `produit` (`ID`, `DESCRIPTION`, `LIBELLE`, `PRIX`, `CATEGORIE_ID`, `MARQUE_ID`) VALUES
-('P01', 'Ordinateur portable corre i5 5G RAM', 'Ordinateur ', 5000, 1, 10),
-('P02', 'Imprimante tout-en-un HP DeskJet 3639', 'Imprimante', 12000, 3, 8),
-('P03', ' BEKANT Longueur: 120 cm, Profondeur: 80 cm, Haut. min.: 65 cm', 'Bureau', 1800, 5, 12);
+INSERT INTO `produit` (`ID`, `DESCRIPTION`, `LIBELLE`, `PRIX`, `SEUILALERT`, `CATEGORIE_ID`, `MARQUE_ID`) VALUES
+('P01', 'Ordinateur portable corre i5 5G RAM', 'Ordinateur ', 5000, 10, 1, 10),
+('P02', 'Imprimante tout-en-un HP DeskJet 3639', 'Imprimante', 12000, 5, 3, 8),
+('P03', ' BEKANT Longueur: 120 cm, Profondeur: 80 cm, Haut. min.: 65 cm', 'Bureau', 1800, 25, 5, 12);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profession`
+-- Structure de la table `profession`
 --
 
 CREATE TABLE IF NOT EXISTS `profession` (
@@ -12784,7 +12792,7 @@ CREATE TABLE IF NOT EXISTS `profession` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
 
 --
--- Dumping data for table `profession`
+-- Contenu de la table `profession`
 --
 
 INSERT INTO `profession` (`id`, `numapg`, `titre`) VALUES
@@ -12829,7 +12837,7 @@ INSERT INTO `profession` (`id`, `numapg`, `titre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pv`
+-- Structure de la table `pv`
 --
 
 CREATE TABLE IF NOT EXISTS `pv` (
@@ -12842,7 +12850,7 @@ CREATE TABLE IF NOT EXISTS `pv` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pvnotemodulaireitem`
+-- Structure de la table `pvnotemodulaireitem`
 --
 
 CREATE TABLE IF NOT EXISTS `pvnotemodulaireitem` (
@@ -12857,7 +12865,7 @@ CREATE TABLE IF NOT EXISTS `pvnotemodulaireitem` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pvnotesemestreitem`
+-- Structure de la table `pvnotesemestreitem`
 --
 
 CREATE TABLE IF NOT EXISTS `pvnotesemestreitem` (
@@ -12872,7 +12880,7 @@ CREATE TABLE IF NOT EXISTS `pvnotesemestreitem` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reception`
+-- Structure de la table `reception`
 --
 
 CREATE TABLE IF NOT EXISTS `reception` (
@@ -12888,7 +12896,7 @@ CREATE TABLE IF NOT EXISTS `reception` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `reception`
+-- Contenu de la table `reception`
 --
 
 INSERT INTO `reception` (`ID`, `DATERECEPTION`, `EXPRESSIONBESOIN_ID`, `USER_ID`, `USERSTOCK_ID`) VALUES
@@ -12899,7 +12907,27 @@ INSERT INTO `reception` (`ID`, `DATERECEPTION`, `EXPRESSIONBESOIN_ID`, `USER_ID`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rubrique`
+-- Structure de la table `role`
+--
+
+CREATE TABLE IF NOT EXISTS `role` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `LIBELLE` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `role`
+--
+
+INSERT INTO `role` (`ID`, `LIBELLE`) VALUES
+(1, 'Doyen'),
+(2, 'Chef de Departement');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rubrique`
 --
 
 CREATE TABLE IF NOT EXISTS `rubrique` (
@@ -12911,7 +12939,7 @@ CREATE TABLE IF NOT EXISTS `rubrique` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `secure`
+-- Structure de la table `secure`
 --
 
 CREATE TABLE IF NOT EXISTS `secure` (
@@ -12927,7 +12955,7 @@ CREATE TABLE IF NOT EXISTS `secure` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `secure`
+-- Contenu de la table `secure`
 --
 
 INSERT INTO `secure` (`ID`, `CORRECT`, `QUEST`, `RESP`, `ENSEIGNANT_CIN`, `ETUDIANT_CNE`) VALUES
@@ -12938,7 +12966,7 @@ INSERT INTO `secure` (`ID`, `CORRECT`, `QUEST`, `RESP`, `ENSEIGNANT_CIN`, `ETUDI
 -- --------------------------------------------------------
 
 --
--- Table structure for table `semestre`
+-- Structure de la table `semestre`
 --
 
 CREATE TABLE IF NOT EXISTS `semestre` (
@@ -12952,7 +12980,7 @@ CREATE TABLE IF NOT EXISTS `semestre` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
--- Dumping data for table `semestre`
+-- Contenu de la table `semestre`
 --
 
 INSERT INTO `semestre` (`ID`, `LIBELLE`, `ANNEE_ID`, `FILIERE_ID`) VALUES
@@ -12976,7 +13004,7 @@ INSERT INTO `semestre` (`ID`, `LIBELLE`, `ANNEE_ID`, `FILIERE_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sequence`
+-- Structure de la table `sequence`
 --
 
 CREATE TABLE IF NOT EXISTS `sequence` (
@@ -12986,16 +13014,16 @@ CREATE TABLE IF NOT EXISTS `sequence` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `sequence`
+-- Contenu de la table `sequence`
 --
 
 INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '0');
+('SEQ_GEN', '850');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stock`
+-- Structure de la table `stock`
 --
 
 CREATE TABLE IF NOT EXISTS `stock` (
@@ -13004,7 +13032,7 @@ CREATE TABLE IF NOT EXISTS `stock` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `stock`
+-- Contenu de la table `stock`
 --
 
 INSERT INTO `stock` (`ID`) VALUES
@@ -13013,7 +13041,7 @@ INSERT INTO `stock` (`ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `themerecherche`
+-- Structure de la table `themerecherche`
 --
 
 CREATE TABLE IF NOT EXISTS `themerecherche` (
@@ -13027,7 +13055,7 @@ CREATE TABLE IF NOT EXISTS `themerecherche` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -13042,7 +13070,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Contenu de la table `user`
 --
 
 INSERT INTO `user` (`ID`, `NOM`, `PASSWORD`, `PRENOM`, `TELEPHONE`, `ENTITEADMINISTRATIVE_ID`) VALUES
@@ -13055,7 +13083,7 @@ INSERT INTO `user` (`ID`, `NOM`, `PASSWORD`, `PRENOM`, `TELEPHONE`, `ENTITEADMIN
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usermaster`
+-- Structure de la table `usermaster`
 --
 
 CREATE TABLE IF NOT EXISTS `usermaster` (
@@ -13067,7 +13095,7 @@ CREATE TABLE IF NOT EXISTS `usermaster` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `usermaster`
+-- Contenu de la table `usermaster`
 --
 
 INSERT INTO `usermaster` (`id`, `login`, `pwd`, `type`) VALUES
@@ -13079,7 +13107,7 @@ INSERT INTO `usermaster` (`id`, `login`, `pwd`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `userstock`
+-- Structure de la table `userstock`
 --
 
 CREATE TABLE IF NOT EXISTS `userstock` (
@@ -13097,97 +13125,99 @@ CREATE TABLE IF NOT EXISTS `userstock` (
   `PRENOM` varchar(255) DEFAULT NULL,
   `TELEPHONE` varchar(255) DEFAULT NULL,
   `ENTITEADMINISTRATIVE_ID` varchar(255) DEFAULT NULL,
+  `ROLE_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `FK_userstock` (`ENTITEADMINISTRATIVE_ID`)
+  KEY `FK_userstock` (`ENTITEADMINISTRATIVE_ID`),
+  KEY `FK_role` (`ROLE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `userstock`
+-- Contenu de la table `userstock`
 --
 
-INSERT INTO `userstock` (`ID`, `ADMINE`, `BLOCKED`, `DATENAISSANCE`, `EMAIL`, `GENDER`, `GRADE`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TELEPHONE`, `ENTITEADMINISTRATIVE_ID`) VALUES
-('JH34141', 0, 0, '1998-02-20', 'amine.annaji@gmail.com', 'M', 'A', 0, 0, 'AHMED MOUSSA', 'a8f145bd7e6ec0e052a08ecc61676c7fe8dabd1939ed48519ff635f31ab00d69', 'Al-amine', '+212636415755', 'E01'),
-('JH36620', 0, 0, '1997-07-14', 'khalidzahid79@gmail.com', 'M', 'A', 0, 0, 'ZAHID', 'e6384b043cd227971044d313ca521f161e005e1b741522649c73dcd1bda14094', 'Khalid', '+212608288723', 'E02'),
-('JK521637', 0, 0, '1997-01-01', 'abderrahim.elmarari@gmail.com', 'M', 'A', 0, 0, 'EL MARARI', 'be394c5ade83c6c0058ddc5c1f5d0e8264945855bb5234400254561d0c022095', 'Abderrahim', '+212658240885', 'E03'),
-('JM63082', 0, 0, '1997-01-03', 'youness.oualili@gmail.com', 'M', 'A', 0, 0, 'OUALILI', '14c6c6f33b714bab85aab5a5db446e0fdca813377b42f91bd56d982a2d7f7fb5', 'Younesse', '+212659084223', 'E02'),
-('P334684', 0, 0, '1998-04-26', 'simoabde@gmail.com', 'M', 'A', 0, 0, 'El ameli', 'f0785d540f7a5a1058a7f23d39eee634d578bcd32738d7afbd0824c9550f21c3', 'Abderrahim', '0697634984', 'E03'),
-('SH184344', 0, 0, '1997-01-24', 'youssef.chaachai@gmail.com', 'M', 'A', 0, 0, 'CHAACHAI', '9660db24c9ed6011ddbbaf17835209aad1916de811533fc7f7b3f76e3f9bcdae', 'Youssef', '+212642112113', 'E03');
+INSERT INTO `userstock` (`ID`, `ADMINE`, `BLOCKED`, `DATENAISSANCE`, `EMAIL`, `GENDER`, `GRADE`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TELEPHONE`, `ENTITEADMINISTRATIVE_ID`, `ROLE_ID`) VALUES
+('JH34141', 0, 0, '1998-02-20', 'amine.annaji@gmail.com', 'M', 'A', 0, 0, 'AHMED MOUSSA', 'a8f145bd7e6ec0e052a08ecc61676c7fe8dabd1939ed48519ff635f31ab00d69', 'Al-amine', '+212636415755', 'E01', 2),
+('JH36620', 0, 0, '1997-07-14', 'khalidzahid79@gmail.com', 'M', 'A', 0, 0, 'ZAHID', 'e6384b043cd227971044d313ca521f161e005e1b741522649c73dcd1bda14094', 'Khalid', '+212608288723', 'E02', 2),
+('JK521637', 0, 0, '1997-01-01', 'abderrahim.elmarari@gmail.com', 'M', 'A', 0, 1, 'EL MARARI', 'be394c5ade83c6c0058ddc5c1f5d0e8264945855bb5234400254561d0c022095', 'Abderrahim', '+212658240885', 'E03', 2),
+('JM63082', 0, 0, '1997-01-03', 'youness.oualili@gmail.com', 'M', 'A', 0, 0, 'OUALILI', '14c6c6f33b714bab85aab5a5db446e0fdca813377b42f91bd56d982a2d7f7fb5', 'Younesse', '+212659084223', 'E02', 2),
+('P334684', 0, 0, '1998-04-26', 'simoabde@gmail.com', 'M', 'A', 0, 0, 'El ameli', 'f0785d540f7a5a1058a7f23d39eee634d578bcd32738d7afbd0824c9550f21c3', 'Abderrahim', '0697634984', 'E03', 2),
+('SH184344', 1, 0, '1997-01-24', 'youssef.chaachai@gmail.com', 'M', 'A', 0, 0, 'CHAACHAI', '9660db24c9ed6011ddbbaf17835209aad1916de811533fc7f7b3f76e3f9bcdae', 'Youssef', '+212642112113', 'E03', 1);
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables exportées
 --
 
 --
--- Constraints for table `commande`
+-- Contraintes pour la table `commande`
 --
 ALTER TABLE `commande`
   ADD CONSTRAINT `FK_commande` FOREIGN KEY (`USERSTOCK_ID`) REFERENCES `userstock` (`ID`),
   ADD CONSTRAINT `FK_COMMANDE_USER_ID` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
 
 --
--- Constraints for table `entiteadministrative`
+-- Contraintes pour la table `entiteadministrative`
 --
 ALTER TABLE `entiteadministrative`
   ADD CONSTRAINT `FK_ENTITEADMINISTRATIVE_MAGASIN_ID` FOREIGN KEY (`MAGASIN_ID`) REFERENCES `magasin` (`ID`);
 
 --
--- Constraints for table `expressionbesoin`
+-- Contraintes pour la table `expressionbesoin`
 --
 ALTER TABLE `expressionbesoin`
   ADD CONSTRAINT `FK_exp` FOREIGN KEY (`USERSTOCK_ID`) REFERENCES `userstock` (`ID`),
   ADD CONSTRAINT `FK_EXPRESSIONBESOIN_USER_ID` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
 
 --
--- Constraints for table `facture`
+-- Contraintes pour la table `facture`
 --
 ALTER TABLE `facture`
   ADD CONSTRAINT `FK_FACTURE_COMMANDE_ID` FOREIGN KEY (`COMMANDE_ID`) REFERENCES `commande` (`ID`),
   ADD CONSTRAINT `FK_FACTURE_FOURNISSEUR_ID` FOREIGN KEY (`FOURNISSEUR_ID`) REFERENCES `fournisseur` (`ID`);
 
 --
--- Constraints for table `lignecommande`
+-- Contraintes pour la table `lignecommande`
 --
 ALTER TABLE `lignecommande`
   ADD CONSTRAINT `FK_LIGNECOMMANDE_COMMANDE_ID` FOREIGN KEY (`COMMANDE_ID`) REFERENCES `commande` (`ID`),
   ADD CONSTRAINT `FK_LIGNECOMMANDE_PRODUIT_ID` FOREIGN KEY (`PRODUIT_ID`) REFERENCES `produit` (`ID`);
 
 --
--- Constraints for table `ligneexpressionbesoin`
+-- Contraintes pour la table `ligneexpressionbesoin`
 --
 ALTER TABLE `ligneexpressionbesoin`
   ADD CONSTRAINT `FK_LIGNEEXPRESSIONBESOIN_EXPRESSIONBESOIN_ID` FOREIGN KEY (`EXPRESSIONBESOIN_ID`) REFERENCES `expressionbesoin` (`ID`),
   ADD CONSTRAINT `FK_LIGNEEXPRESSIONBESOIN_PRODUIT_ID` FOREIGN KEY (`PRODUIT_ID`) REFERENCES `produit` (`ID`);
 
 --
--- Constraints for table `lignefacture`
+-- Contraintes pour la table `lignefacture`
 --
 ALTER TABLE `lignefacture`
   ADD CONSTRAINT `FK_LIGNEFACTURE_FACTURE_ID` FOREIGN KEY (`FACTURE_ID`) REFERENCES `facture` (`ID`),
   ADD CONSTRAINT `FK_LIGNEFACTURE_PRODUIT_ID` FOREIGN KEY (`PRODUIT_ID`) REFERENCES `produit` (`ID`);
 
 --
--- Constraints for table `lignelivraison`
+-- Contraintes pour la table `lignelivraison`
 --
 ALTER TABLE `lignelivraison`
   ADD CONSTRAINT `FK_LIGNELIVRAISON_LIVRAISON_ID` FOREIGN KEY (`LIVRAISON_ID`) REFERENCES `livraison` (`ID`),
   ADD CONSTRAINT `FK_LIGNELIVRAISON_PRODUIT_ID` FOREIGN KEY (`PRODUIT_ID`) REFERENCES `produit` (`ID`);
 
 --
--- Constraints for table `lignemagasin`
+-- Contraintes pour la table `lignemagasin`
 --
 ALTER TABLE `lignemagasin`
   ADD CONSTRAINT `FK_LIGNEMAGASIN_MAGASIN_ID` FOREIGN KEY (`MAGASIN_ID`) REFERENCES `magasin` (`ID`),
   ADD CONSTRAINT `FK_LIGNEMAGASIN_PRODUIT_ID` FOREIGN KEY (`PRODUIT_ID`) REFERENCES `produit` (`ID`);
 
 --
--- Constraints for table `lignereception`
+-- Contraintes pour la table `lignereception`
 --
 ALTER TABLE `lignereception`
   ADD CONSTRAINT `FK_LIGNERECEPTION_PRODUIT_ID` FOREIGN KEY (`PRODUIT_ID`) REFERENCES `produit` (`ID`),
   ADD CONSTRAINT `FK_LIGNERECEPTION_RECEPTION_ID` FOREIGN KEY (`RECEPTION_ID`) REFERENCES `reception` (`ID`);
 
 --
--- Constraints for table `livraison`
+-- Contraintes pour la table `livraison`
 --
 ALTER TABLE `livraison`
   ADD CONSTRAINT `FK_livraison` FOREIGN KEY (`USERSTOCK_ID`) REFERENCES `userstock` (`ID`),
@@ -13195,20 +13225,20 @@ ALTER TABLE `livraison`
   ADD CONSTRAINT `FK_LIVRAISON_USER_ID` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
 
 --
--- Constraints for table `magasin`
+-- Contraintes pour la table `magasin`
 --
 ALTER TABLE `magasin`
   ADD CONSTRAINT `FK_MAGASIN_STOCK_ID` FOREIGN KEY (`STOCK_ID`) REFERENCES `stock` (`ID`);
 
 --
--- Constraints for table `produit`
+-- Contraintes pour la table `produit`
 --
 ALTER TABLE `produit`
   ADD CONSTRAINT `FK_PRODUIT_CATEGORIE_ID` FOREIGN KEY (`CATEGORIE_ID`) REFERENCES `categorie` (`ID`),
   ADD CONSTRAINT `FK_PRODUIT_MARQUE_ID` FOREIGN KEY (`MARQUE_ID`) REFERENCES `marque` (`ID`);
 
 --
--- Constraints for table `reception`
+-- Contraintes pour la table `reception`
 --
 ALTER TABLE `reception`
   ADD CONSTRAINT `FK_reception` FOREIGN KEY (`USERSTOCK_ID`) REFERENCES `userstock` (`ID`),
@@ -13216,15 +13246,16 @@ ALTER TABLE `reception`
   ADD CONSTRAINT `FK_RECEPTION_USER_ID` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
 
 --
--- Constraints for table `user`
+-- Contraintes pour la table `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `FK_USER_ENTITEADMINISTRATIVE_ID` FOREIGN KEY (`ENTITEADMINISTRATIVE_ID`) REFERENCES `entiteadministrative` (`ID`);
 
 --
--- Constraints for table `userstock`
+-- Contraintes pour la table `userstock`
 --
 ALTER TABLE `userstock`
+  ADD CONSTRAINT `FK_role` FOREIGN KEY (`ROLE_ID`) REFERENCES `role` (`ID`),
   ADD CONSTRAINT `FK_userstock` FOREIGN KEY (`ENTITEADMINISTRATIVE_ID`) REFERENCES `entiteadministrative` (`ID`);
 SET FOREIGN_KEY_CHECKS=1;
 

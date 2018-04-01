@@ -1,11 +1,17 @@
 package controller;
 
+import bean.ExpressionBesoin;
 import bean.LigneReception;
+import bean.Reception;
+import bean.UserStock;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.SessionUtil;
 import service.LigneReceptionFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,10 +20,12 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import service.ReceptionFacade;
 
 @Named("ligneReceptionController")
 @SessionScoped
@@ -26,18 +34,72 @@ public class LigneReceptionController implements Serializable {
     @EJB
     private service.LigneReceptionFacade ejbFacade;
     private List<LigneReception> items = null;
+    private List<LigneReception> receptionItmes = new ArrayList<>();
+    @EJB
+    private ReceptionFacade receptionFacade;
+
+
     private LigneReception selected;
+    private ExpressionBesoin expressionBesoin;
+    private Date daterecep;
 
     public LigneReceptionController() {
     }
 
     public LigneReception getSelected() {
+        if(selected == null){
+            selected = new LigneReception();
+        }
         return selected;
     }
 
     public void setSelected(LigneReception selected) {
         this.selected = selected;
     }
+    
+    
+    
+    
+    
+    
+    
+
+    public ExpressionBesoin getExpressionBesoin() {
+        if(expressionBesoin == null){
+            expressionBesoin = new ExpressionBesoin();
+        }
+        return expressionBesoin;
+    }
+
+    public void setExpressionBesoin(ExpressionBesoin expressionBesoin) {
+        this.expressionBesoin = expressionBesoin;
+    }
+
+    
+    
+    
+    public Date getDaterecep() {
+          if(daterecep == null){
+            daterecep = new Date();
+          }
+        return daterecep;
+    }
+
+    public void setDaterecep(Date daterecep) {
+        this.daterecep = daterecep;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     protected void setEmbeddableKeys() {
     }
@@ -53,6 +115,17 @@ public class LigneReceptionController implements Serializable {
         selected = new LigneReception();
         initializeEmbeddableKey();
         return selected;
+    }
+
+    public List<LigneReception> getReceptionItmes() {
+        if (receptionItmes == null) {
+            receptionItmes = new ArrayList();
+        }
+        return receptionItmes;
+    }
+
+    public void setReceptionItmes(List<LigneReception> receptionItmes) {
+        this.receptionItmes = receptionItmes;
     }
 
     public void create() {
@@ -79,6 +152,18 @@ public class LigneReceptionController implements Serializable {
             items = getFacade().findAll();
         }
         return items;
+    }
+
+    public void creerLigne() {
+        System.out.println("azert");
+        LigneReception cloneLigne = ejbFacade.cloneLigneReception(selected);
+        receptionItmes.add(cloneLigne);
+        setSelected(null);
+
+    }
+
+    public void testButton() {
+        System.out.println("hellooooooo");
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
@@ -161,5 +246,38 @@ public class LigneReceptionController implements Serializable {
         }
 
     }
+     public void info() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "recu ajouter", "avec succe"));
+    }
+     public void info1() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre recu a été enregstrer avec sucée", ""));
+    }
+    public void vider() {
+        setSelected(null);
+        receptionItmes.clear();
+    }
+    
+    
+//    
+    
+    public void validerReception() {
+       
+            String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
+            Reception reception = receptionFacade.addReception(idSession , expressionBesoin , daterecep );
+            if (reception == null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Vous devez remplir tout les champs !"));
+            } else {
+                for (int i = 0; i < receptionItmes.size(); i++) {
+                    LigneReception receptionItem = receptionItmes.get(i);
+                    ejbFacade.createLigneReception(receptionItem.getQuantiteRecu(), receptionItem.getProduit(), reception.getId());
+                }
+//                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Votre Recu a été creer avec succès."));
+                vider();
+            }
+        }
+    
+
 
 }
+
+

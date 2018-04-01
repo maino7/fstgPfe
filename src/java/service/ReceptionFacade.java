@@ -5,7 +5,11 @@
  */
 package service;
 
+import bean.ExpressionBesoin;
 import bean.Reception;
+import bean.UserStock;
+import java.util.Date;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,6 +23,10 @@ public class ReceptionFacade extends AbstractFacade<Reception> {
 
     @PersistenceContext(unitName = "Pfe_FstgProjectPU")
     private EntityManager em;
+    @EJB
+    private UserStockFacade userStockFacade; 
+ 
+    
 
     @Override
     protected EntityManager getEntityManager() {
@@ -29,4 +37,17 @@ public class ReceptionFacade extends AbstractFacade<Reception> {
         super(Reception.class);
     }
     
+    public Reception addReception(String idUser,ExpressionBesoin expressionBesoin , Date daterecp) {
+        
+            UserStock userStock = userStockFacade.find(idUser);
+           
+            Reception reception = new Reception();
+            reception.setUserStock(userStock);
+            reception.setDateReception(daterecp);
+            reception.setExpressionBesoin(expressionBesoin);
+            create(reception);
+            
+            return reception;
+        
+    }
 }

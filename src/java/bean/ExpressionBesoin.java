@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +29,7 @@ public class ExpressionBesoin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private int recu;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateExpressionBesoin;
     @ManyToOne
@@ -44,6 +46,14 @@ public class ExpressionBesoin implements Serializable {
 
     public ExpressionBesoin(Long id) {
         this.id = id;
+    }
+
+    public int getRecu() {
+        return recu;
+    }
+
+    public void setRecu(int recu) {
+        this.recu = recu;
     }
 
     public Long getId() {
@@ -105,19 +115,24 @@ public class ExpressionBesoin implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ExpressionBesoin)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        ExpressionBesoin other = (ExpressionBesoin) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ExpressionBesoin other = (ExpressionBesoin) obj;
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

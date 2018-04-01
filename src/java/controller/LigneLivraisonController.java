@@ -1,11 +1,17 @@
 package controller;
 
+import bean.Commande;
 import bean.LigneLivraison;
+import bean.Livraison;
+import bean.UserStock;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.SessionUtil;
 import service.LigneLivraisonFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,10 +20,12 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import service.LivraisonFacade;
 
 @Named("ligneLivraisonController")
 @SessionScoped
@@ -26,12 +34,22 @@ public class LigneLivraisonController implements Serializable {
     @EJB
     private service.LigneLivraisonFacade ejbFacade;
     private List<LigneLivraison> items = null;
+    private List<LigneLivraison> livraisonItmes = new ArrayList<>();
+    @EJB
+    private LivraisonFacade livraisonFacade;
+    
     private LigneLivraison selected;
+    
+    private Commande commande;
+    private Date daterecep;
 
     public LigneLivraisonController() {
     }
 
     public LigneLivraison getSelected() {
+        if (selected == null) {
+            selected = new LigneLivraison();
+        }
         return selected;
     }
 
@@ -80,6 +98,55 @@ public class LigneLivraisonController implements Serializable {
         }
         return items;
     }
+
+    public List<LigneLivraison> getLivraisonItmes() {
+            if (livraisonItmes == null) {
+            livraisonItmes = new ArrayList<>();
+        }
+        return livraisonItmes;
+    }
+
+    public void setLivraisonItmes(List<LigneLivraison> livraisonItmes) {
+        this.livraisonItmes = livraisonItmes;
+    }
+
+    public Commande getCommande() {
+        if (commande == null) {
+            commande = new Commande();
+        }
+        return commande;
+    }
+
+    public void setCommande(Commande commande) {
+        this.commande = commande;
+    }
+
+    public Date getDaterecep() {
+        if (daterecep == null) {
+            daterecep = new Date();
+        }
+        
+        return daterecep;
+    }
+
+    public void setDaterecep(Date daterecep) {
+        this.daterecep = daterecep;
+    }
+    
+    
+        public void creerLigne() {
+        System.out.println("azert");
+        LigneLivraison cloneLigne = ejbFacade.cloneLigneLivraison(selected);
+        livraisonItmes.add(cloneLigne);
+        setSelected(null);
+
+    }
+    
+    
+    
+    
+    
+    
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
@@ -161,5 +228,38 @@ public class LigneLivraisonController implements Serializable {
         }
 
     }
+    
+        public void info() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Livraison ajouter", "avec succe"));
+    }
+     public void info1() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre recu a été enregstrer avec sucée", ""));
+    }
+    public void vider() {
+        setSelected(null);
+        livraisonItmes.clear();
+    }
+    
+    
+//    
+    
+    public void validerLivraison() {
+       
+            String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
+            System.out.println("hahowa l id " + idSession);
+            Livraison livraison = livraisonFacade.addLivraison(idSession, commande, daterecep);
+            System.out.println("ha l9lawii tcrea ");
+            
+            if (livraison == null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Vous devez remplir tout les champs !"));
+            } else {
+                for (int i = 0; i < livraisonItmes.size(); i++) {
+                    LigneLivraison livraisonItem = livraisonItmes.get(i);
+                    ejbFacade.createLigneLivraison(livraisonItem.getQuantite(), livraisonItem.getProduit(), livraison.getId());
+                }
+//                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Votre Recu a été creer avec succès."));
+                vider();
+            }
+        } 
 
 }

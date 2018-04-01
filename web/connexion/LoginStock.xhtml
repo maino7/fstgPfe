@@ -5,6 +5,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+<!--    <h:head>
+        
+    </h:head>-->
     <ui:composition template="/template/simpleTemplate.xhtml">
         <ui:define name="head">
             <f:metadata>
@@ -12,7 +15,7 @@
             </f:metadata>
         </ui:define>
         <ui:define name="title">
-            FSTG | Connexion Enseignant (STOCK)
+            FSTG | Connexion STOCK
         </ui:define>
         <ui:define name="content">
             <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
@@ -23,7 +26,7 @@
 
                 <div class="col-lg-6 col-lg-offset-1">
                     <h:form class="form-group">
-                        <h1><h:outputText value="Connection Enseignant"/></h1>
+                        <h1><h:outputText value="Stock connexion"/></h1>
                         <!--<p:panelGrid columns="2">-->
                         <p:outputLabel value="CIN:" for="id" />
                         <p:inputText id="id" class="form-control" value="#{connectionController.selectedUserStock.id}" />
@@ -31,8 +34,8 @@
                         <p:password id="password" class="form-control" value="#{connectionController.selectedUserStock.password}" title="Password" />
                         <!--</p:panelGrid>-->
                         <br/>
-                        <br/>
-                        <p:commandButton value="OK" action="#{connectionController.signInStock()}" />
+                        <!--<p:commandButton value="Se connecter" action="#{connectionController.signInStock()}" />-->
+                        <p:commandButton value="Se connecter" style="background-color: #00cc33" class="btn center" action="#{connectionController.signInStock()}" update="" />
                         <br/>
                         <br/>
                         <p:commandLink value="forgot password ?" action="#{connectionController.redirect('../enseignant/forgotpassword.xhtml')}"></p:commandLink>

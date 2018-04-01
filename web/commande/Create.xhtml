@@ -12,8 +12,18 @@
             <h:form id="CommandeCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{commandeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCommandeLabel_nombreCommande}" for="nombreCommande" />
+                        <p:inputText id="nombreCommande" value="#{commandeController.selected.nombreCommande}" title="#{bundle.CreateCommandeTitle_nombreCommande}" />
+                        <p:outputLabel value="#{bundle.CreateCommandeLabel_livree}" for="livree" />
+                        <p:inputText id="livree" value="#{commandeController.selected.livree}" title="#{bundle.CreateCommandeTitle_livree}" />
                         <p:outputLabel value="#{bundle.CreateCommandeLabel_id}" for="id" />
                         <p:inputText id="id" value="#{commandeController.selected.id}" title="#{bundle.CreateCommandeTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateCommandeLabel_userStock}" for="userStock" />
+                        <p:selectOneMenu id="userStock" value="#{commandeController.selected.userStock}" >
+                            <f:selectItems value="#{userStockController.itemsAvailableSelectOne}"
+                                           var="userStockItem"
+                                           itemValue="#{userStockItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateCommandeLabel_dateCommande}" for="dateCommande" />
                         <p:calendar id="dateCommande" pattern="MM/dd/yyyy" value="#{commandeController.selected.dateCommande}" title="#{bundle.EditCommandeTitle_dateCommande}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateCommandeLabel_user}" for="user" />

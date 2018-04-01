@@ -1,11 +1,17 @@
 package controller;
 
 import bean.ExpressionBesoin;
+import bean.LigneExpressionBesoin;
+import bean.UserStock;
+import controller.util.DateUtil;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.SessionUtil;
 import service.ExpressionBesoinFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +24,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.persistence.Temporal;
 
 @Named("expressionBesoinController")
 @SessionScoped
@@ -25,8 +32,55 @@ public class ExpressionBesoinController implements Serializable {
 
     @EJB
     private service.ExpressionBesoinFacade ejbFacade;
+
     private List<ExpressionBesoin> items = null;
+    private List<ExpressionBesoin> itemsFind = null;
     private ExpressionBesoin selected;
+    private List<LigneExpressionBesoin> expressionItems = new ArrayList<>();
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dateMin;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dateMax;
+
+    public ExpressionBesoinFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(ExpressionBesoinFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public List<ExpressionBesoin> getItemsFind() {
+        return itemsFind;
+    }
+
+    public void setItemsFind(List<ExpressionBesoin> itemsFind) {
+        this.itemsFind = itemsFind;
+    }
+
+    public List<LigneExpressionBesoin> getExpressionItems() {
+        return expressionItems;
+    }
+
+    public void setExpressionItems(List<LigneExpressionBesoin> expressionItems) {
+        this.expressionItems = expressionItems;
+    }
+
+    public Date getDateMin() {
+        return dateMin;
+    }
+
+    public void setDateMin(Date dateMin) {
+        this.dateMin = dateMin;
+    }
+
+    public Date getDateMax() {
+        return dateMax;
+    }
+
+    public void setDateMax(Date dateMax) {
+        this.dateMax = dateMax;
+    }
 
     public ExpressionBesoinController() {
     }
@@ -53,6 +107,14 @@ public class ExpressionBesoinController implements Serializable {
         selected = new ExpressionBesoin();
         initializeEmbeddableKey();
         return selected;
+    }
+
+    public void findByUser() {
+        String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
+        System.out.println("hahowa l id " + idSession);
+        itemsFind = ejbFacade.findByDate(idSession, dateMin, dateMax);
+        System.out.println("OK");
+
     }
 
     public void create() {

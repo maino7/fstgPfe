@@ -189,7 +189,7 @@ public class ConnectionController implements Serializable {
                 messageConnection = "";
                 SessionUtil.redirect("../enseignant/ensfirstconnect.xhtml"); // added 16/05/2017 Youssef Benihoud
             }*/
-            if (testUserStock.getId().equals("JM63082")) {
+            if (testUserStock.getId().equals("SH184344")) {
                 SessionUtil.redirect("../stock/DoyenLogin.xhtml");
             } else {
                 SessionUtil.redirect("../stock/UserLogin.xhtml");

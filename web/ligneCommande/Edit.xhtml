@@ -31,7 +31,7 @@
                         <p:outputLabel value="#{bundle.EditLigneCommandeLabel_id}" for="id" />
                         <p:inputText id="id" value="#{ligneCommandeController.selected.id}" title="#{bundle.EditLigneCommandeTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{ligneCommandeController.update}" value="#{bundle.Save}" update="display,:LigneCommandeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LigneCommandeEditDialog');"/>
+                    <p:commandButton actionListener="#{ligneCommandeController.update()}" value="#{bundle.Save}" update="display,:LigneCommandeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LigneCommandeEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LigneCommandeEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

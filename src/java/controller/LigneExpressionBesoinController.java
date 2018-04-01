@@ -1,11 +1,16 @@
 package controller;
 
+import bean.ExpressionBesoin;
+import bean.LigneCommande;
 import bean.LigneExpressionBesoin;
+import bean.UserStock;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.SessionUtil;
 import service.LigneExpressionBesoinFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,6 +19,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -25,13 +31,32 @@ public class LigneExpressionBesoinController implements Serializable {
 
     @EJB
     private service.LigneExpressionBesoinFacade ejbFacade;
-    private List<LigneExpressionBesoin> items = null;
+    @EJB
+    private service.ExpressionBesoinFacade expressionBesoinFacade;
+    private List<LigneExpressionBesoin> items = new ArrayList<>();
+    private List<LigneExpressionBesoin> expressionItems = new ArrayList<>();
+    private Long idLigne = 1L;
+
     private LigneExpressionBesoin selected;
+
+    public List<LigneExpressionBesoin> getExpressionItems() {
+        if (expressionItems == null) {
+            expressionItems = new ArrayList<>();
+        }
+        return expressionItems;
+    }
+
+    public void setExpressionItems(List<LigneExpressionBesoin> expressionItems) {
+        this.expressionItems = expressionItems;
+    }
 
     public LigneExpressionBesoinController() {
     }
 
     public LigneExpressionBesoin getSelected() {
+        if (selected == null) {
+            selected = new LigneExpressionBesoin();
+        }
         return selected;
     }
 
@@ -53,6 +78,41 @@ public class LigneExpressionBesoinController implements Serializable {
         selected = new LigneExpressionBesoin();
         initializeEmbeddableKey();
         return selected;
+    }
+
+    public void vider() {
+        setSelected(null);
+        expressionItems.clear();
+    }
+
+    public void supprimerLigne() {
+        expressionItems.remove(selected);
+        setSelected(null);
+    }
+
+    public void creeLigne() {
+        System.out.println("azert");
+        LigneExpressionBesoin ligneClone = ejbFacade.cloneLigneExpressionBesoin(selected);
+        ligneClone.setId(idLigne);
+        expressionItems.add(ligneClone);
+        idLigne++;
+
+    }
+
+    public void validerExpressionDeBesoin() {
+        String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
+        System.out.println("hahowa l id " + idSession);
+
+        ExpressionBesoin expressionBesoin = expressionBesoinFacade.addExpressionDeBesoin(idSession);
+        System.out.println("ok tcryaa");
+
+        for (int i = 0; i < expressionItems.size(); i++) {
+            LigneExpressionBesoin expressionItem = expressionItems.get(i);
+            ejbFacade.createLigneExp(expressionBesoin.getId(), expressionItem.getQuantite(), expressionItem.getProduit());
+        }
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre Expression De Besoin a été validée avec succès."));
+        vider();
     }
 
     public void create() {

@@ -52,6 +52,8 @@ public class UserStock implements Serializable {
     private List<Commande> commandes;
     @ManyToOne
     private EntiteAdministrative entiteAdministrative;
+    @ManyToOne
+    private Role role;
 
     public UserStock() {
     }
@@ -212,6 +214,17 @@ public class UserStock implements Serializable {
         this.entiteAdministrative = entiteAdministrative;
     }
 
+    public Role getRole() {
+        if (role == null) {
+            role = new Role();
+        }
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -241,11 +254,5 @@ public class UserStock implements Serializable {
     public String toString() {
         return nom + " " + prenom;
     }
-    
-    
-
- 
-
-    
 
 }

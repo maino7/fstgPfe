@@ -25,6 +25,8 @@ public class Commande implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String id;
+    private int nombreCommande;
+    private int livree;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateCommande;
     @ManyToOne
@@ -39,10 +41,27 @@ public class Commande implements Serializable {
     private UserStock userStock;
 
     public Commande() {
+        dateCommande = new Date();
     }
 
     public Commande(String id) {
         this.id = id;
+    }
+
+    public int getNombreCommande() {
+        return nombreCommande;
+    }
+
+    public void setNombreCommande(int nombreCommande) {
+        this.nombreCommande = nombreCommande;
+    }
+
+    public int getLivree() {
+        return livree;
+    }
+
+    public void setLivree(int livree) {
+        this.livree = livree;
     }
 
     public String getId() {
