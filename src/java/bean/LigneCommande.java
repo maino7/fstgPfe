@@ -11,43 +11,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author CHAACHAI Youssef <youssef.chaachai@gmail.com>
  */
 @Entity
-public class LigneCommande implements Serializable {
+@Table(name="LigneCommande")
+public class LigneCommande extends Ligne implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private double quantite;
+
     @ManyToOne
     private Commande commande;
-    @ManyToOne
-    private Produit produit;
 
-    public LigneCommande() {
-    }
 
-    public LigneCommande(Long id) {
-        this.id = id;
-    }
 
-    public LigneCommande(Long id, double quantite) {
-        this.id = id;
-        this.quantite = quantite;
-    }
-
-    public double getQuantite() {
-        return quantite;
-    }
-
-    public void setQuantite(double quantite) {
-        this.quantite = quantite;
-    }
 
     public Commande getCommande() {
         if (commande == null) {
@@ -59,25 +38,25 @@ public class LigneCommande implements Serializable {
     public void setCommande(Commande commande) {
         this.commande = commande;
     }
+    
+    
 
-    public Produit getProduit() {
-        if (produit == null) {
-            produit = new Produit();
-        }
-        return produit;
+    public LigneCommande() {
     }
 
-    public void setProduit(Produit produit) {
-        this.produit = produit;
+    public LigneCommande(Long id) {
+        super(id);
     }
 
-    public Long getId() {
-        return id;
+    public LigneCommande(Long id, double quantite) {
+        super(id, quantite);
     }
+    
+    
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+
+
+
 
     @Override
     public int hashCode() {
@@ -93,10 +72,7 @@ public class LigneCommande implements Serializable {
             return false;
         }
         LigneCommande other = (LigneCommande) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

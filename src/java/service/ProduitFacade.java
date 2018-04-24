@@ -5,7 +5,11 @@
  */
 package service;
 
+import bean.Categorie;
+import bean.LigneMagasin;
 import bean.Produit;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,6 +23,13 @@ public class ProduitFacade extends AbstractFacade<Produit> {
 
     @PersistenceContext(unitName = "Pfe_FstgProjectPU")
     private EntityManager em;
+    @EJB
+    private LigneMagasinFacade ligneMagasinFacade;
+
+    public List<Produit> findByCategorie(Categorie categorie) {
+        return em.createQuery("SELECT p FROM Produit p WHERE"
+                + " p.categorie.id = '" + categorie.getId() + "' ").getResultList();
+    }
 
     @Override
     protected EntityManager getEntityManager() {
@@ -28,5 +39,19 @@ public class ProduitFacade extends AbstractFacade<Produit> {
     public ProduitFacade() {
         super(Produit.class);
     }
-    
+public void addquantite (Produit produit , double qtn){
+        
+      List<LigneMagasin> lignemagasins = ligneMagasinFacade.findbyProduit(produit);
+      
+        for (int i = 0; i < lignemagasins.size(); i++) {
+            LigneMagasin get = lignemagasins.get(i);
+            
+            get.setQuantite(get.getQuantite()+qtn);
+            ligneMagasinFacade.edit(get);
+            
+        }
+        System.out.println("it is done I guess check the DB");
+     
+  
+    }
 }

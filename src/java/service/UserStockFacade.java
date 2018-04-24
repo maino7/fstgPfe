@@ -6,10 +6,12 @@
 package service;
 
 import bean.Device;
+import bean.EntiteAdministrative;
 import bean.UserStock;
 import controller.util.DeviceUtil;
 import controller.util.HashageUtil;
 import controller.util.SessionUtil;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -36,11 +38,11 @@ public class UserStockFacade extends AbstractFacade<UserStock> {
     public UserStockFacade() {
         super(UserStock.class);
     }
-    
+
     @Override
     public UserStock find(Object id) {
         try {
-             UserStock userStock = (UserStock) em.createQuery("select u from UserStock u where u.id ='" + id + "'").getSingleResult();
+            UserStock userStock = (UserStock) em.createQuery("select u from UserStock u where u.id ='" + id + "'").getSingleResult();
             if (userStock != null) {
                 return userStock;
             }
@@ -49,7 +51,7 @@ public class UserStockFacade extends AbstractFacade<UserStock> {
         }
         return null;
     }
-    
+
     public int signIn(UserStock userStock) {
         System.out.println("========= Sign In ===========");
         if (userStock == null || userStock.getId() == null) {
@@ -124,5 +126,9 @@ public class UserStockFacade extends AbstractFacade<UserStock> {
         clone.setEntiteAdministrative(userStock.getEntiteAdministrative());
         return clone;
     }
-   
+
+    public List<UserStock> findByEntite(EntiteAdministrative entiteAdministrative) {
+        return em.createQuery("SELECT u FROM UserStock u WHERE u.entiteAdministrative.id ='" + entiteAdministrative.getId() + "'").getResultList();
+    }
+
 }

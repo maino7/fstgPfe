@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>STOCK | Home</title>
 
@@ -42,19 +43,19 @@
         </style>
 
         <ui:include src="Header.xhtml"/>
-        
+
         <div class="main-panel">
             <nav class="navbar navbar-transparent navbar-absolute">
                 <div class="container-fluid">
-<!--                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#"> Tableau de bord du Doyen </a>
-                    </div>-->
+                    <!--                    <div class="navbar-header">
+                                            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>
+                                            <a class="navbar-brand" href="#"> Tableau de bord du Doyen </a>
+                                        </div>-->
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
@@ -216,265 +217,210 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
-                            <div class="card card-nav-tabs">
-                                <div class="card-header" data-background-color="purple">
-                                    <div class="nav-tabs-navigation">
-                                        <div class="nav-tabs-wrapper">
-                                            <span class="nav-tabs-title">Les nouvelles Expressions de Besoin </span>
-                                            <ul class="nav nav-tabs" data-tabs="tabs">
-                                                <li class="active">
+                    <h:form id="idForm">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="card card-nav-tabs">
+                                    <div class="card-header" data-background-color="purple">
+                                        <div class="nav-tabs-navigation">
+                                            <div class="nav-tabs-wrapper">
+                                                 <h4 class="title">Livraisons complètes</h4>
+                                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                                    <li class="active">
 
-                                                </li>
-                                                <li class="">
+                                                    </li>
 
-                                                </li>
-                                                <li class="">
-                                                    <a href="#settings" data-toggle="tab">
-                                                        <i class="material-icons">cloud</i> Tous Les Expressions
-                                                        <div class="ripple-container"></div>
+
+                                                </ul>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="profile">
+                                                <p:dataTable value="#{expressionBesoinController.expressionsToday}" var="item" id="tab">
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Date"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.dateExpressionBesoin}">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                        </h:outputText>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Entite Admin"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.userStock.entiteAdministrative.libelle}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Membre"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.userStock.nom}"/>
+                                                    </p:column>
+
+                                                </p:dataTable>
+                                                <div class="card-content">
+
+                                                    <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true" style="width: 11%;font-size: 120%"  >
+                                                        Consulter les expressions de besoin
                                                     </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-content">
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="profile">
-                                            <table class="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes" checked=""></input>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>5 Ordinateurs portable Toshiba , Departement informatoque</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes"></input>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>3 Bureau modernes  Ikea , Decanat</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes"></input>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>14 Ordinateurs Desktop HP , Departement geologie
-                                                        </td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes" checked=""></input>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>10 microscope de laboratoire OPTIKA ,Departement Chimie</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="tab-pane" id="messages">
-                                            <table class="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes" checked=""></input>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>3 switch Cisco , Decanat
-                                                        </td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes"></input>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>6 routeur Cisco , Decanat</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="tab-pane" id="settings">
-                                            <table class="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes"></input>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>70 chaise confort Ikea , Departement informatique</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes" checked=""></input>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>6 Paquet de feuille A4 YES , Scolarité
-                                                        </td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox" name="optionsCheckboxes"></input>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td>2 imprimante HP , Scolarité</td>
-                                                        <td class="td-actions text-right">
-                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-                                                                <i class="material-icons">edit</i>
-                                                            </button>
-                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                                <i class="material-icons">close</i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="messages">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" name="optionsCheckboxes" checked=""></input>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>3 switch Cisco , Decanat
+                                                            </td>
+                                                            <td class="td-actions text-right">
+                                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
+                                                                    <i class="material-icons">edit</i>
+                                                                </button>
+                                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" name="optionsCheckboxes"></input>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>6 routeur Cisco , Decanat</td>
+                                                            <td class="td-actions text-right">
+                                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
+                                                                    <i class="material-icons">edit</i>
+                                                                </button>
+                                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane" id="settings">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" name="optionsCheckboxes"></input>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>70 chaise confort Ikea , Departement informatique</td>
+                                                            <td class="td-actions text-right">
+                                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
+                                                                    <i class="material-icons">edit</i>
+                                                                </button>
+                                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" name="optionsCheckboxes" checked=""></input>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>6 Paquet de feuille A4 YES , Scolarité
+                                                            </td>
+                                                            <td class="td-actions text-right">
+                                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
+                                                                    <i class="material-icons">edit</i>
+                                                                </button>
+                                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" name="optionsCheckboxes"></input>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>2 imprimante HP , Scolarité</td>
+                                                            <td class="td-actions text-right">
+                                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
+                                                                    <i class="material-icons">edit</i>
+                                                                </button>
+                                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-12">
-                            <div class="card">
-                                <div class="card-header" data-background-color="orange">
-                                    <h4 class="title">Livraisons complètes</h4>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="card">
+                                    <div class="card-header" data-background-color="orange">
+                                        <h4 class="title">Livraisons complètes</h4>
 
-                                </div>
-                                <div class="card-content table-responsive">
-                                    <table class="table table-hover">
-                                        <thead class="text-warning">
-                                            <th>ID</th>
-                                            <th>Date</th>
-                                            <th>Receveur</th>
+                                    </div>
+                                    <div class="card-content table-responsive">
+                                      
+ <p:dataTable class="table table-hover" value="#{commandeController.commandeslivres}" var="item">
+           
 
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>20/12/2017</td>
-                                                <td>CHAACHAI Youssef</td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>17/09/2017</td>
-                                                <td>OUALILI Youness</td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>14/08/2017</td>
-                                                <td>OUALILI Youness</td>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Date de Commande"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateCommande}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
 
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>13/04/2017</td>
-                                                <td>ZAHID Khalid</td>
-
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="User"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userStock.nom} #{item.userStock.prenom}"/>
+                        </p:column>
+              
+                 
+                                       
+                    </p:dataTable>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </h:form>
                 </div>
+
             </div>
             <footer class="footer">
                 <div class="container-fluid">

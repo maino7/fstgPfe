@@ -35,6 +35,12 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProduitTitle_seuilAlert}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.seuilAlert}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProduitTitle_description}"/>
                             </f:facet>
                             <h:outputText value="#{item.description}"/>
@@ -49,13 +55,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProduitTitle_categorie}"/>
                             </f:facet>
-                            <h:outputText value="#{item.categorie.libelle}"/>
+                            <h:outputText value="#{item.categorie}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProduitTitle_marque}"/>
                             </f:facet>
-                            <h:outputText value="#{item.marque.libelle}"/>
+                            <h:outputText value="#{item.marque}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

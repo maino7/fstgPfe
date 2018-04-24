@@ -14,6 +14,8 @@
                     <p:panelGrid columns="2" rendered="#{produitController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateProduitLabel_libelle}" for="libelle" />
                         <p:inputText id="libelle" value="#{produitController.selected.libelle}" title="#{bundle.CreateProduitTitle_libelle}" />
+                        <p:outputLabel value="#{bundle.CreateProduitLabel_seuilAlert}" for="seuilAlert" />
+                        <p:inputText id="seuilAlert" value="#{produitController.selected.seuilAlert}" title="#{bundle.CreateProduitTitle_seuilAlert}" />
                         <p:outputLabel value="#{bundle.CreateProduitLabel_description}" for="description" />
                         <p:inputText id="description" value="#{produitController.selected.description}" title="#{bundle.CreateProduitTitle_description}" />
                         <p:outputLabel value="#{bundle.CreateProduitLabel_prix}" for="prix" />

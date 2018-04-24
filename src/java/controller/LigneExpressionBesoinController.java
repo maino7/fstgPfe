@@ -1,8 +1,9 @@
 package controller;
 
+import bean.EntiteAdministrative;
 import bean.ExpressionBesoin;
-import bean.LigneCommande;
 import bean.LigneExpressionBesoin;
+import bean.Produit;
 import bean.UserStock;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
@@ -11,6 +12,7 @@ import service.LigneExpressionBesoinFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -24,6 +26,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import service.ExpressionBesoinFacade;
+import service.UserStockFacade;
 
 @Named("ligneExpressionBesoinController")
 @SessionScoped
@@ -33,11 +37,141 @@ public class LigneExpressionBesoinController implements Serializable {
     private service.LigneExpressionBesoinFacade ejbFacade;
     @EJB
     private service.ExpressionBesoinFacade expressionBesoinFacade;
+    @EJB
+    private service.UserStockFacade userStockFacade;
     private List<LigneExpressionBesoin> items = new ArrayList<>();
+    private List<ExpressionBesoin> expressionBesoins = new ArrayList<>();
     private List<LigneExpressionBesoin> expressionItems = new ArrayList<>();
+    private List<LigneExpressionBesoin> listDetail = new ArrayList<>();
+    private List<LigneExpressionBesoin> listDetail1 = new ArrayList<>();
+    private List<UserStock> userStocks = new ArrayList<>();
+    private List<ExpressionBesoin> itemsFind = new ArrayList<>();
+
     private Long idLigne = 1L;
+    private Date dateMin = null;
+    private Date dateMax = null;
+    private EntiteAdministrative entiteAdministrative;
+    private UserStock userStock;
+
+    public UserStock getUserStock() {
+        if (userStock == null) {
+            userStock = new UserStock();
+        }
+        return userStock;
+    }
+
+    public void setUserStock(UserStock userStock) {
+        this.userStock = userStock;
+    }
+
+    public List<LigneExpressionBesoin> getListDetail1() {
+        return listDetail1;
+    }
+
+    public void setListDetail1(List<LigneExpressionBesoin> listDetail1) {
+        this.listDetail1 = listDetail1;
+
+    }
+
+    public EntiteAdministrative getEntiteAdministrative() {
+        if (entiteAdministrative == null) {
+            entiteAdministrative = new EntiteAdministrative();
+        }
+        return entiteAdministrative;
+    }
+
+    public void setEntiteAdministrative(EntiteAdministrative entiteAdministrative) {
+        this.entiteAdministrative = entiteAdministrative;
+    }
+
+    public UserStockFacade getUserStockFacade() {
+        return userStockFacade;
+    }
+
+    public void setUserStockFacade(UserStockFacade userStockFacade) {
+        this.userStockFacade = userStockFacade;
+    }
+
+    public List<UserStock> getUserStocks() {
+        return userStocks;
+    }
+
+    public void setUserStocks(List<UserStock> userStocks) {
+        this.userStocks = userStocks;
+    }
+
+    public List<ExpressionBesoin> getItemsFind() {
+
+        return itemsFind;
+    }
+
+    public void setItemsFind(List<ExpressionBesoin> itemsFind) {
+        this.itemsFind = itemsFind;
+    }
+
+    public Date getDateMin() {
+        if (dateMin == null) {
+            dateMin = new Date();
+        }
+        return dateMin;
+    }
+
+    public void setDateMin(Date dateMin) {
+        this.dateMin = dateMin;
+    }
+
+    public Date getDateMax() {
+        if (dateMax == null) {
+            dateMax = new Date();
+        }
+        return dateMax;
+    }
+
+    public void setDateMax(Date dateMax) {
+        this.dateMax = dateMax;
+    }
 
     private LigneExpressionBesoin selected;
+
+    public List<LigneExpressionBesoin> getListDetail() {
+        return listDetail;
+    }
+
+    public void setListDetail(List<LigneExpressionBesoin> listDetail) {
+        this.listDetail = listDetail;
+    }
+
+    public LigneExpressionBesoinFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(LigneExpressionBesoinFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public ExpressionBesoinFacade getExpressionBesoinFacade() {
+        return expressionBesoinFacade;
+    }
+
+    public void setExpressionBesoinFacade(ExpressionBesoinFacade expressionBesoinFacade) {
+        this.expressionBesoinFacade = expressionBesoinFacade;
+    }
+
+    public List<ExpressionBesoin> getExpressionBesoins() {
+        return expressionBesoins;
+    }
+
+    public void setExpressionBesoins(List<ExpressionBesoin> expressionBesoins) {
+        this.expressionBesoins = expressionBesoins;
+    }
+
+    public Long getIdLigne() {
+        return idLigne;
+    }
+
+    public void setIdLigne(Long idLigne) {
+        this.idLigne = idLigne;
+    }
 
     public List<LigneExpressionBesoin> getExpressionItems() {
         if (expressionItems == null) {
@@ -90,29 +224,74 @@ public class LigneExpressionBesoinController implements Serializable {
         setSelected(null);
     }
 
+    public void findByEntite() {
+        userStocks = userStockFacade.findByEntite(entiteAdministrative);
+    }
+
     public void creeLigne() {
-        System.out.println("azert");
         LigneExpressionBesoin ligneClone = ejbFacade.cloneLigneExpressionBesoin(selected);
         ligneClone.setId(idLigne);
         expressionItems.add(ligneClone);
         idLigne++;
-
+        setSelected(null);
     }
 
-    public void validerExpressionDeBesoin() {
+    public ExpressionBesoin validerExpressionDeBesoin() {
+        String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
+        ExpressionBesoin expressionBesoin = expressionBesoinFacade.addExpressionDeBesoin(idSession);
+        ejbFacade.createLigneExp(expressionBesoin, expressionItems);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre Expression De Besoin a été validée avec succès. Le numéro de l'expression est: " + expressionBesoin.getId()));
+        return expressionBesoin;
+    }
+
+    public void validerImprimerOui() {
+        if (expressionItems.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir l'expression de besoin avant de valider !"));
+        } else {
+            ExpressionBesoin expressionBesoin = validerExpressionDeBesoin();
+            imprimer(expressionBesoin);
+            vider();
+        }
+    }
+
+    public void validerImprimerNon() {
+        if (expressionItems.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir l'expression de besoin avant de valider !"));
+        } else {
+            validerExpressionDeBesoin();
+            vider();
+        }
+    }
+
+    public void imprimer(ExpressionBesoin expressionBesoin) {
+        expressionBesoinFacade.imprimerCommande(expressionBesoin);
+    }
+
+    public void findExp() {
+        expressionBesoins = expressionBesoinFacade.findBycriteria(userStock.getId(), dateMin, dateMax, selected.getProduit().getId());
+//        System.out.println(userStock);
+//        System.out.println(dateMin);
+//        System.out.println(dateMax);
+//        System.out.println(selected.getProduit().getId());
+    }
+
+    public void testCombo() {
+        System.out.println("=====" + selected.getExpressionBesoin().getUserStock().getId());
+    }
+
+    public void findBycriteria() {
         String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
         System.out.println("hahowa l id " + idSession);
+        itemsFind = expressionBesoinFacade.findBycriteria(idSession, dateMin, dateMax, selected.getProduit().getId());
+        System.out.println("OK");
+    }
 
-        ExpressionBesoin expressionBesoin = expressionBesoinFacade.addExpressionDeBesoin(idSession);
-        System.out.println("ok tcryaa");
+    public void showDetail(ExpressionBesoin item) {
+        listDetail = ejbFacade.findByExp(item.getId());
+    }
 
-        for (int i = 0; i < expressionItems.size(); i++) {
-            LigneExpressionBesoin expressionItem = expressionItems.get(i);
-            ejbFacade.createLigneExp(expressionBesoin.getId(), expressionItem.getQuantite(), expressionItem.getProduit());
-        }
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre Expression De Besoin a été validée avec succès."));
-        vider();
+    public void showDetailDoyen(ExpressionBesoin item) {
+        listDetail1 = ejbFacade.findByExp(item.getId());
     }
 
     public void create() {

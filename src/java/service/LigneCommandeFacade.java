@@ -8,6 +8,7 @@ package service;
 import bean.Commande;
 import bean.LigneCommande;
 import bean.Produit;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,6 +27,8 @@ public class LigneCommandeFacade extends AbstractFacade<LigneCommande> {
     private ProduitFacade produitFacade;
     @EJB
     private CommandeFacade commandeFacade;
+    @EJB
+    private LigneFacade ligneFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -36,19 +39,30 @@ public class LigneCommandeFacade extends AbstractFacade<LigneCommande> {
         super(LigneCommande.class);
     }
 
-    public int createLigneCommande(String idCommande, double quantite, Produit produit) {
-        Commande commande = commandeFacade.find(idCommande);
-        if (commande == null) {
-            System.out.println("la commande ma kaynach asat !!!");
+    public void createLigneCommande(Commande commande, double quantite, Produit produit) {
+        if (findByCommandeAndProduit(commande, produit) == null) {
+            LigneCommande ligneCommande = new LigneCommande();
+            ligneCommande.setCommande(commande);
+            ligneFacade.createLigne(ligneCommande, quantite, produit);
+            System.out.println("LigneCommande created successfully......");
+        }else{
+            LigneCommande ligneCommande = findByCommandeAndProduit(commande, produit);
+            ligneCommande.setQuantite(ligneCommande.getQuantite()+quantite);
+            edit(ligneCommande);
+            System.out.println("LigneCommande modified successfully......");
+        }
+    }
+
+    public int ajouterLigneCommande(Commande commande, List<LigneCommande> ligneCommandes) {
+        if (commande != null && ligneCommandes != null) {
+            for (int i = 0; i < ligneCommandes.size(); i++) {
+                LigneCommande ligne = ligneCommandes.get(i);
+                createLigneCommande(commande, ligne.getQuantite(), ligne.getProduit());
+            }
+            return 1;
+        } else {
             return -1;
         }
-        LigneCommande ligneCommande = new LigneCommande();
-        ligneCommande.setCommande(commande);
-        ligneCommande.setProduit(produit);
-        ligneCommande.setQuantite(quantite);
-        create(ligneCommande);
-        System.out.println("ligneCommande tcreeat !");
-        return 1;
     }
 
     public LigneCommande clone(LigneCommande ligneCommande) {
@@ -56,11 +70,24 @@ public class LigneCommandeFacade extends AbstractFacade<LigneCommande> {
         Commande commande = new Commande();
         commande.setId("cmdTest");
         clone.setCommande(commande);
-//        clone.setId(generateId("LigneCommande", "id"));
-//        clone.setId(Long.MAX_VALUE);
         clone.setProduit(ligneCommande.getProduit());
         clone.setQuantite(ligneCommande.getQuantite());
         return clone;
     }
 
+    public List<LigneCommande> findByCommande(Commande commande) {
+        return em.createQuery("SELECT l FROM LigneCommande l WHERE "
+                + "l.commande.id = '" + commande.getId() + "' ").getResultList();
+    }
+
+    public LigneCommande findByCommandeAndProduit(Commande commande, Produit produit) {
+        List<LigneCommande> lignes = findAll();
+        for (int i = 0; i < lignes.size(); i++) {
+            LigneCommande ligne = lignes.get(i);
+            if (ligne.getProduit().equals(produit) && ligne.getCommande().equals(commande)) {
+                return lignes.get(i);
+            }
+        }
+        return null;
+    }
 }

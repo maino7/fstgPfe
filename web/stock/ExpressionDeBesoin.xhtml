@@ -34,14 +34,7 @@
     <h:body style="background-image: url(../resources/images/demo/body-bg41.png); background-attachment: fixed;">
         <!-- Navigation -->
         <p:growl id="growl" life="3000" />
-
         <div style="background-color: white; width: 275px" class="sidebar" data-color="purple" >
-
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-            -->
             <div class="logo">
 
                 <a href="../../template/Home.xhtml"><img src="../resources/images/logo.png" style="width: 200px;" /></a>
@@ -104,15 +97,16 @@
                                 <h4 class="title">Expression De Besoin</h4>
                             </div>
                             <div class="card-content">
-                                <h:form>
-
+                                <h:form id="formId">
+                                    <p:messages id="messages" showDetail="true" closable="true">
+                                    </p:messages>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group label-floating">
-                                                <h3 class="title">CATEGORIE </h3>
+                                                <h4 class="title">CATEGORIE </h4>
                                                 <p:selectOneMenu  id="categorie" class="form-control" required="true" value="#{ligneExpressionBesoinController.selected.produit.categorie}" >
-                                                    <p:ajax update="produit"></p:ajax>
-                                                    <f:selectItem itemValue="#{null}" itemLabel="Choisissez une catégorie"/>  
+                                                    <p:ajax  update="produit"></p:ajax>
+                                                    <f:selectItem itemValue="#{null}" itemLabel="------------------Séléctionner------------------"/>  
 
                                                     <f:selectItems value="#{categorieController.items}" var="item"
                                                                    itemValue="#{item}" itemLabel="#{item.libelle}"/>
@@ -122,9 +116,9 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group label-floating"> 
-                                                <h3 class="title">PRODUIT</h3>
+                                                <h4 class="title">PRODUIT</h4>
                                                 <p:selectOneMenu  id="produit" class="form-control" required="true" value="#{ligneExpressionBesoinController.selected.produit}" >
-                                                    <f:selectItem itemValue="#{null}" itemLabel="Choisissez un produit"/>
+                                                    <f:selectItem itemValue="#{null}" itemLabel="------------------Séléctionner------------------"/>
                                                     <f:selectItems value="#{ligneExpressionBesoinController.selected.produit.categorie.produits}" var="item"
                                                                    itemValue="#{item}" itemLabel="#{item.libelle}"/>
                                                 </p:selectOneMenu>
@@ -132,91 +126,91 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group label-floating">
-                                                <h3 class="title">QUANTITE</h3>
+                                                <h4 class="title">QUANTITE</h4>
                                                 <p:spinner id="minMax" value="#{ligneExpressionBesoinController.selected.quantite}" min="0" max="10000" />
                                             </div>
                                         </div>
                                     </div>
-                                    <h:commandButton value="Ajouter"  class="btn btn-basic pull-right" action="#{ligneExpressionBesoinController.creeLigne()}"></h:commandButton>
+                                    <p:commandButton value="Ajouter"  icon="ui-icon-plus" style="background-color: #939393;width: 11%;font-size: 90%" 
+                                                     action="#{ligneExpressionBesoinController.creeLigne()}" update="listLigneExpressionsForm:datalist,formId" class="pull-right"></p:commandButton>
                                 </h:form> 
                             </div> 
+                            
+
+                            <div class="card-content table-responsive">
+                                <h:form id="listLigneExpressionsForm">
+                                    <hr></hr>
+                                    <p:dataTable id="datalist" value="#{ligneExpressionBesoinController.expressionItems}" var="item" selectionMode="single" selection="#{ligneExpressionBesoinController.selected}"
+                                                 rowKey="#{item.id}" editable="true" >
+                                        <p:column>  
+                                            <f:facet name="header">  
+                                                <h:outputText value="CATEORIE"/>  
+                                            </f:facet>  
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{item.produit.categorie.libelle}"/>  
+                                                </f:facet>  
+                                                <f:facet name="input" >  
+                                                    <p:selectOneMenu value="#{item.produit.categorie.libelle}" style="width:100%">  
+                                                        <f:selectItems value="#{categorieController.items}" var="cat" itemLabel="#{cat}"  
+                                                                       itemValue="#{cat}"/>  
+                                                    </p:selectOneMenu>  
+                                                </f:facet>  
+                                            </p:cellEditor>  
+                                        </p:column>  
+                                        <p:column >  
+                                            <f:facet name="header">  
+                                                <h:outputText value="PRODUIT"/>  
+                                            </f:facet>  
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{item.produit.libelle}"/>  
+                                                </f:facet>  
+                                                <f:facet name="input">  
+                                                    <p:selectOneMenu value="#{item.produit}" style="width:100%">  
+                                                        <f:selectItems value="#{produitController.items}" var="prod" itemLabel="#{prod}"  
+                                                                       itemValue="#{prod}"/>  
+                                                    </p:selectOneMenu>  
+                                                </f:facet>  
+                                            </p:cellEditor>  
+                                        </p:column>  
+                                        <p:column>  
+                                            <f:facet name="header">  
+                                                <h:outputText value="QUANTITE"/>  
+                                            </f:facet>  
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{item.quantite}"/>  
+                                                </f:facet>  
+                                                <f:facet name="input">  
+                                                    <p:inputText id="modelInput" value="#{item.quantite}" style="width:96%"/>  
+                                                </f:facet>  
+                                            </p:cellEditor>  
+                                        </p:column>  
+                                        <p:column style="width:6%" exportable="false">  
+                                            <p:rowEditor />  
+                                        </p:column>  
+                                    </p:dataTable>
+                                    <p:commandButton value="Supprimer" icon="ui-icon-trash" style="background-color: grey; font-size: 85%" 
+                                                     action="#{ligneExpressionBesoinController.supprimerLigne()}" update="listLigneExpressionsForm:datalist"
+                                                     ></p:commandButton>
+                                    <p:commandButton value="Vider" icon="ui-icon-close" action="#{ligneExpressionBesoinController.vider()}" 
+                                                     style="background-color: grey; font-size: 85%" update="listLigneExpressionsForm:datalist" ></p:commandButton>
+
+                                </h:form>
+                                <p:commandButton value="VALIDER" icon="ui-icon-check" style="background-color: #2a9942" update="listLigneExpressionsForm:datalist" oncomplete="PF('ImprimerExpressionDialog').show()" class="btn btn-sm pull-right"></p:commandButton>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <br></br>
-            <div class="col-lg-1">
-            </div>
-            <div class="col-lg-10">
-                <div class="card">
-                    <div class="card-header" data-background-color="grey">
-                        <h4 class="title">Liste Des Expression De Besoin</h4>
-                    </div>
-                    <div class="card-content table-responsive">
-                        <h:form>
-                            <p:messages id="messages" showDetail="true" closable="true">
-                            </p:messages>
-                            <p:dataTable id="datalist" value="#{ligneExpressionBesoinController.expressionItems}" var="item" selectionMode="single" selection="#{ligneExpressionBesoinController.selected}"
-                                         rowKey="#{item.id}" editable="true" >  
-                                <p:column>  
-                                    <f:facet name="header">  
-                                        <h:outputText value="CATEORIE"/>  
-                                    </f:facet>  
-                                    <p:cellEditor>  
-                                        <f:facet name="output">  
-                                            <h:outputText value="#{item.produit.categorie.libelle}"/>  
-                                        </f:facet>  
-                                        <f:facet name="input" >  
-                                            <p:selectOneMenu value="#{item.produit.categorie.libelle}" style="width:100%">  
-                                                <f:selectItems value="#{categorieController.items}" var="cat" itemLabel="#{cat}"  
-                                                               itemValue="#{cat}"/>  
-                                            </p:selectOneMenu>  
-                                        </f:facet>  
-                                    </p:cellEditor>  
-                                </p:column>  
-                                <p:column >  
-                                    <f:facet name="header">  
-                                        <h:outputText value="PRODUIT"/>  
-                                    </f:facet>  
-                                    <p:cellEditor>  
-                                        <f:facet name="output">  
-                                            <h:outputText value="#{item.produit.libelle}"/>  
-                                        </f:facet>  
-                                        <f:facet name="input">  
-                                            <p:selectOneMenu value="#{item.produit}" style="width:100%">  
-                                                <f:selectItems value="#{produitController.items}" var="prod" itemLabel="#{prod}"  
-                                                               itemValue="#{prod}"/>  
-                                            </p:selectOneMenu>  
-                                        </f:facet>  
-                                    </p:cellEditor>  
-                                </p:column>  
-                                <p:column>  
-                                    <f:facet name="header">  
-                                        <h:outputText value="QUANTITE"/>  
-                                    </f:facet>  
-                                    <p:cellEditor>  
-                                        <f:facet name="output">  
-                                            <h:outputText value="#{item.quantite}"/>  
-                                        </f:facet>  
-                                        <f:facet name="input">  
-                                            <p:inputText id="modelInput" value="#{item.quantite}" style="width:96%"/>  
-                                        </f:facet>  
-                                    </p:cellEditor>  
-                                </p:column>  
-                                <p:column style="width:6%" exportable="false">  
-                                    <p:rowEditor />  
-                                </p:column>  
-                            </p:dataTable>
-                            <h:commandButton value="Vider" action="#{ligneExpressionBesoinController.vider()}" class="btn btn-sm btn-basic"></h:commandButton>
-                            <h:commandButton value="Valider l'expression De besoin" action="#{ligneExpressionBesoinController.validerExpressionDeBesoin()}" class="btn btn-basic pull-right"></h:commandButton>
-                            <h:commandButton value="Supprimer" action="#{ligneExpressionBesoinController.supprimerLigne()}" class="btn btn-sm btn-basic"></h:commandButton>
-                        </h:form>
-                    </div>
+                <br></br>
+                <div class="col-lg-1">
                 </div>
+
             </div>
         </div>
-        <!--<ui:include src="sideBarDoyen.xhtml"/>-->
     </h:body>
+    <ui:include src="ImprimerExpression.xhtml"/>
     <!--   Core JS Files   -->
     <script src="../assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>

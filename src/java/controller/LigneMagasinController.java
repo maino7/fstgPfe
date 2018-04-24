@@ -1,11 +1,13 @@
 package controller;
 
 import bean.LigneMagasin;
+import bean.Produit;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import service.LigneMagasinFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,6 +16,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -25,13 +28,57 @@ public class LigneMagasinController implements Serializable {
 
     @EJB
     private service.LigneMagasinFacade ejbFacade;
+    @EJB
+    private service.ProduitFacade pf;
     private List<LigneMagasin> items = null;
     private LigneMagasin selected;
+    private double seuilDalerte;
+    private double qtéMax;
+    private double qtéMin;
+    private List<LigneMagasin> magasins = null;
+
+    public List<LigneMagasin> getMagasins() {
+        if (magasins == null) {
+            magasins = new ArrayList<LigneMagasin>();
+        }
+        return magasins;
+    }
+
+    public void setMagasins(List<Produit> produits) {
+        this.magasins = magasins;
+    }
+
+    public double getSeuilDalerte() {
+        return seuilDalerte;
+    }
+
+    public void setSeuilDalerte(double seuilDalerte) {
+        this.seuilDalerte = seuilDalerte;
+    }
+
+    public double getQtéMax() {
+        return qtéMax;
+    }
+
+    public void setQtéMax(double qtéMax) {
+        this.qtéMax = qtéMax;
+    }
+
+    public double getQtéMin() {
+        return qtéMin;
+    }
+
+    public void setQtéMin(double qtéMin) {
+        this.qtéMin = qtéMin;
+    }
 
     public LigneMagasinController() {
     }
 
     public LigneMagasin getSelected() {
+        if (selected == null) {
+            selected = new LigneMagasin();
+        }
         return selected;
     }
 
@@ -52,7 +99,30 @@ public class LigneMagasinController implements Serializable {
     public LigneMagasin prepareCreate() {
         selected = new LigneMagasin();
         initializeEmbeddableKey();
+        qtéMax = 0;
+        qtéMin = 0;
+        seuilDalerte = 0;
+
         return selected;
+    }
+
+     public void searchProduitFinit(){
+        List<LigneMagasin> plf=ejbFacade.searchProduitFinit();
+        if(!plf.isEmpty()){
+            //JsfUtil.addErrorMessage(plf.toString());
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING!",plf.toString()));
+            
+        }else
+         JsfUtil.addSuccessMessage("There is no Product runing out");
+         //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "There is no Product runing out"));
+    }
+
+    public List<LigneMagasin> searchProduit() {
+//        magasins=null;
+        magasins = ejbFacade.searchProduit1(getSelected().getProduit(), getSelected().getMagasin(), getSeuilDalerte(), getQtéMax(), getQtéMin());
+        prepareCreate();
+        return magasins;
+
     }
 
     public void create() {

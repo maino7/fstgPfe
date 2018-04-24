@@ -37,13 +37,70 @@ public class LigneLivraisonController implements Serializable {
     private List<LigneLivraison> livraisonItmes = new ArrayList<>();
     @EJB
     private LivraisonFacade livraisonFacade;
-    
+
     private LigneLivraison selected;
-    
+
     private Commande commande;
-    private Date daterecep;
+    private Date daterecep = null;
+    private Long ligneId = 1L;
 
     public LigneLivraisonController() {
+    }
+    
+    public void creerLigne() {
+        LigneLivraison cloneLigne = ejbFacade.cloneLigneLivraison(selected);
+        cloneLigne.setId(ligneId);
+        ligneId++;
+        livraisonItmes.add(cloneLigne);
+        setSelected(null);
+    }
+
+    public Livraison validerLivraison() {
+        Livraison livraison = livraisonFacade.addLivraison(commande, daterecep);
+        ejbFacade.ajouterLigneLivtaison(livraison, livraisonItmes);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Votre bon de livraison a été enregistré avec succès. Le numéro du bon est " + livraison.getId()));
+        return livraison;
+    }
+
+    public void validerImprimerOui() {
+        if (commande.getId() == null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Vouz n'avez pas choisi la commande !"));
+        } else if (livraisonItmes.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir le bon de livraison avant d'enregistrer !"));
+        } else {
+            Livraison livraison = validerLivraison();
+            imprimer(livraison);
+            vider();
+            setCommande(null);
+            setDaterecep(null);
+        }
+    }
+
+    public void validerImprimerNon() {
+        if (commande.getId() == null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Vouz n'avez pas choisi la commande !"));
+        } else if (livraisonItmes.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir le bon de livraison avant d'enregistrer !"));
+        } else {
+            validerLivraison();
+            vider();
+            setCommande(null);
+            setDaterecep(null);
+        }
+    }
+
+    public void imprimer(Livraison livraison) {
+        livraisonFacade.imprimerLivraison(livraison);
+    }
+    
+    public void vider() {
+        setSelected(null);
+        livraisonItmes.clear();
+    }
+
+    public void supprimerLigne() {
+        livraisonItmes.remove(selected);
+        setSelected(null);
     }
 
     public LigneLivraison getSelected() {
@@ -100,7 +157,7 @@ public class LigneLivraisonController implements Serializable {
     }
 
     public List<LigneLivraison> getLivraisonItmes() {
-            if (livraisonItmes == null) {
+        if (livraisonItmes == null) {
             livraisonItmes = new ArrayList<>();
         }
         return livraisonItmes;
@@ -125,28 +182,21 @@ public class LigneLivraisonController implements Serializable {
         if (daterecep == null) {
             daterecep = new Date();
         }
-        
+
         return daterecep;
+    }
+
+    public Long getLigneId() {
+        return ligneId;
+    }
+
+    public void setLigneId(Long ligneId) {
+        this.ligneId = ligneId;
     }
 
     public void setDaterecep(Date daterecep) {
         this.daterecep = daterecep;
     }
-    
-    
-        public void creerLigne() {
-        System.out.println("azert");
-        LigneLivraison cloneLigne = ejbFacade.cloneLigneLivraison(selected);
-        livraisonItmes.add(cloneLigne);
-        setSelected(null);
-
-    }
-    
-    
-    
-    
-    
-    
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
@@ -228,38 +278,13 @@ public class LigneLivraisonController implements Serializable {
         }
 
     }
-    
-        public void info() {
+
+    public void info() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Livraison ajouter", "avec succe"));
     }
-     public void info1() {
+
+    public void info1() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre recu a été enregstrer avec sucée", ""));
     }
-    public void vider() {
-        setSelected(null);
-        livraisonItmes.clear();
-    }
-    
-    
-//    
-    
-    public void validerLivraison() {
-       
-            String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
-            System.out.println("hahowa l id " + idSession);
-            Livraison livraison = livraisonFacade.addLivraison(idSession, commande, daterecep);
-            System.out.println("ha l9lawii tcrea ");
-            
-            if (livraison == null) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Vous devez remplir tout les champs !"));
-            } else {
-                for (int i = 0; i < livraisonItmes.size(); i++) {
-                    LigneLivraison livraisonItem = livraisonItmes.get(i);
-                    ejbFacade.createLigneLivraison(livraisonItem.getQuantite(), livraisonItem.getProduit(), livraison.getId());
-                }
-//                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Votre Recu a été creer avec succès."));
-                vider();
-            }
-        } 
 
 }

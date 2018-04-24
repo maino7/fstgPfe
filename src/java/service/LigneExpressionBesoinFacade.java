@@ -8,7 +8,7 @@ package service;
 import bean.ExpressionBesoin;
 import bean.LigneExpressionBesoin;
 import bean.Produit;
-import bean.UserStock;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -23,6 +23,8 @@ public class LigneExpressionBesoinFacade extends AbstractFacade<LigneExpressionB
 
     @EJB
     private ExpressionBesoinFacade expressionBesoinFacade;
+    @EJB
+    private LigneFacade ligneFacade;
 
     @PersistenceContext(unitName = "Pfe_FstgProjectPU")
     private EntityManager em;
@@ -53,22 +55,33 @@ public class LigneExpressionBesoinFacade extends AbstractFacade<LigneExpressionB
         ligneExpressionBesoin.setQuantite(quantite);
         ligneExpressionBesoin.setExpressionBesoin(ligneExpressionDeBesoin);
         return ligneExpressionBesoin;
+    }
+
+    public List<LigneExpressionBesoin> findByExp(String id) {
+        String query = "select le from LigneExpressionBesoin le where le.expressionBesoin.id = '" + id + "'";
+        return em.createQuery(query).getResultList();
 
     }
 
-    public int createLigneExp(Long idExpression, double quantite, Produit produit) {
-        ExpressionBesoin expressionBesoin = expressionBesoinFacade.find(idExpression);
-        if (expressionBesoin == null) {
-            System.out.println("l expression de besoin  ma kaynach asat !!!");
+    public int createLigneExp(ExpressionBesoin expressionBesoin, List<LigneExpressionBesoin> ligneExpressionBesoins) {
+        if (expressionBesoin != null && ligneExpressionBesoins != null) {
+            for (int i = 0; i < ligneExpressionBesoins.size(); i++) {
+                LigneExpressionBesoin ligneExpressionBesoin = ligneExpressionBesoins.get(i);
+                ajouterLigneExp(expressionBesoin, ligneExpressionBesoin.getQuantite(), ligneExpressionBesoin.getProduit());
+            }
+            return 1;
+        } else {
             return -1;
         }
+    }
+
+    public void ajouterLigneExp(ExpressionBesoin expressionBesoin, double quantite, Produit produit) {
         LigneExpressionBesoin ligneExpressionBesoin = new LigneExpressionBesoin();
         ligneExpressionBesoin.setExpressionBesoin(expressionBesoin);
-        ligneExpressionBesoin.setProduit(produit);
-        ligneExpressionBesoin.setQuantite(quantite);
-        create(ligneExpressionBesoin);
-        System.out.println("ligneExpressionBesoin tcreeat !");
-        return 1;
+        ligneFacade.createLigne(ligneExpressionBesoin, quantite, produit);
+//        ligneExpressionBesoin.setProduit(produit);
+//        ligneExpressionBesoin.setQuantite(quantite);
+//        create(ligneExpressionBesoin);
     }
 
 }

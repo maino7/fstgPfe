@@ -4,7 +4,7 @@ import bean.UserStock;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import service.UserFacade;
-
+import controller.util.HashageUtil;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -18,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.RowEditEvent;
 import service.UserStockFacade;
 
 @Named("userStockController")
@@ -33,6 +34,9 @@ public class UserStockController implements Serializable {
     }
 
     public UserStock getSelected() {
+        if(selected==null){
+            selected=new UserStock();
+                          }
         return selected;
     }
 
@@ -55,20 +59,30 @@ public class UserStockController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    public void onEditEvent(RowEditEvent event) {
+        ejbFacade.edit((UserStock) event.getObject());
+        JsfUtil.addSuccessMessage("User Edited Succesfully");
+
+    }
+
+    public void onCancel() {
+        JsfUtil.addErrorMessage("Modification annulée");
+    }
+
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UserStockCreated"));
+        persist(PersistAction.CREATE,"UserStockCreated");
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UserStockUpdated"));
+        persist(PersistAction.UPDATE, "UserStockUpdated");
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("UserStockDeleted"));
+        persist(PersistAction.DELETE, "UserStockDeleted");
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -87,7 +101,9 @@ public class UserStockController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
+                    selected.setPassword(HashageUtil.sha256(selected.getPassword()));
                     getFacade().edit(selected);
+                    selected=null;
                 } else {
                     getFacade().remove(selected);
                 }

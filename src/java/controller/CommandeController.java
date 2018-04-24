@@ -27,6 +27,35 @@ public class CommandeController implements Serializable {
     private service.CommandeFacade ejbFacade;
     private List<Commande> items = null;
     private Commande selected;
+    private List<Commande> commandes = null;
+    private List<Commande> commandeslivres = null;
+    
+    
+    public List<Commande> getCommandeslivres() {
+        if (commandeslivres == null){
+        commandeslivres = ejbFacade.findlivree();
+        } 
+        return commandeslivres;
+    }
+
+    public void setCommandeslivres(List<Commande> commandeslivres) {
+        this.commandeslivres = commandeslivres;
+    }
+    
+    
+
+    public List<Commande> getCommandes() {
+        if (commandes == null) {
+            commandes = ejbFacade.findnonlivree();
+        }
+        return commandes;
+    }
+
+    public void setCommandes(List<Commande> commandes) {
+        this.commandes = commandes;
+    }
+    
+    
 
     public CommandeController() {
     }

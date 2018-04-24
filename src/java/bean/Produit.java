@@ -35,17 +35,8 @@ public class Produit implements Serializable {
     @ManyToOne
     private Marque marque;
     @OneToMany(mappedBy = "produit")
-    private List<LigneReception> ligneReceptions;
-    @OneToMany(mappedBy = "produit")
-    private List<LigneMagasin> ligneMagasins;
-    @OneToMany(mappedBy = "produit")
-    private List<LigneLivraison> ligneLivraisons;
-    @OneToMany(mappedBy = "produit")
-    private List<LigneFacture> ligneFactures;
-    @OneToMany(mappedBy = "produit")
-    private List<LigneExpressionBesoin> ligneExpressionBesoins;
-    @OneToMany(mappedBy = "produit")
-    private List<LigneCommande> ligneCommandes;
+    private List<Ligne> lignes;
+
 
     public Produit() {
     }
@@ -114,71 +105,15 @@ public class Produit implements Serializable {
         this.marque = marque;
     }
 
-    public List<LigneReception> getLigneReceptions() {
-        if (ligneReceptions == null) {
-            ligneReceptions = new ArrayList();
+    public List<Ligne> getLignes() {
+        if (lignes == null) {
+            lignes = new ArrayList();
         }
-        return ligneReceptions;
+        return lignes;
     }
 
-    public void setLigneReceptions(List<LigneReception> ligneReceptions) {
-        this.ligneReceptions = ligneReceptions;
-    }
+   
 
-    public List<LigneMagasin> getLigneMagasins() {
-        if (ligneMagasins == null) {
-            ligneMagasins = new ArrayList();
-        }
-        return ligneMagasins;
-    }
-
-    public void setLigneMagasins(List<LigneMagasin> ligneMagasins) {
-        this.ligneMagasins = ligneMagasins;
-    }
-
-    public List<LigneLivraison> getLigneLivraisons() {
-        if (ligneLivraisons == null) {
-            ligneLivraisons = new ArrayList();
-        }
-        return ligneLivraisons;
-    }
-
-    public void setLigneLivraisons(List<LigneLivraison> ligneLivraisons) {
-        this.ligneLivraisons = ligneLivraisons;
-    }
-
-    public List<LigneFacture> getLigneFactures() {
-        if (ligneFactures == null) {
-            ligneFactures = new ArrayList();
-        }
-        return ligneFactures;
-    }
-
-    public void setLigneFactures(List<LigneFacture> ligneFactures) {
-        this.ligneFactures = ligneFactures;
-    }
-
-    public List<LigneExpressionBesoin> getLigneExpressionBesoins() {
-        if (ligneExpressionBesoins == null) {
-            ligneExpressionBesoins = new ArrayList();
-        }
-        return ligneExpressionBesoins;
-    }
-
-    public void setLigneExpressionBesoins(List<LigneExpressionBesoin> ligneExpressionBesoins) {
-        this.ligneExpressionBesoins = ligneExpressionBesoins;
-    }
-
-    public List<LigneCommande> getLigneCommandes() {
-        if (ligneCommandes == null) {
-            ligneCommandes = new ArrayList();
-        }
-        return ligneCommandes;
-    }
-
-    public void setLigneCommandes(List<LigneCommande> ligneCommandes) {
-        this.ligneCommandes = ligneCommandes;
-    }
 
     public String getId() {
         return id;

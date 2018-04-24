@@ -35,12 +35,22 @@ public class ExpressionBesoinController implements Serializable {
 
     private List<ExpressionBesoin> items = null;
     private List<ExpressionBesoin> itemsFind = null;
+    private List<ExpressionBesoin> expressionsToday = null;
     private ExpressionBesoin selected;
     private List<LigneExpressionBesoin> expressionItems = new ArrayList<>();
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateMin;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateMax;
+
+    public List<ExpressionBesoin> getExpressionsToday() {
+        expressionsToday = ejbFacade.findByDate();
+        return expressionsToday;
+    }
+
+    public void setExpressionsToday(List<ExpressionBesoin> expressionsToday) {
+        this.expressionsToday = expressionsToday;
+    }
 
     public ExpressionBesoinFacade getEjbFacade() {
         return ejbFacade;
@@ -109,14 +119,13 @@ public class ExpressionBesoinController implements Serializable {
         return selected;
     }
 
-    public void findByUser() {
-        String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
-        System.out.println("hahowa l id " + idSession);
-        itemsFind = ejbFacade.findByDate(idSession, dateMin, dateMax);
-        System.out.println("OK");
-
-    }
-
+//    public void findByUser() {
+//        String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
+//        System.out.println("hahowa l id " + idSession);
+//        itemsFind = ejbFacade.findByDate(idSession, dateMin, dateMax);
+//        System.out.println("OK");
+//
+//    }
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ExpressionBesoinCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -141,6 +150,10 @@ public class ExpressionBesoinController implements Serializable {
             items = getFacade().findAll();
         }
         return items;
+    }
+
+    public void findByDate() {
+        expressionsToday = ejbFacade.findByDate();
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
@@ -171,7 +184,7 @@ public class ExpressionBesoinController implements Serializable {
         }
     }
 
-    public ExpressionBesoin getExpressionBesoin(java.lang.Long id) {
+    public ExpressionBesoin getExpressionBesoin(java.lang.String id) {
         return getFacade().find(id);
     }
 
@@ -196,13 +209,13 @@ public class ExpressionBesoinController implements Serializable {
             return controller.getExpressionBesoin(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
+        java.lang.String getKey(String value) {
+            java.lang.String key;
+            key = value;
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        String getStringKey(java.lang.String value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();

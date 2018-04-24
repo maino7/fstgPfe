@@ -24,7 +24,8 @@ public class LigneReceptionFacade extends AbstractFacade<LigneReception> {
     private EntityManager em;
     @EJB
     private ReceptionFacade receptionFacade;
-    
+    @EJB
+    private LigneFacade ligneFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -36,26 +37,21 @@ public class LigneReceptionFacade extends AbstractFacade<LigneReception> {
     }
 
     public LigneReception cloneLigneReception(LigneReception ligneReception) {
-
-        System.out.println("raaaah dkhelt l hnaya ");
         LigneReception cloneLigne = new LigneReception();
         Reception reception = new Reception();
-        reception.setId(1L);
+        reception.setId("testId");
         cloneLigne.setProduit(ligneReception.getProduit());
-        cloneLigne.setQuantiteRecu(ligneReception.getQuantiteRecu());
+        cloneLigne.setQuantite(ligneReception.getQuantite());
         cloneLigne.setReception(reception);
         return cloneLigne;
     }
-    
-    public int createLigneReception(Double qteRecu,Produit produit,Long idReception) {
-            Reception reception=receptionFacade.find(idReception);
-            LigneReception ligneReception = new LigneReception();
-            ligneReception.setProduit(produit);
-            ligneReception.setQuantiteRecu(qteRecu);
-            ligneReception.setReception(reception);
-            create(ligneReception);
-            return 1;
-        
+
+   public int createLigneReception(Double qteRecu, Produit produit, String idReception) {
+        Reception reception = receptionFacade.find(idReception);
+        LigneReception ligneReception = new LigneReception();
+        ligneReception.setReception(reception);
+        ligneFacade.createLigne(ligneReception, qteRecu, produit);
+        return 1;
     }
 
 }

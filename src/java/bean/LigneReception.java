@@ -11,45 +11,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author CHAACHAI Youssef <youssef.chaachai@gmail.com>
  */
 @Entity
-public class LigneReception implements Serializable {
+@Table(name="LigneReception")
+public class LigneReception extends Ligne implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private double quantiteRecu;
+
     @ManyToOne
     private Reception reception;
-    @ManyToOne
-    private Produit produit;
 
-    public LigneReception() {
-    }
 
-    public LigneReception(Long id) {
-        this.id = id;
-    }
-
-    public LigneReception(Long id, double quantiteRecu) {
-        this.id = id;
-        this.quantiteRecu = quantiteRecu;
-    }
-
-    public double getQuantiteRecu() {
-        return quantiteRecu;
-    }
-
-    public void setQuantiteRecu(double quantiteRecu) {
-        this.quantiteRecu = quantiteRecu;
-    }
-
+ 
     public Reception getReception() {
+     if (reception == null) {
+            reception = new Reception();
+        }
         return reception;
     }
 
@@ -57,24 +38,24 @@ public class LigneReception implements Serializable {
         this.reception = reception;
     }
 
-    public Produit getProduit() {
-        if (produit == null) {
-            produit = new Produit();
-        }
-        return produit;
+    public LigneReception() {
     }
 
-    public void setProduit(Produit produit) {
-        this.produit = produit;
+    public LigneReception(Long id) {
+        super(id);
     }
 
-    public Long getId() {
-        return id;
+    public LigneReception(Long id, double quantite) {
+        super(id, quantite);
     }
+    
+    
+    
+    
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+
+
+
 
     @Override
     public int hashCode() {
@@ -90,10 +71,7 @@ public class LigneReception implements Serializable {
             return false;
         }
         LigneReception other = (LigneReception) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

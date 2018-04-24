@@ -109,7 +109,7 @@ public class LivraisonController implements Serializable {
         }
     }
 
-    public Livraison getLivraison(java.lang.Long id) {
+    public Livraison getLivraison(java.lang.String id) {
         return getFacade().find(id);
     }
 
@@ -121,7 +121,7 @@ public class LivraisonController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Livraison.class)
+   @FacesConverter(forClass = Livraison.class)
     public static class LivraisonControllerConverter implements Converter {
 
         @Override
@@ -134,13 +134,13 @@ public class LivraisonController implements Serializable {
             return controller.getLivraison(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
+        java.lang.String getKey(String value) {
+            java.lang.String key;
+            key = value;
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        String getStringKey(java.lang.String value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
@@ -161,5 +161,4 @@ public class LivraisonController implements Serializable {
         }
 
     }
-
 }

@@ -1,11 +1,14 @@
 package controller;
 
 import bean.Reception;
+import bean.UserStock;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.SessionUtil;
 import service.ReceptionFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -27,11 +30,37 @@ public class ReceptionController implements Serializable {
     private service.ReceptionFacade ejbFacade;
     private List<Reception> items = null;
     private Reception selected;
+    private List<Reception> listReceptions = null;
+    private UserStock userStock;
+
+    public UserStock getUserStock() {
+        if (userStock == null) {
+            userStock = new UserStock();
+        }
+        return userStock;
+    }
+
+    public void setUserStock(UserStock userStock) {
+        this.userStock = userStock;
+    }
+
+    public List<Reception> getListReceptions() {
+        userStock = ((UserStock) SessionUtil.getConnectedUser());
+        listReceptions = ejbFacade.findReceptionByUser(userStock);
+        return listReceptions;
+    }
+
+    public void setListReceptions(List<Reception> listReceptions) {
+        this.listReceptions = listReceptions;
+    }
 
     public ReceptionController() {
     }
 
     public Reception getSelected() {
+        if (selected == null) {
+            selected = new Reception();
+        }
         return selected;
     }
 
@@ -109,7 +138,7 @@ public class ReceptionController implements Serializable {
         }
     }
 
-    public Reception getReception(java.lang.Long id) {
+    public Reception getReception(java.lang.String id) {
         return getFacade().find(id);
     }
 
@@ -134,13 +163,13 @@ public class ReceptionController implements Serializable {
             return controller.getReception(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
+        java.lang.String getKey(String value) {
+            java.lang.String key;
+            key = value;
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        String getStringKey(java.lang.String value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();

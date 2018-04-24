@@ -114,139 +114,135 @@
                         <div class="card">
 
                             <div class="card-header" data-background-color="grey">
-                                <h4 class="title">Livraison</h4>
+                                <h4 class="title">Enregistrer une livraison</h4>
                             </div>
                             <div class="card-content">
-                                <h:form>
+                                <h:form id="livForm">
+                                    <p:messages id="messages" showDetail="true" closable="true">
+                                    </p:messages>
                                     <div class="row">
-
                                         <div class="col-md-4">
                                             <div class="form-group label-floating">
-                                                <h3 class="title">CATEGORIE </h3>
-                                                <p:selectOneMenu  id="categorie" class="form-control" required="true" value="#{ligneLivraisonController.selected.produit.categorie}" >
-                                                    <p:ajax update="produit"></p:ajax>
-                                                    <f:selectItem itemValue="#{null}" itemLabel="Choisissez une catégorie"/>  
-
-                                                    <f:selectItems value="#{categorieController.items}" var="item"
-                                                                   itemValue="#{item}" itemLabel="#{item.libelle}"/>
+                                                <h6 class="title">Commande</h6>
+                                                <p:selectOneMenu  id="expression" class="form-control" value="#{ligneLivraisonController.commande}" >
+                                                    <f:selectItem itemValue="#{null}" itemLabel="------------------Séléctionner------------------"/>
+                                                    <f:selectItems value="#{commandeController.commandes}" var="item"
+                                                                   itemValue="#{item}" itemLabel="#{item.id}"/>
+                                                    <p:ajax></p:ajax>
+                                                </p:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-6">
+                                            <div class="form-group label-floating">
+                                                <h6 class="title">Date</h6>
+                                                <p:calendar id="myDate" pattern="dd-MM-yyyy" value="#{ligneLivraisonController.daterecep}" showOn="button">
+                                                    <p:ajax event="dateSelect"/>
+                                                </p:calendar>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr></hr>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <h6 class="title">CATEGORIE</h6>
+                                                <p:selectOneMenu id="categorie"  class="form-control" required="true" value="#{ligneLivraisonController.selected.produit.categorie}">
+                                                    <p:ajax update="produit"/>
+                                                    <f:selectItem itemValue="#{null}" itemLabel="------------------Séléctionner------------------"/>
+                                                    <f:selectItems   value="#{categorieController.items}" var="item"
+                                                                     itemValue="#{item}" itemLabel="#{item.libelle}"/>
                                                 </p:selectOneMenu>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group label-floating">
-                                                <h3 class="title">PRODUIT</h3>
-
-                                                <p:selectOneMenu  id="produit" class="form-control"  required="true" value="#{ligneLivraisonController.selected.produit}" >
-                                                    <f:selectItem itemValue="#{null}" itemLabel="Select produit"/>
+                                                <h6 class="title">PRODUIT</h6>
+                                                <p:selectOneMenu  id="produit" class="form-control" required="true" value="#{ligneLivraisonController.selected.produit}" >
+                                                    <f:selectItem itemValue="#{null}" itemLabel="------------------Séléctionner------------------"/>
                                                     <f:selectItems value="#{ligneLivraisonController.selected.produit.categorie.produits}" var="item"
                                                                    itemValue="#{item}" itemLabel="#{item.libelle}"/>
                                                 </p:selectOneMenu>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group label-floating">
-                                                <h3 class="title">QUANTITE</h3>
-                                                <p:spinner id="minMax" value="#{ligneLivraisonController.selected.quantite}" min="0" max="10000" />
-
+                                        <div style="width: 10%" class="col-md-4">
+                                            <div style="width: 50%" class="form-group label-floating">
+                                                <h6 class="title">QUANTITE</h6>
+                                                <p:spinner style="width: 200px" value="#{ligneLivraisonController.selected.quantite}" min="0" max="10000" />
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="clearfix"></div>
-                                    <h:commandButton value="Ajouter" action="#{ligneLivraisonController.creerLigne()}" class="btn btn-basic pull-right"></h:commandButton>
+                                    <p:commandButton value="Ajouter" icon="ui-icon-plus" style="background-color: #939393;width: 11%;font-size: 90%" action="#{ligneLivraisonController.creerLigne()}" update="tableForm:datalist,livForm" class="pull-right"></p:commandButton>
+                                    <br></br>
                                 </h:form>
+                                <h:form id="tableForm">
+                                    <hr></hr>
+                                    <p:dataTable id="datalist" value="#{ligneLivraisonController.livraisonItmes}" var="item" editable="true"
+                                                 selectionMode="single" selection="#{ligneLivraisonController.selected}" rowKey="#{item.id}">  
+                                        <p:column>  
+                                            <f:facet name="header">  
+                                                <h:outputText value="CATEGORIE"/>  
+                                            </f:facet>  
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{item.produit.categorie.libelle}"/>  
+                                                </f:facet>  
+                                                <f:facet name="input" >  
+                                                    <p:selectOneMenu value="#{item.produit.categorie.libelle}" style="width:100%">  
+                                                        <f:selectItems value="#{categorieController.items}" var="cat" itemLabel="#{cat}"  
+                                                                       itemValue="#{cat}"/>  
+                                                    </p:selectOneMenu>  
+                                                </f:facet>  
+                                            </p:cellEditor>  
+                                        </p:column>  
+                                        <p:column >  
+                                            <f:facet name="header">  
+                                                <h:outputText value="PRODUIT"/>  
+                                            </f:facet>  
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{item.produit.libelle}"/>  
+                                                </f:facet>  
+                                                <f:facet name="input">  
+                                                    <p:selectOneMenu value="#{item.produit}" style="width:100%">  
+                                                        <f:selectItems value="#{produitController.items}" var="prod" itemLabel="#{prod}"  
+                                                                       itemValue="#{prod}"/>  
+                                                    </p:selectOneMenu>  
+                                                </f:facet>  
+                                            </p:cellEditor>  
+                                        </p:column>  
+                                        <p:column>  
+                                            <f:facet name="header">  
+                                                <h:outputText value="QUANTITE"/>  
+                                            </f:facet>  
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{item.quantite}"/>  
+                                                </f:facet>  
+                                                <f:facet name="input">  
+                                                    <p:inputText id="modelInput" value="#{item.quantite}" style="width:96%"/>  
+                                                </f:facet>  
+                                            </p:cellEditor>  
+                                        </p:column>  
+                                        <p:column style="width:6%" exportable="false">  
+                                            <p:rowEditor />  
+                                        </p:column>  
+                                    </p:dataTable>
+                                    <p:commandButton value="Supprimer" icon="ui-icon-trash" style="background-color: grey; font-size: 85%" action="#{ligneLivraisonController.supprimerLigne()}" update="tableForm:datalist"></p:commandButton>
+                                    <p:commandButton value="Vider" icon="ui-icon-close" style="background-color: grey; font-size: 85%" action="#{ligneLivraisonController.vider()}" update="tableForm:datalist"></p:commandButton>
+                                    <br></br>
+                                </h:form>
+                                <p:commandButton value="Enregistrer" icon="ui-icon-check" update="tableForm:datalist, livForm" oncomplete="PF('ImprimerLivraisonDialog').show()" style="background-color: #2a9942" class="btn btn-sm pull-right"></p:commandButton>
                             </div> 
                         </div>
-                    </div>
-                </div>
-            </div>
-            <br></br>
-            <div class="col-lg-1">
-            </div>
-            <div class="col-lg-10">
-                <div class="card">
-                    <div class="card-header" data-background-color="grey">
-                        <h4 class="title">Enregistrement de la livraison</h4>
-                    </div>
-                    <div class="card-content table-responsive">
-                        <h:form>
-                            <p:messages id="messages" showDetail="true" closable="true">
-                            </p:messages>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group label-floating">
-                                        <h3 class="title">Date</h3>
-                                        <input class="form-control" type="date" id="myDate" value="#{ligneLivraisonController.daterecep}"></input>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group label-floating">
-                                        <h3 class="title">Commande</h3>
-                                        <p:selectOneMenu  id="expression" class="form-control"  required="true" value="#{ligneLivraisonController.commande}" >
-                                            <f:selectItem itemValue="#{null}" itemLabel="Select commande"/>
-                                            <f:selectItems value="#{commandeController.items}" var="item"
-                                                           itemValue="#{item}" itemLabel="#{item.id}"/>
-                                        </p:selectOneMenu>
-                                    </div>
-                                </div>
-                            </div>
-                            <p:dataTable id="datalist" value="#{ligneLivraisonController.livraisonItmes}" var="item" editable="true" >  
-                                <p:column>  
-                                    <f:facet name="header">  
-                                        <h:outputText value="CATEORIE"/>  
-                                    </f:facet>  
-                                    <p:cellEditor>  
-                                        <f:facet name="output">  
-                                            <h:outputText value="#{item.produit.categorie.libelle}"/>  
-                                        </f:facet>  
-                                        <f:facet name="input" >  
-                                            <p:selectOneMenu value="#{item.produit.categorie.libelle}" style="width:100%">  
-                                                <f:selectItems value="#{categorieController.items}" var="cat" itemLabel="#{cat}"  
-                                                               itemValue="#{cat}"/>  
-                                            </p:selectOneMenu>  
-                                        </f:facet>  
-                                    </p:cellEditor>  
-                                </p:column>  
-                                <p:column >  
-                                    <f:facet name="header">  
-                                        <h:outputText value="PRODUIT"/>  
-                                    </f:facet>  
-                                    <p:cellEditor>  
-                                        <f:facet name="output">  
-                                            <h:outputText value="#{item.produit.libelle}"/>  
-                                        </f:facet>  
-                                        <f:facet name="input">  
-                                            <p:selectOneMenu value="#{item.produit}" style="width:100%">  
-                                                <f:selectItems value="#{produitController.items}" var="prod" itemLabel="#{prod}"  
-                                                               itemValue="#{prod}"/>  
-                                            </p:selectOneMenu>  
-                                        </f:facet>  
-                                    </p:cellEditor>  
-                                </p:column>  
-                                <p:column>  
-                                    <f:facet name="header">  
-                                        <h:outputText value="QUANTITE RECU"/>  
-                                    </f:facet>  
-                                    <p:cellEditor>  
-                                        <f:facet name="output">  
-                                            <h:outputText value="#{item.quantite}"/>  
-                                        </f:facet>  
-                                        <f:facet name="input">  
-                                            <p:inputText id="modelInput" value="#{item.quantite}" style="width:96%"/>  
-                                        </f:facet>  
-                                    </p:cellEditor>  
-                                </p:column>  
-                                <p:column style="width:6%" exportable="false">  
-                                    <p:rowEditor />  
-                                </p:column>  
-                            </p:dataTable>
-                            <h:commandButton value="Enregistrer" action="#{ligneLivraisonController.validerLivraison()}" class="btn btn-basic pull-right"></h:commandButton>
-                        </h:form>
                     </div>
                 </div>
             </div>
         </div>
         <!--<ui:include src="sideBarDoyen.xhtml"/>-->
     </h:body>
+    
+    <ui:include src="ImprimerLivraison.xhtml"/>
     <!--   Core JS Files   -->
     <script src="../assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>

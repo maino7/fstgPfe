@@ -3,11 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Mes expressions de besoins</title>
         <link rel="apple-touch-icon" sizes="76x76" href="./newtemplate/assets/img/apple-icon.png" />
-        <link rel="icon" type="image/png" href="./newtemplate/assets/img/favicon.png" />
+        <!--<link rel="icon" type="image/png" href="./newtemplate/assets/img/favicon.png" />-->
+        <link rel="shortout icon" type="image/x-icon" href="#{resource['images/favicon.png']}" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>Material Dashboard by Creative Tim</title>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -32,6 +35,51 @@
         <!-- Navigation -->
         <p:growl id="growl" life="3000" />
 
+
+
+        <!--haaahwa sidebar-->
+        <div style="background-color: white" class="sidebar" data-color="purple" >
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+            -->
+            <div class="logo">
+                <a href="../../template/Home.xhtml"><img src="../resources/images/logo.png" style="width: 200px;" /></a>
+            </div>
+            <div style="width: 280px" class="sidebar-wrapper">
+                <ul class="nav">
+                    <li>
+                        <a href="UserLogin.xhtml?faces-redirect=true">
+                            <i class="material-icons">home</i>
+                            <p>Home</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./ExpressionDeBesoin.xhtml?faces-redirect=true">
+                            <i class="material-icons">content_paste</i>
+                            <p>Rédiger une exp. de besoin</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="AncienExpressionDeBesoin.xhtml?faces-redirect=true">
+                            <i class="material-icons">library_books</i>
+                            <p>Mes exp. de besoin</p>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="Reception.xhtml?faces-redirect=true">
+                            <i class="material-icons text-gray">event_available</i>
+                            <p>Enregistrer une reception</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+
         <style>
             .kira{
                 background-color: rgba(40,40,40,0.4);
@@ -44,167 +92,142 @@
             }
         </style>
 
+        <ui:include src="Header.xhtml"/>
 
-        <ui:include src="sideBarUser.xhtml"/>
         <div class="main-panel">
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header" data-background-color="purple">
-                                    <h4 class="title">Recherche</h4>
-                                </div>
-                                <div class="card-content">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <h3 class="title">Date Min</h3>
-                                                    <input class="form-control" type="date" id="myDate" ></input>
-                                                </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card">
+                            <div class="card-header" data-background-color="grey">
+                                <h4 class="title">Recherche</h4>
+                            </div>
+                            <div class="card-content">
+                                <h:form id="idForm">
+                                    <div class="row">
+
+
+                                        <div class="col-md-3">
+                                            <h4 class="title">Date Min</h4>
+                                            <p:calendar value="#{ligneExpressionBesoinController.dateMin}"  pattern="dd/MM/yyyy" title="titleButton" showOn="button" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h4 class="title">Date Max</h4>  
+                                            <p:calendar value="#{ligneExpressionBesoinController.dateMax}"  pattern="dd/MM/yyyy" title="titleButton1" showOn="button"/>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h4 class="title">Categorie</h4>
+                                            <p:selectOneMenu  id="categorie" class="form-control" required="true" value="#{ligneExpressionBesoinController.selected.produit.categorie}" >
+                                                <p:ajax update="produit"></p:ajax>
+                                                <f:selectItem itemValue="#{null}" itemLabel="---SELECT CATEGORIE---"/>  
+
+                                                <f:selectItems value="#{categorieController.items}" var="item"
+                                                               itemValue="#{item}" itemLabel="#{item.libelle}"/>
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h4 class="title">Produit</h4>  
+                                            <p:selectOneMenu  id="produit" class="form-control" required="true" value="#{ligneExpressionBesoinController.selected.produit}" >
+                                                <f:selectItem itemValue="#{null}" itemLabel="---SELECT PRODUIT---"/>  
+
+                                                <f:selectItems value="#{ligneExpressionBesoinController.selected.produit.categorie.produits}" var="item"
+                                                               itemValue="#{item}" itemLabel="#{item.libelle}"/>
+                                            </p:selectOneMenu> 
+                                        </div>
+                                    </div>
+                                </h:form>
+
+                                <p:commandButton value="Recherche" update="idForm, formTani:tab" icon="ui-icon-search" style="background-color: #0b93bc;width: 13%;font-size: 110%" 
+                                                 class="pull-right" action="#{ligneExpressionBesoinController.findBycriteria()}"></p:commandButton>
+
+                                <h:form id="formTani">
+
+
+
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="card">
+                                            <div class="card-header" data-background-color="grey">
+                                                <h4 class="title">Liste Des Expression De Besoin</h4>
+
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <h3 class="title">Date Max</h3>
-                                                    <input class="form-control" type="date" id="myDate" ></input>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <h3 class="title">Entite Admin</h3>
-                                                    <select class="form-control">
-                                                        <option>--SELECT--</option>
-                                                    </select>
-                                                </div>
+
+                                            <div class="card-content table-responsive">
+                                                <p:dataTable value="#{ligneExpressionBesoinController.itemsFind}" var="item" id="tab">
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Date"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.dateExpressionBesoin}" > 
+                                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                        </h:outputText>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Entite Admin"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.userStock.entiteAdministrative.libelle}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Membre"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.userStock.nom}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Action"/>
+                                                        </f:facet>
+                                                        <p:commandLink actionListener="#{ligneExpressionBesoinController.showDetail(item)}"  class="btn btn-basic pull-right" value="Detail" update=":formTani:dataExp"></p:commandLink>
+                                                    </p:column>
+                                                </p:dataTable>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="card">
+                                            <div class="card-header" data-background-color="grey">
+                                                <h4 class="title">Detail</h4>
 
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <h3 class="title">Membre</h3>
-                                                    <select class="form-control">
-                                                        <option>--SELECT--</option>
-                                                    </select>
-                                                </div>
                                             </div>
+                                            <div class="card-content table-responsive">
+                                                <p:dataTable value="#{ligneExpressionBesoinController.listDetail}" var="item" id="dataExp">
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Categorie"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.produit.categorie.libelle}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Produit"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.produit.libelle}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Quantite"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.quantite}"/>
+                                                    </p:column>
 
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <h3 class="title">Catégorie Produit</h3>
-                                                    <select class="form-control">
-                                                        <option>--SELECT--</option>
-                                                    </select>
-                                                </div>
+                                                </p:dataTable>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <h3 class="title">Produit</h3>
-                                                    <select class="form-control">
-                                                        <option>--SELECT--</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
                                         </div>
-
-                                        <button type="submit" class="btn btn-primary pull-right">Recherche</button>
-                                        <div class="clearfix"></div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </h:form>
                             </div>
                         </div>
-
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="main-panel">
-            <div class="content"> 
-                <div class="col-lg-6 col-md-12">
-                    <div class="card">
-                        <div class="card-header" data-background-color="blue">
-                            <h4 class="title">Liste Des Expression De Besoin</h4>
 
-                        </div>
-                        <div class="card-content table-responsive">
-                            <table class="table table-hover">
-                                <thead class="text-warning">
-                                    <th>Date</th>
-                                    <th>Entite</th>
-                                    <th>Membre</th>
-                                    <th>Action</th>
-
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>12/02/2017</td>
-                                        <td>INFO</td>
-                                        <td>ZOUANI</td>
-                                        <td><a  class="btn btn-primary"  >Detail</a></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>20/02/2018</td>
-                                        <td>INFO</td>
-                                        <td>--</td>
-                                        <td><a  class="btn btn-primary"  >Detail</a></td>
-
-
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                    <div class="card">
-                        <div class="card-header" data-background-color="blue">
-                            <h4 class="title">Detail</h4>
-
-                        </div>
-                        <div class="card-content table-responsive">
-                            <table class="table table-hover">
-                                <thead class="text-warning">
-                                    <th>Categorie Produit</th>
-                                    <th>Produit</th>
-                                    <th>Quantité</th>
-
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Scanner</td>
-                                        <td>Scqanner HP</td>
-                                        <td>12</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>PC</td>
-                                        <td>MAC IOS 17  </td>
-                                        <td>20</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+        <!--<ui:include src="sideBarDoyen.xhtml"/>-->
 
     </h:body>
     <!--   Core JS Files   -->

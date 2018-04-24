@@ -11,44 +11,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author CHAACHAI Youssef <youssef.chaachai@gmail.com>
  */
 @Entity
-public class LigneMagasin implements Serializable {
+@Table(name="LigneMagasin")
+public class LigneMagasin extends  Ligne implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private double quantite;
+
     private double quantitaDef;
-    @ManyToOne
-    private Produit produit;
+ 
     @ManyToOne
     private Magasin magasin;
 
-    public LigneMagasin() {
-    }
 
-    public LigneMagasin(Long id) {
-        this.id = id;
-    }
 
-    public LigneMagasin(Long id, double quantite) {
-        this.id = id;
-        this.quantite = quantite;
-    }
 
-    public double getQuantite() {
-        return quantite;
-    }
-
-    public void setQuantite(double quantite) {
-        this.quantite = quantite;
-    }
 
     public double getQuantitaDef() {
         return quantitaDef;
@@ -58,16 +39,7 @@ public class LigneMagasin implements Serializable {
         this.quantitaDef = quantitaDef;
     }
 
-    public Produit getProduit() {
-        if (produit == null) {
-            produit = new Produit();
-        }
-        return produit;
-    }
 
-    public void setProduit(Produit produit) {
-        this.produit = produit;
-    }
 
     public Magasin getMagasin() {
         if (magasin == null) {
@@ -80,13 +52,30 @@ public class LigneMagasin implements Serializable {
         this.magasin = magasin;
     }
 
-    public Long getId() {
-        return id;
+    
+    
+    
+    
+    
+    
+    
+    public LigneMagasin() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public LigneMagasin(Long id) {
+        super(id);
     }
+
+    public LigneMagasin(double quantitaDef, Long id, double quantite) {
+        super(id, quantite);
+        this.quantitaDef = quantitaDef;
+    }
+    
+    
+    
+
+    
+
 
     @Override
     public int hashCode() {
@@ -102,15 +91,12 @@ public class LigneMagasin implements Serializable {
             return false;
         }
         LigneMagasin other = (LigneMagasin) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
-        return id + "";
+        return  "LE PRODUIT  "+produit.getId()+" DE Quantité "+quantite+" EST PRESQUE FINIT";
     }
 
 }

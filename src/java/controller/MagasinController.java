@@ -18,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.RowEditEvent;
 
 @Named("magasinController")
 @SessionScoped
@@ -32,6 +33,10 @@ public class MagasinController implements Serializable {
     }
 
     public Magasin getSelected() {
+        if (selected == null) {
+            selected = new Magasin();
+
+        }
         return selected;
     }
 
@@ -55,11 +60,26 @@ public class MagasinController implements Serializable {
         return selected;
     }
 
+    public void onEditEvent(RowEditEvent event) {
+        ejbFacade.edit((Magasin) event.getObject());
+        JsfUtil.addSuccessMessage("Store Edited Succesfully");
+
+    }
+
+    public void onCancel() {
+        JsfUtil.addErrorMessage("Modification annulée");
+    }
+
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MagasinCreated"));
+        System.out.println("-------------------------------------------selected----------------------------");
+        System.out.println(selected.getId());
+        System.out.println(selected.getStock().getId());
+        
+        persist(PersistAction.CREATE, "MagasinCreated");
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        setSelected(null);
     }
 
     public void update() {
@@ -67,7 +87,7 @@ public class MagasinController implements Serializable {
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("MagasinDeleted"));
+        persist(PersistAction.DELETE, "MagasinDeleted");
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.

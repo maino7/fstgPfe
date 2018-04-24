@@ -99,12 +99,13 @@
                     </div>
                     <div class="col-md-10">
                         <div class="card">
-
                             <div class="card-header" data-background-color="grey">
-                                <h4 class="title">Reception</h4>
+                                <h4 class="title">Effectuer une Reception</h4>
                             </div>
                             <div class="card-content">
-                                <h:form>
+                                <p:messages id="messages" showDetail="true" closable="true">
+                                </p:messages>
+                                <h:form id="firstform">
                                     <div class="row">
 
                                         <div class="col-md-4">
@@ -133,102 +134,103 @@
                                         <div class="col-md-4">
                                             <div class="form-group label-floating">
                                                 <h3 class="title">QUANTITE</h3>
-                                                <p:spinner id="minMax" value="#{ligneReceptionController.selected.quantiteRecu}" min="0" max="10000" />
+                                                <p:spinner id="minMax" value="#{ligneReceptionController.selected.quantite}" min="0" max="10000" />
 
                                             </div>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
-                                    <h:commandButton value="Ajouter" action="#{ligneReceptionController.creerLigne()}" class="btn btn-basic pull-right"></h:commandButton>
+                                    <p:commandButton value="Ajouter" action="#{ligneReceptionController.creerLigne()}" style="background-color: #939393" class="btn btn-basic pull-right" update="myform:datalist,firstform,growl" actionListener="#{ligneReceptionController.info()}" ></p:commandButton>
+                                    <p:growl id="growl" showDetail="true" sticky="true" />
                                 </h:form>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br></br>
-            <div class="col-lg-1">
-            </div>
-            <div class="col-lg-10">
-                <div class="card">
-                    <div class="card-header" data-background-color="grey">
-                        <h4 class="title">Enregistrement de la reception</h4>
-                    </div>
-                    <div class="card-content table-responsive">
-                        <h:form>
-                            <p:messages id="messages" showDetail="true" closable="true">
-                            </p:messages>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group label-floating">
-                                        <h3 class="title">Date</h3>
-                                        <input class="form-control" type="date" id="myDate" value="#{ligneReceptionController.daterecep}"></input>
+                                
+                                <hr></hr>
+                               
+                                <h:form id="myform">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <h3 class="title">Date</h3>
+        <!--                                        <input class="form-control" type="date" id="myDate" value="#{ligneReceptionController.daterecep}"></input>-->
+                                                <p:calendar id="myDate" value="#{ligneReceptionController.daterecep}"></p:calendar>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <h3 class="title">Expression de besoin</h3>
+                                                <p:selectOneMenu  id="expression" class="form-control"  required="true" value="#{ligneReceptionController.expressionBesoin}" >
+                                                    <f:selectItem itemValue="#{null}" itemLabel="Select expression"/>
+                                                    <f:selectItems value="#{expressionBesoinController.items}" var="item"
+                                                                   itemValue="#{item}" itemLabel="#{item.id}"/>
+                                                </p:selectOneMenu>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group label-floating">
-                                        <h3 class="title">Expression de besoin</h3>
-                                        <p:selectOneMenu  id="expression" class="form-control"  required="true" value="#{ligneReceptionController.expressionBesoin}" >
-                                            <f:selectItem itemValue="#{null}" itemLabel="Select expression"/>
-                                            <f:selectItems value="#{expressionBesoinController.items}" var="item"
-                                                           itemValue="#{item}" itemLabel="#{item.id}"/>
-                                        </p:selectOneMenu>
-                                    </div>
-                                </div>
+                                    <p:dataTable id="datalist" value="#{ligneReceptionController.receptionItmes}" var="item" selectionMode="single" selection="#{ligneReceptionController.selected}"
+                                                 rowKey="#{item.id}" editable="true" >  
+                                        <p:column>  
+                                            <f:facet name="header">  
+                                                <h:outputText value="CATEORIE"/>  
+                                            </f:facet>  
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{item.produit.categorie.libelle}"/>  
+                                                </f:facet>  
+                                                <f:facet name="input" >  
+                                                    <p:selectOneMenu value="#{item.produit.categorie.libelle}" style="width:100%">  
+                                                        <f:selectItems value="#{categorieController.items}" var="cat" itemLabel="#{cat}"  
+                                                                       itemValue="#{cat}"/>  
+                                                    </p:selectOneMenu>  
+                                                </f:facet>  
+                                            </p:cellEditor>  
+                                        </p:column>  
+                                        <p:column >  
+                                            <f:facet name="header">  
+                                                <h:outputText value="PRODUIT"/>  
+                                            </f:facet>  
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{item.produit.libelle}"/>  
+                                                </f:facet>  
+                                                <f:facet name="input">  
+                                                    <p:selectOneMenu value="#{item.produit}" style="width:100%">  
+                                                        <f:selectItems value="#{produitController.items}" var="prod" itemLabel="#{prod}"  
+                                                                       itemValue="#{prod}"/>  
+                                                    </p:selectOneMenu>  
+                                                </f:facet>  
+                                            </p:cellEditor>  
+                                        </p:column>  
+                                        <p:column>  
+                                            <f:facet name="header">  
+                                                <h:outputText value="QUANTITE RECU"/>  
+                                            </f:facet>  
+                                            <p:cellEditor>  
+                                                <f:facet name="output">  
+                                                    <h:outputText value="#{item.quantite}"/>  
+                                                </f:facet>  
+                                                <f:facet name="input">  
+                                                    <p:inputText id="modelInput" value="#{item.quantite}" style="width:96%"/>  
+                                                </f:facet>  
+                                            </p:cellEditor>  
+                                        </p:column>  
+                                        <p:column style="width:6%" exportable="false">  
+                                            <p:rowEditor />  
+                                        </p:column>  
+                                    </p:dataTable>
+                                   
+                                    
+                                    <p:commandButton value="VALIDER" icon="ui-icon-check" style="background-color: #2a9942" update="myform:datalist" oncomplete="PF('ImprimerCommandeDialog').show()" class="btn btn-sm pull-right"></p:commandButton>
+                                    
+                                     </h:form>
+                                <p:commandButton value="Vider" style="background-color: grey" action="#{ligneReceptionController.vider()}" update="myform:datalist"></p:commandButton>
+                                <p:commandButton value="Supprimer" style="background-color: grey" action="#{ligneReceptionController.supprimerLigne()}" update="myform:datalist" ></p:commandButton>
+                                     
+                                   <ui:include src="popoutReception.xhtml"/>
+                                
+                                    
                             </div>
-                            <p:dataTable id="datalist" value="#{ligneReceptionController.receptionItmes}" var="item" editable="true" >  
-                                <p:column>  
-                                    <f:facet name="header">  
-                                        <h:outputText value="CATEORIE"/>  
-                                    </f:facet>  
-                                    <p:cellEditor>  
-                                        <f:facet name="output">  
-                                            <h:outputText value="#{item.produit.categorie.libelle}"/>  
-                                        </f:facet>  
-                                        <f:facet name="input" >  
-                                            <p:selectOneMenu value="#{item.produit.categorie.libelle}" style="width:100%">  
-                                                <f:selectItems value="#{categorieController.items}" var="cat" itemLabel="#{cat}"  
-                                                               itemValue="#{cat}"/>  
-                                            </p:selectOneMenu>  
-                                        </f:facet>  
-                                    </p:cellEditor>  
-                                </p:column>  
-                                <p:column >  
-                                    <f:facet name="header">  
-                                        <h:outputText value="PRODUIT"/>  
-                                    </f:facet>  
-                                    <p:cellEditor>  
-                                        <f:facet name="output">  
-                                            <h:outputText value="#{item.produit.libelle}"/>  
-                                        </f:facet>  
-                                        <f:facet name="input">  
-                                            <p:selectOneMenu value="#{item.produit}" style="width:100%">  
-                                                <f:selectItems value="#{produitController.items}" var="prod" itemLabel="#{prod}"  
-                                                               itemValue="#{prod}"/>  
-                                            </p:selectOneMenu>  
-                                        </f:facet>  
-                                    </p:cellEditor>  
-                                </p:column>  
-                                <p:column>  
-                                    <f:facet name="header">  
-                                        <h:outputText value="QUANTITE RECU"/>  
-                                    </f:facet>  
-                                    <p:cellEditor>  
-                                        <f:facet name="output">  
-                                            <h:outputText value="#{item.quantiteRecu}"/>  
-                                        </f:facet>  
-                                        <f:facet name="input">  
-                                            <p:inputText id="modelInput" value="#{item.quantiteRecu}" style="width:96%"/>  
-                                        </f:facet>  
-                                    </p:cellEditor>  
-                                </p:column>  
-                                <p:column style="width:6%" exportable="false">  
-                                    <p:rowEditor />  
-                                </p:column>  
-                            </p:dataTable>
-                            <h:commandButton value="Enregistrer" action="#{ligneReceptionController.validerReception()}" class="btn btn-basic pull-right"></h:commandButton>
-                            <h:commandButton value="Imprimer" class="btn btn-basic pull-right"></h:commandButton>
-                        </h:form>
+                        </div>
                     </div>
                 </div>
             </div>

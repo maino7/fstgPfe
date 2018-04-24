@@ -11,49 +11,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author CHAACHAI Youssef <youssef.chaachai@gmail.com>
  */
 @Entity
-public class LigneFacture implements Serializable {
+@Table(name="LigneFacture")
+public class LigneFacture extends Ligne implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private double quantite;
-    @ManyToOne
-    private Produit produit;
+
     @ManyToOne
     private Facture facture;
 
-    public LigneFacture() {
-    }
 
-    public LigneFacture(Long id) {
-        this.id = id;
-    }
 
-    public double getQuantite() {
-        return quantite;
-    }
-
-    public void setQuantite(double quantite) {
-        this.quantite = quantite;
-    }
-
-    public Produit getProduit() {
-        if (produit == null) {
-            produit = new Produit();
-        }
-        return produit;
-    }
-
-    public void setProduit(Produit produit) {
-        this.produit = produit;
-    }
+   
 
     public Facture getFacture() {
         if (facture == null) {
@@ -66,13 +40,24 @@ public class LigneFacture implements Serializable {
         this.facture = facture;
     }
 
-    public Long getId() {
-        return id;
+    
+    
+    
+    public LigneFacture() {
+    }
+    
+    public LigneFacture(Long id) {
+        super(id);
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public LigneFacture(Long id, double quantite) {
+        super(id, quantite);
     }
+
+  
+    
+    
+    
 
     @Override
     public int hashCode() {
@@ -88,10 +73,7 @@ public class LigneFacture implements Serializable {
             return false;
         }
         LigneFacture other = (LigneFacture) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

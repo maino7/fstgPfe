@@ -38,16 +38,24 @@ public class LigneReceptionController implements Serializable {
     @EJB
     private ReceptionFacade receptionFacade;
 
-
     private LigneReception selected;
     private ExpressionBesoin expressionBesoin;
     private Date daterecep;
+    private Long idLing = 1L;
+
+    public Long getIdLing() {
+        return idLing;
+    }
+
+    public void setIdLing(Long idLing) {
+        this.idLing = idLing;
+    }
 
     public LigneReceptionController() {
     }
 
     public LigneReception getSelected() {
-        if(selected == null){
+        if (selected == null) {
             selected = new LigneReception();
         }
         return selected;
@@ -56,16 +64,9 @@ public class LigneReceptionController implements Serializable {
     public void setSelected(LigneReception selected) {
         this.selected = selected;
     }
-    
-    
-    
-    
-    
-    
-    
 
     public ExpressionBesoin getExpressionBesoin() {
-        if(expressionBesoin == null){
+        if (expressionBesoin == null) {
             expressionBesoin = new ExpressionBesoin();
         }
         return expressionBesoin;
@@ -75,31 +76,16 @@ public class LigneReceptionController implements Serializable {
         this.expressionBesoin = expressionBesoin;
     }
 
-    
-    
-    
     public Date getDaterecep() {
-          if(daterecep == null){
+        if (daterecep == null) {
             daterecep = new Date();
-          }
+        }
         return daterecep;
     }
 
     public void setDaterecep(Date daterecep) {
         this.daterecep = daterecep;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     protected void setEmbeddableKeys() {
     }
@@ -158,8 +144,9 @@ public class LigneReceptionController implements Serializable {
         System.out.println("azert");
         LigneReception cloneLigne = ejbFacade.cloneLigneReception(selected);
         receptionItmes.add(cloneLigne);
+        cloneLigne.setId(idLing);
         setSelected(null);
-
+        idLing++;
     }
 
     public void testButton() {
@@ -246,38 +233,71 @@ public class LigneReceptionController implements Serializable {
         }
 
     }
-     public void info() {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "recu ajouter", "avec succe"));
+
+    public void info() {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        context.addMessage(null, new FacesMessage("recu ajouter", ""));
+//        context.addMessage(null, new FacesMessage("Second Message", "Additional Message Detail"));
     }
-     public void info1() {
+
+    public void info1() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Votre recu a été enregstrer avec sucée", ""));
     }
+
     public void vider() {
         setSelected(null);
         receptionItmes.clear();
     }
-    
-    
+
+    public void supprimerLigne() {
+        System.out.println("je suis la");
+        receptionItmes.remove(selected);
+        setSelected(null);
+    }
+
 //    
-    
     public void validerReception() {
-       
-            String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
-            Reception reception = receptionFacade.addReception(idSession , expressionBesoin , daterecep );
-            if (reception == null) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Vous devez remplir tout les champs !"));
-            } else {
-                for (int i = 0; i < receptionItmes.size(); i++) {
-                    LigneReception receptionItem = receptionItmes.get(i);
-                    ejbFacade.createLigneReception(receptionItem.getQuantiteRecu(), receptionItem.getProduit(), reception.getId());
-                }
-//                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Votre Recu a été creer avec succès."));
-                vider();
+
+        String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
+        Reception reception = receptionFacade.addReception(idSession, expressionBesoin, daterecep);
+        if (reception == null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Vous devez remplir tout les champs !"));
+        } else {
+            for (int i = 0; i < receptionItmes.size(); i++) {
+                LigneReception receptionItem = receptionItmes.get(i);
+                ejbFacade.createLigneReception(receptionItem.getQuantite(), receptionItem.getProduit(), reception.getId());
             }
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre commande a été validée avec succès. Le numéro de la reception est " + reception.getId()));
+            vider();
         }
+    }
     
+    
+    public void validerImprimerOui() {
+        if (receptionItmes.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la Facture avant de valider !"));
+        } else {
+            Reception reception = new Reception();
+            validerReception();
+            imprimer(reception);
+            vider();
+        }
+    }
+
+    public void validerImprimerNon() {
+        System.out.println("je suis ici");
+        if (receptionItmes.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la Facture avant de valider !"));
+        } else {
+            validerReception();
+            vider();
+        }
+    }
+
+    public void imprimer(Reception reception) {
+        receptionFacade.imprimerFacture(reception);
+    }
 
 
 }
-
-

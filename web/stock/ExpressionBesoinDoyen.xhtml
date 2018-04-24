@@ -4,10 +4,17 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui">
     <h:head>
-        <title>Facelet Title</title>
-
+        <title>Consulter expression de besoin</title>
+        <link rel="apple-touch-icon" sizes="76x76" href="./newtemplate/assets/img/apple-icon.png" />
+        <!--<link rel="icon" type="image/png" href="./newtemplate/assets/img/favicon.png" />-->
+        <link rel="shortout icon" type="image/x-icon" href="#{resource['images/favicon.png']}" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Material Dashboard by Creative Tim</title>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="viewport" content="width=device-width" />
         <!-- Custom CSS -->
         <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/heroic-features.css" rel="stylesheet"></link>
@@ -20,13 +27,71 @@
         <link href="./newtemplate/assets/css/demo.css" rel="stylesheet" />
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet"></link>
-            <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'></link>
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'></link>
 
 
     </h:head>
     <h:body style="background-image: url(../resources/images/demo/body-bg41.png); background-attachment: fixed;">
         <!-- Navigation -->
         <p:growl id="growl" life="3000" />
+
+
+
+        <!--haaahwa sidebar-->
+        <div style="background-color: white" class="sidebar" data-color="purple" >
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+            -->
+            <div class="logo">
+                <a href="../../template/Home.xhtml"><img src="../resources/images/logo.png" style="width: 200px;" /></a>
+            </div>
+            <div style="width: 280px" class="sidebar-wrapper">
+                <ul class="nav">
+                    <li>
+                        <a href="DoyenLogin.xhtml?faces-redirect=true">
+                            <i class="material-icons">home</i>
+                            <p>Home</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./Commande.xhtml?faces-redirect=true">
+                            <i class="material-icons">content_paste</i>
+                            <p>Effectuer une commande</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Facture.xhtml?faces-redirect=true">
+                            <i class="material-icons">library_books</i>
+                            <p>Consulter les factures</p>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
+                            <i class="material-icons text-gray">notifications</i>
+                            <p>Consulter les exp. de besoin</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Livraison.xhtml?faces-redirect=true">
+                            <i class="material-icons">event_available</i>
+                            <p>Enregistrer une livraison</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Ajout.xhtml?faces-redirect=true">
+                            <i class="material-icons">people</i>
+                            <p>Gestion des utilisateurs</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
 
         <style>
             .kira{
@@ -40,93 +105,170 @@
             }
         </style>
 
-        <ui:include src="../template/Header.xhtml"/>
+        <ui:include src="Header.xhtml"/>
 
-        <!-- Page Content -->
-    <!--    <div class="wrapper">  -->
-    <div class="sidebar" data-color="purple">
-                <!--
-            Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-    
-            Tip 2: you can also add an image using data-image tag
-                -->
+        <div class="main-panel">
+            <br></br>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-11">
+                        <div class="card">
+                            <div class="card-header" data-background-color="grey">
+                                <h4 class="title">Recherche</h4>
+                            </div>
+                            <div class="card-content">
+                                <h:form id="idForm">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h4 class="title">Entite Adminstratif</h4>  
 
-                <div class="sidebar-wrapper">
-                    <ul class="nav">
-                        <br></br>
-                        <br></br>
-                        <br></br>
-                        <br></br>
-                        <li>
-                            <a href="DoyenLogin.xhtml">
-                                <i class="material-icons">person</i>
-                                <p>User Profile</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="Commande.xhtml">
-                                <i class="material-icons">content_paste</i>
-                                <p>Commande</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="Facture.xhtml">
-                                <i class="material-icons">library_books</i>
-                                <p>Facture</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="Ajout.xhtml">
-                                <i class="material-icons">bubble_chart</i>
-                                <p>Ajout</p>
-                            </a>
-                        </li>
-         
-                        <li>
-                            <a href="ExpressionBesoinDoyen.xhtml">
-                                <i class="material-icons text-gray">notifications</i>
-                                <p>Expression de Besoin</p>
-                            </a>
-                        </li>
-                        
-                    </ul>
+                                            <p:selectOneMenu  id="entite" class="form-control"  value="#{ligneExpressionBesoinController.entiteAdministrative}" >
+                                                <p:ajax update="membre" listener="#{ligneExpressionBesoinController.findByEntite()}"></p:ajax>
+                                                <f:selectItem itemValue="#{null}" itemLabel="Select Entite"/>  
+                                                <f:selectItems value="#{entiteAdministrativeController.items}" var="item"
+                                                               itemValue="#{item}" itemLabel="#{item.libelle}"/>
+                                            </p:selectOneMenu> 
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h4 class="title">Membre</h4>  
+                                            <p:selectOneMenu  id="membre" class="form-control"  value="#{ligneExpressionBesoinController.userStock}" >
+                                                <p:ajax></p:ajax>
+                                                <f:selectItem itemValue="#{null}" itemLabel="Select Membre"/>  
+                                                <f:selectItems value="#{ligneExpressionBesoinController.userStocks}" var="item"
+                                                               itemValue="#{item}" itemLabel="#{item.nom}"/>
+                                            </p:selectOneMenu> 
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <h4 class="title">Categorie</h4>
+                                            <p:selectOneMenu  id="categorie" class="form-control" value="#{ligneExpressionBesoinController.selected.produit.categorie}" >
+                                                <p:ajax update="produit"></p:ajax>
+                                                <f:selectItem itemValue="#{null}" itemLabel="---SELECT CATEGORIE---"/>  
+                                                <f:selectItems value="#{categorieController.items}" var="item"
+                                                               itemValue="#{item}" itemLabel="#{item.libelle}"/>
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h4 class="title">Produit</h4>  
+                                            <p:selectOneMenu  id="produit" class="form-control"  value="#{ligneExpressionBesoinController.selected.produit}" >
+                                                <f:selectItem itemValue="#{null}" itemLabel="---SELECT PRODUIT---"/>  
+                                                <f:selectItems value="#{ligneExpressionBesoinController.selected.produit.categorie.produits}" var="item"
+                                                               itemValue="#{item}" itemLabel="#{item.libelle}"/>
+                                            </p:selectOneMenu> 
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h4 class="title">Date Min</h4>
+                                            <p:calendar value="#{ligneExpressionBesoinController.dateMin}"  pattern="dd-MM-yyyy" title="titleButton" showOn="button" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h4 class="title">Date Max</h4>  
+                                            <p:calendar value="#{ligneExpressionBesoinController.dateMax}"  pattern="dd-MM-yyyy" title="titleButton1" showOn="button"/>
+                                        </div>
+                                    </div>
+                                </h:form>
+                                <p:commandButton value="Recherche" icon="ui-icon-search" style="background-color: #0b93bc;width: 13%;font-size: 110%" action="#{ligneExpressionBesoinController.findExp()}" update="idForm, formTani:tab" class="pull-right"></p:commandButton>
+                                <h:form id="formTani">
+                                    <br></br>
+                                    <hr></hr>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="card">
+                                            <div class="card-header" data-background-color="grey">
+                                                <h4 class="title">Liste Des Expression De Besoin</h4>
+                                            </div>
+                                            <div class="card-content table-responsive">
+                                                <p:dataTable value="#{ligneExpressionBesoinController.expressionBesoins}" var="item" id="tab">
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Date"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.dateExpressionBesoin}" > 
+                                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                        </h:outputText>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Entite Admin"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.userStock.entiteAdministrative.libelle}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Membre"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.userStock.nom}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Action"/>
+                                                        </f:facet>
+                                                        <p:commandLink actionListener="#{ligneExpressionBesoinController.showDetailDoyen(item)}"  class="btn btn-basic pull-right" value="Detail" update=":formTani:dataExp"></p:commandLink>
+                                                    </p:column>
+                                                </p:dataTable>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="card">
+                                            <div class="card-header" data-background-color="grey">
+                                                <h4 class="title">Detail</h4>
+
+                                            </div>
+                                            <div class="card-content table-responsive">
+                                                <p:dataTable value="#{ligneExpressionBesoinController.listDetail1}" var="item" id="dataExp">
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Categorie"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.produit.categorie.libelle}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Produit"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.produit.libelle}"/>
+                                                    </p:column>
+                                                    <p:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Quantite"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.quantite}"/>
+                                                    </p:column>
+
+                                                </p:dataTable>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-  
-    <!--    </div>  -->
-        <!-- /.container -->
+        </div>
+        <div class="main-panel">
 
-        <!-- jQuery -->
-        <script src="js/jquery.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+        </div>
+        <!--<ui:include src="sideBarDoyen.xhtml"/>-->
 
     </h:body>
-    <script src="./newtemplate/assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
-    <script src="./newtemplate/assets/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="./newtemplate/assets/js/material.min.js" type="text/javascript"></script>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../assets/js/material.min.js" type="text/javascript"></script>
     <!--  Charts Plugin -->
-    <script src="./newtemplate/assets/js/chartist.min.js"></script>
+    <script src="../assets/js/chartist.min.js"></script>
     <!--  Dynamic Elements plugin -->
-    <script src="./newtemplate/assets/js/arrive.min.js"></script>
-    <!--  PerfectScrollbar Library -->  
-    <script src="./newtemplate/assets/js/perfect-scrollbar.jquery.min.js"></script> 
+    <script src="../assets/js/arrive.min.js"></script>
+    <!--  PerfectScrollbar Library -->
+    <script src="../assets/js/perfect-scrollbar.jquery.min.js"></script>
     <!--  Notifications Plugin    -->
-    <script src="./newtemplate/assets/js/bootstrap-notify.js"></script>
+    <script src="../assets/js/bootstrap-notify.js"></script>
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
     <!-- Material Dashboard javascript methods -->
-    <script src="./newtemplate/assets/js/material-dashboard.js?v=1.2.0"></script>   
+    <script src="../assets/js/material-dashboard.js?v=1.2.0"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="./newtemplate/assets/js/demo.js"></script>  
-    <script type="text/javascript">
-                                $(document).ready(function () {
+    <script src="../assets/js/demo.js"></script>
 
-                                    // Javascript method's body can be found in assets/js/demos.js
-                                    demo.initDashboardPageCharts();
-
-                                });
-    </script>
 </html>
-

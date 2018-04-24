@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 01 Avril 2018 à 17:55
+-- Généré le :  Mer 25 Avril 2018 à 01:26
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -233,14 +233,22 @@ CREATE TABLE IF NOT EXISTS `commande` (
 --
 
 INSERT INTO `commande` (`ID`, `DATECOMMANDE`, `LIVREE`, `NOMBRECOMMANDE`, `USER_ID`, `USERSTOCK_ID`) VALUES
-('CMD-2018-1', '2018-04-01', 0, 1, NULL, 'SH184344'),
+('CMD-2018-1', '2018-04-01', 1, 1, NULL, 'SH184344'),
+('CMD-2018-10', '2018-04-05', 2, 10, NULL, 'SH184344'),
+('CMD-2018-11', '2018-04-22', 2, 11, NULL, 'SH184344'),
+('CMD-2018-12', '2018-04-23', 2, 12, NULL, 'SH184344'),
+('CMD-2018-13', '2018-04-23', 0, 13, NULL, 'SH184344'),
+('CMD-2018-14', '2018-04-23', 0, 14, NULL, 'SH184344'),
+('CMD-2018-15', '2018-04-23', 0, 15, NULL, 'SH184344'),
+('CMD-2018-16', '2018-04-23', 0, 16, NULL, 'SH184344'),
+('CMD-2018-17', '2018-04-23', 0, 17, NULL, 'SH184344'),
+('CMD-2018-18', '2018-04-24', 0, 18, NULL, 'SH184344'),
+('CMD-2018-19', '2018-04-24', 0, 19, NULL, 'SH184344'),
 ('CMD-2018-2', '2018-04-01', 0, 2, NULL, 'SH184344'),
 ('CMD-2018-3', '2018-04-01', 0, 3, NULL, 'SH184344'),
 ('CMD-2018-4', '2018-04-01', 0, 4, NULL, 'SH184344'),
-('CMD-2018-5', '2018-04-01', 0, 5, NULL, 'SH184344'),
-('CMD-2018-6', '2018-04-01', 0, 6, NULL, 'SH184344'),
-('CMD-2018-7', '2018-04-01', 0, 7, NULL, 'SH184344'),
-('CMD-2018-8', '2018-04-01', 0, 8, NULL, 'SH184344');
+('CMD-2018-5', '2018-04-01', 2, 5, NULL, 'SH184344'),
+('CMD-2018-6', '2018-04-05', 0, 6, NULL, 'SH184344');
 
 -- --------------------------------------------------------
 
@@ -263,9 +271,9 @@ CREATE TABLE IF NOT EXISTS `demande` (
 
 INSERT INTO `demande` (`ID`, `DESCRIPTION`, `ETAT`, `ETUDIANT_CNE`) VALUES
 (1, 'hhhhhhhhhhhhhh', NULL, 11001003),
-(2, 'zzzzzzzzzz', 0, 11001003),
-(3, 'eeeeee', 0, 11001003),
-(4, '', 0, 11001003);
+(2, 'zzzzzzzzzz', -1, 11001003),
+(3, 'eeeeee', 1, 11001003),
+(4, '', -1, 11001003);
 
 -- --------------------------------------------------------
 
@@ -536,7 +544,7 @@ CREATE TABLE IF NOT EXISTS `device` (
   KEY `FK_DEVICE_USER_CIN` (`USER_CIN`),
   KEY `FK_DEVICE_ETUDIANT_CNE` (`ETUDIANT_CNE`),
   KEY `fk_device` (`USERSTOCK_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=96 ;
 
 --
 -- Contenu de la table `device`
@@ -581,7 +589,60 @@ INSERT INTO `device` (`ID`, `ADRESSEMAC`, `BROWSER`, `DATECREATION`, `DEVICECATE
 (39, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
 (40, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
 (41, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
-(42, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL);
+(42, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(43, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(44, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(45, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(46, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(47, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(48, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, 'ana', NULL),
+(49, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', 1111, NULL, NULL),
+(50, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(51, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(52, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(53, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(54, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(55, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(56, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(57, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(58, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(59, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(60, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(61, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(62, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(63, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(64, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(65, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(66, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(67, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(68, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(69, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(70, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(71, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(72, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(73, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(74, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(75, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(76, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(77, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(78, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(79, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(80, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(81, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(82, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(83, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(84, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(85, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(86, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(87, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(88, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(89, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(90, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(91, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(92, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(93, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(94, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL),
+(95, 'A4-DB-30-96-88-81', 'Firefox', NULL, 'Personal computer', 'Windows 8.1', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1565,7 +1626,7 @@ CREATE TABLE IF NOT EXISTS `etudiant_secure` (
 --
 
 CREATE TABLE IF NOT EXISTS `expressionbesoin` (
-  `ID` bigint(20) NOT NULL,
+  `ID` varchar(255) NOT NULL,
   `DATEEXPRESSIONBESOIN` date DEFAULT NULL,
   `RECU` int(11) DEFAULT NULL,
   `USER_ID` varchar(255) DEFAULT NULL,
@@ -1580,11 +1641,9 @@ CREATE TABLE IF NOT EXISTS `expressionbesoin` (
 --
 
 INSERT INTO `expressionbesoin` (`ID`, `DATEEXPRESSIONBESOIN`, `RECU`, `USER_ID`, `USERSTOCK_ID`) VALUES
-(1, '2018-02-21', 0, 'abderrahim', 'JK521637'),
-(2, '2018-02-05', 0, 'chaachai', 'SH184344'),
-(3, '2018-02-19', 0, 'yougata10', 'JM63082'),
-(401, '2018-03-19', 0, NULL, 'JH36620'),
-(452, '2018-03-19', 0, NULL, 'JM63082');
+('EXP-2018-1', '2018-04-24', 0, NULL, 'JH36620'),
+('EXP-2018-2', '2018-04-24', 0, NULL, 'JH36620'),
+('EXP-2018-3', '2018-04-24', 0, NULL, 'JH36620');
 
 -- --------------------------------------------------------
 
@@ -1602,6 +1661,13 @@ CREATE TABLE IF NOT EXISTS `facture` (
   KEY `FK_FACTURE_COMMANDE_ID` (`COMMANDE_ID`),
   KEY `FK_FACTURE_FOURNISSEUR_ID` (`FOURNISSEUR_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `facture`
+--
+
+INSERT INTO `facture` (`ID`, `DATEFACTURE`, `PRIXTOTALE`, `COMMANDE_ID`, `FOURNISSEUR_ID`) VALUES
+('fact-2018-1', '2018-04-11', 10000, 'CMD-2018-1', 'Fr01');
 
 -- --------------------------------------------------------
 
@@ -1876,6 +1942,20 @@ INSERT INTO `lieu` (`id`, `numapg`, `titre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `ligne`
+--
+
+CREATE TABLE IF NOT EXISTS `ligne` (
+  `ID` bigint(20) NOT NULL,
+  `QUANTITE` double DEFAULT NULL,
+  `PRODUIT_ID` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_LIGNE_PRODUIT_ID` (`PRODUIT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `lignecommande`
 --
 
@@ -1900,10 +1980,7 @@ INSERT INTO `lignecommande` (`ID`, `QUANTITE`, `COMMANDE_ID`, `PRODUIT_ID`) VALU
 (654, 1, 'CMD-2018-2', 'P01'),
 (701, 1, 'CMD-2018-3', 'P01'),
 (702, 1, 'CMD-2018-4', 'P02'),
-(703, 26, 'CMD-2018-5', 'P01'),
-(751, 2, 'CMD-2018-7', 'P01'),
-(752, 2, 'CMD-2018-7', 'P03'),
-(801, 3, 'CMD-2018-8', 'P02');
+(703, 26, 'CMD-2018-5', 'P01');
 
 -- --------------------------------------------------------
 
@@ -1914,7 +1991,7 @@ INSERT INTO `lignecommande` (`ID`, `QUANTITE`, `COMMANDE_ID`, `PRODUIT_ID`) VALU
 CREATE TABLE IF NOT EXISTS `ligneexpressionbesoin` (
   `ID` bigint(20) NOT NULL,
   `QUANTITE` double DEFAULT NULL,
-  `EXPRESSIONBESOIN_ID` bigint(20) DEFAULT NULL,
+  `EXPRESSIONBESOIN_ID` varchar(255) DEFAULT NULL,
   `PRODUIT_ID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_LIGNEEXPRESSIONBESOIN_EXPRESSIONBESOIN_ID` (`EXPRESSIONBESOIN_ID`),
@@ -1926,11 +2003,10 @@ CREATE TABLE IF NOT EXISTS `ligneexpressionbesoin` (
 --
 
 INSERT INTO `ligneexpressionbesoin` (`ID`, `QUANTITE`, `EXPRESSIONBESOIN_ID`, `PRODUIT_ID`) VALUES
-(54, 1, 1, 'P01'),
-(55, 2, 2, 'P02'),
-(56, 10, 3, 'P03'),
-(402, 1, 401, 'P02'),
-(453, 2, 452, 'P02');
+(2651, 3, 'EXP-2018-1', 'P01'),
+(2701, 2, 'EXP-2018-2', 'P02'),
+(2702, 2, 'EXP-2018-2', 'P03'),
+(2801, 7, 'EXP-2018-3', 'P01');
 
 -- --------------------------------------------------------
 
@@ -1948,6 +2024,13 @@ CREATE TABLE IF NOT EXISTS `lignefacture` (
   KEY `FK_LIGNEFACTURE_FACTURE_ID` (`FACTURE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `lignefacture`
+--
+
+INSERT INTO `lignefacture` (`ID`, `QUANTITE`, `FACTURE_ID`, `PRODUIT_ID`) VALUES
+(2752, 2, 'fact-2018-1', 'P01');
+
 -- --------------------------------------------------------
 
 --
@@ -1957,12 +2040,41 @@ CREATE TABLE IF NOT EXISTS `lignefacture` (
 CREATE TABLE IF NOT EXISTS `lignelivraison` (
   `ID` bigint(20) NOT NULL,
   `QUANTITE` double DEFAULT NULL,
-  `LIVRAISON_ID` bigint(20) DEFAULT NULL,
+  `LIVRAISON_ID` varchar(255) DEFAULT NULL,
   `PRODUIT_ID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_LIGNELIVRAISON_LIVRAISON_ID` (`LIVRAISON_ID`),
   KEY `FK_LIGNELIVRAISON_PRODUIT_ID` (`PRODUIT_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `lignelivraison`
+--
+
+INSERT INTO `lignelivraison` (`ID`, `QUANTITE`, `LIVRAISON_ID`, `PRODUIT_ID`) VALUES
+(2101, 3, 'LVR-2018-1', 'P01'),
+(2102, 3, 'LVR-2018-1', 'P02'),
+(2201, 3, 'LVR-2018-2', 'P03'),
+(2251, 9, 'LVR-2018-3', 'P01'),
+(2252, 1, 'LVR-2018-4', 'P01'),
+(2301, 2, 'LVR-2018-5', 'P01'),
+(2302, 1, 'LVR-2018-6', 'P01'),
+(2351, 1, 'LVR-2018-7', 'P01'),
+(2352, 1, 'LVR-2018-7', 'P02'),
+(2353, 1, 'LVR-2018-7', 'P03'),
+(2401, 1, 'LVR-2018-8', 'P01'),
+(2402, 1, 'LVR-2018-8', 'P02'),
+(2403, 1, 'LVR-2018-8', 'P03'),
+(2451, 1, 'LVR-2018-9', 'P01'),
+(2452, 2, 'LVR-2018-9', 'P03'),
+(2453, 1, 'LVR-2018-10', 'P02'),
+(2454, 2, 'LVR-2018-10', 'P01'),
+(2455, 4, 'LVR-2018-11', 'P03'),
+(2456, 3, 'LVR-2018-11', 'P02'),
+(2457, 26, 'LVR-2018-12', 'P01'),
+(2501, 26, 'LVR-2018-13', 'P01'),
+(2551, 26, 'LVR-2018-14', 'P01'),
+(2601, 26, 'LVR-2018-15', 'P01');
 
 -- --------------------------------------------------------
 
@@ -1986,9 +2098,10 @@ CREATE TABLE IF NOT EXISTS `lignemagasin` (
 --
 
 INSERT INTO `lignemagasin` (`ID`, `QUANTITADEF`, `QUANTITE`, `MAGASIN_ID`, `PRODUIT_ID`) VALUES
-(63, 2, 50, 'Mg01', 'P01'),
-(64, 1, 10, 'Mg02', 'P02'),
-(65, 5, 30, 'Mg03', 'P03');
+(63, 2, 172, 'Mg01', 'P01'),
+(64, 1, 16, 'Mg02', 'P02'),
+(65, 5, 38, 'Mg03', 'P03'),
+(66, 3, 3, 'Mg03', 'P01');
 
 -- --------------------------------------------------------
 
@@ -1998,9 +2111,9 @@ INSERT INTO `lignemagasin` (`ID`, `QUANTITADEF`, `QUANTITE`, `MAGASIN_ID`, `PROD
 
 CREATE TABLE IF NOT EXISTS `lignereception` (
   `ID` bigint(20) NOT NULL,
-  `QUANTITERECU` double DEFAULT NULL,
+  `QUANTITE` double DEFAULT NULL,
   `PRODUIT_ID` varchar(255) DEFAULT NULL,
-  `RECEPTION_ID` bigint(20) DEFAULT NULL,
+  `RECEPTION_ID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_LIGNERECEPTION_RECEPTION_ID` (`RECEPTION_ID`),
   KEY `FK_LIGNERECEPTION_PRODUIT_ID` (`PRODUIT_ID`)
@@ -2010,10 +2123,8 @@ CREATE TABLE IF NOT EXISTS `lignereception` (
 -- Contenu de la table `lignereception`
 --
 
-INSERT INTO `lignereception` (`ID`, `QUANTITERECU`, `PRODUIT_ID`, `RECEPTION_ID`) VALUES
-(66, 1, 'P01', 1),
-(67, 2, 'P02', 1),
-(68, 10, 'P03', 3);
+INSERT INTO `lignereception` (`ID`, `QUANTITE`, `PRODUIT_ID`, `RECEPTION_ID`) VALUES
+(2751, 3, 'P01', 'REC-2018-1');
 
 -- --------------------------------------------------------
 
@@ -2022,7 +2133,7 @@ INSERT INTO `lignereception` (`ID`, `QUANTITERECU`, `PRODUIT_ID`, `RECEPTION_ID`
 --
 
 CREATE TABLE IF NOT EXISTS `livraison` (
-  `ID` bigint(20) NOT NULL,
+  `ID` varchar(255) NOT NULL,
   `DATELIVRAISON` date DEFAULT NULL,
   `COMMANDE_ID` varchar(255) DEFAULT NULL,
   `USER_ID` varchar(255) DEFAULT NULL,
@@ -2032,6 +2143,27 @@ CREATE TABLE IF NOT EXISTS `livraison` (
   KEY `FK_LIVRAISON_COMMANDE_ID` (`COMMANDE_ID`),
   KEY `FK_livraison` (`USERSTOCK_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `livraison`
+--
+
+INSERT INTO `livraison` (`ID`, `DATELIVRAISON`, `COMMANDE_ID`, `USER_ID`, `USERSTOCK_ID`) VALUES
+('LVR-2018-1', '2018-04-03', 'CMD-2018-10', NULL, 'SH184344'),
+('LVR-2018-10', '2018-04-28', 'CMD-2018-10', NULL, 'SH184344'),
+('LVR-2018-11', '2018-04-30', 'CMD-2018-1', NULL, 'SH184344'),
+('LVR-2018-12', '2018-04-30', 'CMD-2018-5', NULL, 'SH184344'),
+('LVR-2018-13', '2018-04-22', 'CMD-2018-5', NULL, 'SH184344'),
+('LVR-2018-14', '2018-04-22', 'CMD-2018-5', NULL, 'SH184344'),
+('LVR-2018-15', '2018-04-22', 'CMD-2018-5', NULL, 'SH184344'),
+('LVR-2018-2', '2018-04-02', 'CMD-2018-2', NULL, 'SH184344'),
+('LVR-2018-3', '2018-04-11', 'CMD-2018-10', NULL, 'SH184344'),
+('LVR-2018-4', '2018-04-03', 'CMD-2018-10', NULL, 'SH184344'),
+('LVR-2018-5', '2018-04-22', 'CMD-2018-4', NULL, 'SH184344'),
+('LVR-2018-6', '2018-04-27', 'CMD-2018-10', NULL, 'SH184344'),
+('LVR-2018-7', '2018-04-22', 'CMD-2018-10', NULL, 'SH184344'),
+('LVR-2018-8', '2018-04-22', 'CMD-2018-6', NULL, 'SH184344'),
+('LVR-2018-9', '2018-04-22', 'CMD-2018-1', NULL, 'SH184344');
 
 -- --------------------------------------------------------
 
@@ -2126,7 +2258,9 @@ INSERT INTO `magasin` (`ID`, `STOCK_ID`) VALUES
 ('Mg01', 'StockGB'),
 ('Mg02', 'StockGB'),
 ('Mg03', 'StockGB'),
-('Mg04', 'StockGB');
+('Mg04', 'StockGB'),
+('Mg08', 'StockGB'),
+('Mg09', 'StockGB');
 
 -- --------------------------------------------------------
 
@@ -12884,15 +13018,15 @@ CREATE TABLE IF NOT EXISTS `pvnotesemestreitem` (
 --
 
 CREATE TABLE IF NOT EXISTS `reception` (
-  `ID` bigint(20) NOT NULL,
+  `ID` varchar(255) NOT NULL,
   `DATERECEPTION` date DEFAULT NULL,
-  `EXPRESSIONBESOIN_ID` bigint(20) DEFAULT NULL,
+  `EXPRESSIONBESOIN_ID` varchar(255) DEFAULT NULL,
   `USER_ID` varchar(255) DEFAULT NULL,
   `USERSTOCK_ID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_RECEPTION_EXPRESSIONBESOIN_ID` (`EXPRESSIONBESOIN_ID`),
   KEY `FK_RECEPTION_USER_ID` (`USER_ID`),
-  KEY `FK_reception` (`USERSTOCK_ID`)
+  KEY `FK_RECEPTION_USERSTOCK_ID` (`USERSTOCK_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -12900,9 +13034,7 @@ CREATE TABLE IF NOT EXISTS `reception` (
 --
 
 INSERT INTO `reception` (`ID`, `DATERECEPTION`, `EXPRESSIONBESOIN_ID`, `USER_ID`, `USERSTOCK_ID`) VALUES
-(1, '2018-03-21', 1, 'abderrahim', 'JK521637'),
-(2, '2018-03-17', 2, 'chaachai', 'SH184344'),
-(3, '2018-03-28', 3, 'yougata10', 'JM63082');
+('REC-2018-1', '2018-04-24', 'EXP-2018-1', NULL, 'JH36620');
 
 -- --------------------------------------------------------
 
@@ -13018,7 +13150,7 @@ CREATE TABLE IF NOT EXISTS `sequence` (
 --
 
 INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '850');
+('SEQ_GEN', '2850');
 
 -- --------------------------------------------------------
 
@@ -13175,6 +13307,12 @@ ALTER TABLE `facture`
   ADD CONSTRAINT `FK_FACTURE_FOURNISSEUR_ID` FOREIGN KEY (`FOURNISSEUR_ID`) REFERENCES `fournisseur` (`ID`);
 
 --
+-- Contraintes pour la table `ligne`
+--
+ALTER TABLE `ligne`
+  ADD CONSTRAINT `FK_LIGNE_PRODUIT_ID` FOREIGN KEY (`PRODUIT_ID`) REFERENCES `produit` (`ID`);
+
+--
 -- Contraintes pour la table `lignecommande`
 --
 ALTER TABLE `lignecommande`
@@ -13241,8 +13379,8 @@ ALTER TABLE `produit`
 -- Contraintes pour la table `reception`
 --
 ALTER TABLE `reception`
-  ADD CONSTRAINT `FK_reception` FOREIGN KEY (`USERSTOCK_ID`) REFERENCES `userstock` (`ID`),
   ADD CONSTRAINT `FK_RECEPTION_EXPRESSIONBESOIN_ID` FOREIGN KEY (`EXPRESSIONBESOIN_ID`) REFERENCES `expressionbesoin` (`ID`),
+  ADD CONSTRAINT `FK_RECEPTION_USERSTOCK_ID` FOREIGN KEY (`USERSTOCK_ID`) REFERENCES `userstock` (`ID`),
   ADD CONSTRAINT `FK_RECEPTION_USER_ID` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`);
 
 --

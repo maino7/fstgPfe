@@ -117,9 +117,11 @@
         <ui:include src="Header.xhtml"/>
 
 
+
         <div class="main-panel">
             <br></br>
             <div class="container-fluid">
+
                 <div class="row">
                     <div class="col-md-1">
                     </div>
@@ -129,14 +131,14 @@
                                 <h4 class="title">Effectuer une Commande</h4>
                             </div>
                             <div class="card-content">
-                                <p:messages id="messages" showDetail="true" closable="true">
-                                </p:messages>
                                 <h:form id="myForm" class="form-group">
+                                    <p:messages id="messages" showDetail="true" closable="true">
+                                    </p:messages>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group label-floating">
                                                 <h6 class="title">CATEGORIE</h6>
-                                                <p:selectOneMenu styleClass="menu" panelStyleClass="panel" id="categorie"  class="form-control" required="true" value="#{ligneCommandeController.selected.produit.categorie}">
+                                                <p:selectOneMenu id="categorie"  class="form-control" required="true" value="#{ligneCommandeController.selected.produit.categorie}">
                                                     <p:ajax update="produit"/>
                                                     <f:selectItem itemValue="#{null}" itemLabel="------------------Séléctionner------------------"/>
                                                     <f:selectItems   value="#{categorieController.items}" var="item"
@@ -162,7 +164,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p:commandButton value="Ajouter" style="background-color: #939393;width: 13%" action="#{ligneCommandeController.ajouterLigneCommande()}" update="LigneCommandeListForm:datalist,myForm" class="btn btn-sm pull-right"></p:commandButton>
+                                    <p:commandButton value="Ajouter" icon="ui-icon-plus" style="background-color: #939393;width: 11%;font-size: 90%" action="#{ligneCommandeController.ajouterLigneCommande()}" update="LigneCommandeListForm:datalist,myForm" class="pull-right"></p:commandButton>
                                     <br></br>
                                 </h:form>
                                 <h:form id="LigneCommandeListForm" class="form-group">
@@ -218,102 +220,22 @@
                                             <p:rowEditor />  
                                         </p:column>  
                                     </p:dataTable>
-                                    <p:commandButton value="Vider" style="background-color: grey" action="#{ligneCommandeController.vider()}" update="LigneCommandeListForm:datalist" class="btn btn-xs"></p:commandButton>
-                                    <p:commandButton value="Supprimer" style="background-color: grey" action="#{ligneCommandeController.supprimerLigne()}" update="LigneCommandeListForm:datalist" class="btn btn-xs"></p:commandButton>
+                                    <p:commandButton value="Supprimer" icon="ui-icon-trash" style="background-color: grey; font-size: 85%" action="#{ligneCommandeController.supprimerLigne()}" update="LigneCommandeListForm:datalist"></p:commandButton>
+                                    <p:commandButton value="Vider" icon="ui-icon-close" style="background-color: grey; font-size: 85%" action="#{ligneCommandeController.vider()}" update="LigneCommandeListForm:datalist"></p:commandButton>
                                     <br></br>
-                                    <h:commandButton style="width: 20%;font-weight: bold;font-size: small" value="Valider" action="#{ligneCommandeController.validerCommande()}" class="btn btn-success pull-right"></h:commandButton>
                                 </h:form>
-                                <!--<h:commandButton value="Valider" action="#{ligneCommandeController.validerCommande()}" class="btn btn-success pull-right"></h:commandButton>-->
-                                <!--</h:form>-->
+                                <p:commandButton value="VALIDER" icon="ui-icon-check" style="background-color: #2a9942" update="LigneCommandeListForm:datalist" oncomplete="PF('ImprimerCommandeDialog').show()" class="btn btn-sm pull-right"></p:commandButton>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--            <br></br>
-                        <div class="col-lg-1">
-                        </div>
-                        <div class="col-lg-10">
-                            <div class="card">
-                                <div class="card-header" data-background-color="grey">
-                                    <h4 class="title">Validation de la commande</h4>
-                                </div>
-                                <div class="card-content table-responsive">
-                                                            <h:form id="LigneCommandeListForm" class="form-group">
-                                                                <p:messages id="messages" showDetail="true" closable="true">
-                                                                </p:messages>
-                                                                Saisissez le numero de la commande:* <p:inputText value="#{ligneCommandeController.cmdId}"></p:inputText>
-                                                                <br></br>
-                                                                <p:dataTable id="datalist" value="#{ligneCommandeController.commandeItems}" var="item" selectionMode="single" selection="#{ligneCommandeController.selected}"
-                                                                             rowKey="#{item.id}" editable="true" >  
-                                                                    <p:column>  
-                                                                        <f:facet name="header">  
-                                                                            <h:outputText value="CATEORIE"/>  
-                                                                        </f:facet>  
-                                                                        <p:cellEditor>  
-                                                                            <f:facet name="output">  
-                                                                                <h:outputText value="#{item.produit.categorie.libelle}"/>  
-                                                                            </f:facet>  
-                                                                            <f:facet name="input">  
-                                                                                <p:selectOneMenu value="#{item.produit.categorie.libelle}" style="width:100%">  
-                                                                                    <f:selectItems value="#{categorieController.items}" var="cat" itemLabel="#{cat}"  
-                                                                                                   itemValue="#{cat}"/>  
-                                                                                </p:selectOneMenu>  
-                                                                            </f:facet>  
-                                                                        </p:cellEditor>  
-                                                                    </p:column>  
-                                                                    <p:column >  
-                                                                        <f:facet name="header">  
-                                                                            <h:outputText value="PRODUIT"/>  
-                                                                        </f:facet>  
-                                                                        <p:cellEditor>  
-                                                                            <f:facet name="output">  
-                                                                                <h:outputText value="#{item.produit.libelle}"/>  
-                                                                            </f:facet>  
-                                                                            <f:facet name="input">  
-                                                                                <p:selectOneMenu value="#{item.produit}" style="width:100%">  
-                                                                                    <f:selectItems value="#{produitController.items}" var="prod" itemLabel="#{prod}"  
-                                                                                                   itemValue="#{prod}"/>  
-                                                                                </p:selectOneMenu>  
-                                                                            </f:facet>  
-                                                                        </p:cellEditor>  
-                                                                    </p:column>  
-                                                                    <p:column>  
-                                                                        <f:facet name="header">  
-                                                                            <h:outputText value="QUANTITE"/>  
-                                                                        </f:facet>  
-                                                                        <p:cellEditor>  
-                                                                            <f:facet name="output">  
-                                                                                <h:outputText value="#{item.quantite}"/>  
-                                                                            </f:facet>  
-                                                                            <f:facet name="input">  
-                                                                                <p:inputText id="modelInput" value="#{item.quantite}" style="width:96%"/>  
-                                                                            </f:facet>  
-                                                                        </p:cellEditor>  
-                                                                    </p:column>  
-                                                                    <p:column style="width:6%" exportable="false">  
-                                                                        <p:rowEditor />  
-                                                                    </p:column>  
-                                                                </p:dataTable>
-                                                                <h:commandButton value="Vider" action="#{ligneCommandeController.vider()}" class="btn btn-sm btn-basic"></h:commandButton>
-                                                                <h:commandButton value="Supprimer" action="#{ligneCommandeController.supprimerLigne()}" class="btn btn-sm btn-basic"></h:commandButton>
-                                                                <br></br>
-                                                                
-                                                            </h:form>
-            
-                                </div>
-                            </div>
-                            <br></br>
-                            <br></br>
-                        </div>-->
-
         </div>
-
     </h:body>
 
+    <ui:include src="ImprimerCommande.xhtml"/>
 
     <!--<ui:include src="sideBarDoyen.xhtml"/>-->
-
 
     <!--   Core JS Files   -->
     <script src="../assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
@@ -333,6 +255,5 @@
     <script src="../assets/js/material-dashboard.js?v=1.2.0"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="../assets/js/demo.js"></script>
-
 
 </html>

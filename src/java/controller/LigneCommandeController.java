@@ -2,6 +2,7 @@ package controller;
 
 import bean.Commande;
 import bean.LigneCommande;
+import bean.Produit;
 import bean.UserStock;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
@@ -10,8 +11,6 @@ import service.LigneCommandeFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -26,6 +25,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import service.CommandeFacade;
+import service.ProduitFacade;
 
 @Named("ligneCommandeController")
 @SessionScoped
@@ -35,14 +35,33 @@ public class LigneCommandeController implements Serializable {
     private service.LigneCommandeFacade ejbFacade;
     @EJB
     private CommandeFacade commandeFacade;
+    @EJB
+    private ProduitFacade produitFacade;
     private List<LigneCommande> items = null;
     private List<LigneCommande> commandeItems = new ArrayList<>();
+    private List<Produit> produits = new ArrayList<>();
     private LigneCommande selected;
     private String cmdId;
     private Long ligneId = 1L;
 
     public LigneCommandeController() {
     }
+
+    public List<Produit> getProduits() {
+        if (produits == null) {
+            produits = new ArrayList();
+        }
+        return produits;
+    }
+
+    public void setProduits(List<Produit> produits) {
+        this.produits = produits;
+    }
+
+//    public List<Produit> findByCategorie() {
+//        produits = produitFacade.findByCategorie(getSelected().getProduit().getCategorie());
+//        return produits;
+//    }
 
     public String getCmdId() {
         return cmdId;
@@ -112,24 +131,34 @@ public class LigneCommandeController implements Serializable {
         setSelected(null);
     }
 
-    public void validerCommande() {
+    public Commande validerCommande() {
+        Commande commande = commandeFacade.addCommande();
+        ejbFacade.ajouterLigneCommande(commande, commandeItems);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre commande a été validée avec succès. Le numéro de la commande est " + commande.getId()));
+        return commande;
+    }
+
+    public void validerImprimerOui() {
         if (commandeItems.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la commande avant de valider !"));
         } else {
-            Commande commande = commandeFacade.addCommande();
-            for (int i = 0; i < commandeItems.size(); i++) {
-                LigneCommande commandeItem = commandeItems.get(i);
-                ejbFacade.createLigneCommande(commande.getId(), commandeItem.getQuantite(), commandeItem.getProduit());
-            }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre commande a été validée avec succès. Le numéro de la commande est " + commande.getId()));
+            Commande commande = validerCommande();
+            imprimer(commande);
             vider();
         }
     }
 
-    public void testButton() {
-        System.out.println("the test is working positively !!!!");
-        String idTest = ((UserStock) SessionUtil.getConnectedUser()).getId();
-        System.out.println(idTest);
+    public void validerImprimerNon() {
+        if (commandeItems.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la commande avant de valider !"));
+        } else {
+            validerCommande();
+            vider();
+        }
+    }
+
+    public void imprimer(Commande commande) {
+        commandeFacade.imprimerCommande(commande);
     }
 
     public void update() {

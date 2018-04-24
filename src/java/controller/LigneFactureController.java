@@ -1,11 +1,18 @@
 package controller;
 
+import bean.Commande;
+import bean.Facture;
+import bean.Fournisseur;
+import bean.LigneCommande;
 import bean.LigneFacture;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.SessionUtil;
 import service.LigneFactureFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,10 +21,12 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import service.FactureFacade;
 
 @Named("ligneFactureController")
 @SessionScoped
@@ -25,13 +34,107 @@ public class LigneFactureController implements Serializable {
 
     @EJB
     private service.LigneFactureFacade ejbFacade;
+    @EJB
+    private FactureFacade factureFacade;
     private List<LigneFacture> items = null;
     private LigneFacture selected;
+    private Long ligneId = 1L;
+    private List<LigneFacture> factureItems = new ArrayList<>();
+    private Date dateFacture;
+    private Commande commande;
+    private Fournisseur fournisseur;
+    private double prixTotale;
+    private int nombre;
+    private double qte;
+
+    public double getQte() {
+        return qte;
+    }
+
+    public void setQte(double qte) {
+        this.qte = qte;
+    }
+    
+
+    public int getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(int nombre) {
+        this.nombre = nombre;
+    }
+
+    public void test() {
+        System.out.println(prixTotale);
+    }
+
+    public List<LigneFacture> getFactureItems() {
+        if (factureItems == null) {
+            factureItems = new ArrayList();
+        }
+        return factureItems;
+    }
+
+    public Date getDateFacture() {
+        if (dateFacture == null) {
+            dateFacture = new Date();
+        }
+        return dateFacture;
+    }
+
+    public void setDateFacture(Date dateFacture) {
+        this.dateFacture = dateFacture;
+    }
+
+    public Commande getCommande() {
+        if (commande == null) {
+            commande = new Commande();
+        }
+        return commande;
+    }
+
+    public void setCommande(Commande commande) {
+        this.commande = commande;
+    }
+
+    public Fournisseur getFournisseur() {
+        if (fournisseur == null) {
+            fournisseur = new Fournisseur();
+        }
+        return fournisseur;
+    }
+
+    public void setFournisseur(Fournisseur fournisseur) {
+        this.fournisseur = fournisseur;
+    }
+
+    public Double getPrixTotale() {
+        return prixTotale;
+    }
+
+    public void setPrixTotale(Double prixTotale) {
+        this.prixTotale = prixTotale;
+    }
+
+    public void setFactureItems(List<LigneFacture> factureItems) {
+        this.factureItems = factureItems;
+    }
+
+    public Long getLigneId() {
+        return ligneId;
+    }
+
+    public void setLigneId(Long ligneId) {
+        this.ligneId = ligneId;
+    }
 
     public LigneFactureController() {
     }
 
     public LigneFacture getSelected() {
+        if (selected == null) {
+            selected = new LigneFacture();
+        }
         return selected;
     }
 
@@ -79,6 +182,25 @@ public class LigneFactureController implements Serializable {
             items = getFacade().findAll();
         }
         return items;
+    }
+
+    public void validerFacture() {
+        System.out.println(dateFacture + " " + commande.getId() + " " + fournisseur.getId() );
+            Facture facture = factureFacade.addFacture(dateFacture, commande, fournisseur, factureItems);
+        System.out.println("facture t3del");
+        if (facture == null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Vous devez remplir tout les champs !"));
+        } else {
+            for (int i = 0; i < factureItems.size(); i++) {
+                LigneFacture factureItem = factureItems.get(i);
+                ejbFacade.createLigneFacture(facture.getId(), factureItem.getQuantite(), factureItem.getProduit());
+                System.out.println("had lingFacture itcrya");
+            }
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre commande a été validée avec succès. Le numéro de la commande est " + facture.getId()));
+            vider();
+
+        }
+
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
@@ -160,6 +282,44 @@ public class LigneFactureController implements Serializable {
             }
         }
 
+    }
+
+    public void ajouterLigneFacture() {
+        LigneFacture ligneClone = ejbFacade.clone(selected);
+        ligneClone.setId(ligneId);
+        factureItems.add(ligneClone);
+        ligneId++;
+        setSelected(null);
+    }
+
+    public void vider() {
+        setSelected(null);
+        factureItems.clear();
+    }
+    
+   public void validerImprimerOui() {
+        if (factureItems.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la Facture avant de valider !"));
+        } else {
+            Facture facture = new Facture();
+            validerFacture();
+            imprimer(facture);
+            vider();
+        }
+    }
+
+    public void validerImprimerNon() {
+        System.out.println("je suis ici");
+        if (factureItems.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la Facture avant de valider !"));
+        } else {
+            validerFacture();
+            vider();
+        }
+    }
+
+    public void imprimer(Facture facture) {
+        factureFacade.imprimerFacture(facture);
     }
 
 }

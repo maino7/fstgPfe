@@ -11,54 +11,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author CHAACHAI Youssef <youssef.chaachai@gmail.com>
  */
 @Entity
-public class LigneExpressionBesoin implements Serializable {
+@Table(name="LigneExpressionBesoin")
+public class LigneExpressionBesoin extends Ligne implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private double quantite;
-    @ManyToOne
-    private Produit produit;
+
     @ManyToOne
     private ExpressionBesoin expressionBesoin;
 
-    public LigneExpressionBesoin() {
-    }
 
-    public LigneExpressionBesoin(Long id) {
-        this.id = id;
-    }
+    
 
-    public LigneExpressionBesoin(Long id, double quantite) {
-        this.id = id;
-        this.quantite = quantite;
-    }
-
-    public double getQuantite() {
-        return quantite;
-    }
-
-    public void setQuantite(double quantite) {
-        this.quantite = quantite;
-    }
-
-    public Produit getProduit() {
-        if (produit == null) {
-            produit = new Produit();
-        }
-        return produit;
-    }
-
-    public void setProduit(Produit produit) {
-        this.produit = produit;
-    }
 
     public ExpressionBesoin getExpressionBesoin() {
         if (expressionBesoin == null) {
@@ -70,14 +39,23 @@ public class LigneExpressionBesoin implements Serializable {
     public void setExpressionBesoin(ExpressionBesoin expressionBesoin) {
         this.expressionBesoin = expressionBesoin;
     }
+    
+    
 
-    public Long getId() {
-        return id;
+    public LigneExpressionBesoin() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public LigneExpressionBesoin(Long id) {
+        super(id);
     }
+
+    public LigneExpressionBesoin(Long id, double quantite) {
+        super(id, quantite);
+    }
+    
+    
+
+   
 
     @Override
     public int hashCode() {
@@ -93,10 +71,7 @@ public class LigneExpressionBesoin implements Serializable {
             return false;
         }
         LigneExpressionBesoin other = (LigneExpressionBesoin) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

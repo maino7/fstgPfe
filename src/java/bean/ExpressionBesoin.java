@@ -27,8 +27,7 @@ public class ExpressionBesoin implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
     private int recu;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateExpressionBesoin;
@@ -44,7 +43,7 @@ public class ExpressionBesoin implements Serializable {
     public ExpressionBesoin() {
     }
 
-    public ExpressionBesoin(Long id) {
+    public ExpressionBesoin(String id) {
         this.id = id;
     }
 
@@ -56,11 +55,11 @@ public class ExpressionBesoin implements Serializable {
         this.recu = recu;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -140,7 +139,7 @@ public class ExpressionBesoin implements Serializable {
 
     @Override
     public String toString() {
-        return id + "";
+        return id;
     }
 
 }
