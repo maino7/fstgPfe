@@ -10,8 +10,8 @@
         <p:dialog id="ImprimerCommandeDlg" widgetVar="ImprimerCommandeDialog" showEffect="fade" modal="true" resizable="false" appendTo="@(body)" header="Voulez vous imprimer cette commande ?">
             <h:form id="ImprimerCommandeForm">
                 <h:panelGroup id="display">
-                    <p:commandButton value="Oui" style="background-color: grey" action="#{ligneCommandeController.validerImprimerOui()}" update=":LigneCommandeListForm:datalist,:growl" icon="ui-icon-check" onclick="ImprimerDlg.hide()" oncomplete="handleSubmit(args,'ImprimerCommandeDialog');" class="btn btn-xs"></p:commandButton>
-                    <p:commandButton value="Non" style="background-color: grey" action="#{ligneCommandeController.validerImprimerNon()}" update=":LigneCommandeListForm:datalist,:growl" icon="ui-icon-close" onclick="ImprimerDlg.hide()" oncomplete="handleSubmit(args,'ImprimerCommandeDialog');" class="btn btn-xs"></p:commandButton>
+                    <p:commandButton value="Oui" ajax="false" style="background-color: grey" action="#{ligneCommandeController.validerImprimerOui()}" update=":LigneCommandeListForm:datalist,:growl" icon="ui-icon-check" onclick="ImprimerCommandeDlg.hide()" oncomplete="handleSubmit(args,'ImprimerCommandeDialog');" class="btn btn-xs"></p:commandButton>
+                    <p:commandButton value="Non" style="background-color: grey"  update=":LigneCommandeListForm:datalist,:growl" icon="ui-icon-close" onclick="ImprimerCommandeDlg.hide()" oncomplete="handleSubmit(args,'ImprimerCommandeDialog');" class="btn btn-xs"></p:commandButton>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

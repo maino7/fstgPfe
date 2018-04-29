@@ -9,7 +9,7 @@
 
 
     <h:head>
-        <title>UserStock(Oualili Younesse)</title>
+        <title>Géstion des Utilisateurs</title>
         <link rel="apple-touch-icon" sizes="76x76" href="./newtemplate/assets/img/apple-icon.png" />
         <!--<link rel="icon" type="image/png" href="./newtemplate/assets/img/favicon.png" />-->
         <link rel="shortout icon" type="image/x-icon" href="#{resource['images/favicon.png']}" />
@@ -40,58 +40,56 @@
 
 
         <!--haaahwa sidebar-->
-        <div style="background-color: white" class="sidebar" data-color="purple" >
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-            -->
+        <div style="background-color: white;width: 265px" class="sidebar" data-color="purple" >
             <div class="logo">
                 <a href="../../template/Home.xhtml"><img src="../resources/images/logo.png" style="width: 200px;" /></a>
             </div>
-            <div style="width: 280px" class="sidebar-wrapper">
+            <div style="width: 278px" class="sidebar-wrapper">
                 <ul class="nav">
                     <li>
                         <a href="DoyenLogin.xhtml?faces-redirect=true">
                             <i class="material-icons">home</i>
-                            <p>Home</p>
+                            <p>Accueil</p>
                         </a>
                     </li>
                     <li>
                         <a href="./Commande.xhtml?faces-redirect=true">
                             <i class="material-icons">content_paste</i>
-                            <p>Effectuer une commande</p>
+                            <p>Effectuer une Commande</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
+                            <i class="material-icons text-gray">notifications</i>
+                            <p>Consulter les Exp. de Besoin</p>
                         </a>
                     </li>
                     <li>
                         <a href="Facture.xhtml?faces-redirect=true">
                             <i class="material-icons">library_books</i>
-                            <p>Consulter les factures</p>
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
-                            <i class="material-icons text-gray">notifications</i>
-                            <p>Consulter les exp. de besoin</p>
+                            <p>Enregistrer une Facture</p>
                         </a>
                     </li>
                     <li>
                         <a href="Livraison.xhtml?faces-redirect=true">
                             <i class="material-icons">event_available</i>
-                            <p>Enregistrer une livraison</p>
+                            <p>Enregistrer une Livraison</p>
                         </a>
                     </li>
                     <li>
-                        <a href="Ajout.xhtml?faces-redirect=true">
+                        <a href="Depot.xhtml?faces-redirect=true">
+                            <i class="material-icons">store</i>
+                            <p>Géstion des Dépôts</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="UserStock.xhtml?faces-redirect=true">
                             <i class="material-icons">people</i>
-                            <p>Gestion des utilisateurs</p>
+                            <p>Géstion des Utilisateurs</p>
                         </a>
                     </li>
                 </ul>
             </div>
-
         </div>
 
 
@@ -119,88 +117,85 @@
 
         <div class="main-panel">
             <br></br>
-            <h:form id="idForm">      
-                <p:growl id="msgs" showDetail="true"/>
-                <p:dataTable id="reslist" value="#{userStockController.items}" style="margin-bottom:20px;margin-left: 50px"  editable="true"   var="item" rowKey="#{item.id}" selectionMode="single" selection="#{userStockController.selected}">
-                    <p:ajax event="rowEdit" listener="#{userStockController.onEditEvent}" update=":idForm:msgs" />
-                    <p:ajax event="rowEditCancel" listener="#{userStockController.onCancel}" update=":idForm:msgs" />
-                    <p:ajax event="rowSelect"  listener="#{userStockController.onRowselect}"  />
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header" data-background-color="grey">
+                            <h4 class="title">Géstion des Utilisqteurs</h4>
+                        </div>
+                        <div class="card-content">
+                            <h:form id="idForm">      
+                                <p:growl id="msgs" showDetail="true"/>
+                                <p:dataTable style="font-size: 90%" id="reslist" value="#{userStockController.items}"  editable="true"   var="item" rowKey="#{item.id}" selectionMode="single" selection="#{userStockController.selected}">
+                                    <p:ajax event="rowEdit" listener="#{userStockController.onEditEvent}" update=":idForm:msgs" />
+                                    <p:ajax event="rowEditCancel" listener="#{userStockController.onCancel}" update=":idForm:msgs" />
+                                    <p:ajax event="rowSelect"  listener="#{userStockController.onRowselect}"  />
 
 
-                    <p:column headerText="Id">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{item.id}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="modelInput" value="#{item.id}" style="width:96%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Nom">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{item.nom}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{item.nom}" style="width:96%" label="nom"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Prenom">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{item.prenom}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{item.prenom}" style="width:96%" label="prenom"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Blocked">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{item.blocked}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{item.blocked}" style="width:96%" label="Blocked"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="NbrDeCnx">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{item.nbrCnx}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{item.nbrCnx}" style="width:96%" label="gender"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Grade">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{item.grade}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{item.grade}" style="width:96%" label="gender"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Entité Ad">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{item.entiteAdministrative}" /></f:facet>
-                            <f:facet name="input"><p:selectOneMenu id="entiteAdministrative" value="#{item.entiteAdministrative}" >
-                                    <f:selectItems value="#{entiteAdministrativeController.itemsAvailableSelectOne}"
-                                                   var="entiteAdministrativeItem"
-                                                   itemValue="#{entiteAdministrativeItem}"/>
-                                </p:selectOneMenu></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Email">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{item.email}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{item.email}" style="width:96%" label="email"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Tel">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{item.telephone}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{item.telephone}" style="width:96%" label="tel"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column style="width:32px">
-                        <p:rowEditor />
-                    </p:column>
-
-
-
-
-                </p:dataTable>
-                <p:commandButton value="Create" action="CreateUserFinal"   style="margin-left: 43%"/>
-                <p:commandButton value="Delete" actionListener="#{userStockController.destroy()}" disabled="#{empty userStockController.selected}" update="reslist,:idForm:msgs" />
-
-                
-
-            </h:form>
-
-
+                                    <p:column style="width: 75px" headerText="CIN">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{item.id}" /></f:facet>
+                                            <f:facet name="input"><p:inputText id="modelInput" value="#{item.id}" style="width:96%"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column style="width: 120px" headerText="Nom">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{item.nom}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{item.nom}" style="width:96%" label="nom"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column style="width: 95px" headerText="Prénom">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{item.prenom}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{item.prenom}" style="width:96%" label="prenom"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column style="width: 165px" headerText="Entité Ad">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{item.entiteAdministrative.libelle}" /></f:facet>
+                                            <f:facet name="input"><p:selectOneMenu id="entiteAdministrative" value="#{item.entiteAdministrative}" >
+                                                    <f:selectItems value="#{entiteAdministrativeController.itemsAvailableSelectOne}"
+                                                                   var="entiteAdministrativeItem"
+                                                                   itemValue="#{entiteAdministrativeItem.libelle}"/>
+                                                </p:selectOneMenu></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column style="width: 50px" headerText="Grade">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{item.grade}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{item.grade}" style="width:96%" label="gender"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column style="width: 210px" headerText="Email">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{item.email}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{item.email}" style="width:96%" label="email"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column style="width: 135px" headerText="Téléphone">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{item.telephone}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{item.telephone}" style="width:96%" label="tel"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column style="width: 75px" headerText="Bloqué ?">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{item.blocked == true ? 'Oui' : 'Non'}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{item.blocked}" style="width:96%" label="blocked"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+                                    <p:column style="width:32px">
+                                        <p:rowEditor />
+                                    </p:column>
+                                </p:dataTable>
+                                <p:commandButton value="Ajouter" icon="ui-icon-plus" style="background-color: grey; font-size: 85%" actionListener="#{userStockController.prepareCreate()}" action="CreateUserFinal.xhtml?faces-redirect=true"></p:commandButton>
+                                <p:commandButton value="Supprimer" icon="ui-icon-trash" style="background-color: grey; font-size: 85%" actionListener="#{userStockController.destroy()}" disabled="#{empty userStockController.selected}" update="reslist,:idForm:msgs" ></p:commandButton>
+                                <p:commandButton value="Bloquer/Débloquer" actionListener="#{userStockController.bloquerUser()}" update="reslist" icon="ui-icon-close" style="background-color: grey; font-size: 85%" ></p:commandButton>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </h:body>

@@ -37,6 +37,9 @@ public class LigneExpressionBesoinFacade extends AbstractFacade<LigneExpressionB
     public LigneExpressionBesoinFacade() {
         super(LigneExpressionBesoin.class);
     }
+    public List<LigneExpressionBesoin> findligneexp(String id){
+        return  em.createQuery("SELECT l FROM LigneExpressionBesoin l WHERE l.expressionBesoin.id='"+id+"'").getResultList();
+    }
 
     public LigneExpressionBesoin cloneLigneExpressionBesoin(LigneExpressionBesoin ligneExpressionDeBesoin) {
         LigneExpressionBesoin clone = new LigneExpressionBesoin();

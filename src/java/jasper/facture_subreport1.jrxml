@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="facture_subreport1" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0151c035-fb66-464a-92af-a12f1c1b5e55">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="produit" class="bean.Produit">
+		<fieldDescription><![CDATA[produit]]></fieldDescription>
+	</field>
+	<field name="quantite" class="java.lang.Double">
+		<fieldDescription><![CDATA[quantite]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="194" height="20" uuid="dcadbd10-4fee-43ae-ab14-5805778274bf"/>
+				<box>
+					<pen lineWidth="2.25"/>
+					<topPen lineWidth="2.25"/>
+					<leftPen lineWidth="2.25"/>
+					<bottomPen lineWidth="2.25"/>
+					<rightPen lineWidth="2.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[produit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="0" width="171" height="20" uuid="d69237c2-4dba-4b58-bdba-db521220e38c"/>
+				<box>
+					<pen lineWidth="2.25"/>
+					<topPen lineWidth="2.25"/>
+					<leftPen lineWidth="2.25"/>
+					<bottomPen lineWidth="2.25"/>
+					<rightPen lineWidth="2.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[quantite]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="194" y="0" width="189" height="20" uuid="40d0a4b6-bb96-4cf7-8dea-90c4683c6edc"/>
+				<box>
+					<pen lineWidth="2.25"/>
+					<topPen lineWidth="2.25"/>
+					<leftPen lineWidth="2.25"/>
+					<bottomPen lineWidth="2.25"/>
+					<rightPen lineWidth="2.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[produit]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="194" height="20" uuid="608c0d5c-1144-4d82-b23d-01850490aa52"/>
+				<box>
+					<pen lineWidth="2.25"/>
+					<topPen lineWidth="2.25"/>
+					<leftPen lineWidth="2.25"/>
+					<bottomPen lineWidth="2.25"/>
+					<rightPen lineWidth="2.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{produit}.getLibelle()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="383" y="0" width="171" height="20" uuid="2cb7c327-7f84-4382-9f10-0592f1178aae"/>
+				<box>
+					<pen lineWidth="2.25"/>
+					<topPen lineWidth="2.25"/>
+					<leftPen lineWidth="2.25"/>
+					<bottomPen lineWidth="2.25"/>
+					<rightPen lineWidth="2.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="194" y="0" width="189" height="20" uuid="c13623db-4919-4f9b-87b2-af8054fb4d11"/>
+				<box>
+					<pen lineWidth="2.25"/>
+					<topPen lineWidth="2.25"/>
+					<leftPen lineWidth="2.25"/>
+					<bottomPen lineWidth="2.25"/>
+					<rightPen lineWidth="2.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{produit}.getPrix()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

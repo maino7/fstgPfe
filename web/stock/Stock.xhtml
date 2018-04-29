@@ -9,7 +9,7 @@
 
 
     <h:head>
-        <title>Consulter Stock(Oualili Younesse)</title>
+        <title>Consultation du Stock</title>
         <link rel="apple-touch-icon" sizes="76x76" href="./newtemplate/assets/img/apple-icon.png" />
         <!--<link rel="icon" type="image/png" href="./newtemplate/assets/img/favicon.png" />-->
         <link rel="shortout icon" type="image/x-icon" href="#{resource['images/favicon.png']}" />
@@ -35,63 +35,67 @@
     </h:head>
     <h:body style="background-image: url(../resources/images/demo/body-bg41.png); background-attachment: fixed;">
         <!-- Navigation -->
-<!--        <p:growl id="growl" life="3000" />-->
+        <!--        <p:growl id="growl" life="3000" />-->
 
 
 
         <!--haaahwa sidebar-->
-        <div style="background-color: white" class="sidebar" data-color="purple" >
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-            -->
+        <div style="background-color: white;width: 265px" class="sidebar" data-color="purple" >
             <div class="logo">
                 <a href="../../template/Home.xhtml"><img src="../resources/images/logo.png" style="width: 200px;" /></a>
             </div>
-            <div style="width: 280px" class="sidebar-wrapper">
+            <div style="width: 278px" class="sidebar-wrapper">
                 <ul class="nav">
                     <li>
                         <a href="DoyenLogin.xhtml?faces-redirect=true">
                             <i class="material-icons">home</i>
-                            <p>Home</p>
+                            <p>Accueil</p>
                         </a>
                     </li>
                     <li>
                         <a href="./Commande.xhtml?faces-redirect=true">
                             <i class="material-icons">content_paste</i>
-                            <p>Effectuer une commande</p>
+                            <p>Effectuer une Commande</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
+                            <i class="material-icons text-gray">notifications</i>
+                            <p>Consulter les Exp. de Besoin</p>
                         </a>
                     </li>
                     <li>
                         <a href="Facture.xhtml?faces-redirect=true">
                             <i class="material-icons">library_books</i>
-                            <p>Consulter les factures</p>
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
-                            <i class="material-icons text-gray">notifications</i>
-                            <p>Consulter les exp. de besoin</p>
+                            <p>Enregistrer une Facture</p>
                         </a>
                     </li>
                     <li>
                         <a href="Livraison.xhtml?faces-redirect=true">
                             <i class="material-icons">event_available</i>
-                            <p>Enregistrer une livraison</p>
+                            <p>Enregistrer une Livraison</p>
                         </a>
                     </li>
                     <li>
-                        <a href="Ajout.xhtml?faces-redirect=true">
+                        <a href="Depot.xhtml?faces-redirect=true">
+                            <i class="material-icons">store</i>
+                            <p>Géstion des Dépôts</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="UserStock.xhtml?faces-redirect=true">
                             <i class="material-icons">people</i>
-                            <p>Gestion des utilisateurs</p>
+                            <p>Géstion des Utilisateurs</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Stock.xhtml?faces-redirect=true">
+                            <i class="material-icons">dns</i>
+                            <p>Consulter le Stock</p>
                         </a>
                     </li>
                 </ul>
             </div>
-
         </div>
 
 
@@ -121,19 +125,15 @@
             <br></br>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-1">
-                    </div>
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header" data-background-color="grey">
-                                <h4 class="title">Consulter Stock</h4>
+                                <h4 class="title">Consultation du Stock</h4>
                             </div>
                             <div class="card-content">
-<!--                                <p:messages id="messages" showDetail="true" closable="true">
-                                </p:messages>-->
                                 <h:form id="myForm" class="form-group">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group label-floating">
                                                 <h6 class="title">Magasin</h6>
                                                 <p:selectOneMenu styleClass="menu" panelStyleClass="panel"   class="form-control" value="#{ligneMagasinController.selected.magasin}" >
@@ -143,7 +143,8 @@
                                                 </p:selectOneMenu>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3">
                                             <div class="form-group label-floating">
                                                 <h6 class="title">Produit</h6>
                                                 <p:selectOneMenu styleClass="menu" panelStyleClass="panel"   class="form-control" value="#{ligneMagasinController.selected.produit}">
@@ -153,24 +154,24 @@
                                                 </p:selectOneMenu>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
                                             <div class="form-group label-floating">
-                                                <h6 class="title">S.A</h6>
+                                                <h6 class="title">Seuil d'Alert</h6>
                                                 <p:spinner style="width: 200px" value="#{ligneMagasinController.seuilDalerte}" min="0" max="10000"  />
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group label-floating">
-                                                <h6 class="title">QteMax</h6>
-                                                <p:spinner style="width: 200px"  value="#{ligneMagasinController.qtéMax}" min="0" max="10000" />
+                                                <h6 class="title">Quantité Min.</h6>
+                                                <p:spinner style="width: 200px" value="#{ligneMagasinController.qtéMin}" min="0" max="10000" />
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group label-floating">
-                                                <h6 class="title">QteMin</h6>
-                                                <p:spinner style="width: 200px" value="#{ligneMagasinController.qtéMin}" min="0" max="10000" />
+                                                <h6 class="title">Quantité Max.</h6>
+                                                <p:spinner style="width: 200px"  value="#{ligneMagasinController.qtéMax}" min="0" max="10000" />
                                             </div>
                                         </div>
                                     </div>
@@ -181,7 +182,7 @@
                                         <h:panelGroup id="display">
                                             <p:panelGrid  >
                                                 <p:messages id="messages" showDetail="true" closable="true">
-                                                    
+
                                                 </p:messages>
                                             </p:panelGrid>
                                         </h:panelGroup>
@@ -228,16 +229,15 @@
                                         </f:facet>
                                     </p:dataTable>
                                     <br></br>
-                                    <h:commandButton style="width: 20%;font-weight: bold;font-size: small" value="IMPRIMER" action="#{ligneCommandeController.validerCommande()}" class="btn btn-success pull-right"></h:commandButton>
+
                                 </h:form>
-                                <!--<h:commandButton value="Valider" action="#{ligneCommandeController.validerCommande()}" class="btn btn-success pull-right"></h:commandButton>-->
-                                <!--</h:form>-->
+                                <p:commandButton value="IMPRIMER"  icon="ui-icon-print" style="background-color: grey" class="btn btn-sm pull-right"></p:commandButton>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-           
+
 
         </div>
 

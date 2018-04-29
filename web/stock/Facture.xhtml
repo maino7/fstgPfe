@@ -9,7 +9,7 @@
 
 
     <h:head>
-        <title>Effectuer une Commande</title>
+        <title>Enregistrer une Facture</title>
         <link rel="apple-touch-icon" sizes="76x76" href="./newtemplate/assets/img/apple-icon.png" />
         <!--<link rel="icon" type="image/png" href="./newtemplate/assets/img/favicon.png" />-->
         <link rel="shortout icon" type="image/x-icon" href="#{resource['images/favicon.png']}" />
@@ -31,74 +31,63 @@
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet"></link>
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'></link>
 
-
     </h:head>
     <h:body style="background-image: url(../resources/images/demo/body-bg41.png); background-attachment: fixed;">
         <!-- Navigation -->
         <p:growl id="growl" life="3000" />
 
-
-
         <!--haaahwa sidebar-->
-        <div style="background-color: white" class="sidebar" data-color="purple" >
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-            -->
+        <div style="background-color: white;width: 265px" class="sidebar" data-color="purple" >
             <div class="logo">
                 <a href="../../template/Home.xhtml"><img src="../resources/images/logo.png" style="width: 200px;" /></a>
             </div>
-            <div style="width: 280px" class="sidebar-wrapper">
+            <div style="width: 278px" class="sidebar-wrapper">
                 <ul class="nav">
                     <li>
                         <a href="DoyenLogin.xhtml?faces-redirect=true">
                             <i class="material-icons">home</i>
-                            <p>Home</p>
+                            <p>Accueil</p>
                         </a>
                     </li>
                     <li>
                         <a href="./Commande.xhtml?faces-redirect=true">
                             <i class="material-icons">content_paste</i>
-                            <p>Effectuer une commande</p>
+                            <p>Effectuer une Commande</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
+                            <i class="material-icons text-gray">notifications</i>
+                            <p>Consulter les Exp. de Besoin</p>
                         </a>
                     </li>
                     <li>
                         <a href="Facture.xhtml?faces-redirect=true">
                             <i class="material-icons">library_books</i>
-                            <p>Consulter les factures</p>
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
-                            <i class="material-icons text-gray">notifications</i>
-                            <p>Consulter les exp. de besoin</p>
+                            <p>Enregistrer une Facture</p>
                         </a>
                     </li>
                     <li>
                         <a href="Livraison.xhtml?faces-redirect=true">
                             <i class="material-icons">event_available</i>
-                            <p>Enregistrer une livraison</p>
+                            <p>Enregistrer une Livraison</p>
                         </a>
                     </li>
                     <li>
-                        <a href="Ajout.xhtml?faces-redirect=true">
+                        <a href="Depot.xhtml?faces-redirect=true">
+                            <i class="material-icons">store</i>
+                            <p>Géstion des Dépôts</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="UserStock.xhtml?faces-redirect=true">
                             <i class="material-icons">people</i>
-                            <p>Gestion des utilisateurs</p>
+                            <p>Géstion des Utilisateurs</p>
                         </a>
                     </li>
                 </ul>
             </div>
-
         </div>
-
-
-
-
-
-
 
         <style>
             .kira{
@@ -126,25 +115,52 @@
                     <div class="col-md-10">
                         <div class="card">
                             <div class="card-header" data-background-color="grey">
-                                <h4 class="title">Effectuer une Facture</h4>
+                                <h4 class="title">Enregistrer une Facture</h4>
                             </div>
                             <div class="card-content">
-                                <p:messages id="messages" showDetail="true" closable="true">
-                                </p:messages>
-
-
-                                <h:form id="secondform">
-
-
+                                <h:form id="factureForm">
+                                    <p:messages id="messages" showDetail="true" closable="true">
+                                    </p:messages>
                                     <div class="row">
-
                                         <div class="col-md-4">
                                             <div class="form-group label-floating">
-                                                <h3 class="title">CATEGORIE </h3>
+                                                <h6 class="title">COMMANDE</h6>
+                                                <p:selectOneMenu  id="commande" class="form-control" value="#{ligneFactureController.commande}" >
+                                                    <f:selectItem itemValue="#{null}" itemLabel="------------------Séléctionner------------------"/>
+                                                    <f:selectItems value="#{commandeController.commandes}" var="item"
+                                                                   itemValue="#{item}" itemLabel="#{item.id}"/>
+                                                    <p:ajax></p:ajax>
+                                                </p:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <h6 class="title">FOURNISSEUR</h6>
+                                                <p:selectOneMenu  id="fournisseur" class="form-control" value="#{ligneFactureController.fournisseur}" >
+                                                    <f:selectItem itemValue="#{null}" itemLabel="------------------Séléctionner------------------"/>
+                                                    <f:selectItems value="#{fournisseurController.items}" var="item"
+                                                                   itemValue="#{item}" itemLabel="#{item.nom}"/>
+                                                    <p:ajax></p:ajax>
+                                                </p:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <h6 class="title">Date</h6>
+                                                <p:calendar id="myDate" pattern="dd-MM-yyyy" value="#{ligneFactureController.dateFacture}" showOn="button">
+                                                    <p:ajax event="dateSelect"/>
+                                                </p:calendar>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr></hr>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <h6 class="title">CATEGORIE </h6>
                                                 <p:selectOneMenu  id="categorie" class="form-control" required="true" value="#{ligneFactureController.selected.produit.categorie}" >
                                                     <p:ajax update="produit"></p:ajax>
-                                                    <f:selectItem itemValue="#{null}" itemLabel="Choisissez une catégorie"/>  
-
+                                                    <f:selectItem itemValue="#{null}" itemLabel="------------------Séléctionner------------------"/>  
                                                     <f:selectItems value="#{categorieController.items}" var="item"
                                                                    itemValue="#{item}" itemLabel="#{item.libelle}"/>
                                                 </p:selectOneMenu>
@@ -152,10 +168,10 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group label-floating">
-                                                <h3 class="title">PRODUIT</h3>
+                                                <h6 class="title">PRODUIT</h6>
 
                                                 <p:selectOneMenu  id="produit" class="form-control"  required="true" value="#{ligneFactureController.selected.produit}" >
-                                                    <f:selectItem itemValue="#{null}" itemLabel="Select produit"/>
+                                                    <f:selectItem itemValue="#{null}" itemLabel="------------------Séléctionner------------------"/>
                                                     <f:selectItems value="#{ligneFactureController.selected.produit.categorie.produits}" var="item"
                                                                    itemValue="#{item}" itemLabel="#{item.libelle}"/>
                                                 </p:selectOneMenu>
@@ -163,77 +179,15 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group label-floating">
-                                                <h3 class="title">QUANTITE</h3>
+                                                <h6 class="title">QUANTITE</h6>
                                                 <p:spinner id="minMax" value="#{ligneFactureController.selected.quantite}" min="0" max="10000" />
-
-
                                             </div>
                                         </div>
                                     </div>
-                                    <p:commandButton value="Ajouter" style="background-color: #939393;width: 13%" action="#{ligneFactureController.ajouterLigneFacture()}"
-                                                     update="formTable:datalist" class="btn btn-sm pull-right"></p:commandButton>
+                                    <p:commandButton value="Ajouter" icon="ui-icon-plus" style="background-color: #939393;width: 11%;font-size: 90%" action="#{ligneFactureController.ajouterLigneFacture()}" update="formTable:datalist, factureForm" class="pull-right"></p:commandButton>
                                 </h:form>
-
-
-                                 <h:form id="formTable">
-
-
-
-                                     <br></br>
-                                     <br></br>
-                                     <br></br>
-                                     <br></br>
-
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group label-floating">
-                                                <h3 class="title">Commande </h3>
-                                                <p:selectOneMenu  id="commande" class="form-control" required="true" value="#{ligneFactureController.commande}" >
-                                                    <f:selectItem itemValue="#{null}" itemLabel="Choisissez une commande"/>  
-
-                                                    <f:selectItems value="#{commandeController.items}" var="item"
-                                                                   itemValue="#{item}" itemLabel="#{item.id}"/>
-                                                </p:selectOneMenu>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group label-floating">
-                                                <h3 class="title">fornesseur </h3>
-                                                <p:selectOneMenu  id="fournisseur" class="form-control" required="true" value="#{ligneFactureController.fournisseur}" >
-                                                    <f:selectItem itemValue="#{null}" itemLabel="Choisissez une commande"/>  
-
-                                                    <f:selectItems value="#{fournisseurController.items}" var="item"
-                                                                   itemValue="#{item}" itemLabel="#{item.id}"/>
-                                                </p:selectOneMenu>
-                                            </div>
-                                            
-                                            
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group label-floating">
-                                                <h3 class="title">Date</h3>
-                                                <p:calendar id="myDate" value="#{ligneFactureController.dateFacture}" ></p:calendar>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-
-                                        <div class="col-md-4">
-                                           
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="clearfix"></div>
-
-                                
-                               
-                                   
-
-
-
-                                            
+                                <h:form id="formTable">
+                                    <hr></hr>
                                     <p:dataTable id="datalist" value="#{ligneFactureController.factureItems}" var="item" selectionMode="single" selection="#{ligneFactureController.selected}"
                                                  rowKey="#{item.id}" editable="true" >  
                                         <p:column>  
@@ -283,7 +237,7 @@
                                         </p:column>  
                                         <p:column>  
                                             <f:facet name="header">  
-                                                <h:outputText value="prix"/>  
+                                                <h:outputText value="PRIX (DH)"/>  
                                             </f:facet>  
                                             <p:cellEditor>  
                                                 <f:facet name="output">  
@@ -292,25 +246,22 @@
                                                 <f:facet name="input">  
                                                     <p:inputText id="Input" value="#{item.produit.prix}" style="width:96%"/>  
                                                 </f:facet> 
-                                                
+
                                             </p:cellEditor>  
                                         </p:column>  
-                                         
                                     </p:dataTable>
-                                     <p:commandButton value="VALIDER" icon="ui-icon-check" style="background-color: #2a9942" update="formTable:datalist" oncomplete="PF('ImprimerCommandeDialog').show()" class="btn btn-sm pull-right"></p:commandButton>
-
+                                    <p:commandButton value="Supprimer" icon="ui-icon-trash" style="background-color: grey; font-size: 85%" action="#{ligneFactureController.supprimerLigne()}" update="formTable:datalist"></p:commandButton>
+                                    <p:commandButton value="Vider" icon="ui-icon-close" style="background-color: grey; font-size: 85%" action="#{ligneFactureController.vider()}" update="formTable:datalist"></p:commandButton>
+                                    <br></br>
                                 </h:form>
-                               
-                                
-                                
+                                <p:commandButton value="Enregistrer" icon="ui-icon-check" actionListener="#{ligneFactureController.validerFacture()}" update="formTable:datalist, factureForm" oncomplete="PF('ImprimerFactureDialog').show()" style="background-color: #2a9942" class="btn btn-sm pull-right"></p:commandButton>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-         <ui:include src="popout.xhtml"/>
-
+        <ui:include src="../stock/ImprimerFacture.xhtml"/>
     </h:body>
 
 

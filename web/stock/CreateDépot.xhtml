@@ -40,58 +40,62 @@
 
 
         <!--haaahwa sidebar-->
-        <div style="background-color: white" class="sidebar" data-color="purple" >
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-            -->
+        <div style="background-color: white;width: 265px" class="sidebar" data-color="purple" >
             <div class="logo">
                 <a href="../../template/Home.xhtml"><img src="../resources/images/logo.png" style="width: 200px;" /></a>
             </div>
-            <div style="width: 280px" class="sidebar-wrapper">
+            <div style="width: 278px" class="sidebar-wrapper">
                 <ul class="nav">
                     <li>
                         <a href="DoyenLogin.xhtml?faces-redirect=true">
                             <i class="material-icons">home</i>
-                            <p>Home</p>
+                            <p>Accueil</p>
                         </a>
                     </li>
                     <li>
                         <a href="./Commande.xhtml?faces-redirect=true">
                             <i class="material-icons">content_paste</i>
-                            <p>Ajouter un depôt</p>
+                            <p>Effectuer une Commande</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
+                            <i class="material-icons text-gray">notifications</i>
+                            <p>Consulter les Exp. de Besoin</p>
                         </a>
                     </li>
                     <li>
                         <a href="Facture.xhtml?faces-redirect=true">
                             <i class="material-icons">library_books</i>
-                            <p>Consulter les factures</p>
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
-                            <i class="material-icons text-gray">notifications</i>
-                            <p>Consulter les exp. de besoin</p>
+                            <p>Enregistrer une Facture</p>
                         </a>
                     </li>
                     <li>
                         <a href="Livraison.xhtml?faces-redirect=true">
                             <i class="material-icons">event_available</i>
-                            <p>Enregistrer une livraison</p>
+                            <p>Enregistrer une Livraison</p>
                         </a>
                     </li>
                     <li>
-                        <a href="Ajout.xhtml?faces-redirect=true">
+                        <a href="Depot.xhtml?faces-redirect=true">
+                            <i class="material-icons">store</i>
+                            <p>Géstion des Dépôts</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="UserStock.xhtml?faces-redirect=true">
                             <i class="material-icons">people</i>
-                            <p>Gestion des utilisateurs</p>
+                            <p>Géstion des Utilisateurs</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Stock.xhtml?faces-redirect=true">
+                            <i class="material-icons">dns</i>
+                            <p>Consulter le Stock</p>
                         </a>
                     </li>
                 </ul>
             </div>
-
         </div>
 
 
@@ -143,7 +147,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group label-floating">
                                                 <h6 class="title">STOCK</h6>
-                                                <p:selectOneMenu  id="produit" class="form-control" required="true" value="#{magasinController.selected.stock}" >
+                                                <p:selectOneMenu  id="produit" class="form-control" value="#{magasinController.selected.stock}" >
                                                     <f:selectItem itemValue="#{null}" itemLabel="------------------------------------------------Séléctionner------------------------------------------------"/>
                                                     <f:selectItems value="#{stockController.itemsAvailableSelectOne}" var="item"
                                                                    itemValue="#{item}" itemLabel="#{item.id}"/>
@@ -152,10 +156,10 @@
                                         </div>
                                     </div>
                                     <p:commandButton value="Ajouter" icon="ui-icon-plus" style="background-color: grey; font-size: 85%" actionListener="#{magasinController.create()}" ></p:commandButton>
-
+                                    <p:commandButton value="Retourne" icon="ui-icon-arrowreturnthick-1-w" style="background-color: grey; font-size: 85%" action="Depot.xhtml?faces-redirect=true" ></p:commandButton>
                                     <div class="clearfix"></div>
                                 </h:form>
-                                <p:commandButton value="Retourne" icon="ui-icon-plus" style="background-color: grey; font-size: 85%" action="Depot" ></p:commandButton>
+
                             </div>
                         </div>
                     </div>

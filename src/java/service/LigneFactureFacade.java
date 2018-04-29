@@ -8,6 +8,7 @@ package service;
 import bean.Facture;
 import bean.LigneFacture;
 import bean.Produit;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -24,8 +25,6 @@ public class LigneFactureFacade extends AbstractFacade<LigneFacture> {
     private EntityManager em;
     @EJB
     private FactureFacade factureFacade;
-    @EJB
-    private ProduitFacade produitFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -35,31 +34,44 @@ public class LigneFactureFacade extends AbstractFacade<LigneFacture> {
     public LigneFactureFacade() {
         super(LigneFacture.class);
     }
-     public int createLigneFacture(String idFacture, double quantite, Produit produit) {
+    public List<LigneFacture> findLignefctr(String id){
+        return em.createQuery("SELECT l FROM LigneFacture l WHERE l.facture.id='"+id+"'").getResultList();
+    }
+
+    public int createLigneFacture(String idFacture, double quantite, Produit produit) {
         Facture facture = factureFacade.find(idFacture);
         if (facture == null) {
-            System.out.println("had l facture or tla !!!");
             return -1;
         }
-         LigneFacture ligneFacture= new LigneFacture();
+        LigneFacture ligneFacture = new LigneFacture();
         ligneFacture.setFacture(facture);
         ligneFacture.setProduit(produit);
         ligneFacture.setQuantite(quantite);
         create(ligneFacture);
-        System.out.println("ligneFacture tcreeat !");
         return 1;
     }
 
     public LigneFacture clone(LigneFacture ligneFacture) {
-        System.out.println("raaaah dkhelt l hnaya ");
         LigneFacture clone = new LigneFacture();
         Facture facture = new Facture();
-       facture.setId("fact");
+        facture.setId("fact");
         clone.setFacture(facture);
         clone.setId(1l);
         clone.setProduit(ligneFacture.getProduit());
         clone.setQuantite(ligneFacture.getQuantite());
         return clone;
     }
-    
+
+    public int ajouterLigneFacture(Facture facture, List<LigneFacture> ligneFactures) {
+        if (facture != null && ligneFactures != null) {
+            for (int i = 0; i < ligneFactures.size(); i++) {
+                LigneFacture ligne = ligneFactures.get(i);
+                createLigneFacture(facture.getId(), ligne.getQuantite(), ligne.getProduit());
+            }
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
 }

@@ -5,12 +5,13 @@
  */
 package service;
 
-import bean.Categorie;
 import bean.ExpressionBesoin;
 import bean.LigneExpressionBesoin;
 import bean.Produit;
 import bean.UserStock;
+import controller.util.PdfUtil;
 import controller.util.SearchUtil;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,6 +20,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -29,6 +31,8 @@ public class ExpressionBesoinFacade extends AbstractFacade<ExpressionBesoin> {
 
     @EJB
     private UserStockFacade userStockFacade;
+    @EJB
+    private LigneExpressionBesoinFacade ligneexpressionBesoinFacade;
 
     @PersistenceContext(unitName = "Pfe_FstgProjectPU")
     private EntityManager em;
@@ -64,6 +68,11 @@ public class ExpressionBesoinFacade extends AbstractFacade<ExpressionBesoin> {
 
         return exps;
 
+    }
+    public List<ExpressionBesoin> expressionParAnnée(int année){
+     String requete = "SELECT e FROM ExpressionBesoin e WHERE e.dateExpressionBesoin LIKE '" + année  + "-%-%'";
+      return em.createQuery(requete).getResultList();
+       
     }
 
     public List<LigneExpressionBesoin> findByProduit(Produit produit) {
@@ -113,21 +122,22 @@ public class ExpressionBesoinFacade extends AbstractFacade<ExpressionBesoin> {
         String query = "SELECT COUNT(e) FROM ExpressionBesoin e";
         return (Long) em.createQuery(query).getSingleResult();
     }
+    
 
-    public void imprimerCommande(ExpressionBesoin expressionBesoin) {
+    public void imprimerCommande(ExpressionBesoin expressionBesoin) throws JRException, IOException {
+        List<LigneExpressionBesoin> lx = new ArrayList<>();
+        lx=ligneexpressionBesoinFacade.findligneexp(expressionBesoin.getId());
+        expressionBesoin.setLigneExpressionBesoins(lx);
         System.out.println("==============================");
         System.out.println("IMPRIMER =====> OUI");
         System.out.println("==============================");
         System.out.println("##### Le numero de la commande est ======> " + expressionBesoin.getId());
         System.out.println("##### La date de la commande est ======> " + expressionBesoin.getDateExpressionBesoin());
         System.out.println("##### L'utilisateur qui l'a effectué est ======> " + expressionBesoin.getUserStock().getNom() + " " + expressionBesoin.getUserStock().getPrenom());
-        System.out.println("***** Les ligne de Commande ***** ");
-//        List<LigneExpressionBesoin> lignes = LigneExpressionBesoinFacade.findByCommande(commande);
-//        for (int i = 0; i < lignes.size(); i++) {
-//            LigneCommande ligne = lignes.get(i);
-//            System.out.println("-----------------------------------------------------------------------");
-//            System.out.println("ID = " + ligne.getId() + " Produit = " + ligne.getProduit() + " Quantite = " + ligne.getQuantite());
-//        }
+        System.out.println("-------------------------------Les lignes exp ---------------------------------------- ");
+       List<ExpressionBesoin> c = new ArrayList<>();
+       c.add(expressionBesoin);
+       PdfUtil.generatePdf(c, null, "Expression Report", "/jasper/ExpressionDeBesion.jasper");
     }
 
 }

@@ -3,6 +3,7 @@ package controller;
 import bean.Commande;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import java.io.IOException;
 import service.CommandeFacade;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 
 @Named("commandeController")
 @SessionScoped
@@ -25,24 +27,28 @@ public class CommandeController implements Serializable {
 
     @EJB
     private service.CommandeFacade ejbFacade;
+    @EJB
+    private service.FactureFacade factureFacade;
     private List<Commande> items = null;
     private Commande selected;
     private List<Commande> commandes = null;
     private List<Commande> commandeslivres = null;
-    
-    
+
+    public void printMultiCmd() throws IOException, JRException {
+        ejbFacade.PrintMultiCommande();
+//        System.out.println("-----------------------------------------hna-----------------------------------");
+    }
+
     public List<Commande> getCommandeslivres() {
-        if (commandeslivres == null){
-        commandeslivres = ejbFacade.findlivree();
-        } 
+        if (commandeslivres == null) {
+            commandeslivres = ejbFacade.findlivree();
+        }
         return commandeslivres;
     }
 
     public void setCommandeslivres(List<Commande> commandeslivres) {
         this.commandeslivres = commandeslivres;
     }
-    
-    
 
     public List<Commande> getCommandes() {
         if (commandes == null) {
@@ -54,8 +60,6 @@ public class CommandeController implements Serializable {
     public void setCommandes(List<Commande> commandes) {
         this.commandes = commandes;
     }
-    
-    
 
     public CommandeController() {
     }
@@ -82,6 +86,10 @@ public class CommandeController implements Serializable {
         selected = new Commande();
         initializeEmbeddableKey();
         return selected;
+    }
+
+    public void printMultiFctr() throws IOException, JRException {
+        factureFacade.PrintMultiFacture();
     }
 
     public void create() {

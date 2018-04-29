@@ -38,45 +38,40 @@
 
 
         <!--haaahwa sidebar-->
-        <div style="background-color: white" class="sidebar" data-color="purple" >
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-            -->
+        <div style="background-color: white;width: 265px" class="sidebar" data-color="purple" >
             <div class="logo">
+
                 <a href="../../template/Home.xhtml"><img src="../resources/images/logo.png" style="width: 200px;" /></a>
             </div>
-            <div style="width: 280px" class="sidebar-wrapper">
+            <div style="width: 278px" class="sidebar-wrapper">
                 <ul class="nav">
                     <li>
                         <a href="UserLogin.xhtml?faces-redirect=true">
                             <i class="material-icons">home</i>
-                            <p>Home</p>
+                            <p>Accueil</p>
                         </a>
                     </li>
                     <li>
                         <a href="./ExpressionDeBesoin.xhtml?faces-redirect=true">
                             <i class="material-icons">content_paste</i>
-                            <p>Rédiger une exp. de besoin</p>
+                            <p>Rédiger une Exp. de Besoin</p>
                         </a>
                     </li>
                     <li>
                         <a href="AncienExpressionDeBesoin.xhtml?faces-redirect=true">
                             <i class="material-icons">library_books</i>
-                            <p>Mes exp. de besoin</p>
+                            <p>Chercher les Exp. de Besoin</p>
                         </a>
                     </li>
 
                     <li>
                         <a href="Reception.xhtml?faces-redirect=true">
                             <i class="material-icons text-gray">event_available</i>
-                            <p>Enregistrer une reception</p>
+                            <p>Enregistrer une réception</p>
                         </a>
                     </li>
                 </ul>
             </div>
-
         </div>
 
 
@@ -97,9 +92,8 @@
         <div class="main-panel">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-1">
-                    </div>
-                    <div class="col-md-10">
+                    <div class="col-md-1" ></div>
+                    <div class="col-md-11">
                         <div class="card">
                             <div class="card-header" data-background-color="grey">
                                 <h4 class="title">Recherche</h4>
@@ -107,8 +101,6 @@
                             <div class="card-content">
                                 <h:form id="idForm">
                                     <div class="row">
-
-
                                         <div class="col-md-3">
                                             <h4 class="title">Date Min</h4>
                                             <p:calendar value="#{ligneExpressionBesoinController.dateMin}"  pattern="dd/MM/yyyy" title="titleButton" showOn="button" />
@@ -121,7 +113,7 @@
                                             <h4 class="title">Categorie</h4>
                                             <p:selectOneMenu  id="categorie" class="form-control" required="true" value="#{ligneExpressionBesoinController.selected.produit.categorie}" >
                                                 <p:ajax update="produit"></p:ajax>
-                                                <f:selectItem itemValue="#{null}" itemLabel="---SELECT CATEGORIE---"/>  
+                                                <f:selectItem itemValue="#{null}" itemLabel="------------Séléctionner------------"/>  
 
                                                 <f:selectItems value="#{categorieController.items}" var="item"
                                                                itemValue="#{item}" itemLabel="#{item.libelle}"/>
@@ -130,7 +122,7 @@
                                         <div class="col-md-3">
                                             <h4 class="title">Produit</h4>  
                                             <p:selectOneMenu  id="produit" class="form-control" required="true" value="#{ligneExpressionBesoinController.selected.produit}" >
-                                                <f:selectItem itemValue="#{null}" itemLabel="---SELECT PRODUIT---"/>  
+                                                <f:selectItem itemValue="#{null}" itemLabel="------------Séléctionner------------"/>  
 
                                                 <f:selectItems value="#{ligneExpressionBesoinController.selected.produit.categorie.produits}" var="item"
                                                                itemValue="#{item}" itemLabel="#{item.libelle}"/>
@@ -138,83 +130,62 @@
                                         </div>
                                     </div>
                                 </h:form>
-
-                                <p:commandButton value="Recherche" update="idForm, formTani:tab" icon="ui-icon-search" style="background-color: #0b93bc;width: 13%;font-size: 110%" 
-                                                 class="pull-right" action="#{ligneExpressionBesoinController.findBycriteria()}"></p:commandButton>
-
+                                <p:commandButton value="Recherche" icon="ui-icon-search" style="background-color: #0b93bc;width: 11%;font-size: 100%" action="#{ligneExpressionBesoinController.findBycriteria()}" update="idForm, formTani:tab" class="pull-right"></p:commandButton>
                                 <h:form id="formTani">
-
-
-
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="card">
-                                            <div class="card-header" data-background-color="grey">
-                                                <h4 class="title">Liste Des Expression De Besoin</h4>
-
-                                            </div>
-
-                                            <div class="card-content table-responsive">
-                                                <p:dataTable value="#{ligneExpressionBesoinController.itemsFind}" var="item" id="tab">
-                                                    <p:column>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Date"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{item.dateExpressionBesoin}" > 
-                                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                                        </h:outputText>
-                                                    </p:column>
-                                                    <p:column>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Entite Admin"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{item.userStock.entiteAdministrative.libelle}"/>
-                                                    </p:column>
-                                                    <p:column>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Membre"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{item.userStock.nom}"/>
-                                                    </p:column>
-                                                    <p:column>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Action"/>
-                                                        </f:facet>
-                                                        <p:commandLink actionListener="#{ligneExpressionBesoinController.showDetail(item)}"  class="btn btn-basic pull-right" value="Detail" update=":formTani:dataExp"></p:commandLink>
-                                                    </p:column>
-                                                </p:dataTable>
-                                            </div>
-                                        </div>
+                                    <br></br>
+                                    <hr></hr>
+                                    <div class="col-lg-6">
+                                        <p:dataTable value="#{ligneExpressionBesoinController.itemsFind}" var="item" id="tab">
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Date"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.dateExpressionBesoin}" > 
+                                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Entite Admin"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.userStock.entiteAdministrative.libelle}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Membre"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.userStock.nom}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Action"/>
+                                                </f:facet>
+                                                <p:commandLink actionListener="#{ligneExpressionBesoinController.showDetail(item)}" style="font-size: 100%;" value="Détails >>" update=":formTani:dataExp"></p:commandLink>
+                                            </p:column>
+                                        </p:dataTable>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
-                                        <div class="card">
-                                            <div class="card-header" data-background-color="grey">
-                                                <h4 class="title">Detail</h4>
+                                        <p:dataTable value="#{ligneExpressionBesoinController.listDetail}" var="item" id="dataExp">
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Categorie"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.produit.categorie.libelle}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Produit"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.produit.libelle}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Quantite"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.quantite}"/>
+                                            </p:column>
 
-                                            </div>
-                                            <div class="card-content table-responsive">
-                                                <p:dataTable value="#{ligneExpressionBesoinController.listDetail}" var="item" id="dataExp">
-                                                    <p:column>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Categorie"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{item.produit.categorie.libelle}"/>
-                                                    </p:column>
-                                                    <p:column>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Produit"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{item.produit.libelle}"/>
-                                                    </p:column>
-                                                    <p:column>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Quantite"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{item.quantite}"/>
-                                                    </p:column>
-
-                                                </p:dataTable>
-                                            </div>
-                                        </div>
+                                        </p:dataTable>
                                     </div>
                                 </h:form>
                             </div>

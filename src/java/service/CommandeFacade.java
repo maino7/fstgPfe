@@ -8,6 +8,9 @@ package service;
 import bean.Commande;
 import bean.LigneCommande;
 import bean.UserStock;
+import controller.util.JsfUtil;
+import controller.util.PdfUtil;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -15,6 +18,8 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  *
@@ -52,13 +57,33 @@ public class CommandeFacade extends AbstractFacade<Commande> {
         System.out.println("Commande created successfully.....");
         return commande;
     }
+    public void PrintMultiCommande() throws JRException, IOException{
+        List<Commande> commandes = new ArrayList<>();
+        List<Commande> cm = new ArrayList<>();
+        commandes=findAll();
+        List<JasperPrint> jasperPrints = new ArrayList();
+        for (int i = 0; i < commandes.size(); i++) {
+            Commande c = commandes.get(i);
+            cm.add(c);
+            jasperPrints.add(PdfUtil.createJasperPrint(cm, null,"/jasper/Commande.jasper"));
+            cm.clear();
+        }
+        if (jasperPrints != null && !jasperPrints.isEmpty()) {
+            PdfUtil.generatePdfs(jasperPrints,"MultiCommande Report");
+        } else {
+            JsfUtil.addErrorMessage("Une erreur s'est produit lors de l'impression");
+        }
+        
+    }
 
     public int nombreCommande() {
         String query = "SELECT MAX(c.nombreCommande) FROM Commande c";
         return (int) em.createQuery(query).getSingleResult();
     }
 
-    public void imprimerCommande(Commande commande) {
+    public void imprimerCommande(Commande commande) throws JRException, IOException {
+        List<LigneCommande> lcm=ligneCommandeFacade.findLignecmd(commande.getId());
+        commande.setLigneCommandes(lcm);
         System.out.println("==============================");
         System.out.println("IMPRIMER =====> OUI");
         System.out.println("==============================");
@@ -67,11 +92,13 @@ public class CommandeFacade extends AbstractFacade<Commande> {
         System.out.println("##### L'utilisateur qui l'a effectué est ======> " + commande.getUserStock().getNom() + " " + commande.getUserStock().getPrenom());
         System.out.println("***** Les ligne de Commande ***** ");
         List<LigneCommande> lignes = ligneCommandeFacade.findByCommande(commande);
-        for (int i = 0; i < lignes.size(); i++) {
-            LigneCommande ligne = lignes.get(i);
-            System.out.println("-----------------------------------------------------------------------");
-            System.out.println("ID = " + ligne.getId() + " Produit = " + ligne.getProduit() + " Quantite = " + ligne.getQuantite());
-        }
+        System.out.println("----------------------------------------LigneCommande---------------------------------");
+        System.out.println(commande.getLigneCommandes());
+        
+        List<Commande> c = new ArrayList<>();
+        c.add(commande);
+        PdfUtil.generatePdf(c, null, "Commande Report", "/jasper/Commande.jasper");
+    
     }
     
     

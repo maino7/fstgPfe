@@ -6,8 +6,12 @@
 package service;
 
 import bean.ExpressionBesoin;
+import bean.LigneReception;
 import bean.Reception;
 import bean.UserStock;
+import controller.util.PdfUtil;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +19,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -27,6 +32,8 @@ public class ReceptionFacade extends AbstractFacade<Reception> {
     private EntityManager em;
     @EJB
     private UserStockFacade userStockFacade;
+    @EJB
+    private LigneReceptionFacade receptionFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -56,7 +63,9 @@ public class ReceptionFacade extends AbstractFacade<Reception> {
         return (Long) em.createQuery(query).getSingleResult();
     }
 
-    public void imprimerFacture(Reception reception) {
+    public void imprimerFacture(Reception reception) throws JRException, IOException {
+         List<LigneReception> lr=receptionFacade.findligneexp(reception.getId());
+         reception.setLigneReceptions(lr);
         System.out.println("==============================");
         System.out.println("IMPRIMER =====> OUI");
         System.out.println("==============================");
@@ -69,6 +78,9 @@ public class ReceptionFacade extends AbstractFacade<Reception> {
 //            System.out.println("-----------------------------------------------------------------------");
 //            System.out.println("ID = " + ligne.getId() + " Produit = " + ligne.getProduit() + " Quantite = " + ligne.getQuantite());
 //        }
+            List<Reception> c = new ArrayList<>();
+        c.add(reception);
+        PdfUtil.generatePdf(c, null, "Reception Report", "/jasper/Reception.jasper");
     }
 
     public List<Reception> findReceptionByUser(UserStock userStock) {

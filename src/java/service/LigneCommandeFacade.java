@@ -38,6 +38,9 @@ public class LigneCommandeFacade extends AbstractFacade<LigneCommande> {
     public LigneCommandeFacade() {
         super(LigneCommande.class);
     }
+    public List<LigneCommande> findLignecmd(String id){
+        return em.createQuery("SELECT l FROM LigneCommande l WHERE l.commande.id='"+id+"'").getResultList();
+    }
 
     public void createLigneCommande(Commande commande, double quantite, Produit produit) {
         if (findByCommandeAndProduit(commande, produit) == null) {

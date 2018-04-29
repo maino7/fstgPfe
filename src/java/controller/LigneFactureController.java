@@ -3,13 +3,12 @@ package controller;
 import bean.Commande;
 import bean.Facture;
 import bean.Fournisseur;
-import bean.LigneCommande;
 import bean.LigneFacture;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
-import controller.util.SessionUtil;
+import java.io.IOException;
 import service.LigneFactureFacade;
-
+import controller.util.Session;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,6 +25,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 import service.FactureFacade;
 
 @Named("ligneFactureController")
@@ -47,6 +47,50 @@ public class LigneFactureController implements Serializable {
     private int nombre;
     private double qte;
 
+    public void ajouterLigneFacture() {
+        LigneFacture ligneClone = ejbFacade.clone(selected);
+        ligneClone.setId(ligneId);
+        factureItems.add(ligneClone);
+        ligneId++;
+        setSelected(null);
+    }
+
+    public Facture validerFacture() {
+        Facture facture = factureFacade.addFacture(dateFacture, commande, fournisseur, factureItems);
+        ejbFacade.ajouterLigneFacture(facture, factureItems);
+        if(facture.getLigneFactures().isEmpty()){
+            facture.setLigneFactures(factureItems);
+        }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "La facture a été enregistrée avec succès. Le numéro de la facture est " + facture.getId()));
+        Session.updateAttribute(facture, "facture");
+        setCommande(null);
+        setFournisseur(null);
+        setDateFacture(null);
+        vider();
+        return facture;
+    }
+
+    public void validerImprimerOui() throws JRException, IOException {
+            Facture facture = (Facture) Session.getAttribut("facture");
+            imprimer(facture);
+    }
+
+   
+
+    public void vider() {
+        setSelected(null);
+        factureItems.clear();
+    }
+
+    public void supprimerLigne() {
+        factureItems.remove(selected);
+        setSelected(null);
+    }
+
+    public void imprimer(Facture facture) throws JRException, IOException {
+        factureFacade.imprimerFacture(facture);
+    }
+
     public double getQte() {
         return qte;
     }
@@ -54,7 +98,6 @@ public class LigneFactureController implements Serializable {
     public void setQte(double qte) {
         this.qte = qte;
     }
-    
 
     public int getNombre() {
         return nombre;
@@ -184,25 +227,6 @@ public class LigneFactureController implements Serializable {
         return items;
     }
 
-    public void validerFacture() {
-        System.out.println(dateFacture + " " + commande.getId() + " " + fournisseur.getId() );
-            Facture facture = factureFacade.addFacture(dateFacture, commande, fournisseur, factureItems);
-        System.out.println("facture t3del");
-        if (facture == null) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Vous devez remplir tout les champs !"));
-        } else {
-            for (int i = 0; i < factureItems.size(); i++) {
-                LigneFacture factureItem = factureItems.get(i);
-                ejbFacade.createLigneFacture(facture.getId(), factureItem.getQuantite(), factureItem.getProduit());
-                System.out.println("had lingFacture itcrya");
-            }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre commande a été validée avec succès. Le numéro de la commande est " + facture.getId()));
-            vider();
-
-        }
-
-    }
-
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -282,44 +306,6 @@ public class LigneFactureController implements Serializable {
             }
         }
 
-    }
-
-    public void ajouterLigneFacture() {
-        LigneFacture ligneClone = ejbFacade.clone(selected);
-        ligneClone.setId(ligneId);
-        factureItems.add(ligneClone);
-        ligneId++;
-        setSelected(null);
-    }
-
-    public void vider() {
-        setSelected(null);
-        factureItems.clear();
-    }
-    
-   public void validerImprimerOui() {
-        if (factureItems.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la Facture avant de valider !"));
-        } else {
-            Facture facture = new Facture();
-            validerFacture();
-            imprimer(facture);
-            vider();
-        }
-    }
-
-    public void validerImprimerNon() {
-        System.out.println("je suis ici");
-        if (factureItems.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la Facture avant de valider !"));
-        } else {
-            validerFacture();
-            vider();
-        }
-    }
-
-    public void imprimer(Facture facture) {
-        factureFacade.imprimerFacture(facture);
     }
 
 }

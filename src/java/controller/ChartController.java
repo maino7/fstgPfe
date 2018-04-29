@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import service.AnneeFacade;
+import service.ExpressionBesoinFacade;
+import service.FactureFacade;
 import service.ModuleFacade;
 import service.NoteModulaireFacade;
 import service.SemestreFacade;
@@ -34,7 +36,7 @@ import service.SemestreFacade;
  *
  * @author BENIHOUD Youssef
  */
-@Named( "chartController")
+@Named("chartController")
 @SessionScoped
 public class ChartController implements Serializable {
 
@@ -53,6 +55,10 @@ public class ChartController implements Serializable {
     private ModuleFacade moduleFacade;
     @EJB
     private AnneeFacade anneeFacade;
+    @EJB
+    private FactureFacade factureFacade;
+    @EJB
+    private ExpressionBesoinFacade besoinFacade;
 
     @PostConstruct
     public void init() {
@@ -71,18 +77,17 @@ public class ChartController implements Serializable {
     }
 
     public List<Module> getFindBySemestre() {
-        System.out.println("choice == "+choice);
+        System.out.println("choice == " + choice);
         if (semestre != null) {
-            if(choice == false)
-            return moduleFacade.findBySemestre(semestre.getLibelle());
+            if (choice == false) {
+                return moduleFacade.findBySemestre(semestre.getLibelle());
+            }
         }
         return new ArrayList<>();
     }
 
     public boolean getChoice() {
-        
-            
-        
+
         return choice;
     }
 
@@ -90,7 +95,6 @@ public class ChartController implements Serializable {
         this.choice = choice;
     }
 
-    
     public Filiere getFiliere() {
         if (filiere == null) {
             filiere = new Filiere();
@@ -144,16 +148,14 @@ public class ChartController implements Serializable {
         boys.setLabel("Validé");
         for (Annee item : annees) {
 
-            nmV = noteModulaireFacade.findbyChart(semestre, module, item, 1,choice);
-            System.out.println("item.Libelle == "+item.getLibelle());
+            nmV = noteModulaireFacade.findbyChart(semestre, module, item, 1, choice);
+            System.out.println("item.Libelle == " + item.getLibelle());
             System.out.println("nmV === " + nmV);
-            if ( nmV.isEmpty() )
-            {
-                boys.set(item.getLibelle() , 0 );
+            if (nmV.isEmpty()) {
+                boys.set(item.getLibelle(), 0);
             }
             boys.set(item.getLibelle(), nmV.size());
-            if ( max < nmV.size())
-            {
+            if (max < nmV.size()) {
                 max = nmV.size();
             }
         }
@@ -162,16 +164,14 @@ public class ChartController implements Serializable {
         girls.setLabel("Non Validé");
 
         for (Annee item : annees) {
-            nmNV = noteModulaireFacade.findbyChart(semestre, module, item, 0,choice);
-            System.out.println("item.Libelle == "+item.getLibelle());
+            nmNV = noteModulaireFacade.findbyChart(semestre, module, item, 0, choice);
+            System.out.println("item.Libelle == " + item.getLibelle());
             System.out.println("nmNV === " + nmNV);
-            if ( nmNV.isEmpty())
-            {
-                girls.set(item.getLibelle() , 0 );
+            if (nmNV.isEmpty()) {
+                girls.set(item.getLibelle(), 0);
             }
             girls.set(item.getLibelle(), nmNV.size());
-            if ( max <= nmNV.size())
-            {
+            if (max <= nmNV.size()) {
                 max = nmNV.size();
             }
         }
@@ -183,44 +183,58 @@ public class ChartController implements Serializable {
         return model;
     }
 
+    private BarChartModel initBarModel2() {
+        BarChartModel model = new BarChartModel();
+        List<Annee> annees = anneeFacade.findAll();
+        ChartSeries factures = new ChartSeries();
+        factures.setLabel("Fts");
+        ChartSeries expressions = new ChartSeries();
+        expressions.setLabel("Exp");
+
+        annees.stream().forEach((a) -> {
+
+            factures.set("" + a.getLibelle(), factureFacade.factureParAnnée(a.getLibelle()).size());
+            System.out.println(factureFacade.factureParAnnée(a.getLibelle()).size());
+            expressions.set("" + a.getLibelle(), besoinFacade.expressionParAnnée(a.getLibelle()).size());
+            System.out.println(besoinFacade.expressionParAnnée(a.getLibelle()).size());
+        });
+
+        model.addSeries(factures);
+        model.addSeries(expressions);
+        model.setAnimate(true);
+        model.setBarWidth(30);
+        return model;
+    }
+
     private void createBarModels() {
         createBarModel();
     }
 
     private void createBarModel() {
-        barModel = initBarModel();
-        int testMax = 2;
-        
-        if ( max >= testMax )
-        {
-            testMax = max;
-        }
-
-        barModel.setTitle("Les Resultats des Etudiants");
+        barModel = initBarModel2();
+        barModel.setTitle("FACTURES AND EXPRESSIONS DE BESIONS");
+//        barModel.setLegendPosition("ne");
 
         Axis xAxis = barModel.getAxis(AxisType.X);
-        xAxis.setLabel("Resultats des Etudiants");
+        xAxis.setLabel("Années");
 
         Axis yAxis = barModel.getAxis(AxisType.Y);
         yAxis.setLabel("Nombres");
         yAxis.setMin(0);
-        yAxis.setMax(testMax*1.2);
-        
-        max=0;
+        yAxis.setMax(6);
+
     }
 
-    
-    public Module getCorrectModule(Module module)
-    {
+    public Module getCorrectModule(Module module) {
         System.out.println("==== getCorrectModule ====");
-        if (choice)
-        {
+        if (choice) {
             System.out.println("You have choosen Semestre ; if not then correct your methode");
             return null;
         }
-        
+
         return module;
     }
+
     /**
      * Creates a new instance of ChartController
      */

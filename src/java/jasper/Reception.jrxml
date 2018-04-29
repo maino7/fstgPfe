@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="36b33e50-60c7-49c2-90f4-bc086ce7e7ba">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\CHAÂCHAÏ\\Documents\\NetBeansProjects\\sitefstg-master\\src\\java\\jasper\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="dateReception" class="java.util.Date">
+		<fieldDescription><![CDATA[dateReception]]></fieldDescription>
+	</field>
+	<field name="expressionBesoin" class="bean.ExpressionBesoin">
+		<fieldDescription><![CDATA[expressionBesoin]]></fieldDescription>
+	</field>
+	<field name="userStock" class="bean.UserStock">
+		<fieldDescription><![CDATA[userStock]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.String">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="ligneReceptions" class="java.util.List">
+		<fieldDescription><![CDATA[ligneReceptions]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="144" splitType="Stretch">
+			<staticText>
+				<reportElement x="303" y="2" width="100" height="20" uuid="7159099f-dcbd-442e-b870-dc0c7bfc1c54"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="60" width="348" height="66" uuid="e50a1b57-9b99-4cd7-9289-c3a1462a34e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[UNIVERSITE CADI AYYAD
+FACULTE DES SCIENCES ET TECHNIQUES
+GUELIZ-MARRAKECH]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="403" y="0" width="152" height="20" uuid="873861c2-5143-4f52-a60a-39c23e50e309"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="177" height="47" uuid="6b6b5645-021f-47b8-b19c-da39487ae600"/>
+				<imageExpression><![CDATA["C:\\Users\\CHAÂCHAÏ\\Documents\\NetBeansProjects\\sitefstg-master\\web\\resources\\images\\logofstg - Copy.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="291" splitType="Stretch">
+			<staticText>
+				<reportElement x="290" y="109" width="100" height="20" uuid="7aacb9ae-102c-4025-9ca9-7912f1b49403"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recu le :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="109" width="100" height="20" uuid="5a437076-a9d3-4abe-af3b-8d9c42cc5949"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ref :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="0" width="249" height="61" uuid="cfdf24d1-ce80-49e9-b68e-1aa5f82db0d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bookman Old Style" size="26" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Réception]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="89" width="212" height="1" uuid="bcdaa6b7-c599-4131-a98b-7940d91968af"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="324" y="90" width="231" height="1" uuid="6f58bfcd-2392-414f-9e18-bbc710246230"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="212" y="70" width="112" height="20" uuid="e890d393-028c-4e8c-8959-d02c44549733"/>
+				<box>
+					<pen lineWidth="3.0" lineStyle="Double"/>
+					<topPen lineWidth="3.0" lineStyle="Double"/>
+					<leftPen lineWidth="3.0" lineStyle="Double"/>
+					<bottomPen lineWidth="3.0" lineStyle="Double"/>
+					<rightPen lineWidth="3.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Info Reception]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="109" width="100" height="20" uuid="262aba3a-2ac9-4807-ab44-1b4edb143f68"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="109" width="165" height="20" uuid="7f034bce-6cc9-4e97-8123-03934a4184a2"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dateReception}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="33" y="146" width="100" height="20" uuid="018e3330-72c7-40d7-aac7-b4f272208d7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Exprimer par :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="133" y="146" width="364" height="20" uuid="d5dabc82-815a-4336-a71e-d443201a5d6b"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{expressionBesoin}.getUserStock().getNom()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="33" y="180" width="100" height="20" uuid="975f2d4a-0829-4a94-a3cb-c0c13ab0a68f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recu par :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="133" y="180" width="197" height="20" uuid="69e77092-c67e-43fa-a225-55c0cd176ca3"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{userStock}.getNom()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="33" y="224" width="100" height="20" uuid="a017a631-f4fb-4e61-b942-df0dea251584"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Exprimée Le:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="133" y="224" width="384" height="20" uuid="c94945cf-808c-4553-bedd-3d57cf56ef46"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{expressionBesoin}.getDateExpressionBesoin()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="265" width="555" height="1" uuid="10823cab-9bf2-4fe5-8a45-845a3a017785"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="100" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="100" uuid="b4df6b63-fb25-4570-bbfe-dc07c5bbbaaa"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{ligneReceptions})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Reception_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="184" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="118" width="555" height="66" uuid="2802b847-3d65-4564-8eb1-7d2144ce08be"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Faculté des Sciences et Techniques, Avenue Abdelkrim Khattabi   BP 549   Marrakech  Maroc    Tel : 212 ( 0)524 43 34 04 / 43 31 63 Fax 212 (0)524 43 31 70]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="414" y="22" width="141" height="49" uuid="13388b83-3453-4367-8f89-327a6ce3f9f4"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="301" y="34" width="113" height="20" uuid="ac6e0afe-c846-4d75-8880-e47c783b464b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Signature :]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

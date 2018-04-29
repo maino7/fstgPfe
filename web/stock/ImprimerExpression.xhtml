@@ -13,8 +13,8 @@
         <p:dialog id="ImprimerExpDlg" widgetVar="ImprimerExpressionDialog" showEffect="fade" modal="true" resizable="false" appendTo="@(body)" header="Voulez vous imprimer cette Expression De Besoin ?">
             <h:form id="ImprimerExpForm">
                 <h:panelGroup id="display">
-                    <p:commandButton value="Oui" style="background-color: grey" action="#{ligneExpressionBesoinController.validerImprimerOui()}" update=":listLigneExpressionsForm:datalist,:growl" icon="ui-icon-check" onclick="ImprimerDlg.hide()" oncomplete="handleSubmit(args,'ImprimerExpressionDialog');" class="btn btn-xs"></p:commandButton>
-                    <p:commandButton value="Non" style="background-color: grey" action="#{ligneExpressionBesoinController.validerImprimerNon()}" update=":listLigneExpressionsForm:datalist,:growl" icon="ui-icon-close" onclick="ImprimerDlg.hide()" oncomplete="handleSubmit(args,'ImprimerExpressionDialog');" class="btn btn-xs"></p:commandButton>
+                    <p:commandButton value="Oui" ajax="false" style="background-color: grey" action="#{ligneExpressionBesoinController.validerImprimerOui()}" update=":listLigneExpressionsForm:datalist,:growl" icon="ui-icon-check" onclick="ImprimerExpDlg.hide()" oncomplete="handleSubmit(args,'ImprimerExpressionDialog');" class="btn btn-xs"></p:commandButton>
+                    <p:commandButton value="Non" style="background-color: grey" update=":listLigneExpressionsForm:datalist,:growl" icon="ui-icon-close" onclick="ImprimerExpDlg.hide()" oncomplete="handleSubmit(args,'ImprimerExpressionDialog');" class="btn btn-xs"></p:commandButton>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

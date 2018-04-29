@@ -8,7 +8,8 @@ import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import controller.util.SessionUtil;
 import service.LigneLivraisonFacade;
-
+import controller.util.Session;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +26,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 import service.LivraisonFacade;
 
 @Named("ligneLivraisonController")
@@ -41,12 +43,12 @@ public class LigneLivraisonController implements Serializable {
     private LigneLivraison selected;
 
     private Commande commande;
-    private Date daterecep = null;
+    private Date daterecep;
     private Long ligneId = 1L;
 
     public LigneLivraisonController() {
     }
-    
+
     public void creerLigne() {
         LigneLivraison cloneLigne = ejbFacade.cloneLigneLivraison(selected);
         cloneLigne.setId(ligneId);
@@ -56,43 +58,38 @@ public class LigneLivraisonController implements Serializable {
     }
 
     public Livraison validerLivraison() {
-        Livraison livraison = livraisonFacade.addLivraison(commande, daterecep);
-        ejbFacade.ajouterLigneLivtaison(livraison, livraisonItmes);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Votre bon de livraison a été enregistré avec succès. Le numéro du bon est " + livraison.getId()));
-        return livraison;
-    }
-
-    public void validerImprimerOui() {
         if (commande.getId() == null) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Vouz n'avez pas choisi la commande !"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Vous n'avez pas choisi la commande !"));
         } else if (livraisonItmes.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir le bon de livraison avant d'enregistrer !"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Vous devez remplir la livraison avant de valider !"));
         } else {
-            Livraison livraison = validerLivraison();
-            imprimer(livraison);
+            Livraison livraison = livraisonFacade.addLivraison(commande, daterecep);
+            ejbFacade.ajouterLigneLivtaison(livraison, livraisonItmes);
+            if (livraison.getLigneLivraisons().isEmpty()) {
+                livraison.setLigneLivraisons(livraisonItmes);
+            }
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Votre bon de livraison a été enregistré avec succès. Le numéro du bon est " + livraison.getId()));
+            Session.updateAttribute(livraison, "livraison");
             vider();
             setCommande(null);
             setDaterecep(null);
+            return livraison;
         }
+        return null;
     }
 
-    public void validerImprimerNon() {
-        if (commande.getId() == null) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Vouz n'avez pas choisi la commande !"));
-        } else if (livraisonItmes.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir le bon de livraison avant d'enregistrer !"));
-        } else {
-            validerLivraison();
-            vider();
-            setCommande(null);
-            setDaterecep(null);
-        }
+    public void validerImprimerOui() throws JRException, IOException {
+        Livraison livraison = (Livraison) Session.getAttribut("livraison");
+        imprimer(livraison);
+        vider();
+        setCommande(null);
+        setDaterecep(null);
     }
 
-    public void imprimer(Livraison livraison) {
+    public void imprimer(Livraison livraison) throws JRException, IOException {
         livraisonFacade.imprimerLivraison(livraison);
     }
-    
+
     public void vider() {
         setSelected(null);
         livraisonItmes.clear();
@@ -182,7 +179,6 @@ public class LigneLivraisonController implements Serializable {
         if (daterecep == null) {
             daterecep = new Date();
         }
-
         return daterecep;
     }
 

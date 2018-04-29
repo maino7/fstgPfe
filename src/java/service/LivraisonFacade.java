@@ -10,6 +10,9 @@ import bean.LigneCommande;
 import bean.LigneLivraison;
 import bean.Livraison;
 import bean.UserStock;
+import controller.util.PdfUtil;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +20,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -62,7 +66,9 @@ public class LivraisonFacade extends AbstractFacade<Livraison> {
         return (Long) em.createQuery(query).getSingleResult();
     }
 
-    public void imprimerLivraison(Livraison livraison) {
+    public void imprimerLivraison(Livraison livraison) throws JRException, IOException {
+        List<LigneLivraison> llv=ligneLivraisonFacade.findligneliv(livraison.getId());
+         livraison.setLigneLivraisons(llv);
         System.out.println("==============================");
         System.out.println("IMPRIMER =====> OUI");
         System.out.println("==============================");
@@ -70,12 +76,12 @@ public class LivraisonFacade extends AbstractFacade<Livraison> {
         System.out.println("##### La date de la livraison est ======> " + livraison.getDateLivraison());
         System.out.println("##### L'utilisateur qui l'a effectué est ======> " + livraison.getUserStock().getNom() + " " + livraison.getUserStock().getPrenom());
         System.out.println("***** Les ligne de Livraison ***** ");
-        List<LigneLivraison> lignes = ligneLivraisonFacade.findByLivraison(livraison);
-        for (int i = 0; i < lignes.size(); i++) {
-            LigneLivraison ligne = lignes.get(i);
-            System.out.println("-----------------------------------------------------------------------");
-            System.out.println("ID = " + ligne.getId() + " Produit = " + ligne.getProduit() + " Quantite = " + ligne.getQuantite());
-        }
+       
+        
+        List<Livraison> c = new ArrayList<>();
+        c.add(livraison);
+        PdfUtil.generatePdf(c, null, "Livraison Report", "/jasper/Livraison.jasper");
+        
         
     }
         public double calculTotalQuantiteCommande(Commande commande) {

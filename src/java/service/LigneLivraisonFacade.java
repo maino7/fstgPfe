@@ -40,6 +40,9 @@ public class LigneLivraisonFacade extends AbstractFacade<LigneLivraison> {
     public LigneLivraisonFacade() {
         super(LigneLivraison.class);
     }
+    public List<LigneLivraison> findligneliv(String id){
+        return em.createQuery("SELECT l FROM LigneLivraison l WHERE l.livraison.id='"+id+"'").getResultList();
+    }
 
     public LigneLivraison cloneLigneLivraison(LigneLivraison ligneLivraison) {
         LigneLivraison cloneLigne = new LigneLivraison();

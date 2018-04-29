@@ -131,4 +131,15 @@ public class UserStockFacade extends AbstractFacade<UserStock> {
         return em.createQuery("SELECT u FROM UserStock u WHERE u.entiteAdministrative.id ='" + entiteAdministrative.getId() + "'").getResultList();
     }
 
+    public int bloquerUser(UserStock userStock) {
+        if (userStock != null) {
+            if (userStock.isBlocked() == true) {
+                userStock.setBlocked(false);
+            } else {
+                userStock.setBlocked(true);
+            }
+            return 1;
+        }
+        return -1;
+    }
 }

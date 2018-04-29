@@ -34,36 +34,36 @@
     <h:body style="background-image: url(../resources/images/demo/body-bg41.png); background-attachment: fixed;">
         <!-- Navigation -->
         <p:growl id="growl" life="3000" />
-        <div style="background-color: white; width: 275px" class="sidebar" data-color="purple" >
+        <div style="background-color: white;width: 265px" class="sidebar" data-color="purple" >
             <div class="logo">
 
                 <a href="../../template/Home.xhtml"><img src="../resources/images/logo.png" style="width: 200px;" /></a>
             </div>
-            <div style="width: 280px" class="sidebar-wrapper">
+            <div style="width: 278px" class="sidebar-wrapper">
                 <ul class="nav">
                     <li>
                         <a href="UserLogin.xhtml?faces-redirect=true">
                             <i class="material-icons">home</i>
-                            <p>Home</p>
+                            <p>Accueil</p>
                         </a>
                     </li>
                     <li>
                         <a href="./ExpressionDeBesoin.xhtml?faces-redirect=true">
                             <i class="material-icons">content_paste</i>
-                            <p>Rédiger une exp. de besoin</p>
+                            <p>Rédiger une Exp. de Besoin</p>
                         </a>
                     </li>
                     <li>
                         <a href="AncienExpressionDeBesoin.xhtml?faces-redirect=true">
                             <i class="material-icons">library_books</i>
-                            <p>Mes exp. de besoin</p>
+                            <p>Chercher les Exp. de Besoin</p>
                         </a>
                     </li>
 
                     <li>
                         <a href="Reception.xhtml?faces-redirect=true">
                             <i class="material-icons text-gray">event_available</i>
-                            <p>Enregistrer une reception</p>
+                            <p>Enregistrer une réception</p>
                         </a>
                     </li>
                 </ul>
@@ -198,7 +198,7 @@
                                                      style="background-color: grey; font-size: 85%" update="listLigneExpressionsForm:datalist" ></p:commandButton>
 
                                 </h:form>
-                                <p:commandButton value="VALIDER" icon="ui-icon-check" style="background-color: #2a9942" update="listLigneExpressionsForm:datalist" oncomplete="PF('ImprimerExpressionDialog').show()" class="btn btn-sm pull-right"></p:commandButton>
+                                <p:commandButton value="VALIDER" icon="ui-icon-check" style="background-color: #2a9942" actionListener="#{ligneExpressionBesoinController.validerExpressionDeBesoin()}" update="listLigneExpressionsForm:datalist" oncomplete="PF('ImprimerExpressionDialog').show()" class="btn btn-sm pull-right" />
                             </div>
                         </div>
                     </div>

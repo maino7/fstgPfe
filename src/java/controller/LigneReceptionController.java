@@ -8,7 +8,8 @@ import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import controller.util.SessionUtil;
 import service.LigneReceptionFacade;
-
+import controller.util.Session;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +26,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 import service.ReceptionFacade;
 
 @Named("ligneReceptionController")
@@ -149,10 +151,6 @@ public class LigneReceptionController implements Serializable {
         idLing++;
     }
 
-    public void testButton() {
-        System.out.println("hellooooooo");
-    }
-
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -251,13 +249,11 @@ public class LigneReceptionController implements Serializable {
     }
 
     public void supprimerLigne() {
-        System.out.println("je suis la");
         receptionItmes.remove(selected);
         setSelected(null);
     }
 
-//    
-    public void validerReception() {
+    public Reception validerReception() {
 
         String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
         Reception reception = receptionFacade.addReception(idSession, expressionBesoin, daterecep);
@@ -268,21 +264,19 @@ public class LigneReceptionController implements Serializable {
                 LigneReception receptionItem = receptionItmes.get(i);
                 ejbFacade.createLigneReception(receptionItem.getQuantite(), receptionItem.getProduit(), reception.getId());
             }
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre commande a été validée avec succès. Le numéro de la reception est " + reception.getId()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre commande a été validée avec succès. Le numéro de la reception est " + reception.getId()));
+            if(reception.getLigneReceptions().isEmpty()){
+                reception.setLigneReceptions(receptionItmes);
+            }
             vider();
         }
+        Session.updateAttribute(reception, "reception");
+        return reception;
     }
-    
-    
-    public void validerImprimerOui() {
-        if (receptionItmes.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la Facture avant de valider !"));
-        } else {
-            Reception reception = new Reception();
-            validerReception();
-            imprimer(reception);
-            vider();
-        }
+
+    public void validerImprimerOui() throws JRException, IOException {
+        Reception reception = (Reception) Session.getAttribut("reception");
+        imprimer(reception);
     }
 
     public void validerImprimerNon() {
@@ -290,14 +284,12 @@ public class LigneReceptionController implements Serializable {
         if (receptionItmes.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la Facture avant de valider !"));
         } else {
-            validerReception();
             vider();
         }
     }
 
-    public void imprimer(Reception reception) {
+    public void imprimer(Reception reception) throws JRException, IOException {
         receptionFacade.imprimerFacture(reception);
     }
-
 
 }

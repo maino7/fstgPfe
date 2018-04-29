@@ -8,6 +8,7 @@ package service;
 import bean.LigneReception;
 import bean.Produit;
 import bean.Reception;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,7 +27,8 @@ public class LigneReceptionFacade extends AbstractFacade<LigneReception> {
     private ReceptionFacade receptionFacade;
     @EJB
     private LigneFacade ligneFacade;
-
+    @EJB
+    private ProduitFacade produitFacade;
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -34,6 +36,9 @@ public class LigneReceptionFacade extends AbstractFacade<LigneReception> {
 
     public LigneReceptionFacade() {
         super(LigneReception.class);
+    }
+    public List<LigneReception> findligneexp(String id){
+        return  em.createQuery("SELECT l FROM LigneReception l WHERE l.reception.id='"+id+"'").getResultList();
     }
 
     public LigneReception cloneLigneReception(LigneReception ligneReception) {
@@ -51,6 +56,7 @@ public class LigneReceptionFacade extends AbstractFacade<LigneReception> {
         LigneReception ligneReception = new LigneReception();
         ligneReception.setReception(reception);
         ligneFacade.createLigne(ligneReception, qteRecu, produit);
+        produitFacade.deletequantite(produit, qteRecu);
         return 1;
     }
 

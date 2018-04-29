@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dd869c33-3e51-45f9-8700-d6682d10cab0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\CHAÂCHAÏ\\Documents\\NetBeansProjects\\sitefstg-master\\src\\java\\jasper\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="id" class="java.lang.String">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="userStock" class="bean.UserStock">
+		<fieldDescription><![CDATA[userStock]]></fieldDescription>
+	</field>
+	<field name="ligneCommandes" class="java.util.List">
+		<fieldDescription><![CDATA[ligneCommandes]]></fieldDescription>
+	</field>
+	<field name="livree" class="java.lang.Integer">
+		<fieldDescription><![CDATA[livree]]></fieldDescription>
+	</field>
+	<field name="dateCommande" class="java.util.Date">
+		<fieldDescription><![CDATA[dateCommande]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="151" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="390" y="0" width="165" height="20" uuid="3a27151e-5f41-4021-af42-09c3b857429d"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="0" width="100" height="20" uuid="5cf471f2-9fa3-462a-a67f-dcc5c2290e57"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="64" width="348" height="66" uuid="e2690aff-02b5-45c0-8dbe-d0a15224fa0f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[UNIVERSITE CADI AYYAD
+FACULTE DES SCIENCES ET TECHNIQUES
+GUELIZ-MARRAKECH]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="177" height="47" uuid="f56f0064-e41f-4e81-8b59-66ebc386f206"/>
+				<imageExpression><![CDATA["C:\\Users\\CHAÂCHAÏ\\Documents\\NetBeansProjects\\sitefstg-master\\web\\resources\\images\\logofstg - Copy.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="255" splitType="Stretch">
+			<staticText>
+				<reportElement x="154" y="0" width="249" height="61" uuid="e2c41e41-1efb-439a-b40d-70d4b2d89370"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bookman Old Style" size="26" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Commande]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="126" width="100" height="20" uuid="70eac5e4-3c0f-4146-a388-248e99de83f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Faite le :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="126" width="100" height="20" uuid="a0969216-046e-423c-aa68-17e0c19663e3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ref :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="126" width="115" height="20" uuid="541e5137-53f4-450a-91f2-b34fa72d5f20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="126" width="152" height="20" uuid="5112fbef-ef77-4478-b3ce-5079d34bae7e"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dateCommande}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="93" width="212" height="1" uuid="760a5325-ca48-48af-b5fc-58a1c519050d"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="330" y="93" width="225" height="1" uuid="f84031f7-9f78-4bd3-b105-75602cd2d66d"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="215" y="74" width="113" height="20" uuid="c10223a7-9872-4c69-a1f8-76c01629ce0d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Info Commande]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="192" width="113" height="20" uuid="19e36e7f-2408-4971-9019-3ec0474272ed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Faite par Mr:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="113" y="192" width="442" height="20" uuid="ee7e8000-1bcc-44cb-a44d-1508f517be89"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[""+$F{userStock}.getNom()+""+$F{userStock}.getPrenom()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="243" width="555" height="1" uuid="d8050bcb-e29b-4460-9d15-90070c55bd9f"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="100" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="100" uuid="385bd03e-d9f4-46c8-92b5-7d1c3feccb3f"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{ligneCommandes})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Commande_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="66" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="66" uuid="3eec8a27-78d2-46a4-b6f0-14d3158a6363"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Faculté des Sciences et Techniques, Avenue Abdelkrim Khattabi   BP 549   Marrakech  Maroc    Tel : 212 ( 0)524 43 34 04 / 43 31 63 Fax 212 (0)524 43 31 70]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

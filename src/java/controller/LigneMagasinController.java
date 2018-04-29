@@ -106,15 +106,16 @@ public class LigneMagasinController implements Serializable {
         return selected;
     }
 
-     public void searchProduitFinit(){
-        List<LigneMagasin> plf=ejbFacade.searchProduitFinit();
-        if(!plf.isEmpty()){
+    public void searchProduitFinit() {
+        List<LigneMagasin> plf = ejbFacade.searchProduitFinit();
+        if (!plf.isEmpty()) {
             //JsfUtil.addErrorMessage(plf.toString());
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING!",plf.toString()));
-            
-        }else
-         JsfUtil.addSuccessMessage("There is no Product runing out");
-         //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "There is no Product runing out"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "WARNING!", plf.toString()));
+
+        } else {
+            JsfUtil.addSuccessMessage("There is no Product runing out");
+        }
+        //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "There is no Product runing out"));
     }
 
     public List<LigneMagasin> searchProduit() {

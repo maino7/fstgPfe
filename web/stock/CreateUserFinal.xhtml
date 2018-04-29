@@ -9,7 +9,7 @@
 
 
     <h:head>
-        <title>CreateUserFinal(Oualili Younesse)</title>
+        <title>Ajouter un Utilisateur</title>
         <link rel="apple-touch-icon" sizes="76x76" href="./newtemplate/assets/img/apple-icon.png" />
         <!--<link rel="icon" type="image/png" href="./newtemplate/assets/img/favicon.png" />-->
         <link rel="shortout icon" type="image/x-icon" href="#{resource['images/favicon.png']}" />
@@ -40,58 +40,62 @@
 
 
         <!--haaahwa sidebar-->
-        <div style="background-color: white" class="sidebar" data-color="purple" >
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-            -->
+        <div style="background-color: white;width: 265px" class="sidebar" data-color="purple" >
             <div class="logo">
                 <a href="../../template/Home.xhtml"><img src="../resources/images/logo.png" style="width: 200px;" /></a>
             </div>
-            <div style="width: 280px" class="sidebar-wrapper">
+            <div style="width: 278px" class="sidebar-wrapper">
                 <ul class="nav">
                     <li>
                         <a href="DoyenLogin.xhtml?faces-redirect=true">
                             <i class="material-icons">home</i>
-                            <p>Home</p>
+                            <p>Accueil</p>
                         </a>
                     </li>
                     <li>
                         <a href="./Commande.xhtml?faces-redirect=true">
                             <i class="material-icons">content_paste</i>
-                            <p>Effectuer une commande</p>
+                            <p>Effectuer une Commande</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
+                            <i class="material-icons text-gray">notifications</i>
+                            <p>Consulter les Exp. de Besoin</p>
                         </a>
                     </li>
                     <li>
                         <a href="Facture.xhtml?faces-redirect=true">
                             <i class="material-icons">library_books</i>
-                            <p>Consulter les factures</p>
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
-                            <i class="material-icons text-gray">notifications</i>
-                            <p>Consulter les exp. de besoin</p>
+                            <p>Enregistrer une Facture</p>
                         </a>
                     </li>
                     <li>
                         <a href="Livraison.xhtml?faces-redirect=true">
                             <i class="material-icons">event_available</i>
-                            <p>Enregistrer une livraison</p>
+                            <p>Enregistrer une Livraison</p>
                         </a>
                     </li>
                     <li>
-                        <a href="Ajout.xhtml?faces-redirect=true">
+                        <a href="Depot.xhtml?faces-redirect=true">
+                            <i class="material-icons">store</i>
+                            <p>Géstion des Dépôts</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="UserStock.xhtml?faces-redirect=true">
                             <i class="material-icons">people</i>
-                            <p>Gestion des utilisateurs</p>
+                            <p>Géstion des Utilisateurs</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Stock.xhtml?faces-redirect=true">
+                            <i class="material-icons">dns</i>
+                            <p>Consulter le Stock</p>
                         </a>
                     </li>
                 </ul>
             </div>
-
         </div>
 
 
@@ -119,118 +123,122 @@
 
         <div class="main-panel">
             <br></br>
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header" data-background-color="grey">
-                                    <h4 class="title">Create UserStock</h4>
-                                    <p class="category">Complete your profile</p>
-                                </div>
-                                <div class="card-content">
-                                    <h:form>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">ID</label>
-                                                    <b:inputText value="#{userStockController.selected.id}" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Nom</label>
-                                                    <b:inputText value="#{userStockController.selected.nom}" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Prenom</label>
-                                                    <b:inputText value="#{userStockController.selected.prenom}" class="form-control" />
-                                                </div>
+            <!--<div class="content">-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header" data-background-color="grey">
+                                <h4 class="title">Ajouter un utilisateur</h4>
+                                <p class="category">Complete your profile</p>
+                            </div>
+                            <div class="card-content">
+                                <h:form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">CIN</label>
+                                                <b:inputText value="#{userStockController.selected.id}" class="form-control" />
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Email</label>
-                                                    <b:inputText value="#{userStockController.selected.email}" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Password</label>
-                                                    <b:inputText value="#{userStockController.selected.password}" class="form-control" />
-                                                </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Nom</label>
+                                                <b:inputText value="#{userStockController.selected.nom}" class="form-control" />
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Tel</label>
-                                                    <b:inputText class="form-control" value="#{userStockController.selected.telephone}" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Gender</label>
-                                                    <b:inputText value="#{userStockController.selected.gender}" class="form-control" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Grade</label>
-                                                    <b:inputText value="#{userStockController.selected.grade}" class="form-control" />
-                                                </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Prénom</label>
+                                                <b:inputText value="#{userStockController.selected.prenom}" class="form-control" />
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Date de naissance</label>
-                                                    <b:datepicker value="#{userStockController.selected.dateNaissance}" placeholder="MM/DD/YYYY"  />                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Email</label>
+                                                <b:inputText value="#{userStockController.selected.email}" class="form-control" />
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group label-floating">
-                                                    <label class="control-label">Entitée Administrative</label>
-                                                    <b:selectOneMenu value="#{userStockController.selected.entiteAdministrative}">
-                                                        <f:selectItem itemValue="#{null}" itemLabel="------------------Séléctionner------------------"/>
-                                                        <f:selectItems value="#{entiteAdministrativeController.itemsAvailableSelectOne}" var="entiteAdministrativeItem" itemValue="#{entiteAdministrativeItem}">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Password</label>
+                                                <b:inputText value="#{userStockController.selected.password}" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Téléphone</label>
+                                                <b:inputText class="form-control" value="#{userStockController.selected.telephone}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Sexe</label>
+                                                <b:inputText value="#{userStockController.selected.gender}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Grade</label>
+                                                <b:inputText value="#{userStockController.selected.grade}" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Date de Naissance</label>
+                                                <b:datepicker value="#{userStockController.selected.dateNaissance}" placeholder="MM/DD/YYYY"  />                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Entitée Administrative</label>
+                                                <b:selectOneMenu value="#{userStockController.selected.entiteAdministrative}">
+                                                    <f:selectItem itemValue="#{null}" itemLabel="------------------Séléctionner------------------"/>
+                                                    <f:selectItems value="#{entiteAdministrativeController.itemsAvailableSelectOne}" var="entiteAdministrativeItem" itemValue="#{entiteAdministrativeItem}">
+                                                    </f:selectItems>
+                                                </b:selectOneMenu>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <b:commandButton actionListener="#{userStockController.create()}" class="btn btn-primary pull-left" value="create" />
 
-                                                        </f:selectItems>
-                                                    </b:selectOneMenu>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <b:commandButton actionListener="#{userStockController.create()}" class="btn btn-primary pull-left" value="create" />
-                                        
 
-                                        <div class="clearfix"></div>
-                                    </h:form>
-                                    <p:commandButton action="UserStock" value="Return"  />
-                                </div>
+                                    <div class="clearfix"></div>
+                                </h:form>
+                                <p:commandButton action="UserStock" value="Return"  />
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card card-profile">
-                                <div class="card-avatar">
-                                    <a href="#pablo">
-                                        <img class="img" src="../resources/images/Directeur_Moha_Taourirte.jpg" />
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <h6 class="category text-gray">Doyen</h6>
-                                    <p class="card-content">
-                                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                                    </p>
-                                    <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div class="card card-profile">
+                            <div class="card-avatar">
+                                <a href="#pablo">
+                                    <img class="img" src="../resources/images/Directeur_Moha_Taourirte.jpg" />
+                                </a>
+                            </div>
+                            <div class="content">
+                                <h6 class="category text-gray">Doyen</h6>
+                                <p class="card-content">
+                                    Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                                </p>
+                                <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
+
+            <!--</div>-->
 
 
         </div>

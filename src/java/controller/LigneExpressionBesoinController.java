@@ -3,13 +3,13 @@ package controller;
 import bean.EntiteAdministrative;
 import bean.ExpressionBesoin;
 import bean.LigneExpressionBesoin;
-import bean.Produit;
 import bean.UserStock;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import controller.util.SessionUtil;
 import service.LigneExpressionBesoinFacade;
-
+import controller.util.Session;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,6 +26,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 import service.ExpressionBesoinFacade;
 import service.UserStockFacade;
 
@@ -65,6 +66,9 @@ public class LigneExpressionBesoinController implements Serializable {
     }
 
     public List<LigneExpressionBesoin> getListDetail1() {
+        if (listDetail1 == null) {
+            listDetail1 = new ArrayList();
+        }
         return listDetail1;
     }
 
@@ -111,7 +115,8 @@ public class LigneExpressionBesoinController implements Serializable {
 
     public Date getDateMin() {
         if (dateMin == null) {
-            dateMin = new Date();
+            Date d = new Date();
+            dateMin = new Date(d.getTime() - 30 * 24 * 3600 * 1000l);
         }
         return dateMin;
     }
@@ -240,43 +245,45 @@ public class LigneExpressionBesoinController implements Serializable {
         String idSession = ((UserStock) SessionUtil.getConnectedUser()).getId();
         ExpressionBesoin expressionBesoin = expressionBesoinFacade.addExpressionDeBesoin(idSession);
         ejbFacade.createLigneExp(expressionBesoin, expressionItems);
+        if(expressionBesoin.getLigneExpressionBesoins().isEmpty()){
+            expressionBesoin.setLigneExpressionBesoins(expressionItems);
+        }
+        System.out.println("-------------------------------LigneExpression----------------------------------");
+        System.out.println(expressionBesoin.getLigneExpressionBesoins());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre Expression De Besoin a été validée avec succès. Le numéro de l'expression est: " + expressionBesoin.getId()));
+        Session.updateAttribute(expressionBesoin, "expression");
+        vider();
         return expressionBesoin;
     }
 
-    public void validerImprimerOui() {
-        if (expressionItems.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir l'expression de besoin avant de valider !"));
-        } else {
-            ExpressionBesoin expressionBesoin = validerExpressionDeBesoin();
-            imprimer(expressionBesoin);
-            vider();
-        }
+    public void validerImprimerOui() throws JRException, IOException {
+        //ExpressionBesoin expressionBesoin = validerExpressionDeBesoin();
+        ExpressionBesoin exp = (ExpressionBesoin) Session.getAttribut("expression");
+        System.out.println("----------------------------------------LignesAvantImp-----------------------------------");
+        System.out.println(exp.getLigneExpressionBesoins());
+        imprimer(exp);
+
     }
 
-    public void validerImprimerNon() {
-        if (expressionItems.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir l'expression de besoin avant de valider !"));
-        } else {
-            validerExpressionDeBesoin();
-            vider();
-        }
-    }
+    
 
-    public void imprimer(ExpressionBesoin expressionBesoin) {
+    public void imprimer(ExpressionBesoin expressionBesoin) throws JRException, IOException {
         expressionBesoinFacade.imprimerCommande(expressionBesoin);
     }
 
     public void findExp() {
         expressionBesoins = expressionBesoinFacade.findBycriteria(userStock.getId(), dateMin, dateMax, selected.getProduit().getId());
-//        System.out.println(userStock);
-//        System.out.println(dateMin);
-//        System.out.println(dateMax);
-//        System.out.println(selected.getProduit().getId());
+        setSelected(null);
+        setDateMax(null);
+        setDateMin(null);
+        setUserStock(null);
+        setEntiteAdministrative(null);
+        setListDetail1(null);
+//        listDetail1.clear();
     }
 
     public void testCombo() {
-        System.out.println("=====" + selected.getExpressionBesoin().getUserStock().getId());
+        System.out.println("=====" + dateMin);
     }
 
     public void findBycriteria() {

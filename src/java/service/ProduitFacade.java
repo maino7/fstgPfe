@@ -40,15 +40,28 @@ public class ProduitFacade extends AbstractFacade<Produit> {
         super(Produit.class);
     }
 public void addquantite (Produit produit , double qtn){
+      List<LigneMagasin> lignemagasins = ligneMagasinFacade.findbyProduit(produit);
+        for (int i = 0; i < lignemagasins.size(); i++) {
+            LigneMagasin get = lignemagasins.get(i);
+            if (i==0) {
+            get.setQuantite(get.getQuantite()+qtn);
+            ligneMagasinFacade.edit(get);   
+            }
+        }
+  
+    }
+public void deletequantite (Produit produit , double qtn){
         
       List<LigneMagasin> lignemagasins = ligneMagasinFacade.findbyProduit(produit);
       
         for (int i = 0; i < lignemagasins.size(); i++) {
             LigneMagasin get = lignemagasins.get(i);
-            
-            get.setQuantite(get.getQuantite()+qtn);
-            ligneMagasinFacade.edit(get);
-            
+            if (i==0) {
+               get.setQuantite(get.getQuantite()-qtn);
+            ligneMagasinFacade.edit(get); 
+            }
+
+           
         }
         System.out.println("it is done I guess check the DB");
      

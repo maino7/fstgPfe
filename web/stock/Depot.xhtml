@@ -9,7 +9,7 @@
 
 
     <h:head>
-        <title>Depot(Oualili Younesse)</title>
+        <title>Géstion des Dêpots</title>
         <link rel="apple-touch-icon" sizes="76x76" href="./newtemplate/assets/img/apple-icon.png" />
         <!--<link rel="icon" type="image/png" href="./newtemplate/assets/img/favicon.png" />-->
         <link rel="shortout icon" type="image/x-icon" href="#{resource['images/favicon.png']}" />
@@ -40,58 +40,62 @@
 
 
         <!--haaahwa sidebar-->
-        <div style="background-color: white" class="sidebar" data-color="purple" >
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-            -->
+        <div style="background-color: white;width: 265px" class="sidebar" data-color="purple" >
             <div class="logo">
                 <a href="../../template/Home.xhtml"><img src="../resources/images/logo.png" style="width: 200px;" /></a>
             </div>
-            <div style="width: 280px" class="sidebar-wrapper">
+            <div style="width: 278px" class="sidebar-wrapper">
                 <ul class="nav">
                     <li>
                         <a href="DoyenLogin.xhtml?faces-redirect=true">
                             <i class="material-icons">home</i>
-                            <p>Home</p>
+                            <p>Accueil</p>
                         </a>
                     </li>
                     <li>
                         <a href="./Commande.xhtml?faces-redirect=true">
                             <i class="material-icons">content_paste</i>
-                            <p>Effectuer une commande</p>
+                            <p>Effectuer une Commande</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
+                            <i class="material-icons text-gray">notifications</i>
+                            <p>Consulter les Exp. de Besoin</p>
                         </a>
                     </li>
                     <li>
                         <a href="Facture.xhtml?faces-redirect=true">
                             <i class="material-icons">library_books</i>
-                            <p>Consulter les factures</p>
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
-                            <i class="material-icons text-gray">notifications</i>
-                            <p>Consulter les exp. de besoin</p>
+                            <p>Enregistrer une Facture</p>
                         </a>
                     </li>
                     <li>
                         <a href="Livraison.xhtml?faces-redirect=true">
                             <i class="material-icons">event_available</i>
-                            <p>Enregistrer une livraison</p>
+                            <p>Enregistrer une Livraison</p>
                         </a>
                     </li>
                     <li>
-                        <a href="Ajout.xhtml?faces-redirect=true">
+                        <a href="Depot.xhtml?faces-redirect=true">
+                            <i class="material-icons">store</i>
+                            <p>Géstion des Dépôts</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="UserStock.xhtml?faces-redirect=true">
                             <i class="material-icons">people</i>
-                            <p>Gestion des utilisateurs</p>
+                            <p>Géstion des Utilisateurs</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Stock.xhtml?faces-redirect=true">
+                            <i class="material-icons">dns</i>
+                            <p>Consulter le Stock</p>
                         </a>
                     </li>
                 </ul>
             </div>
-
         </div>
 
 
@@ -130,7 +134,7 @@
                     <div class="col-md-10">
                         <div class="card">
                             <div class="card-header" data-background-color="grey">
-                                <h4 class="title">Gerer Depots</h4>
+                                <h4 class="title">Géstion des Depots</h4>
                             </div>
                             <div class="card-content">
                                 <h:form id="idForm">      
@@ -151,7 +155,7 @@
                                         </p:column>
                                     </p:dataTable>
                                     <p:commandButton value="Supprimer" icon="ui-icon-trash" style="background-color: grey; font-size: 85%" action="#{magasinController.destroy()}" update="idForm:reslist"></p:commandButton>
-                                    <p:commandButton value="Ajouter" icon="ui-icon-plus" style="background-color: grey; font-size: 85%" action="CreateDépot" ></p:commandButton>
+                                    <p:commandButton value="Ajouter" icon="ui-icon-plus" style="background-color: grey; font-size: 85%" action="CreateDépot.xhtml?faces-redirect=true" ></p:commandButton>
 
                                 </h:form>
                             </div>

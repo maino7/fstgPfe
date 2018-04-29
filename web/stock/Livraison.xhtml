@@ -35,55 +35,52 @@
         <!-- Navigation -->
         <p:growl id="growl" life="3000" />
 
-        <div style="background-color: white; width: 275px" class="sidebar" data-color="purple" >
-
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-            -->
+       <div style="background-color: white;width: 265px" class="sidebar" data-color="purple" >
             <div class="logo">
-
                 <a href="../../template/Home.xhtml"><img src="../resources/images/logo.png" style="width: 200px;" /></a>
             </div>
-            <div style="width: 280px" class="sidebar-wrapper">
+            <div style="width: 278px" class="sidebar-wrapper">
                 <ul class="nav">
                     <li>
                         <a href="DoyenLogin.xhtml?faces-redirect=true">
                             <i class="material-icons">home</i>
-                            <p>Home</p>
+                            <p>Accueil</p>
                         </a>
                     </li>
                     <li>
                         <a href="./Commande.xhtml?faces-redirect=true">
                             <i class="material-icons">content_paste</i>
-                            <p>Effectuer une commande</p>
+                            <p>Effectuer une Commande</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
+                            <i class="material-icons text-gray">notifications</i>
+                            <p>Consulter les Exp. de Besoin</p>
                         </a>
                     </li>
                     <li>
                         <a href="Facture.xhtml?faces-redirect=true">
                             <i class="material-icons">library_books</i>
-                            <p>Consulter les factures</p>
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a href="ExpressionBesoinDoyen.xhtml?faces-redirect=true">
-                            <i class="material-icons text-gray">notifications</i>
-                            <p>Consulter les exp. de besoin</p>
+                            <p>Enregistrer une Facture</p>
                         </a>
                     </li>
                     <li>
                         <a href="Livraison.xhtml?faces-redirect=true">
                             <i class="material-icons">event_available</i>
-                            <p>Enregistrer une livraison</p>
+                            <p>Enregistrer une Livraison</p>
                         </a>
                     </li>
                     <li>
-                        <a href="Ajout.xhtml?faces-redirect=true">
+                        <a href="Depot.xhtml?faces-redirect=true">
+                            <i class="material-icons">store</i>
+                            <p>Géstion des Dépôts</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="UserStock.xhtml?faces-redirect=true">
                             <i class="material-icons">people</i>
-                            <p>Gestion des utilisateurs</p>
+                            <p>Géstion des Utilisateurs</p>
                         </a>
                     </li>
                 </ul>
@@ -232,7 +229,7 @@
                                     <p:commandButton value="Vider" icon="ui-icon-close" style="background-color: grey; font-size: 85%" action="#{ligneLivraisonController.vider()}" update="tableForm:datalist"></p:commandButton>
                                     <br></br>
                                 </h:form>
-                                <p:commandButton value="Enregistrer" icon="ui-icon-check" update="tableForm:datalist, livForm" oncomplete="PF('ImprimerLivraisonDialog').show()" style="background-color: #2a9942" class="btn btn-sm pull-right"></p:commandButton>
+                                <p:commandButton value="Enregistrer" icon="ui-icon-check" actionListener="#{ligneLivraisonController.validerLivraison()}" update="tableForm:datalist, livForm" oncomplete="PF('ImprimerLivraisonDialog').show()" style="background-color: #2a9942" class="btn btn-sm pull-right"></p:commandButton>
                             </div> 
                         </div>
                     </div>

@@ -7,8 +7,9 @@ import bean.UserStock;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import controller.util.SessionUtil;
+import java.io.IOException;
 import service.LigneCommandeFacade;
-
+import controller.util.Session;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 import service.CommandeFacade;
 import service.ProduitFacade;
 
@@ -134,30 +136,23 @@ public class LigneCommandeController implements Serializable {
     public Commande validerCommande() {
         Commande commande = commandeFacade.addCommande();
         ejbFacade.ajouterLigneCommande(commande, commandeItems);
+        commande.setLigneCommandes(commandeItems);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Votre commande a été validée avec succès. Le numéro de la commande est " + commande.getId()));
+        Session.updateAttribute(commande,"commande");
+         vider();
         return commande;
     }
 
-    public void validerImprimerOui() {
-        if (commandeItems.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la commande avant de valider !"));
-        } else {
-            Commande commande = validerCommande();
-            imprimer(commande);
-            vider();
-        }
+    public void validerImprimerOui() throws JRException, IOException {
+           // Commande commande = validerCommande();
+           Commande c=(Commande) Session.getAttribut("commande");
+            imprimer(c);
+           
     }
 
-    public void validerImprimerNon() {
-        if (commandeItems.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Veuillez remplir la commande avant de valider !"));
-        } else {
-            validerCommande();
-            vider();
-        }
-    }
+   
 
-    public void imprimer(Commande commande) {
+    public void imprimer(Commande commande) throws JRException, IOException {
         commandeFacade.imprimerCommande(commande);
     }
 

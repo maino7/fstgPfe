@@ -34,10 +34,14 @@ public class UserStockController implements Serializable {
     }
 
     public UserStock getSelected() {
-        if(selected==null){
-            selected=new UserStock();
-                          }
+        if (selected == null) {
+            selected = new UserStock();
+        }
         return selected;
+    }
+
+    public void bloquerUser() {
+        ejbFacade.bloquerUser(selected);
     }
 
     public void setSelected(UserStock selected) {
@@ -59,6 +63,7 @@ public class UserStockController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+
     public void onEditEvent(RowEditEvent event) {
         ejbFacade.edit((UserStock) event.getObject());
         JsfUtil.addSuccessMessage("User Edited Succesfully");
@@ -69,9 +74,8 @@ public class UserStockController implements Serializable {
         JsfUtil.addErrorMessage("Modification annulée");
     }
 
-
     public void create() {
-        persist(PersistAction.CREATE,"UserStockCreated");
+        persist(PersistAction.CREATE, "UserStockCreated");
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
@@ -103,7 +107,7 @@ public class UserStockController implements Serializable {
                 if (persistAction != PersistAction.DELETE) {
                     selected.setPassword(HashageUtil.sha256(selected.getPassword()));
                     getFacade().edit(selected);
-                    selected=null;
+                    selected = null;
                 } else {
                     getFacade().remove(selected);
                 }

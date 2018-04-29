@@ -17,10 +17,12 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.export.JRPdfExporterParameter;
 
 /**
  *
- * @author Khalid
+ * @author Yougata
  */
 public class PdfUtil {
 
@@ -38,6 +40,11 @@ public class PdfUtil {
         OutputStream outputStream = getResponseOutput(outPoutFileName);
         JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
     }
+    public static JasperPrint createJasperPrint(List myList, Map<String, Object> params, String bilan) throws JRException, IOException {
+        JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(myList);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(PdfUtil.class.getResourceAsStream(bilan), params, jrBeanCollectionDataSource);
+        return jasperPrint;
+    }
   
     private static OutputStream getResponseOutput(String fileName) throws IOException {
         HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -47,6 +54,14 @@ public class PdfUtil {
         httpServletResponse.addHeader("Content-Type", "application/pdf");
         httpServletResponse.addHeader("Content-Disposition", "attachment; filename=" + fileName + ".pdf");
         return httpServletResponse.getOutputStream();
+    }
+    public static void generatePdfs(List<JasperPrint> myList, String nonFile) throws JRException, IOException {
+        JRPdfExporter exporter = new JRPdfExporter();
+        exporter.setParameter(JRPdfExporterParameter.JASPER_PRINT_LIST, myList);
+
+        exporter.setParameter(JRPdfExporterParameter.OUTPUT_STREAM, getResponseOutput(nonFile));
+        exporter.exportReport();
+
     }
 
  
