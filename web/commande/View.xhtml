@@ -12,8 +12,14 @@
             <h:form id="CommandeViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{commandeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCommandeLabel_nombreCommande}"/>
+                        <h:outputText value="#{commandeController.selected.nombreCommande}" title="#{bundle.ViewCommandeTitle_nombreCommande}"/>
+                        <h:outputText value="#{bundle.ViewCommandeLabel_livree}"/>
+                        <h:outputText value="#{commandeController.selected.livree}" title="#{bundle.ViewCommandeTitle_livree}"/>
                         <h:outputText value="#{bundle.ViewCommandeLabel_id}"/>
                         <h:outputText value="#{commandeController.selected.id}" title="#{bundle.ViewCommandeTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCommandeLabel_userStock}"/>
+                        <h:outputText value="#{commandeController.selected.userStock}" title="#{bundle.ViewCommandeTitle_userStock}"/>
                         <h:outputText value="#{bundle.ViewCommandeLabel_dateCommande}"/>
                         <h:outputText value="#{commandeController.selected.dateCommande}" title="#{bundle.ViewCommandeTitle_dateCommande}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />

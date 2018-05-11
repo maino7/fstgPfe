@@ -39,6 +39,13 @@
                                            var="entiteAdministrativeItem"
                                            itemValue="#{entiteAdministrativeItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditUserStockLabel_role}" for="role" />
+                        <p:selectOneMenu id="role" value="#{userStockController.selected.role}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{roleController.itemsAvailableSelectOne}"
+                                           var="roleItem"
+                                           itemValue="#{roleItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{userStockController.update}" value="#{bundle.Save}" update="display,:UserStockListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserStockEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UserStockEditDialog.hide()"/>

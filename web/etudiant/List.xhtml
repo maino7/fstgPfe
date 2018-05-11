@@ -29,6 +29,12 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEtudiantTitle_etatDeust}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etatDeust}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListEtudiantTitle_password}"/>
                             </f:facet>
                             <h:outputText value="#{item.password}"/>
@@ -94,12 +100,6 @@
                                 <h:outputText value="#{bundle.ListEtudiantTitle_gender}"/>
                             </f:facet>
                             <h:outputText value="#{item.gender}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Etat deust"/>
-                            </f:facet>
-                            <h:outputText value="#{item.etatDeust}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{etudiantController.prepareCreate}" update=":EtudiantCreateForm" oncomplete="PF('EtudiantCreateDialog').show()"/>

@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import org.hibernate.validator.constraints.Email;
 
@@ -58,11 +59,15 @@ public class Etudiant implements Serializable {
     @OneToMany(mappedBy = "etudiant")
     private List<NoteSemestre> noteSemestre;
     @ManyToOne
-    private Filiere filiere;
+    private Filiere filiere; //a changer avec niveau + ajouter bean.candidat
     @OneToMany(mappedBy = "etudiant")
     private List<Device> devices;
     @OneToMany(mappedBy = "etudiant")
     private List<DemandeLicence> demandeLicences;
+    @ManyToOne
+    private Niveau niveau;
+    @OneToOne
+    private Candidat candidat;
 
     public Etudiant() {
     }

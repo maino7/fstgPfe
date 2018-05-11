@@ -26,8 +26,6 @@
                                            var="semestreItem"
                                            itemValue="#{semestreItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateDemandeReleveNoteItemLabel_delivred}" for="delivred" />
-                        <p:inputText id="delivred" value="#{demandeReleveNoteItemController.selected.delivred}" title="#{bundle.CreateDemandeReleveNoteItemTitle_delivred}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{demandeReleveNoteItemController.create}" value="#{bundle.Save}" update="display,:DemandeReleveNoteItemListForm:datalist,:growl" oncomplete="handleSubmit(args,'DemandeReleveNoteItemCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DemandeReleveNoteItemCreateDialog.hide()"/>

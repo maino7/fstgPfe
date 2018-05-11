@@ -12,31 +12,18 @@
             <h:form id="ArticleEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{articleController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditArticleLabel_file}" for="file" />
-                        <p:inputText id="file" value="#{articleController.selected.file}" title="#{bundle.EditArticleTitle_file}" />
-                        <p:outputLabel value="#{bundle.EditArticleLabel_priority}" for="priority" />
-                        <p:inputText id="priority" value="#{articleController.selected.priority}" title="#{bundle.EditArticleTitle_priority}" />
-                        <p:outputLabel value="#{bundle.EditArticleLabel_type}" for="type" />
-                        <p:inputText id="type" value="#{articleController.selected.type}" title="#{bundle.EditArticleTitle_type}" />
-                        <p:outputLabel value="#{bundle.EditArticleLabel_auteur}" for="auteur" />
-                        <p:selectOneMenu id="auteur" value="#{articleController.selected.auteur}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{enseignantController.itemsAvailableSelectOne}"
-                                           var="auteurItem"
-                                           itemValue="#{auteurItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditArticleLabel_dateCreation}" for="dateCreation" />
-                        <p:calendar id="dateCreation" pattern="MM/dd/yyyy" value="#{articleController.selected.dateCreation}" title="#{bundle.EditArticleTitle_dateCreation}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditArticleLabel_dateDebut}" for="dateDebut" />
-                        <p:calendar id="dateDebut" pattern="MM/dd/yyyy" value="#{articleController.selected.dateDebut}" title="#{bundle.EditArticleTitle_dateDebut}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditArticleLabel_dateExpiration}" for="dateExpiration" />
-                        <p:calendar id="dateExpiration" pattern="MM/dd/yyyy" value="#{articleController.selected.dateExpiration}" title="#{bundle.EditArticleTitle_dateExpiration}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditArticleLabel_contenu}" for="contenu" />
-                        <p:inputText id="contenu" value="#{articleController.selected.contenu}" title="#{bundle.EditArticleTitle_contenu}" />
-                        <p:outputLabel value="#{bundle.EditArticleLabel_titre}" for="titre" />
-                        <p:inputText id="titre" value="#{articleController.selected.titre}" title="#{bundle.EditArticleTitle_titre}" />
                         <p:outputLabel value="#{bundle.EditArticleLabel_id}" for="id" />
                         <p:inputText id="id" value="#{articleController.selected.id}" title="#{bundle.EditArticleTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditArticleLabel_content}" for="content" />
+                        <p:inputText id="content" value="#{articleController.selected.content}" title="#{bundle.EditArticleTitle_content}" />
+                        <p:outputLabel value="#{bundle.EditArticleLabel_title}" for="title" />
+                        <p:inputText id="title" value="#{articleController.selected.title}" title="#{bundle.EditArticleTitle_title}" />
+                        <p:outputLabel value="#{bundle.EditArticleLabel_images}" for="images" />
+                        <p:inputText id="images" value="#{articleController.selected.images}" title="#{bundle.EditArticleTitle_images}" />
+                        <p:outputLabel value="#{bundle.EditArticleLabel_datePublication}" for="datePublication" />
+                        <p:calendar id="datePublication" pattern="MM/dd/yyyy" value="#{articleController.selected.datePublication}" title="#{bundle.EditArticleTitle_datePublication}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditArticleLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{articleController.selected.type}" title="#{bundle.EditArticleTitle_type}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{articleController.update}" value="#{bundle.Save}" update="display,:ArticleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ArticleEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ArticleEditDialog.hide()"/>

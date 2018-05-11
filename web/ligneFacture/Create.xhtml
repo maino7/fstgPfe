@@ -12,14 +12,6 @@
             <h:form id="LigneFactureCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ligneFactureController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateLigneFactureLabel_quantite}" for="quantite" />
-                        <p:inputText id="quantite" value="#{ligneFactureController.selected.quantite}" title="#{bundle.CreateLigneFactureTitle_quantite}" />
-                        <p:outputLabel value="#{bundle.CreateLigneFactureLabel_produit}" for="produit" />
-                        <p:selectOneMenu id="produit" value="#{ligneFactureController.selected.produit}" >
-                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
-                                           var="produitItem"
-                                           itemValue="#{produitItem}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateLigneFactureLabel_facture}" for="facture" />
                         <p:selectOneMenu id="facture" value="#{ligneFactureController.selected.facture}" >
                             <f:selectItems value="#{factureController.itemsAvailableSelectOne}"
@@ -28,6 +20,14 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateLigneFactureLabel_id}" for="id" />
                         <p:inputText id="id" value="#{ligneFactureController.selected.id}" title="#{bundle.CreateLigneFactureTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateLigneFactureLabel_quantite}" for="quantite" />
+                        <p:inputText id="quantite" value="#{ligneFactureController.selected.quantite}" title="#{bundle.CreateLigneFactureTitle_quantite}" />
+                        <p:outputLabel value="#{bundle.CreateLigneFactureLabel_produit}" for="produit" />
+                        <p:selectOneMenu id="produit" value="#{ligneFactureController.selected.produit}" >
+                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
+                                           var="produitItem"
+                                           itemValue="#{produitItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{ligneFactureController.create}" value="#{bundle.Save}" update="display,:LigneFactureListForm:datalist,:growl" oncomplete="handleSubmit(args,'LigneFactureCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LigneFactureCreateDialog.hide()"/>

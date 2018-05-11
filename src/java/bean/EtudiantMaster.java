@@ -64,7 +64,7 @@ public class EtudiantMaster implements Serializable {
     @ManyToOne
     private Pays pays;
     @ManyToOne
-    private MentionBac mentionBac;
+    private MentionDiplome mentionBac;
     @ManyToOne
     private OptionBac optionBac;
     @ManyToOne
@@ -348,11 +348,11 @@ public class EtudiantMaster implements Serializable {
         this.pays = pays;
     }
 
-    public MentionBac getMentionBac() {
+    public MentionDiplome getMentionBac() {
         return mentionBac;
     }
 
-    public void setMentionBac(MentionBac mentionBac) {
+    public void setMentionBac(MentionDiplome mentionBac) {
         this.mentionBac = mentionBac;
     }
 

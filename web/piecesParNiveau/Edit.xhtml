@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PiecesParNiveauEditDlg" widgetVar="PiecesParNiveauEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPiecesParNiveauTitle}">
+            <h:form id="PiecesParNiveauEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{piecesParNiveauController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPiecesParNiveauLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{piecesParNiveauController.selected.nombre}" title="#{bundle.EditPiecesParNiveauTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditPiecesParNiveauLabel_piecesJointe}" for="piecesJointe" />
+                        <p:selectOneMenu id="piecesJointe" value="#{piecesParNiveauController.selected.piecesJointe}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{pieceController.itemsAvailableSelectOne}"
+                                           var="piecesJointeItem"
+                                           itemValue="#{piecesJointeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPiecesParNiveauLabel_niveau}" for="niveau" />
+                        <p:selectOneMenu id="niveau" value="#{piecesParNiveauController.selected.niveau}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{niveauController.itemsAvailableSelectOne}"
+                                           var="niveauItem"
+                                           itemValue="#{niveauItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPiecesParNiveauLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{piecesParNiveauController.selected.id}" title="#{bundle.EditPiecesParNiveauTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{piecesParNiveauController.update}" value="#{bundle.Save}" update="display,:PiecesParNiveauListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PiecesParNiveauEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PiecesParNiveauEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

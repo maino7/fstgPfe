@@ -12,6 +12,8 @@
             <h:form id="ReceptionViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{receptionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewReceptionLabel_userStock}"/>
+                        <h:outputText value="#{receptionController.selected.userStock}" title="#{bundle.ViewReceptionTitle_userStock}"/>
                         <h:outputText value="#{bundle.ViewReceptionLabel_dateReception}"/>
                         <h:outputText value="#{receptionController.selected.dateReception}" title="#{bundle.ViewReceptionTitle_dateReception}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />

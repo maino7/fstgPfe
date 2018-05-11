@@ -12,12 +12,18 @@
             <h:form id="DemandeCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{demandeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDemandeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{demandeController.selected.id}" title="#{bundle.CreateDemandeTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateDemandeLabel_etudiant}" for="etudiant" />
                         <p:selectOneMenu id="etudiant" value="#{demandeController.selected.etudiant}" >
                             <f:selectItems value="#{etudiantController.itemsAvailableSelectOne}"
                                            var="etudiantItem"
                                            itemValue="#{etudiantItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandeLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{demandeController.selected.description}" title="#{bundle.CreateDemandeTitle_description}" />
+                        <p:outputLabel value="#{bundle.CreateDemandeLabel_etat}" for="etat" />
+                        <p:inputText id="etat" value="#{demandeController.selected.etat}" title="#{bundle.CreateDemandeTitle_etat}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{demandeController.create}" value="#{bundle.Save}" update="display,:DemandeListForm:datalist,:growl" oncomplete="handleSubmit(args,'DemandeCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DemandeCreateDialog.hide()"/>

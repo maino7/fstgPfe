@@ -38,6 +38,8 @@
                                            var="filiereItem"
                                            itemValue="#{filiereItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandeDerogationLabel_etat}" for="etat" />
+                        <p:inputText id="etat" value="#{demandeDerogationController.selected.etat}" title="#{bundle.EditDemandeDerogationTitle_etat}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{demandeDerogationController.update}" value="#{bundle.Save}" update="display,:DemandeDerogationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandeDerogationEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DemandeDerogationEditDialog.hide()"/>

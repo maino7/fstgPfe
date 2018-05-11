@@ -1,6 +1,6 @@
 package controller;
 
-import bean.MentionBac;
+import bean.MentionDiplome;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import service.MentionBacFacade;
@@ -25,17 +25,17 @@ public class MentionBacController implements Serializable {
 
     @EJB
     private service.MentionBacFacade ejbFacade;
-    private List<MentionBac> items = null;
-    private MentionBac selected;
+    private List<MentionDiplome> items = null;
+    private MentionDiplome selected;
 
     public MentionBacController() {
     }
 
-    public MentionBac getSelected() {
+    public MentionDiplome getSelected() {
         return selected;
     }
 
-    public void setSelected(MentionBac selected) {
+    public void setSelected(MentionDiplome selected) {
         this.selected = selected;
     }
 
@@ -49,8 +49,8 @@ public class MentionBacController implements Serializable {
         return ejbFacade;
     }
 
-    public MentionBac prepareCreate() {
-        selected = new MentionBac();
+    public MentionDiplome prepareCreate() {
+        selected = new MentionDiplome();
         initializeEmbeddableKey();
         return selected;
     }
@@ -74,7 +74,7 @@ public class MentionBacController implements Serializable {
         }
     }
 
-    public List<MentionBac> getItems() {
+    public List<MentionDiplome> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,19 +109,19 @@ public class MentionBacController implements Serializable {
         }
     }
 
-    public MentionBac getMentionBac(java.lang.Long id) {
+    public MentionDiplome getMentionBac(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<MentionBac> getItemsAvailableSelectMany() {
+    public List<MentionDiplome> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<MentionBac> getItemsAvailableSelectOne() {
+    public List<MentionDiplome> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = MentionBac.class)
+    @FacesConverter(forClass = MentionDiplome.class)
     public static class MentionBacControllerConverter implements Converter {
 
         @Override
@@ -151,11 +151,11 @@ public class MentionBacController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof MentionBac) {
-                MentionBac o = (MentionBac) object;
+            if (object instanceof MentionDiplome) {
+                MentionDiplome o = (MentionDiplome) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), MentionBac.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), MentionDiplome.class.getName()});
                 return null;
             }
         }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ExamCandidatCreateDlg" widgetVar="ExamCandidatCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateExamCandidatTitle}">
+            <h:form id="ExamCandidatCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{examCandidatController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateExamCandidatLabel_noteCalc}" for="noteCalc" />
+                        <p:inputText id="noteCalc" value="#{examCandidatController.selected.noteCalc}" title="#{bundle.CreateExamCandidatTitle_noteCalc}" />
+                        <p:outputLabel value="#{bundle.CreateExamCandidatLabel_condidature}" for="condidature" />
+                        <p:selectOneMenu id="condidature" value="#{examCandidatController.selected.condidature}" >
+                            <f:selectItems value="#{condidatureController.itemsAvailableSelectOne}"
+                                           var="condidatureItem"
+                                           itemValue="#{condidatureItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateExamCandidatLabel_matiereConcour}" for="matiereConcour" />
+                        <p:selectOneMenu id="matiereConcour" value="#{examCandidatController.selected.matiereConcour}" >
+                            <f:selectItems value="#{matiereConcourController.itemsAvailableSelectOne}"
+                                           var="matiereConcourItem"
+                                           itemValue="#{matiereConcourItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateExamCandidatLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{examCandidatController.selected.id}" title="#{bundle.CreateExamCandidatTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{examCandidatController.create}" value="#{bundle.Save}" update="display,:ExamCandidatListForm:datalist,:growl" oncomplete="handleSubmit(args,'ExamCandidatCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ExamCandidatCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

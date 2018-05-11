@@ -16,6 +16,13 @@
                         <p:inputText id="titre" value="#{dernierDiplomeController.selected.titre}" title="#{bundle.EditDernierDiplomeTitle_titre}" />
                         <p:outputLabel value="#{bundle.EditDernierDiplomeLabel_numApg}" for="numApg" />
                         <p:inputText id="numApg" value="#{dernierDiplomeController.selected.numApg}" title="#{bundle.EditDernierDiplomeTitle_numApg}" />
+                        <p:outputLabel value="#{bundle.EditDernierDiplomeLabel_mentionDiplome}" for="mentionDiplome" />
+                        <p:selectOneMenu id="mentionDiplome" value="#{dernierDiplomeController.selected.mentionDiplome}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{mentionDiplomeController.itemsAvailableSelectOne}"
+                                           var="mentionDiplomeItem"
+                                           itemValue="#{mentionDiplomeItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditDernierDiplomeLabel_id}" for="id" />
                         <p:inputText id="id" value="#{dernierDiplomeController.selected.id}" title="#{bundle.EditDernierDiplomeTitle_id}" />
                     </p:panelGrid>

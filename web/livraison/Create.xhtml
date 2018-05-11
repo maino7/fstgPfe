@@ -12,6 +12,12 @@
             <h:form id="LivraisonCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{livraisonController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateLivraisonLabel_userStock}" for="userStock" />
+                        <p:selectOneMenu id="userStock" value="#{livraisonController.selected.userStock}" >
+                            <f:selectItems value="#{userStockController.itemsAvailableSelectOne}"
+                                           var="userStockItem"
+                                           itemValue="#{userStockItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateLivraisonLabel_dateLivraison}" for="dateLivraison" />
                         <p:calendar id="dateLivraison" pattern="MM/dd/yyyy" value="#{livraisonController.selected.dateLivraison}" title="#{bundle.EditLivraisonTitle_dateLivraison}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateLivraisonLabel_commande}" for="commande" />

@@ -39,7 +39,7 @@
                         <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_anneeBac}" for="anneeBac" />
                         <p:inputText id="anneeBac" value="#{etudiantMasterController.selected.anneeBac}" title="#{bundle.CreateEtudiantMasterTitle_anneeBac}" />
                         <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_dateInscription}" for="dateInscription" />
-                        <p:calendar id="dateInscription" pattern="HH:mm:ss" value="#{etudiantMasterController.selected.dateInscription}" title="#{bundle.EditEtudiantMasterTitle_dateInscription}"  showOn="button"/>
+                        <p:calendar id="dateInscription" pattern="MM/dd/yyyy" value="#{etudiantMasterController.selected.dateInscription}" title="#{bundle.EditEtudiantMasterTitle_dateInscription}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_photo}" for="photo" />
                         <p:inputText id="photo" value="#{etudiantMasterController.selected.photo}" title="#{bundle.CreateEtudiantMasterTitle_photo}" />
                         <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_ip}" for="ip" />
@@ -88,7 +88,7 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateEtudiantMasterLabel_mentionBac}" for="mentionBac" />
                         <p:selectOneMenu id="mentionBac" value="#{etudiantMasterController.selected.mentionBac}" >
-                            <f:selectItems value="#{mentionBacController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{mentionDiplomeController.itemsAvailableSelectOne}"
                                            var="mentionBacItem"
                                            itemValue="#{mentionBacItem}"/>
                         </p:selectOneMenu>

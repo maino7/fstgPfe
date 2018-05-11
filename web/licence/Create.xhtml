@@ -14,7 +14,7 @@
                     <p:panelGrid columns="2" rendered="#{licenceController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateLicenceLabel_filiere}" for="filiere" />
                         <p:selectOneMenu id="filiere" value="#{licenceController.selected.filiere}" >
-                            <f:selectItems value="#{licenceController.tcFiliere()}"
+                            <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
                                            var="filiereItem"
                                            itemValue="#{filiereItem}"/>
                         </p:selectOneMenu>

@@ -41,6 +41,12 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNoteSemestreTitle_etatReleve}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etatReleve}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListNoteSemestreTitle_semestre}"/>
                             </f:facet>
                             <h:outputText value="#{item.semestre}"/>
@@ -59,7 +65,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Etat"/>
+                                <h:outputText value="#{bundle.ListNoteSemestreTitle_etat}"/>
                             </f:facet>
                             <h:outputText value="#{item.etat}"/>
                         </p:column>
@@ -68,6 +74,12 @@
                                 <h:outputText value="#{bundle.ListNoteSemestreTitle_nbrModuleValide}"/>
                             </f:facet>
                             <h:outputText value="#{item.nbrModuleValide}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNoteSemestreTitle_total}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.total}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{noteSemestreController.prepareCreate}" update=":NoteSemestreCreateForm" oncomplete="PF('NoteSemestreCreateDialog').show()"/>

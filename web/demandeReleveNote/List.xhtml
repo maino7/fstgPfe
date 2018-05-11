@@ -39,6 +39,12 @@
                             </f:facet>
                             <h:outputText value="#{item.etudiant}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandeReleveNoteTitle_etat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etat}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{demandeReleveNoteController.prepareCreate}" update=":DemandeReleveNoteCreateForm" oncomplete="PF('DemandeReleveNoteCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandeReleveNoteViewForm" oncomplete="PF('DemandeReleveNoteViewDialog').show()" disabled="#{empty demandeReleveNoteController.selected}"/>

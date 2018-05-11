@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template/adminTemplate.xhtml" >
+        <ui:define name="content" >
+            <h:form>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="orange">
+                                    <i class="material-icons">content_copy</i>
+                                </div>
+                                <div class="card-content">
+                                    <a href="./preinscription.xhtml"><p>Les critère de pre-inscription</p></a>
+                                </div>
+                                <div class="card-footer">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="green">
+                                    <i class="material-icons">person</i>
+                                </div>
+                                <div class="card-content">
+                                    <a href="#"><p>Gestion des pieces jointes</p></a>
+                                </div>
+                                <div class="card-footer">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                <div class="card-header" data-background-color="red">
+                                    <i class="material-icons">local_library</i>
+                                </div>
+                                <div class="card-content">
+
+                                    <a href="./gestionDeConcours.xhtml"><p>Gestion des épreuves</p></a>
+                                </div>
+                                <div class="card-footer">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <h:form>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="orange">
+                                    <h4 class="title">Coefficient des concours ecrit </h4>
+
+                                </div>
+                                <div class="card-content table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="text-warning">
+                                            <th>Nom Filiere</th>
+                                            <th>Exam 1</th>
+                                            <th>Exam 2</th>
+                                            <th>Exam 3</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>IRISI 1</td>
+                                                <td>2.0</td>
+                                                <td>2.0</td>
+                                                <td>3.0</td>
+                                                <td><p:commandButton value="Modifier" class="btn btn-info"></p:commandButton></td>
+                                            </tr>
+                                            <tr>
+                                                <td>ISA 1</td>
+                                                <td>3.0</td>
+                                                <td>7.0</td>
+                                                <td>7.0</td>
+                                                <td><p:commandButton value="Modifier" class="btn btn-info"></p:commandButton></td>
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </h:form>
+                    <div>
+                    </div>
+
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

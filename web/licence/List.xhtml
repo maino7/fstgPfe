@@ -31,13 +31,19 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListLicenceTitle_filiere}"/>
                             </f:facet>
-                            <h:outputText value="#{item.filiere.abreviation}"/>
+                            <h:outputText value="#{item.filiere}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListLicenceTitle_nom}"/>
                             </f:facet>
                             <h:outputText value="#{item.nom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLicenceTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{licenceController.prepareCreate}" update=":LicenceCreateForm" oncomplete="PF('LicenceCreateDialog').show()"/>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CandidatCreateDlg" widgetVar="CandidatCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCandidatTitle}">
+            <h:form id="CandidatCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{candidatController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_cin}" for="cin" />
+                        <p:inputText id="cin" value="#{candidatController.selected.cin}" title="#{bundle.CreateCandidatTitle_cin}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_condidature}" for="condidature" />
+                        <p:selectOneMenu id="condidature" value="#{candidatController.selected.condidature}" >
+                            <f:selectItems value="#{condidatureController.itemsAvailableSelectOne}"
+                                           var="condidatureItem"
+                                           itemValue="#{condidatureItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_etablissement}" for="etablissement" />
+                        <p:selectOneMenu id="etablissement" value="#{candidatController.selected.etablissement}" >
+                            <f:selectItems value="#{etablissementTypeController.itemsAvailableSelectOne}"
+                                           var="etablissementItem"
+                                           itemValue="#{etablissementItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_nomLat}" for="nomLat" />
+                        <p:inputText id="nomLat" value="#{candidatController.selected.nomLat}" title="#{bundle.CreateCandidatTitle_nomLat}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_prenomLat}" for="prenomLat" />
+                        <p:inputText id="prenomLat" value="#{candidatController.selected.prenomLat}" title="#{bundle.CreateCandidatTitle_prenomLat}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_sexe}" for="sexe" />
+                        <p:inputText id="sexe" value="#{candidatController.selected.sexe}" title="#{bundle.CreateCandidatTitle_sexe}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{candidatController.selected.email}" title="#{bundle.CreateCandidatTitle_email}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_telephone}" for="telephone" />
+                        <p:inputText id="telephone" value="#{candidatController.selected.telephone}" title="#{bundle.CreateCandidatTitle_telephone}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_nomAr}" for="nomAr" />
+                        <p:inputText id="nomAr" value="#{candidatController.selected.nomAr}" title="#{bundle.CreateCandidatTitle_nomAr}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_prenomAr}" for="prenomAr" />
+                        <p:inputText id="prenomAr" value="#{candidatController.selected.prenomAr}" title="#{bundle.CreateCandidatTitle_prenomAr}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_dateNaissance}" for="dateNaissance" />
+                        <p:calendar id="dateNaissance" pattern="MM/dd/yyyy" value="#{candidatController.selected.dateNaissance}" title="#{bundle.EditCandidatTitle_dateNaissance}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_lieuNaissance}" for="lieuNaissance" />
+                        <p:inputText id="lieuNaissance" value="#{candidatController.selected.lieuNaissance}" title="#{bundle.CreateCandidatTitle_lieuNaissance}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_anneeBac}" for="anneeBac" />
+                        <p:inputText id="anneeBac" value="#{candidatController.selected.anneeBac}" title="#{bundle.CreateCandidatTitle_anneeBac}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_dateInscription}" for="dateInscription" />
+                        <p:calendar id="dateInscription" pattern="MM/dd/yyyy" value="#{candidatController.selected.dateInscription}" title="#{bundle.EditCandidatTitle_dateInscription}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_photo}" for="photo" />
+                        <p:inputText id="photo" value="#{candidatController.selected.photo}" title="#{bundle.CreateCandidatTitle_photo}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_ip}" for="ip" />
+                        <p:inputText id="ip" value="#{candidatController.selected.ip}" title="#{bundle.CreateCandidatTitle_ip}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_adresse}" for="adresse" />
+                        <p:inputText id="adresse" value="#{candidatController.selected.adresse}" title="#{bundle.CreateCandidatTitle_adresse}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_lieuAr}" for="lieuAr" />
+                        <p:inputText id="lieuAr" value="#{candidatController.selected.lieuAr}" title="#{bundle.CreateCandidatTitle_lieuAr}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_lastPdf}" for="lastPdf" />
+                        <p:inputText id="lastPdf" value="#{candidatController.selected.lastPdf}" title="#{bundle.CreateCandidatTitle_lastPdf}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_anneeInscriptionEnsSup}" for="anneeInscriptionEnsSup" />
+                        <p:inputText id="anneeInscriptionEnsSup" value="#{candidatController.selected.anneeInscriptionEnsSup}" title="#{bundle.CreateCandidatTitle_anneeInscriptionEnsSup}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_anneeInscriptionUniv}" for="anneeInscriptionUniv" />
+                        <p:inputText id="anneeInscriptionUniv" value="#{candidatController.selected.anneeInscriptionUniv}" title="#{bundle.CreateCandidatTitle_anneeInscriptionUniv}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_anneeInscriptionEtab}" for="anneeInscriptionEtab" />
+                        <p:inputText id="anneeInscriptionEtab" value="#{candidatController.selected.anneeInscriptionEtab}" title="#{bundle.CreateCandidatTitle_anneeInscriptionEtab}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_etablissementPreInsc}" for="etablissementPreInsc" />
+                        <p:inputText id="etablissementPreInsc" value="#{candidatController.selected.etablissementPreInsc}" title="#{bundle.CreateCandidatTitle_etablissementPreInsc}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_secret}" for="secret" />
+                        <p:inputText id="secret" value="#{candidatController.selected.secret}" title="#{bundle.CreateCandidatTitle_secret}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_optionBac}" for="optionBac" />
+                        <p:selectOneMenu id="optionBac" value="#{candidatController.selected.optionBac}" >
+                            <f:selectItems value="#{optionBacController.itemsAvailableSelectOne}"
+                                           var="optionBacItem"
+                                           itemValue="#{optionBacItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_dernierDiplome}" for="dernierDiplome" />
+                        <p:selectOneMenu id="dernierDiplome" value="#{candidatController.selected.dernierDiplome}" >
+                            <f:selectItems value="#{dernierDiplomeController.itemsAvailableSelectOne}"
+                                           var="dernierDiplomeItem"
+                                           itemValue="#{dernierDiplomeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCandidatLabel_cne}" for="cne" />
+                        <p:inputText id="cne" value="#{candidatController.selected.cne}" title="#{bundle.CreateCandidatTitle_cne}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{candidatController.create}" value="#{bundle.Save}" update="display,:CandidatListForm:datalist,:growl" oncomplete="handleSubmit(args,'CandidatCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CandidatCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -9,14 +9,13 @@
     <ui:composition>
 
         <p:dialog id="DepartementCreateDlg" widgetVar="DepartementCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDepartementTitle}">
-            <h:form id="DepartementCreateForm" enctype="multipart/form-data">
+            <h:form id="DepartementCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{departementController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateDepartementLabel_description}" for="description" />
                         <p:inputText id="description" value="#{departementController.selected.description}" title="#{bundle.CreateDepartementTitle_description}" />
                         <p:outputLabel value="#{bundle.CreateDepartementLabel_img}" for="img" />
-                        <p:fileUpload id="img" mode="simple" value="#{departementController.uploadedFile}" sizeLimit="10000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
-                        
+                        <p:inputText id="img" value="#{departementController.selected.img}" title="#{bundle.CreateDepartementTitle_img}" />
                         <p:outputLabel value="#{bundle.CreateDepartementLabel_chefDepartement}" for="chefDepartement" />
                         <p:selectOneMenu id="chefDepartement" value="#{departementController.selected.chefDepartement}" >
                             <f:selectItems value="#{enseignantController.itemsAvailableSelectOne}"

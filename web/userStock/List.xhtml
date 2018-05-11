@@ -95,11 +95,17 @@
                             </f:facet>
                             <h:outputText value="#{item.entiteAdministrative}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUserStockTitle_role}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.role}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{userStockController.prepareCreate}" update=":UserStockCreateForm" oncomplete="PF('UserStockCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":UserStockViewForm" oncomplete="PF('UserStockViewDialog').show()" disabled="#{empty userStockController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UserStockEditForm" oncomplete="PF('UserStockEditDialog').show()" disabled="#{empty userStockController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{userStockController.destroy}" update=":UserStockListForm:datalist" disabled="#{empty userStockController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{userStockController.destroy}" update=":growl,datalist" disabled="#{empty userStockController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
@@ -112,5 +118,3 @@
     </ui:composition>
 
 </html>
-                
-            

@@ -251,5 +251,13 @@ public class EtudiantController implements Serializable {
          else
              return false;
      }
+     
+     //test
+     
+     public void testwalo(Etudiant e){
+         System.out.println("hahowa dkhel");
+         selected = e;
+         
+     }
 
 }

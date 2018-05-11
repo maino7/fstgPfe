@@ -18,12 +18,14 @@
                         <h:outputText value="#{articleController.selected.content}" title="#{bundle.ViewArticleTitle_content}"/>
                         <h:outputText value="#{bundle.ViewArticleLabel_title}"/>
                         <h:outputText value="#{articleController.selected.title}" title="#{bundle.ViewArticleTitle_title}"/>
-                        <h:outputText value="#{bundle.ViewArticleLabel_type}"/>
-                        
+                        <h:outputText value="#{bundle.ViewArticleLabel_images}"/>
+                        <h:outputText value="#{articleController.selected.images}" title="#{bundle.ViewArticleTitle_images}"/>
                         <h:outputText value="#{bundle.ViewArticleLabel_datePublication}"/>
-                        <h:outputText value="#{articleController.selected.datePublication}" title="#{bundle.ViewArticleLabel_datePublication}">
+                        <h:outputText value="#{articleController.selected.datePublication}" title="#{bundle.ViewArticleTitle_datePublication}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
+                        <h:outputText value="#{bundle.ViewArticleLabel_type}"/>
+                        <h:outputText value="#{articleController.selected.type}" title="#{bundle.ViewArticleTitle_type}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ArticleViewDialog.hide()"/>
                 </h:panelGroup>

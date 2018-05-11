@@ -38,6 +38,12 @@
                                            var="entiteAdministrativeItem"
                                            itemValue="#{entiteAdministrativeItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateUserStockLabel_role}" for="role" />
+                        <p:selectOneMenu id="role" value="#{userStockController.selected.role}" >
+                            <f:selectItems value="#{roleController.itemsAvailableSelectOne}"
+                                           var="roleItem"
+                                           itemValue="#{roleItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{userStockController.create}" value="#{bundle.Save}" update="display,:UserStockListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserStockCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UserStockCreateDialog.hide()"/>

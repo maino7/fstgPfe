@@ -12,15 +12,6 @@
             <h:form id="LigneExpressionBesoinEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ligneExpressionBesoinController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditLigneExpressionBesoinLabel_quantite}" for="quantite" />
-                        <p:inputText id="quantite" value="#{ligneExpressionBesoinController.selected.quantite}" title="#{bundle.EditLigneExpressionBesoinTitle_quantite}" />
-                        <p:outputLabel value="#{bundle.EditLigneExpressionBesoinLabel_produit}" for="produit" />
-                        <p:selectOneMenu id="produit" value="#{ligneExpressionBesoinController.selected.produit}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
-                                           var="produitItem"
-                                           itemValue="#{produitItem}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditLigneExpressionBesoinLabel_expressionBesoin}" for="expressionBesoin" />
                         <p:selectOneMenu id="expressionBesoin" value="#{ligneExpressionBesoinController.selected.expressionBesoin}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -30,6 +21,15 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditLigneExpressionBesoinLabel_id}" for="id" />
                         <p:inputText id="id" value="#{ligneExpressionBesoinController.selected.id}" title="#{bundle.EditLigneExpressionBesoinTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditLigneExpressionBesoinLabel_quantite}" for="quantite" />
+                        <p:inputText id="quantite" value="#{ligneExpressionBesoinController.selected.quantite}" title="#{bundle.EditLigneExpressionBesoinTitle_quantite}" />
+                        <p:outputLabel value="#{bundle.EditLigneExpressionBesoinLabel_produit}" for="produit" />
+                        <p:selectOneMenu id="produit" value="#{ligneExpressionBesoinController.selected.produit}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
+                                           var="produitItem"
+                                           itemValue="#{produitItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{ligneExpressionBesoinController.update}" value="#{bundle.Save}" update="display,:LigneExpressionBesoinListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LigneExpressionBesoinEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LigneExpressionBesoinEditDialog.hide()"/>

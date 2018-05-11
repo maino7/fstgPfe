@@ -5,7 +5,7 @@
  */
 package service;
 
-import bean.MentionBac;
+import bean.MentionDiplome;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author xXx-BlackAngel-xXx
  */
 @Stateless
-public class MentionBacFacade extends AbstractFacade<MentionBac> {
+public class MentionBacFacade extends AbstractFacade<MentionDiplome> {
 
     @PersistenceContext(unitName = "Pfe_FstgProjectPU")
     private EntityManager em;
@@ -26,7 +26,7 @@ public class MentionBacFacade extends AbstractFacade<MentionBac> {
     }
 
     public MentionBacFacade() {
-        super(MentionBac.class);
+        super(MentionDiplome.class);
     }
     
 }

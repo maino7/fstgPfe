@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -24,6 +25,8 @@ public class DernierDiplome implements Serializable {
     private Long id;
     private String titre;
     private String numApg;
+    @ManyToOne
+    private MentionDiplome mentionDiplome;
 
     public String getTitre() {
         return titre;
@@ -41,6 +44,15 @@ public class DernierDiplome implements Serializable {
         this.numApg = numApg;
     }
 
+    public MentionDiplome getMentionDiplome() {
+        return mentionDiplome;
+    }
+
+    public void setMentionDiplome(MentionDiplome mentionDiplome) {
+        this.mentionDiplome = mentionDiplome;
+    }
+    
+    
     
 
     public Long getId() {

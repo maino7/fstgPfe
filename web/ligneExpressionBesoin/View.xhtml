@@ -12,14 +12,14 @@
             <h:form id="LigneExpressionBesoinViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ligneExpressionBesoinController.selected != null}">
-                        <h:outputText value="#{bundle.ViewLigneExpressionBesoinLabel_quantite}"/>
-                        <h:outputText value="#{ligneExpressionBesoinController.selected.quantite}" title="#{bundle.ViewLigneExpressionBesoinTitle_quantite}"/>
-                        <h:outputText value="#{bundle.ViewLigneExpressionBesoinLabel_produit}"/>
-                        <h:outputText value="#{ligneExpressionBesoinController.selected.produit}" title="#{bundle.ViewLigneExpressionBesoinTitle_produit}"/>
                         <h:outputText value="#{bundle.ViewLigneExpressionBesoinLabel_expressionBesoin}"/>
                         <h:outputText value="#{ligneExpressionBesoinController.selected.expressionBesoin}" title="#{bundle.ViewLigneExpressionBesoinTitle_expressionBesoin}"/>
                         <h:outputText value="#{bundle.ViewLigneExpressionBesoinLabel_id}"/>
                         <h:outputText value="#{ligneExpressionBesoinController.selected.id}" title="#{bundle.ViewLigneExpressionBesoinTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewLigneExpressionBesoinLabel_quantite}"/>
+                        <h:outputText value="#{ligneExpressionBesoinController.selected.quantite}" title="#{bundle.ViewLigneExpressionBesoinTitle_quantite}"/>
+                        <h:outputText value="#{bundle.ViewLigneExpressionBesoinLabel_produit}"/>
+                        <h:outputText value="#{ligneExpressionBesoinController.selected.produit}" title="#{bundle.ViewLigneExpressionBesoinTitle_produit}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="LigneExpressionBesoinViewDialog.hide()"/>
                 </h:panelGroup>

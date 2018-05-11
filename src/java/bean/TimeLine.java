@@ -13,17 +13,15 @@ import javax.persistence.Id;
 
 /**
  *
- * @author Abed
+ * @author Topo
  */
 @Entity
-public class MentionBac implements Serializable {
+public class TimeLine implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String titre;
-    private String numApg;
 
     public Long getId() {
         return id;
@@ -32,24 +30,6 @@ public class MentionBac implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getTitre() {
-        return titre;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public String getNumApg() {
-        return numApg;
-    }
-
-    public void setNumApg(String numApg) {
-        this.numApg = numApg;
-    }
-
-   
 
     @Override
     public int hashCode() {
@@ -61,10 +41,10 @@ public class MentionBac implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MentionBac)) {
+        if (!(object instanceof TimeLine)) {
             return false;
         }
-        MentionBac other = (MentionBac) object;
+        TimeLine other = (TimeLine) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -73,7 +53,7 @@ public class MentionBac implements Serializable {
 
     @Override
     public String toString() {
-        return titre;
+        return "bean.TimeLine[ id=" + id + " ]";
     }
     
 }

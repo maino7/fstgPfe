@@ -29,9 +29,21 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExpressionBesoinTitle_recu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recu}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListExpressionBesoinTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExpressionBesoinTitle_userStock}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userStock}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -41,11 +53,11 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </p:column>
-                         <p:column>
+                        <p:column>
                             <f:facet name="header">
-                                <h:outputText value="User Stock"/>
+                                <h:outputText value="#{bundle.ListExpressionBesoinTitle_user}"/>
                             </f:facet>
-                             <h:outputText value="#{item.userStock.nom} #{item.userStock.prenom}"/>
+                            <h:outputText value="#{item.user}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{expressionBesoinController.prepareCreate}" update=":ExpressionBesoinCreateForm" oncomplete="PF('ExpressionBesoinCreateDialog').show()"/>

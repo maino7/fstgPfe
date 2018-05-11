@@ -29,6 +29,12 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFiliereTitle_section}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.section}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListFiliereTitle_typeFormation}"/>
                             </f:facet>
                             <h:outputText value="#{item.typeFormation}"/>

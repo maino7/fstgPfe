@@ -29,9 +29,27 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCommandeTitle_nombreCommande}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreCommande}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCommandeTitle_livree}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.livree}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCommandeTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCommandeTitle_userStock}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userStock}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -41,17 +59,11 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </p:column>
-<!--                        <p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCommandeTitle_user}"/>
                             </f:facet>
-                            <h:outputText value="#{item.user.nom} #{item.user.prenom}"/>
-                        </p:column>-->
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="User"/>
-                            </f:facet>
-                            <h:outputText value="#{item.userStock.nom} #{item.userStock.prenom}"/>
+                            <h:outputText value="#{item.user}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{commandeController.prepareCreate}" update=":CommandeCreateForm" oncomplete="PF('CommandeCreateDialog').show()"/>

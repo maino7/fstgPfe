@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConcourExamMatiereViewDlg" widgetVar="ConcourExamMatiereViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewConcourExamMatiereTitle}">
+            <h:form id="ConcourExamMatiereViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{concourExamMatiereController.selected != null}">
+                        <h:outputText value="#{bundle.ViewConcourExamMatiereLabel_coeff}"/>
+                        <h:outputText value="#{concourExamMatiereController.selected.coeff}" title="#{bundle.ViewConcourExamMatiereTitle_coeff}"/>
+                        <h:outputText value="#{bundle.ViewConcourExamMatiereLabel_dateExam}"/>
+                        <h:outputText value="#{concourExamMatiereController.selected.dateExam}" title="#{bundle.ViewConcourExamMatiereTitle_dateExam}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewConcourExamMatiereLabel_matiereConcour}"/>
+                        <h:outputText value="#{concourExamMatiereController.selected.matiereConcour}" title="#{bundle.ViewConcourExamMatiereTitle_matiereConcour}"/>
+                        <h:outputText value="#{bundle.ViewConcourExamMatiereLabel_concourNiveau}"/>
+                        <h:outputText value="#{concourExamMatiereController.selected.concourNiveau}" title="#{bundle.ViewConcourExamMatiereTitle_concourNiveau}"/>
+                        <h:outputText value="#{bundle.ViewConcourExamMatiereLabel_id}"/>
+                        <h:outputText value="#{concourExamMatiereController.selected.id}" title="#{bundle.ViewConcourExamMatiereTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ConcourExamMatiereViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

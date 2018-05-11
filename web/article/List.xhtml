@@ -29,69 +29,41 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListArticleTitle_file}"/>
+                                <h:outputText value="#{bundle.ListArticleTitle_id}"/>
                             </f:facet>
-                            <h:outputText escape="false" value="#{item.file}"/>
+                            <h:outputText value="#{item.id}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListArticleTitle_priority}"/>
+                                <h:outputText value="#{bundle.ListArticleTitle_content}"/>
                             </f:facet>
-                            <h:outputText value="#{item.priority}"/>
+                            <h:outputText value="#{item.content}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticleTitle_title}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.title}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticleTitle_images}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.images}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArticleTitle_datePublication}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datePublication}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListArticleTitle_type}"/>
                             </f:facet>
                             <h:outputText value="#{item.type}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListArticleTitle_auteur}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.auteur}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListArticleTitle_dateCreation}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dateCreation}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListArticleTitle_dateDebut}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dateDebut}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListArticleTitle_dateExpiration}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dateExpiration}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListArticleTitle_contenu}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.contenu}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListArticleTitle_titre}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.titre}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListArticleTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{articleController.prepareCreate}" update=":ArticleCreateForm" oncomplete="PF('ArticleCreateDialog').show()"/>
@@ -106,7 +78,6 @@
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
-          
         </ui:define>
     </ui:composition>
 

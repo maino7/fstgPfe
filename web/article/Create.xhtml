@@ -8,25 +8,28 @@
 
     <ui:composition>
 
-            <h:form id="ArticleCreateForm" enctype="multipart/form-data">
+        <p:dialog id="ArticleCreateDlg" widgetVar="ArticleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateArticleTitle}">
+            <h:form id="ArticleCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{articleController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateArticleLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{articleController.selected.id}" title="#{bundle.CreateArticleTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateArticleLabel_content}" for="content" />
-                        <p:textEditor id="content" value="#{articleController.selected.content}" height="200"  />
-
+                        <p:inputText id="content" value="#{articleController.selected.content}" title="#{bundle.CreateArticleTitle_content}" />
                         <p:outputLabel value="#{bundle.CreateArticleLabel_title}" for="title" />
                         <p:inputText id="title" value="#{articleController.selected.title}" title="#{bundle.CreateArticleTitle_title}" />
-                        <p:outputLabel value="Ajouter une image" for="imageUploader" />
+                        <p:outputLabel value="#{bundle.CreateArticleLabel_images}" for="images" />
+                        <p:inputText id="images" value="#{articleController.selected.images}" title="#{bundle.CreateArticleTitle_images}" />
+                        <p:outputLabel value="#{bundle.CreateArticleLabel_datePublication}" for="datePublication" />
+                        <p:calendar id="datePublication" pattern="MM/dd/yyyy" value="#{articleController.selected.datePublication}" title="#{bundle.EditArticleTitle_datePublication}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateArticleLabel_type}" for="type" />
                         <p:inputText id="type" value="#{articleController.selected.type}" title="#{bundle.CreateArticleTitle_type}" />
-                        <p:outputLabel value="Date de publication " for="datePublication" />
-                        <p:calendar id="datePublication" pattern="MM/dd/yyyy" value="#{articleController.selected.datePublication}" title="#{bundle.CreateArticleTitle_datePublication}"  showOn="button"/>
                     </p:panelGrid>
-                    <div style="position: relative ; left:60% ;">
-                        <p:commandButton  style="position: relative ; height: 300%;" value="#{bundle.Save}" ajax="false"  actionListener="#{articleController.create}"   oncomplete="handleSubmit(args,'ArticleCreateDialog');"/>  
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ArticleCreateDialog.hide()"/></div>
+                    <p:commandButton actionListener="#{articleController.create}" value="#{bundle.Save}" update="display,:ArticleListForm:datalist,:growl" oncomplete="handleSubmit(args,'ArticleCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ArticleCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
+        </p:dialog>
 
     </ui:composition>
 </html>

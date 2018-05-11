@@ -18,8 +18,8 @@
                                            var="equipeRechercheItem"
                                            itemValue="#{equipeRechercheItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="Titre" for="nom" />
-                        <p:inputTextarea id="nom" value="#{themeRechercheController.selected.nom}" title="#{bundle.CreateThemeRechercheTitle_nom}" />
+                        <p:outputLabel value="#{bundle.CreateThemeRechercheLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{themeRechercheController.selected.nom}" title="#{bundle.CreateThemeRechercheTitle_nom}" />
                         <p:outputLabel value="#{bundle.CreateThemeRechercheLabel_id}" for="id" />
                         <p:inputText id="id" value="#{themeRechercheController.selected.id}" title="#{bundle.CreateThemeRechercheTitle_id}" />
                     </p:panelGrid>

@@ -75,6 +75,12 @@
                             </f:facet>
                             <h:outputText value="#{item.filiere}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDemandeDerogationTitle_etat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etat}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{demandeDerogationController.prepareCreate}" update=":DemandeDerogationCreateForm" oncomplete="PF('DemandeDerogationCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandeDerogationViewForm" oncomplete="PF('DemandeDerogationViewDialog').show()" disabled="#{empty demandeDerogationController.selected}"/>

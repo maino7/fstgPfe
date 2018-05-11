@@ -12,6 +12,12 @@
             <h:form id="DemandeLicenceCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{demandeLicenceController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDemandeLicenceLabel_anneUniversitaire}" for="anneUniversitaire" />
+                        <p:selectOneMenu id="anneUniversitaire" value="#{demandeLicenceController.selected.anneUniversitaire}" >
+                            <f:selectItems value="#{anneUniversitaireController.itemsAvailableSelectOne}"
+                                           var="anneUniversitaireItem"
+                                           itemValue="#{anneUniversitaireItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateDemandeLicenceLabel_etudiant}" for="etudiant" />
                         <p:selectOneMenu id="etudiant" value="#{demandeLicenceController.selected.etudiant}" >
                             <f:selectItems value="#{etudiantController.itemsAvailableSelectOne}"

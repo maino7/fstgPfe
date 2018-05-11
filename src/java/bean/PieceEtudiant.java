@@ -14,7 +14,8 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author Abed
+<<<<<<< OURS
+ * @author Topo
  */
 @Entity
 public class PieceEtudiant implements Serializable {
@@ -23,11 +24,32 @@ public class PieceEtudiant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int nombre;
     @ManyToOne
-    private EtudiantMaster etudiantMaster;
+    private Condidature condidature;
     @ManyToOne
-    private Piece piece;
+    private PiecesParNiveau piecesParNiveau;
+
+    public PieceEtudiant() {
+    }
+
+    public Condidature getCondidature() {
+        return condidature;
+    }
+
+    public void setCondidature(Condidature condidature) {
+        this.condidature = condidature;
+    }
+
+    public PiecesParNiveau getPiecesParNiveau() {
+        return piecesParNiveau;
+    }
+
+    public void setPiecesParNiveau(PiecesParNiveau piecesParNiveau) {
+        this.piecesParNiveau = piecesParNiveau;
+    }
+    
+    
+    
 
     public Long getId() {
         return id;
@@ -35,30 +57,6 @@ public class PieceEtudiant implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(int nombre) {
-        this.nombre = nombre;
-    }
-
-    public EtudiantMaster getEtudiantMaster() {
-        return etudiantMaster;
-    }
-
-    public void setEtudiantMaster(EtudiantMaster etudiantMaster) {
-        this.etudiantMaster = etudiantMaster;
-    }
-
-    public Piece getPiece() {
-        return piece;
-    }
-
-    public void setPiece(Piece piece) {
-        this.piece = piece;
     }
 
     @Override
@@ -83,7 +81,8 @@ public class PieceEtudiant implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.PieceEtudiant[ id=" + id + " ]";
+        return "bean.PiecesFournie[ id=" + id + " ]";
+
     }
     
 }

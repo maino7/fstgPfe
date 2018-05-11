@@ -12,14 +12,20 @@
             <h:form id="ActualiteViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{actualiteController.selected != null}">
+                        <h:outputText value="#{bundle.ViewActualiteLabel_path}"/>
+                        <h:outputText value="#{actualiteController.selected.path}" title="#{bundle.ViewActualiteTitle_path}"/>
+                        <h:outputText value="#{bundle.ViewActualiteLabel_file}"/>
+                        <h:outputText value="#{actualiteController.selected.file}" title="#{bundle.ViewActualiteTitle_file}"/>
+                        <h:outputText value="#{bundle.ViewActualiteLabel_etat}"/>
+                        <h:outputText value="#{actualiteController.selected.etat}" title="#{bundle.ViewActualiteTitle_etat}"/>
+                        <h:outputText value="#{bundle.ViewActualiteLabel_description}"/>
+                        <h:outputText value="#{actualiteController.selected.description}" title="#{bundle.ViewActualiteTitle_description}"/>
                         <h:outputText value="#{bundle.ViewActualiteLabel_position}"/>
                         <h:outputText value="#{actualiteController.selected.position}" title="#{bundle.ViewActualiteTitle_position}"/>
                         <h:outputText value="#{bundle.ViewActualiteLabel_contenue}"/>
                         <h:outputText value="#{actualiteController.selected.contenue}" title="#{bundle.ViewActualiteTitle_contenue}"/>
                         <h:outputText value="#{bundle.ViewActualiteLabel_titre}"/>
                         <h:outputText value="#{actualiteController.selected.titre}" title="#{bundle.ViewActualiteTitle_titre}"/>
-                        <h:outputText value="description"/>
-                        <h:outputText value="#{actualiteController.selected.description}" title="description"/>
                         <h:outputText value="#{bundle.ViewActualiteLabel_priority}"/>
                         <h:outputText value="#{actualiteController.selected.priority}" title="#{bundle.ViewActualiteTitle_priority}"/>
                         <h:outputText value="#{bundle.ViewActualiteLabel_auteur}"/>

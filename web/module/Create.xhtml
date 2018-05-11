@@ -12,32 +12,30 @@
             <h:form id="ModuleCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{moduleController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateModuleLabel_filiere}" for="filiere" />
-                        <p:selectOneMenu id="filiere" value="#{moduleController.selected.filiere}" >
-                            <f:selectItem itemLabel="--SELECT--" itemValue="#{null}"/>
-                            <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
-                                           var="filiereItem"
-                                           itemValue="#{filiereItem}"/>
-                            <p:ajax process="filiere" update="semestre"/>
+                        <p:outputLabel value="#{bundle.CreateModuleLabel_enseignant}" for="enseignant" />
+                        <p:selectOneMenu id="enseignant" value="#{moduleController.selected.enseignant}" >
+                            <f:selectItems value="#{enseignantController.itemsAvailableSelectOne}"
+                                           var="enseignantItem"
+                                           itemValue="#{enseignantItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateModuleLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{moduleController.selected.id}" title="#{bundle.CreateModuleTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateModuleLabel_semestre}" for="semestre" />
                         <p:selectOneMenu id="semestre" value="#{moduleController.selected.semestre}" >
-                            <f:selectItem itemLabel="--SELECT--" itemValue="#{null}"/>
-                            <f:selectItems value="#{moduleController.semestresByFiliere()}"
+                            <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"
                                            var="semestreItem"
                                            itemValue="#{semestreItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateModuleLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{moduleController.selected.nom}" title="#{bundle.CreateModuleTitle_nom}" />
-                        <p:outputLabel value="#{bundle.CreateModuleLabel_enseignant}" for="enseignant" />
-                        <p:selectOneMenu id="enseignant" value="#{moduleController.selected.enseignant}" >
-                            <f:selectItem itemLabel="---------select--" itemValue="#{null}"/>
-                            <f:selectItems value="#{enseignantController.itemsAvailableSelectOne}"
-                                           var="enseignantItem"
-                                           itemValue="#{enseignantItem}"/>
+                        <p:outputLabel value="#{bundle.CreateModuleLabel_filiere}" for="filiere" />
+                        <p:selectOneMenu id="filiere" value="#{moduleController.selected.filiere}" >
+                            <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
+                                           var="filiereItem"
+                                           itemValue="#{filiereItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{moduleController.create}" value="#{bundle.Save}" update="display,:ModuleListForm:datalist" oncomplete="handleSubmit(args,'ModuleCreateDialog');"/>
+                    <p:commandButton actionListener="#{moduleController.create}" value="#{bundle.Save}" update="display,:ModuleListForm:datalist,:growl" oncomplete="handleSubmit(args,'ModuleCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ModuleCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -12,6 +12,8 @@
             <h:form id="DemandeLicenceViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{demandeLicenceController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDemandeLicenceLabel_anneUniversitaire}"/>
+                        <h:outputText value="#{demandeLicenceController.selected.anneUniversitaire}" title="#{bundle.ViewDemandeLicenceTitle_anneUniversitaire}"/>
                         <h:outputText value="#{bundle.ViewDemandeLicenceLabel_etudiant}"/>
                         <h:outputText value="#{demandeLicenceController.selected.etudiant}" title="#{bundle.ViewDemandeLicenceTitle_etudiant}"/>
                         <h:outputText value="#{bundle.ViewDemandeLicenceLabel_id}"/>

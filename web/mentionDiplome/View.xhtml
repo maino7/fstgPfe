@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MentionDiplomeViewDlg" widgetVar="MentionDiplomeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMentionDiplomeTitle}">
+            <h:form id="MentionDiplomeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mentionDiplomeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMentionDiplomeLabel_id}"/>
+                        <h:outputText value="#{mentionDiplomeController.selected.id}" title="#{bundle.ViewMentionDiplomeTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewMentionDiplomeLabel_titre}"/>
+                        <h:outputText value="#{mentionDiplomeController.selected.titre}" title="#{bundle.ViewMentionDiplomeTitle_titre}"/>
+                        <h:outputText value="#{bundle.ViewMentionDiplomeLabel_numApg}"/>
+                        <h:outputText value="#{mentionDiplomeController.selected.numApg}" title="#{bundle.ViewMentionDiplomeTitle_numApg}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MentionDiplomeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

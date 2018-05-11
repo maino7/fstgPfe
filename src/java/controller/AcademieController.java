@@ -54,6 +54,10 @@ public class AcademieController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    //methode de test
+    public void test1(){
+        System.out.println("khedam !");
+    }
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("AcademieCreated"));

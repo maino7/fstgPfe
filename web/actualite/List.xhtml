@@ -14,100 +14,112 @@
         </ui:define>
 
         <ui:define name="body">
-                <h:form id="ActualiteListForm">
-                    <p:panel header="#{bundle.ListActualiteTitle}">
-                        <p:dataTable id="datalist" value="#{actualiteController.items}" var="item"
-                            selectionMode="single" selection="#{actualiteController.selected}"
-                            paginator="true"
-                            rowKey="#{item.id}"
-                            rows="10"
-                            rowsPerPageTemplate="10,20,30,40,50"
-                            >
+            <h:form id="ActualiteListForm">
+                <p:panel header="#{bundle.ListActualiteTitle}">
+                    <p:dataTable id="datalist" value="#{actualiteController.items}" var="item"
+                                 selectionMode="single" selection="#{actualiteController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
 
-                            <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                            <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListActualiteTitle_position}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.position}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListActualiteTitle_titre}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.titre}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="description"/>
-                                </f:facet>
-                                <h:outputText value="#{item.description}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListActualiteTitle_priority}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.priority}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListActualiteTitle_auteur}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.auteur}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListActualiteTitle_dateCreation}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.dateCreation}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy" />
-                                </h:outputText>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListActualiteTitle_dateDebut}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.dateDebut}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy" />
-                                </h:outputText>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListActualiteTitle_dateExpiration}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.dateExpiration}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy" />
-                                </h:outputText>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListActualiteTitle_id}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.id}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="File"/>
-                                </f:facet>
-                                <h:outputText value="#{item.file}"/>
-                            </p:column>
-                             <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Etat"/>
-                                </f:facet>
-                                <h:outputText value="#{item.etat}"/>
-                            </p:column>
-                            <f:facet name="footer">
-                                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{actualiteController.prepareCreate}" update=":ActualiteCreateForm" oncomplete="PF('ActualiteCreateDialog').show()"/>
-                                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ActualiteViewForm" oncomplete="PF('ActualiteViewDialog').show()" disabled="#{empty actualiteController.selected}"/>
-                                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ActualiteEditForm" oncomplete="PF('ActualiteEditDialog').show()" disabled="#{empty actualiteController.selected}"/>
-                                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{actualiteController.destroy}" update=":growl,datalist" disabled="#{empty actualiteController.selected}"/>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_path}"/>
                             </f:facet>
-                        </p:dataTable>
-                    </p:panel>
-                </h:form>
+                            <h:outputText value="#{item.path}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_file}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.file}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_etat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etat}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_description}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.description}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_position}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.position}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_contenue}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.contenue}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_titre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.titre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_priority}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.priority}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_auteur}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.auteur}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_dateCreation}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateCreation}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_dateDebut}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateDebut}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_dateExpiration}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateExpiration}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListActualiteTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{actualiteController.prepareCreate}" update=":ActualiteCreateForm" oncomplete="PF('ActualiteCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ActualiteViewForm" oncomplete="PF('ActualiteViewDialog').show()" disabled="#{empty actualiteController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ActualiteEditForm" oncomplete="PF('ActualiteEditDialog').show()" disabled="#{empty actualiteController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{actualiteController.destroy}" update=":growl,datalist" disabled="#{empty actualiteController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
 
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>

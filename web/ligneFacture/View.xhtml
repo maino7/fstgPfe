@@ -12,14 +12,14 @@
             <h:form id="LigneFactureViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ligneFactureController.selected != null}">
-                        <h:outputText value="#{bundle.ViewLigneFactureLabel_quantite}"/>
-                        <h:outputText value="#{ligneFactureController.selected.quantite}" title="#{bundle.ViewLigneFactureTitle_quantite}"/>
-                        <h:outputText value="#{bundle.ViewLigneFactureLabel_produit}"/>
-                        <h:outputText value="#{ligneFactureController.selected.produit}" title="#{bundle.ViewLigneFactureTitle_produit}"/>
                         <h:outputText value="#{bundle.ViewLigneFactureLabel_facture}"/>
                         <h:outputText value="#{ligneFactureController.selected.facture}" title="#{bundle.ViewLigneFactureTitle_facture}"/>
                         <h:outputText value="#{bundle.ViewLigneFactureLabel_id}"/>
                         <h:outputText value="#{ligneFactureController.selected.id}" title="#{bundle.ViewLigneFactureTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewLigneFactureLabel_quantite}"/>
+                        <h:outputText value="#{ligneFactureController.selected.quantite}" title="#{bundle.ViewLigneFactureTitle_quantite}"/>
+                        <h:outputText value="#{bundle.ViewLigneFactureLabel_produit}"/>
+                        <h:outputText value="#{ligneFactureController.selected.produit}" title="#{bundle.ViewLigneFactureTitle_produit}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="LigneFactureViewDialog.hide()"/>
                 </h:panelGroup>

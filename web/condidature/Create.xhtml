@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CondidatureCreateDlg" widgetVar="CondidatureCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCondidatureTitle}">
+            <h:form id="CondidatureCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{condidatureController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCondidatureLabel_anneUniversitaire}" for="anneUniversitaire" />
+                        <p:selectOneMenu id="anneUniversitaire" value="#{condidatureController.selected.anneUniversitaire}" >
+                            <f:selectItems value="#{anneUniversitaireController.itemsAvailableSelectOne}"
+                                           var="anneUniversitaireItem"
+                                           itemValue="#{anneUniversitaireItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCondidatureLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{condidatureController.selected.id}" title="#{bundle.CreateCondidatureTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateCondidatureLabel_candidat}" for="candidat" />
+                        <p:selectOneMenu id="candidat" value="#{condidatureController.selected.candidat}" >
+                            <f:selectItems value="#{candidatController.itemsAvailableSelectOne}"
+                                           var="candidatItem"
+                                           itemValue="#{candidatItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCondidatureLabel_typeInscription}" for="typeInscription" />
+                        <p:inputText id="typeInscription" value="#{condidatureController.selected.typeInscription}" title="#{bundle.CreateCondidatureTitle_typeInscription}" />
+                        <p:outputLabel value="#{bundle.CreateCondidatureLabel_condidatureValide}" for="condidatureValide" />
+                        <p:inputText id="condidatureValide" value="#{condidatureController.selected.condidatureValide}" title="#{bundle.CreateCondidatureTitle_condidatureValide}" />
+                        <p:outputLabel value="#{bundle.CreateCondidatureLabel_pieceValide}" for="pieceValide" />
+                        <p:inputText id="pieceValide" value="#{condidatureController.selected.pieceValide}" title="#{bundle.CreateCondidatureTitle_pieceValide}" />
+                        <p:outputLabel value="#{bundle.CreateCondidatureLabel_moyenneEcrit}" for="moyenneEcrit" />
+                        <p:inputText id="moyenneEcrit" value="#{condidatureController.selected.moyenneEcrit}" title="#{bundle.CreateCondidatureTitle_moyenneEcrit}" />
+                        <p:outputLabel value="#{bundle.CreateCondidatureLabel_moyenneOrale}" for="moyenneOrale" />
+                        <p:inputText id="moyenneOrale" value="#{condidatureController.selected.moyenneOrale}" title="#{bundle.CreateCondidatureTitle_moyenneOrale}" />
+                        <p:outputLabel value="#{bundle.CreateCondidatureLabel_moyenneGenerale}" for="moyenneGenerale" />
+                        <p:inputText id="moyenneGenerale" value="#{condidatureController.selected.moyenneGenerale}" title="#{bundle.CreateCondidatureTitle_moyenneGenerale}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{condidatureController.create}" value="#{bundle.Save}" update="display,:CondidatureListForm:datalist,:growl" oncomplete="handleSubmit(args,'CondidatureCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CondidatureCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
