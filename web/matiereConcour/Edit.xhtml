@@ -12,13 +12,6 @@
             <h:form id="MatiereConcourEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{matiereConcourController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditMatiereConcourLabel_examCandidat}" for="examCandidat" />
-                        <p:selectOneMenu id="examCandidat" value="#{matiereConcourController.selected.examCandidat}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{examCandidatController.itemsAvailableSelectOne}"
-                                           var="examCandidatItem"
-                                           itemValue="#{examCandidatItem}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditMatiereConcourLabel_titre}" for="titre" />
                         <p:inputText id="titre" value="#{matiereConcourController.selected.titre}" title="#{bundle.EditMatiereConcourTitle_titre}" />
                         <p:outputLabel value="#{bundle.EditMatiereConcourLabel_numApg}" for="numApg" />

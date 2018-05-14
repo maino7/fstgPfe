@@ -28,7 +28,7 @@ public class ExamCandidat implements Serializable {
     @ManyToOne
     private Condidature condidature;
    
-    @OneToOne
+    @ManyToOne
     private MatiereConcour matiereConcour;
 
     public ExamCandidat() {

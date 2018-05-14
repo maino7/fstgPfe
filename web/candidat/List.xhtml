@@ -35,6 +35,12 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCandidatTitle_etudiant}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etudiant}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCandidatTitle_condidature}"/>
                             </f:facet>
                             <h:outputText value="#{item.condidature}"/>

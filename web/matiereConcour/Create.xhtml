@@ -12,12 +12,6 @@
             <h:form id="MatiereConcourCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{matiereConcourController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateMatiereConcourLabel_examCandidat}" for="examCandidat" />
-                        <p:selectOneMenu id="examCandidat" value="#{matiereConcourController.selected.examCandidat}" >
-                            <f:selectItems value="#{examCandidatController.itemsAvailableSelectOne}"
-                                           var="examCandidatItem"
-                                           itemValue="#{examCandidatItem}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateMatiereConcourLabel_titre}" for="titre" />
                         <p:inputText id="titre" value="#{matiereConcourController.selected.titre}" title="#{bundle.CreateMatiereConcourTitle_titre}" />
                         <p:outputLabel value="#{bundle.CreateMatiereConcourLabel_numApg}" for="numApg" />

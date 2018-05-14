@@ -16,6 +16,12 @@
                         <p:inputText id="id" value="#{etablissementTypeController.selected.id}" title="#{bundle.CreateEtablissementTypeTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateEtablissementTypeLabel_abrApg}" for="abrApg" />
                         <p:inputText id="abrApg" value="#{etablissementTypeController.selected.abrApg}" title="#{bundle.CreateEtablissementTypeTitle_abrApg}" />
+                        <p:outputLabel value="#{bundle.CreateEtablissementTypeLabel_academie}" for="academie" />
+                        <p:selectOneMenu id="academie" value="#{etablissementTypeController.selected.academie}" >
+                            <f:selectItems value="#{academieController.itemsAvailableSelectOne}"
+                                           var="academieItem"
+                                           itemValue="#{academieItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateEtablissementTypeLabel_titre}" for="titre" />
                         <p:inputText id="titre" value="#{etablissementTypeController.selected.titre}" title="#{bundle.CreateEtablissementTypeTitle_titre}" />
                     </p:panelGrid>

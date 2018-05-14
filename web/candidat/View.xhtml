@@ -14,6 +14,8 @@
                     <p:panelGrid columns="2" rendered="#{candidatController.selected != null}">
                         <h:outputText value="#{bundle.ViewCandidatLabel_cin}"/>
                         <h:outputText value="#{candidatController.selected.cin}" title="#{bundle.ViewCandidatTitle_cin}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_etudiant}"/>
+                        <h:outputText value="#{candidatController.selected.etudiant}" title="#{bundle.ViewCandidatTitle_etudiant}"/>
                         <h:outputText value="#{bundle.ViewCandidatLabel_condidature}"/>
                         <h:outputText value="#{candidatController.selected.condidature}" title="#{bundle.ViewCandidatTitle_condidature}"/>
                         <h:outputText value="#{bundle.ViewCandidatLabel_etablissement}"/>

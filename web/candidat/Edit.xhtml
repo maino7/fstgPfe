@@ -14,6 +14,13 @@
                     <p:panelGrid columns="2" rendered="#{candidatController.selected != null}">
                         <p:outputLabel value="#{bundle.EditCandidatLabel_cin}" for="cin" />
                         <p:inputText id="cin" value="#{candidatController.selected.cin}" title="#{bundle.EditCandidatTitle_cin}" />
+                        <p:outputLabel value="#{bundle.EditCandidatLabel_etudiant}" for="etudiant" />
+                        <p:selectOneMenu id="etudiant" value="#{candidatController.selected.etudiant}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{etudiantController.itemsAvailableSelectOne}"
+                                           var="etudiantItem"
+                                           itemValue="#{etudiantItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditCandidatLabel_condidature}" for="condidature" />
                         <p:selectOneMenu id="condidature" value="#{candidatController.selected.condidature}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

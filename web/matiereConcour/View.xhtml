@@ -12,8 +12,6 @@
             <h:form id="MatiereConcourViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{matiereConcourController.selected != null}">
-                        <h:outputText value="#{bundle.ViewMatiereConcourLabel_examCandidat}"/>
-                        <h:outputText value="#{matiereConcourController.selected.examCandidat}" title="#{bundle.ViewMatiereConcourTitle_examCandidat}"/>
                         <h:outputText value="#{bundle.ViewMatiereConcourLabel_titre}"/>
                         <h:outputText value="#{matiereConcourController.selected.titre}" title="#{bundle.ViewMatiereConcourTitle_titre}"/>
                         <h:outputText value="#{bundle.ViewMatiereConcourLabel_numApg}"/>

@@ -30,8 +30,9 @@ public class MatiereConcour implements Serializable {
     
     @OneToMany(mappedBy = "matiereConcour")
     private List<ConcourExamMatiere> concourExamMatieres;
-    @OneToOne(mappedBy = "matiereConcour")
-    private ExamCandidat examCandidat;
+    @OneToMany(mappedBy = "matiereConcour")
+    private List<ExamCandidat> examCandidats;
+    
 
     public List<ConcourExamMatiere> getConcourExamMatieres() {
         return concourExamMatieres;
@@ -41,14 +42,14 @@ public class MatiereConcour implements Serializable {
         this.concourExamMatieres = concourExamMatieres;
     }
 
-    public ExamCandidat getExamCandidat() {
-        return examCandidat;
+    public List<ExamCandidat> getExamCandidats() {
+        return examCandidats;
     }
 
-    public void setExamCandidat(ExamCandidat examCandidat) {
-        this.examCandidat = examCandidat;
+    public void setExamCandidats(List<ExamCandidat> examCandidats) {
+        this.examCandidats = examCandidats;
     }
-    
+
     
     
 
