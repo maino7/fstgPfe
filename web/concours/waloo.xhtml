@@ -4,18 +4,89 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-   <b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass">
-       <h:outputText value="ha l etudiant====>#{etudiantController.selected}" />
-  <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-  <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-  <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-  <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-  <f:facet name="footer">
-    <b:button value="Close" dismiss="modal" />
-    <b:button value="Ok" look="primary" dismiss="modal" />
-  </f:facet>
-</b:modal>
+    <b:modal id="amodal" title="Dossier N° #{candidatController.selected.cin}" styleClass="modalPseudoClass" >
+        <form class="form-inline"><fieldset>
+                <div class="form-group col-md-12">
+                    <div class="row">
+
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <b:inputText value="#{candidatController.selected.nomLat}" disabled="true" class="form-control" label="nom"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <b:inputText value="#{candidatController.selected.prenomLat}" disabled="true" class="form-control" label="prenom"/>
+                            </div>
+                        </div>
+
+                       </div>
+                     <div class="row">
+
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <b:inputText value="#{candidatController.selected.cne}" disabled="true" class="form-control" label="cne"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <b:inputText value="#{candidatController.selected.cin}" disabled="true" class="form-control" label="cin"/>
+                            </div>
+                        </div>
+
+                       </div>
+                     <div class="row">
+
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <b:inputText value="#{candidatController.selected.dernierDiplome.titre}" disabled="true" class="form-control" label="Dernier diplome"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <b:inputText value="#{candidatController.selected.dernierDiplome}" disabled="true" class="form-control" label="Mention"/>
+                            </div>
+                        </div>
+
+                       </div>
+                     <div class="row">
+                         <h5>Moyenne des semestres</h5>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <div class="form-group">
+                                <b:inputText value="#{candidatController.selected}" disabled="true" class="form-control" label="S1"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <div class="form-group">
+                                <b:inputText value="#{candidatController.selected}" disabled="true" class="form-control" label="S2"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <div class="form-group">
+                                <b:inputText value="#{candidatController.selected}" disabled="true" class="form-control" label="S3"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <div class="form-group">
+                                <b:inputText value="#{candidatController.selected}" disabled="true" class="form-control" label="S4"/>
+                            </div>
+                        </div>
+                        
+
+                       </div>
+                   
+                </div>
+
+
+
+
+            </fieldset></form>
+        <f:facet name="footer">
+            <b:button value="Close" dismiss="modal" />
+            <b:commandButton value="rejeter" look="danger" onclick="$('.modalPseudoClass').modal('hide')"/>
+            <b:commandButton value="valider" look="success" onclick="$('.modalPseudoClass').modal('hide')" />
+            
+        </f:facet>
+    </b:modal>
 </html>
 

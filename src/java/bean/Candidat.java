@@ -83,6 +83,15 @@ public class Candidat implements Serializable {
         this.cin = cin;
     }
 
+    public Etudiant getEtudiant() {
+        return etudiant;
+    }
+
+    public void setEtudiant(Etudiant etudiant) {
+        this.etudiant = etudiant;
+    }
+    
+
     public Condidature getCondidature() {
         return condidature;
     }

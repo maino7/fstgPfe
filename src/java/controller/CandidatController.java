@@ -27,11 +27,15 @@ public class CandidatController implements Serializable {
     private service.CandidatFacade ejbFacade;
     private List<Candidat> items = null;
     private Candidat selected;
+    private int typeInscription;
 
     public CandidatController() {
     }
 
     public Candidat getSelected() {
+        if(selected == null){
+            selected = new Candidat();
+        }
         return selected;
     }
 
@@ -161,5 +165,21 @@ public class CandidatController implements Serializable {
         }
 
     }
+    //test
+    
+     public void testwalo(Candidat e){
+         System.out.println("hahowa dkhel");
+         selected = e;
+         
+     }
+
+    public int getTypeInscription() {
+        return typeInscription;
+    }
+
+    public void setTypeInscription(int typeInscription) {
+        this.typeInscription = typeInscription;
+    }
+     
 
 }
