@@ -7,7 +7,7 @@
       xmlns:b="http://bootsfaces.net/ui">
     <ui:composition template="/template/adminTemplate.xhtml" >
         <ui:define name="titre">
-           Gestion des candidats
+           Gestion des admis
         </ui:define>
         <ui:define name="content" >
 
@@ -65,7 +65,7 @@
                         <div class="panel-heading">Recherche</div>
 
                         <div class="panel-body">
-                            <h:panelGrid id="display" columns="6">
+                            <h:panelGrid id="display" columns="10">
                                 <div class="row">
                                     <div class="col-lg-12">
                                 <div class="form-group col-lg-4">
@@ -87,11 +87,21 @@
                                     </div>
 
                                 </div>
-                                <div class="form-group col-lg-4">
+                                <div class="form-group col-lg-2">
                                     
                                     <div class="input-group">
                                         
-                                        <b:commandButton value="rechercher" look="success" offset-lg="2" />
+                                        <b:commandButton value="rechercher" look="success" />
+                                        
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-lg-2">
+                                    
+                                    <div class="input-group">
+                                        
+                                        <b:commandButton value="imprimer" look="success"  />
+                                        
                                     </div>
 
                                 </div>
@@ -106,7 +116,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-header" data-background-color="orange">
-                                <h4 class="title">Dossier de candidature</h4>
+                                <h4 class="title">List des admis pour passer l'orale</h4>
 
                             </div>
                             <div class="card-content table-responsive">
@@ -117,51 +127,52 @@
 
 
                                     <h:form>
-                                        <b:dataTable value="#{condidatureController.items}" var="item">
+                                      <b:dataTable value="#{candidatController.items}" var="item">
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Cin"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.cin}"/>
+                                            </b:dataTableColumn>
 
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Nom"/>
+                                                    <h:outputText value="Etablissement"/>
                                                 </f:facet>
-                                                <h:outputText value="#{item.candidat.nomLat}"/>
+                                                <h:outputText value="#{item.etablissement.titre}"/>
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Prenom"/>
+                                                    <h:outputText value="NomLat"/>
                                                 </f:facet>
-                                                <h:outputText value="#{item.candidat.nomLat}"/>
+                                                <h:outputText value="#{item.nomLat}"/>
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Exam 1"/>
+                                                    <h:outputText value="PrenomLat"/>
                                                 </f:facet>
-                                                <b:inputText placeholder="0.0" />
+                                                <h:outputText value="#{item.prenomLat}"/>
                                             </b:dataTableColumn>
+
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Exam 2"/>
+                                                    <h:outputText value="Email"/>
                                                 </f:facet>
-                                                <b:inputText placeholder="0.0" />
+                                                <h:outputText value="#{item.email}"/>
                                             </b:dataTableColumn>
+
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Exam 3"/>
+                                                    <h:outputText value="DernierDiplome"/>
                                                 </f:facet>
-                                                <b:inputText placeholder="0.0" />
-                                            </b:dataTableColumn>
-                                            <b:dataTableColumn>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Note orale"/>
-                                                </f:facet>
-                                                <b:inputText placeholder="0.0" />
+                                                <h:outputText value="#{item.dernierDiplome}"/>
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
                                                     <h:outputText value="Action"/>
                                                 </f:facet>
-                                                <b:commandButton value="Valider" look="success" />
+                                                <b:commandButton look="warning" value="consulter" ajax="true" actionListener="#{candidatController.testwalo(item)}" oncomplete="$('.modalPseudoClass').modal('show')" />
                                             </b:dataTableColumn>
-
                                         </b:dataTable>
 
 
@@ -184,4 +195,6 @@
         </ui:define>
     </ui:composition>
 </html>
+
+
 

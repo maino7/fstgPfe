@@ -6,6 +6,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui">
     <ui:composition template="/template/adminTemplate.xhtml" >
+        <ui:define name="titre">
+           Gestion des candidats
+        </ui:define>
         <ui:define name="content" >
 
             <div class="container-fluid">
@@ -44,7 +47,7 @@
                             </div>
                             <div class="card-content">
 
-                                <a href="#"><p>Gestion des épreuves</p></a>
+                                <a href="./gestionAdmis.xhtml?faces-redirect=true"><p>List des admis a l'écrit</p></a>
                             </div>
                             <div class="card-footer">
 

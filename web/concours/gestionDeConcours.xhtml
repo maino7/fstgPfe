@@ -7,6 +7,9 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/template/adminTemplate.xhtml" >
+        <ui:define name="titre">
+           Les preinscription
+        </ui:define>
         <ui:define name="content" >
             <h:form>
                 <div class="container-fluid">
@@ -136,20 +139,21 @@
                                                     <f:facet name="header">
                                                         <h:outputText value="MatiereConcour"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{item.matiereConcour}"/>
+                                                    <h:outputText value="#{item.matiereConcour.titre}"/>
                                                 </b:dataTableColumn>
                                                 <b:dataTableColumn>
                                                     <f:facet name="header">
-                                                        <h:outputText value="ConcourNiveau"/>
+                                                        <h:outputText value="Niveau"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{item.concourNiveau}"/>
+                                                    <h:outputText value="#{item.concourNiveau.niveau.semestre.libelle}"/>
                                                 </b:dataTableColumn>
                                                 <b:dataTableColumn>
                                                     <f:facet name="header">
-                                                        <h:outputText value="Id"/>
+                                                        <h:outputText value="Action"/>
                                                     </f:facet>
-                                                    <h:outputText value="#{item.id}"/>
+                                                    <b:commandButton look="success" value="Modifier" />    
                                                 </b:dataTableColumn>
+                                               
                                             </b:dataTable>
                                         </h:form>
                                     </f:view>
