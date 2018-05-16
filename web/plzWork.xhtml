@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <div class=" row0">
+            <div id="topbar" class="clear"> 
+                <!-- ################################################################################################ -->
+                <nav>
+                    <ul>
+                        <li><a href="../template/Home.xhtml">Acceuil</a></li>
+                        <li><p:commandLink value="Contactez Nous" action="#{messageController.prepareCreate()}"></p:commandLink></li>
+                        <li>
+                            <h:link outcome="/connexion/LoginStock.xhtml" rendered="#{templateController.userConnected()&gt;0?'false':'true'}">
+                                Stock
+                            </h:link>
+                        </li>
+                        <li rendered="#{templateController.userConnected()&gt;0?'false':'true'}">
+                            <h:link outcome="/connexion/LoginEtudiant.xhtml" rendered="#{templateController.userConnected()&gt;0?'false':'true'}">
+                                Login Etudiant
+                            </h:link>
+                            <h:link outcome="/home/Home.xhtml" rendered="#{templateController.userConnected()==2}">
+                                Mon Profil
+                            </h:link>
+                            <h:link outcome="/profilEnseignant/Home.xhtml" rendered="#{templateController.userConnected()==1}">
+                                Mon Profil
+                            </h:link>
+                        </li>
+                        <li>
+                            <h:link outcome="/connexion/LoginStaff.xhtml" rendered="#{templateController.userConnected()&gt;0?'false':'true'}">
+                                Login Staff
+                            </h:link>
+                            
+
+                                <p:commandLink value="|Se Deconnecter|" action="#{connectionController.logOut()}" rendered="#{connectionController.isConnected()}"></p:commandLink>
+                            
+                        </li>
+                        <li>
+                            <h:link outcome="/etudiantMaster/test.xhtml" >
+                                Inscription master-Cycle
+                            </h:link>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- ################################################################################################ --> 
+            </div>
+        </div>
+        <!-- ################################################################################################ --> 
+        <!-- ################################################################################################ --> 
+        <!-- ################################################################################################ -->
+        <!-- ################################################################################################ --> 
+        <!-- ################################################################################################ --> 
+        <!-- ################################################################################################ -->
+        <div class=" row2 menu-top">
+            <a href="../template/Home.xhtml">
+                <div id="logo" class="fl_left">
+                    <img src="../resources/images/logo.png" width="80%" alt=""/>
+
+                </div>
+            </a>
+            <div class="fl_left">
+                <h:form>
+                    <nav id="mainav" class="clear"> 
+                        <!-- ################################################################################################ -->
+                        <ul class="clear">
+                            <li id="home" class=""><p:commandLink value='Acceuil' action="/template/Home.xhtml?faces-redirect=true"> </p:commandLink></li>
+                            <li><a class="drop" href="#">Faculté</a>
+                                <ul>
+                                    <li><p:commandLink value='Mot Du Doyen'  action="/article/MotDuDoyen.xhtml?faces-redirect=true"></p:commandLink></li>
+                                    <li><p:commandLink value="Architecture Pedagogique"  action='/article/architecturePedagogique.xhtml?faces-redirect=true'></p:commandLink></li>
+                                    <li> <p:commandLink value="FSTG En bref"  action='/article/FSTGEnBref.xhtml?faces-redirect=true' ></p:commandLink></li>
+                                    <li> <p:commandLink value="FSTG En chiffre"  action='/article/FSTGEnChiffr.xhtml?faces-redirect=true' ></p:commandLink></li>
+                                    <li><p:commandLink value="Departements" action="/departement/Departement.xhtml?faces-redirect=true"/></li>
+
+                                </ul>
+                            </li>
+
+                            <li><a class="drop">Formation</a>
+                                <ul>
+                                    <li><a href="#" class="drop">Formation Initiale &raquo;</a>
+
+                                        <ul>  
+                                            <li><p:commandLink value="Tronc Commun" action="#{filiereController.toTC()}"></p:commandLink></li>
+                                            <li><p:commandLink value="Licences" action="#{filiereController.toLicence()}"></p:commandLink></li>
+                                            <li><p:commandLink value="Filière d'Ingénieurs" action="#{filiereController.toCycle()}"></p:commandLink></li>
+                                            <li><p:commandLink value="Masters" action="#{filiereController.toMaster()}"></p:commandLink></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="drop" href="#">Formation Continue &raquo;</a>
+                                        <ul>
+                                            <li><p:commandLink value="Licence Professionelle" action="#{filiereController.toLicenceContinu()}"></p:commandLink></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="drop" href="#">Espace Etudiant</a>
+                                <ul>
+                                    <li><p:commandLink value="Reglement Interieur"  action='/article/reglementInterieur.xhtml?faces-redirect=true'></p:commandLink></li>
+                                    <li><p:commandLink value="Planning Annuel"  action="/article/planningAnnuel.xhtml?faces-redirect=true"></p:commandLink></li>
+                                </ul>
+                            </li>
+
+                            <li><a class="drop" href="#">Recherche Scientifique</a>
+                                <ul>
+                                    <li><p:commandLink value="Laboratoires" action="/laboratoire/AllLaboratoire?faces-redirect=true"></p:commandLink></li>
+
+                                    <li><p:commandLink value="Equipes"  action='/article/Equipes.xhtml?faces-redirect=true'  ></p:commandLink></li>
+                                    <li><p:commandLink value="CED-SI"  action='/article/CED-SI.xhtml?faces-redirect=true'  ></p:commandLink></li>
+                                    <li><p:commandLink value="UFR"  action='/article/UFR.xhtml?faces-redirect=true' ></p:commandLink></li>
+                                    <li><p:commandLink value="Bourse d'Excellence"  action='/article/Bourse excellence.xhtml?faces-redirect=true' ></p:commandLink></li>
+
+                                </ul>
+                            </li>
+
+                            <li><a class="drop" href="#">Activités</a>
+                                <ul>
+                                    <li><p:commandLink value="Manifestations">Manifestations</p:commandLink></li>
+                                    <li><p:commandLink value="Culturelles">Culturelles</p:commandLink></li>
+                                    <li><p:commandLink value="Clubs et Associations"></p:commandLink></li>
+                                    <li><p:commandLink value="Sportives"></p:commandLink></li>
+                                </ul>
+                            </li>
+                            <li><a class="drop" href="#">En Ligne</a>
+                                <ul>
+                                    <li><a href="http://www.fstg-marrakech.ac.ma/moodle">Platform Moodle</a></li>
+                                    <li><p:commandLink value="Bibliothèque"  ></p:commandLink></li>
+                                    <li><p:commandLink value="Messagerie"   ></p:commandLink></li>
+                                    <li><p:commandLink value="Cours et Support"  ></p:commandLink></li>
+
+
+                                </ul>
+                            </li>
+
+
+
+                        </ul>
+                        <!-- ################################################################################################ --> 
+                    </nav>
+                </h:form>
+            </div>
+        </div>
+
+
+    </ui:composition>
+</html>
+
