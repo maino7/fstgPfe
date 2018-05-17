@@ -247,7 +247,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:outputLabel for="pa" value="Lieu de naissance : (arabe)" style="text-align: left;padding-top: 10px" />
+                                                                    <p:outputLabel for="pa" value="Lieu de naissance : " style="text-align: left;padding-top: 10px" />
                                                                 </p:column>
 
                                                                 <p:column>
@@ -366,35 +366,153 @@
 
                                             <div class="tab-pane" id="company">
                                                 <div class="row">
-                                                    <h5 class="info-text"> Select a company for your service </h5>
+                                                    <h5 class="info-text"> Formations universitaires </h5>
 
                                                     <div class="col-sm-12">
-                                                        <p:panelGrid id="companyGrid" styleClass="ui-noborder" style="text-align: center;margin: 0 auto">
+                                                        <p:panelGrid id="companyGrid" styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
                                                             <p:row>
-                                                                <p:column style="width: 100px">
-                                                                    <p:outputLabel value="Choice :" for="choice" style="padding-top: 10px" />
+
+                                                                <p:column>
+                                                                    <p:outputLabel value="Type du dérnier diplôme : " for="monday" style="text-align: left;padding-top: 10px;width: 200px"/>
                                                                 </p:column>
 
-                                                                <p:column style="width: 260px">
-                                                                    <p:selectOneMenu class="form-control" id="choice" widgetVar="choice" value="choice" style="width: 250px;height: 40px" >
+                                                                <p:column style="width: 260px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control" id="monday" widgetVar="choice" value="choice" style="width: 250px;height: 40px" >
 
 
-                                                                        <f:selectItem itemValue="1" itemLabel="-- SELECT A CHOICE --"/>
-                                                                        <f:selectItem itemValue="2" itemLabel="Choose a company / individual for me"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="Baccalauréat"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="DEUST"/>
 
                                                                     </p:selectOneMenu>
                                                                 </p:column>
 
-                                                            </p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Mention BAC: " for="thursday" style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
 
+                                                                <p:column style="width: 260px;">
+                                                                    <p:selectOneMenu class="form-control" id="thursday" widgetVar="choice" value="choice" style="width: 250px;height: 40px;padding-right: 00px;" >
+
+
+                                                                        <f:selectItem itemValue="1" itemLabel=" Assez Bien "/>
+                                                                        <f:selectItem itemValue="2" itemLabel="Bien"/>
+
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Option BAC : " for="wednesday" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control" id="wednesday" widgetVar="choice" value="choice" style="width: 250px;height: 40px" >
+
+
+                                                                        <f:selectItem itemValue="1" itemLabel="SCIENCES EXPERIMENTALES"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="SCIENCES MATH"/>
+
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Type du lycée:" for="oftenOnce1" style="text-align: left;padding-top: 10px;width: 200px" />
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:selectBooleanButton id="oftenOnce1" class="myBtn" value="Libre" onLabel="Libre" offLabel="Libre" style="width:80px;height: 40px;text-align: center;padding: 8px 0;" onchange="PF('NetoyageUneFoisDialog').show()" >
+                                                                    </p:selectBooleanButton>
+                                                                    <p:selectBooleanButton id="hi" class="myBtn" value="Privé" onLabel="Privé" offLabel="Privé" style="width:80px;height: 40px;text-align: center;padding: 8px 0;" onchange="PF('NetoyagePlusieursFoisDialog').show()">
+                                                                    </p:selectBooleanButton>
+                                                                    <p:selectBooleanButton id="hello" class="myBtn" value="Public" onLabel="Public" offLabel="Public" style="width:80px;height: 40px;text-align: center;padding: 8px 0;" onchange="PF('NetoyagePlusieursFoisDialog').show()">
+                                                                    </p:selectBooleanButton>
+                                                                </p:column>
+
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="1ère inscription dans l'enseignement supérieur:" for="a" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column style="padding-top: 10px">
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="a" placeholder="EX: 2016" value="Nom" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel for="b" value="Année BAC:" style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column style="padding-top: 10px">
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"    id="b" placeholder="EX: 2016" value="Prénom" />
+
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="1ère inscription dans notre Université Cady Ayyad(UCA):" for="c" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column style="padding-top: 10px">
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="c" placeholder="EX: 2016" value="Nom" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Lycée du BAC: " for="d" style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;">
+                                                                    <p:selectOneMenu class="form-control" id="d" widgetVar="choice" value="choice" style="width: 250px;height: 40px;padding-right: 00px;" >
+
+
+                                                                        <f:selectItem itemValue="1" itemLabel=" Lycée 1 "/>
+                                                                        <f:selectItem itemValue="2" itemLabel="Lycée 2"/>
+
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="1ère inscription dans notre établissment FSTG:" for="X" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column style="padding-top: 10px">
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="X" placeholder="EX: 2016" value="Nom" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Province: " for="y" style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;">
+                                                                    <p:selectOneMenu class="form-control" id="y" widgetVar="choice" value="choice" style="width: 250px;height: 40px;padding-right: 00px;" >
+
+
+                                                                        <f:selectItem itemValue="1" itemLabel=" Lycée 1 "/>
+                                                                        <f:selectItem itemValue="2" itemLabel="Lycée 2"/>
+
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Etablissmenet de préinscription:" for="w" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column style="padding-top: 10px">
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="w" placeholder="FSTG Marrakech" value="Nom" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Accadémie: " for="z" style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;">
+                                                                    <p:selectOneMenu class="form-control" id="z" widgetVar="choice" value="choice" style="width: 250px;height: 40px;padding-right: 00px;" >
+
+
+                                                                        <f:selectItem itemValue="1" itemLabel=" acca 1 "/>
+                                                                        <f:selectItem itemValue="2" itemLabel="acca 2"/>
+
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
                                                         </p:panelGrid>
                                                     </div>
-
-
-
-
-
-
                                                 </div>
                                             </div>
 
@@ -407,80 +525,16 @@
 
                                                             <p:row>
                                                                 <p:column>
-                                                                    <p:outputLabel value="Your email:" for="email" style="text-align: left;padding-top: 5px;width: 100%" />
+                                                                    <p:outputLabel value="Type de préinscription :" for="dady" style="text-align: left;padding-top: 10px;width: 200px" />
                                                                 </p:column>
 
                                                                 <p:column>
+                                                                    <p:selectBooleanButton id="dady" class="myBtn" value="Master" onLabel="Master" offLabel="Master" style="width:120px;height: 40px;text-align: center;padding: 8px 0;" onchange="PF('NetoyageUneFoisDialog').show()" >
+                                                                    </p:selectBooleanButton>
 
-
-                                                                    <p:inputText id="email" value="email"  style="width:200px;height: 40px;" />
-
-                                                                    <!--<p:commandButton icon="fa fa-search" process="detailGrid"  styleClass="white-button" style="width:50px;height: 40px;"  update=":ConnexionDlg,:growl,detailGrid"/>-->  
-
+                                                                    <p:selectBooleanButton id="mamy" class="myBtn" value="Cycle d'ingénieur" onLabel="Cycle d'ingénieur" offLabel="Cycle d'ingénieur" style="width:200px;height: 40px;text-align: center;padding: 8px 0;" onchange="PF('NetoyagePlusieursFoisDialog').show()">
+                                                                    </p:selectBooleanButton>
                                                                 </p:column>
-
-
-
-                                                                <p:column>
-                                                                    <p:outputLabel value="Your number:" for="number" style="text-align: left;padding-top: 10px;width: 100%" />
-                                                                </p:column>
-
-                                                                <p:column>
-                                                                    <p:inputText id="number" value="phone number" style="width:250px;height: 40px;" />
-                                                                </p:column>
-
-                                                            </p:row>
-
-                                                            <p:row>
-
-                                                                <p:column>
-                                                                    <p:outputLabel value="Your First name:" for="firstName" style="text-align: left;padding-top: 10px;width: 100%" />
-                                                                </p:column>
-
-                                                                <p:column>
-                                                                    <p:inputText id="firstName" value="first" style="width:250px;height: 40px;" />
-                                                                </p:column>
-
-                                                                <p:column>
-                                                                    <p:outputLabel value="Your Last Name:" for="lastName" style="text-align: left;padding-top: 10px;width: 100%" />
-                                                                </p:column>
-
-                                                                <p:column>
-                                                                    <p:inputText id="lastName" value="last" style="width:250px;height: 40px;" />
-                                                                </p:column>
-
-                                                            </p:row>
-
-                                                            <p:row>
-
-                                                                <p:column>
-                                                                    <p:outputLabel value="City:"  style="text-align: left;padding-top: 10px;width: 100%" />
-                                                                </p:column>
-
-                                                                <p:column>
-
-                                                                </p:column>
-
-                                                                <p:column>
-                                                                    <p:outputLabel value="Area:"  style="text-align: left;padding-top: 10px;width: 100%" />
-                                                                </p:column>
-
-                                                                <p:column>
-
-                                                                </p:column>
-
-                                                            </p:row>
-
-                                                            <p:row>
-
-                                                                <p:column>
-                                                                    <p:outputLabel value="Adresse"  style="text-align: left;padding-top: 10px;width: 100%" />
-                                                                </p:column>
-
-                                                                <p:column>
-                                                                    <p:inputText id="adresse" value="adress" style="width:250px;height: 40px;" />
-                                                                </p:column>
-
                                                             </p:row>
 
                                                         </p:panelGrid>
