@@ -114,7 +114,7 @@ public class Niveau implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Niveau[ id=" + id + " ]";
+        return filiere+" "+semestre;
     }
     
 }

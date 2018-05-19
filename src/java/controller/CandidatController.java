@@ -1,6 +1,8 @@
 package controller;
 
 import bean.Candidat;
+import bean.Niveau;
+import bean.Section;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import service.CandidatFacade;
@@ -25,9 +27,14 @@ public class CandidatController implements Serializable {
 
     @EJB
     private service.CandidatFacade ejbFacade;
+    @EJB
+    private service.NiveauFacade niveauFacade;
     private List<Candidat> items = null;
     private Candidat selected;
     private int typeInscription;
+    private Section section;
+    private Niveau niveau;
+    private List<Niveau> niveaus = null;
 
     public CandidatController() {
     }
@@ -51,6 +58,11 @@ public class CandidatController implements Serializable {
 
     private CandidatFacade getFacade() {
         return ejbFacade;
+    }
+    public void niveauBySection(){
+        
+        niveaus = niveauFacade.findBySection(section);
+        System.out.println("ha les niveau===>"+niveaus);
     }
 
     public Candidat prepareCreate() {
@@ -180,6 +192,38 @@ public class CandidatController implements Serializable {
     public void setTypeInscription(int typeInscription) {
         this.typeInscription = typeInscription;
     }
+
+    public Section getSection() {
+        if(section == null){
+            section = new Section();
+        }
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public List<Niveau> getNiveaus() {
+        
+        return niveaus;
+    }
+
+    public void setNiveaus(List<Niveau> niveaus) {
+        this.niveaus = niveaus;
+    }
+
+    public Niveau getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(Niveau niveau) {
+        this.niveau = niveau;
+    }
+    
+    
+    
+    
      
 
 }

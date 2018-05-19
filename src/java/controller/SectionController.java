@@ -27,6 +27,9 @@ public class SectionController implements Serializable {
     private service.SectionFacade ejbFacade;
     private List<Section> items = null;
     private Section selected;
+    //test
+    private int var =0;
+    //*** test***//
 
     public SectionController() {
     }
@@ -160,6 +163,23 @@ public class SectionController implements Serializable {
             }
         }
 
+    }
+    //test//
+
+    public int getVar() {
+        if(var == 0){
+            var = 2;
+        }
+        return var;
+    }
+
+    public void setVar(int var) {
+        this.var = var;
+    }
+    
+    public void test(){
+        System.out.println("ha howa dkhel l test");
+        var = 1;
     }
 
 }

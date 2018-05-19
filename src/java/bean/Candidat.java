@@ -56,6 +56,10 @@ public class Candidat implements Serializable {
     private int anneeInscriptionEnsSup;
     private int anneeInscriptionUniv;
     private int anneeInscriptionEtab;
+    private int noteS1;
+    private int noteS2;
+    private int noteS3;
+    private int noteS4;
     private int etablissementPreInsc=15;
     private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch-
     
@@ -341,6 +345,39 @@ public class Candidat implements Serializable {
     public void setCne(String cne) {
         this.cne = cne;
     }
+
+    public int getNoteS1() {
+        return noteS1;
+    }
+
+    public void setNoteS1(int noteS1) {
+        this.noteS1 = noteS1;
+    }
+
+    public int getNoteS2() {
+        return noteS2;
+    }
+
+    public void setNoteS2(int noteS2) {
+        this.noteS2 = noteS2;
+    }
+
+    public int getNoteS3() {
+        return noteS3;
+    }
+
+    public void setNoteS3(int noteS3) {
+        this.noteS3 = noteS3;
+    }
+
+    public int getNoteS4() {
+        return noteS4;
+    }
+
+    public void setNoteS4(int noteS4) {
+        this.noteS4 = noteS4;
+    }
+    
     
 
     

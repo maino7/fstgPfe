@@ -28,6 +28,7 @@ public class PieceEtudiant implements Serializable {
     private Condidature condidature;
     @ManyToOne
     private PiecesParNiveau piecesParNiveau;
+    private int nbr;
 
     public PieceEtudiant() {
     }
@@ -58,6 +59,15 @@ public class PieceEtudiant implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public int getNbr() {
+        return nbr;
+    }
+
+    public void setNbr(int nbr) {
+        this.nbr = nbr;
+    }
+    
 
     @Override
     public int hashCode() {

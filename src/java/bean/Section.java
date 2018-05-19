@@ -75,7 +75,7 @@ public class Section implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Section[ id=" + id + " ]";
+        return titre;
     }
     
 }

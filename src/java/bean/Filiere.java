@@ -181,7 +181,7 @@ public class Filiere implements Serializable {
 
     @Override
     public String toString() {
-        return libelle;
+        return abreviation;
     }
 
 }
