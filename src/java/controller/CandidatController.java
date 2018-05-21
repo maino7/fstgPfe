@@ -28,10 +28,15 @@ public class CandidatController implements Serializable {
     @EJB
     private service.CandidatFacade ejbFacade;
     @EJB
+    private service.CondidatureFacade condidatureFacade;
+    @EJB
+    private service.PieceEtudiantFacade pieceEtudiantFacade;
+    @EJB
     private service.NiveauFacade niveauFacade;
     private List<Candidat> items = null;
     private Candidat selected;
     private int typeInscription;
+    private String cne;
     private Section section;
     private Niveau niveau;
     private List<Niveau> niveaus = null;
@@ -64,6 +69,21 @@ public class CandidatController implements Serializable {
         niveaus = niveauFacade.findBySection(section);
         System.out.println("ha les niveau===>"+niveaus);
     }
+    
+    public void findBycreataria(){
+        items = null;
+        System.out.println("ha niveau==>"+niveau+"o ha section==>"+section+"o ha cne==>"+cne);
+        items = pieceEtudiantFacade.findByNiveauAndSection(niveau,section,cne);
+        System.out.println("ha l items===>"+items);
+    }
+    public void validerCandidat(){
+        System.out.println("ha selected==>"+selected);
+        condidatureFacade.validerCandidature(selected);
+       
+        items.remove(items.indexOf(selected));
+        
+        System.out.println("ha l items==>"+items);
+    }
 
     public Candidat prepareCreate() {
         selected = new Candidat();
@@ -92,7 +112,7 @@ public class CandidatController implements Serializable {
 
     public List<Candidat> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = getFacade().findNonvalider();
         }
         return items;
     }
@@ -220,6 +240,16 @@ public class CandidatController implements Serializable {
     public void setNiveau(Niveau niveau) {
         this.niveau = niveau;
     }
+
+    public String getCne() {
+        return cne;
+    }
+
+    public void setCne(String cne) {
+        this.cne = cne;
+    }
+    
+    
     
     
     

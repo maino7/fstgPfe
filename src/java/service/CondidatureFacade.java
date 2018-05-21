@@ -5,10 +5,12 @@
  */
 package service;
 
+import bean.Candidat;
 import bean.Condidature;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.xbill.DNS.Update;
 
 /**
  *
@@ -27,6 +29,14 @@ public class CondidatureFacade extends AbstractFacade<Condidature> {
 
     public CondidatureFacade() {
         super(Condidature.class);
+    }
+    public Condidature findByCandidat(Candidat candidat){
+        return (Condidature) em.createQuery("SELECT c FROM Condidature c WHERE c.candidat.cne='"+candidat.getCne()+"'").getSingleResult();
+    }
+    public void validerCandidature(Candidat candidat){
+        Condidature condidature = findByCandidat(candidat);
+        condidature.setCondidatureValide(1);
+        edit(condidature);
     }
     
 }

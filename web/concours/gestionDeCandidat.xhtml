@@ -71,11 +71,11 @@
                                 <f:view>
 
 
-                                    <h:form>
+                                    <h:form id="searchBar">
                                         <b:container>
                                             <b:row>
                                                 <b:column span="4">
-                                                    <b:selectOneMenu id="filiere" value="#{candidatController.section}" process="@form" onchange="ajax:candidatController.niveauBySection()" update="niveau" >
+                                                    <b:selectOneMenu id="filiere" value="#{candidatController.section}" process="filiere" onchange="ajax:candidatController.niveauBySection()" update="niveau" >
                                                         <f:selectItem itemLabel="--Selectionner--" itemValue="" />
                                                         <f:selectItems value="#{sectionController.items}" 
                                                                        var="sectionItem"
@@ -84,16 +84,27 @@
                                                 </b:column>
                                                 <b:column span="4">
                                                     <b:selectOneMenu id="niveau" value="#{candidatController.niveau}">
+                                                         <f:selectItem itemLabel="--Selectionner--" itemValue="" />
                                                         <f:selectItems value="#{candidatController.niveaus}" />
                                                     </b:selectOneMenu>
 
                                                 </b:column>
+                                                <b:column span="4">
+                                                    <p:inputText value="#{candidatController.cne}" placeholder="cne.." />
+
+                                                </b:column>
                                                 <b:column>
-                                                    <b:commandButton look="success" value="ok" />
+                                                    <b:commandButton look="success" value="ok" actionListener="#{candidatController.findBycreataria()}" />
+                                                    
+                                                    <b:commandButton look="success" value="imprimer" action="#{candidatController.test}" rendered="true" />
+                                                  
+                                                    
                                                 </b:column>
                                             </b:row>
                                         </b:container>
-                                        <b:dataTable value="#{candidatController.items}" var="item">
+                                        </h:form>
+                                    <h:form id="datalistform" >
+                                        <b:dataTable id="datalist" value="#{candidatController.items}" var="item">
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
                                                     <h:outputText value="Cin"/>

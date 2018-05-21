@@ -6,6 +6,7 @@
 package service;
 
 import bean.Candidat;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +29,10 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
     public CandidatFacade() {
         super(Candidat.class);
     }
+    
+    public List<Candidat> findNonvalider(){
+       return em.createQuery("SELECT c.candidat FROM Condidature c WHERE c.condidatureValide='0'").getResultList();
+    }
+    
     
 }

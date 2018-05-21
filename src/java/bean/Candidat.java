@@ -56,10 +56,10 @@ public class Candidat implements Serializable {
     private int anneeInscriptionEnsSup;
     private int anneeInscriptionUniv;
     private int anneeInscriptionEtab;
-    private int noteS1;
-    private int noteS2;
-    private int noteS3;
-    private int noteS4;
+    private float noteS1;
+    private float noteS2;
+    private float noteS3;
+    private float noteS4;
     private int etablissementPreInsc=15;
     private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch-
     
@@ -346,7 +346,7 @@ public class Candidat implements Serializable {
         this.cne = cne;
     }
 
-    public int getNoteS1() {
+    public float getNoteS1() {
         return noteS1;
     }
 
@@ -354,7 +354,7 @@ public class Candidat implements Serializable {
         this.noteS1 = noteS1;
     }
 
-    public int getNoteS2() {
+    public float getNoteS2() {
         return noteS2;
     }
 
@@ -362,7 +362,7 @@ public class Candidat implements Serializable {
         this.noteS2 = noteS2;
     }
 
-    public int getNoteS3() {
+    public float getNoteS3() {
         return noteS3;
     }
 
@@ -370,7 +370,7 @@ public class Candidat implements Serializable {
         this.noteS3 = noteS3;
     }
 
-    public int getNoteS4() {
+    public float getNoteS4() {
         return noteS4;
     }
 
@@ -411,7 +411,7 @@ public class Candidat implements Serializable {
 
     @Override
     public String toString() {
-        return "Candidat{" + "cne=" + cne + '}';
+        return nomLat;
     }
 
 }
