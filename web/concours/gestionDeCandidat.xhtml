@@ -11,7 +11,9 @@
             Gestion des candidats
         </ui:define>
         <ui:define name="content" >
-
+            <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+         show-detail="true" show-summary="false" allowDismiss="true"
+         delay="3000" escape="true" />
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -65,6 +67,7 @@
                                 <h4 class="title">Dossier de candidature</h4>
 
                             </div>
+                            <p:messages for="somekey"  />
                             <div class="card-content table-responsive">
 
 

@@ -16,6 +16,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -74,6 +75,7 @@ public class CandidatController implements Serializable {
         items = null;
         System.out.println("ha niveau==>"+niveau+"o ha section==>"+section+"o ha cne==>"+cne);
         items = pieceEtudiantFacade.findByNiveauAndSection(niveau,section,cne);
+       
         System.out.println("ha l items===>"+items);
     }
     public void validerCandidat(){
@@ -81,7 +83,8 @@ public class CandidatController implements Serializable {
         condidatureFacade.validerCandidature(selected);
        
         items.remove(items.indexOf(selected));
-        
+        FacesContext.getCurrentInstance().addMessage(null, 
+            new FacesMessage("Candidat valider"));
         System.out.println("ha l items==>"+items);
     }
 

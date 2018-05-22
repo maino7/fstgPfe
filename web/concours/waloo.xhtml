@@ -83,7 +83,7 @@
             </fieldset>
             <f:facet name="footer">
                 <b:button value="Close" dismiss="modal" />
-                <b:commandButton value="rejeter" look="danger" ajax="true" actionListener="#{candidatController.validerCandidat()}" update=":datalistform:datalist" oncomplete="$('.modalPseudoClass').modal('hide')"/>
+                <b:commandButton value="rejeter" look="danger" ajax="true" actionListener="#{candidatController.validerCandidat()}" update=":datalistform:datalist growlMsg" oncomplete="$('.modalPseudoClass').modal('hide')"/>
                 <b:commandButton value="valider" look="success" onclick="$('.modalPseudoClass').modal('hide')" />
 
             </f:facet>
