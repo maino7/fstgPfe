@@ -260,10 +260,12 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px">
-                                                                    <p:selectOneMenu class="form-control" id="ana" widgetVar="choice" value="#{candidatController.selected.pays}" style="width: 250px;height: 40px" >
-                                                                        <f:selectItems value="#{paysController.itemsAvailableSelectOne}" itemLabel="-- NATIONNALITE --"
-                                                                                       var="paysItem"
-                                                                                       itemValue="#{paysItem}"/>
+                                                                    <p:selectOneMenu class="form-control" id="ana" widgetVar="choice" value="choice" style="width: 250px;height: 40px" >
+
+
+                                                                        <f:selectItem itemValue="1" itemLabel="-- NATIONNALITE --"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="Maroc"/>
+
                                                                     </p:selectOneMenu>
                                                                 </p:column>
                                                                 <p:column>
@@ -271,7 +273,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="tel" placeholder="tapez votre Téléphone ici" value="#{candidatController.selected.telephone}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="tel" placeholder="tapez votre Téléphone ici" value="Téléphone" />
                                                                 </p:column>
 
                                                             </p:row>
@@ -279,34 +281,26 @@
                                                             <p:row>
 
                                                                 <p:column>
-                                                                    <p:outputLabel value="Sexe :" for="male" style="text-align: left;padding-top: 10px;width: 200px" />
+                                                                    <p:outputLabel value="Sexe :" for="oftenOnce" style="text-align: left;padding-top: 10px;width: 200px" />
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:selectBooleanButton id="male" class="myBtn" value="#{candidatController.male}" onLabel="Male" offLabel="Male" style="width:120px;height: 40px;text-align: center;padding: 8px 0;" >
-                                                                        <p:ajax listener="#{candidatController.checkOnce0(true, candidatController.selected)}" update="male female"/>
-
+                                                                    <p:selectBooleanButton id="oftenOnce" class="myBtn" value="Male" onLabel="Male" offLabel="Male" style="width:120px;height: 40px;text-align: center;padding: 8px 0;" onchange="PF('NetoyageUneFoisDialog').show()" >
                                                                     </p:selectBooleanButton>
 
-                                                                    <p:selectBooleanButton id="female" class="myBtn" value="#{candidatController.female}" onLabel="Female" offLabel="Female" style="width:120px;height: 40px;text-align: center;padding: 8px 0;">
-                                                                        <p:ajax listener="#{candidatController.checkMany0(false, candidatController.selected)}" update="male female"/>
-
+                                                                    <p:selectBooleanButton id="oftenManyTimes" class="myBtn" value="Female" onLabel="Female" offLabel="Female" style="width:120px;height: 40px;text-align: center;padding: 8px 0;" onchange="PF('NetoyagePlusieursFoisDialog').show()">
                                                                     </p:selectBooleanButton>
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:outputLabel value="Handicap :" for="mama" style="text-align: left;padding-top: 10px;width: 200px" />
+                                                                    <p:outputLabel value="Handicap :" for="oftenOnce" style="text-align: left;padding-top: 10px;width: 200px" />
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:selectBooleanButton id="mama" class="myBtn" value="#{candidatController.handicap}" onLabel="Non" offLabel="Non" style="width:120px;height: 40px;text-align: center;padding: 8px 0;" onchange="PF('NetoyageUneFoisDialog').show()" >
-                                                                        <p:ajax listener="#{candidatController.checkOnce1()}" update="mama baba "/>
-
+                                                                    <p:selectBooleanButton id="mama" class="myBtn" value="Non" onLabel="Non" offLabel="Non" style="width:120px;height: 40px;text-align: center;padding: 8px 0;" onchange="PF('NetoyageUneFoisDialog').show()" >
                                                                     </p:selectBooleanButton>
 
-                                                                    <p:selectBooleanButton id="baba" class="myBtn" value="#{candidatController.nonHandicap}" onLabel="Oui" offLabel="Oui" style="width:120px;height: 40px;text-align: center;padding: 8px 0;" onchange="PF('NetoyagePlusieursFoisDialog').show()">
-                                                                        <p:ajax listener="#{candidatController.checkMany1()}" update="mama baba"/>
-
+                                                                    <p:selectBooleanButton id="baba" class="myBtn" value="Oui" onLabel="Oui" offLabel="Oui" style="width:120px;height: 40px;text-align: center;padding: 8px 0;" onchange="PF('NetoyagePlusieursFoisDialog').show()">
                                                                     </p:selectBooleanButton>
                                                                 </p:column>
                                                             </p:row>
@@ -316,14 +310,14 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="CNE" placeholder="Le CNE doit contenir 10 chiffres" value="#{candidatController.selected.cne}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="CNE" placeholder="Le CNE doit contenir 10 chiffres" value="CNE" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="CIN :" for="CIN" style="text-align: left;padding-top: 10px;width: 200px"/>
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="CIN" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.cin}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="CIN" placeholder="tapez votre Prénom ici" value="CIN" />
                                                                 </p:column>
 
                                                             </p:row>
@@ -333,19 +327,22 @@
                                                                     <p:outputLabel value="Date de Naissance" for="dateCreation" style="text-align: left;padding-top: 10px" />
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:calendar id="dateCreation" pattern="MM/dd/yyyy" value="#{candidatController.selected.dateNaissance}"   style="width:550px; height:100px;" />
+                                                                    <p:calendar id="dateCreation" pattern="MM/dd/yyyy" value="date"   style="width:550px; height:100px;" />
                                                                 </p:column>
                                                                 <p:column style="width: 100px">
                                                                     <p:outputLabel value="Profession de la mère :" for="maman" style="padding-top: 10px" />
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px">
-                                                                    <p:selectOneMenu class="form-control" id="maman" widgetVar="choice" value="#{candidatController.selected.professionDeLaMere}" style="width: 250px;height: 40px" >
-                                                                        <f:selectItems value="#{professionController.itemsAvailableSelectOne}" itemLabel="-- Profession --"
-                                                                                       var="professionItem"
-                                                                                       itemValue="#{professionItem}"/>
+                                                                    <p:selectOneMenu class="form-control" id="maman" widgetVar="choice" value="choice" style="width: 250px;height: 40px" >
+
+
+                                                                        <f:selectItem itemValue="1" itemLabel="-- Profession --"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="Maitresse"/>
+
                                                                     </p:selectOneMenu>
                                                                 </p:column>
+
                                                             </p:row>
                                                             <p:row>
 
@@ -353,9 +350,12 @@
                                                                     <p:outputLabel value="Adresse :" for="instructions" style="text-align: left;padding-top: 10px;width: 200px" />
                                                                 </p:column>
                                                                 <p:column colspan="3">
-                                                                    <p:inputTextarea rows="6" style="width: 100%"   id="instructions" placeholder="Adresse" value="#{candidatController.selected.adresse}" />
+                                                                    <p:inputTextarea rows="6" style="width: 100%"   id="instructions" placeholder="Adresse" value="Adresse" />
                                                                 </p:column>
                                                             </p:row>
+
+
+
                                                         </p:panelGrid>
                                                     </div>
 
@@ -376,11 +376,12 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control" id="monday" widgetVar="choice" value="#{candidatController.selected.dernierDiplome.titre}" style="width: 250px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control" id="monday" widgetVar="choice" value="choice" style="width: 250px;height: 40px" >
 
-                                                                        <f:selectItems value="#{dernierDiplomeController.itemsAvailableSelectOne}" itemLabel="-- Profession --"
-                                                                                       var="dernierDiplomeItem"
-                                                                                       itemValue="#{dernierDiplomeItem}"/>
+
+                                                                        <f:selectItem itemValue="1" itemLabel="Baccalauréat"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="DEUST"/>
+
                                                                     </p:selectOneMenu>
                                                                 </p:column>
 
@@ -389,10 +390,11 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="thursday" widgetVar="choice" value="#{candidatController.selected.dernierDiplome.mentionDiplome.titre}" style="width: 250px;height: 40px;padding-right: 00px;" >
-                                                                        <f:selectItems value="#{mentionBacController.itemsAvailableSelectOne}" itemLabel="-- Profession --"
-                                                                                       var="mentionBacItem"
-                                                                                       itemValue="#{mentionBacItem}"/>
+                                                                    <p:selectOneMenu class="form-control" id="thursday" widgetVar="choice" value="choice" style="width: 250px;height: 40px;padding-right: 00px;" >
+
+
+                                                                        <f:selectItem itemValue="1" itemLabel=" Assez Bien "/>
+                                                                        <f:selectItem itemValue="2" itemLabel="Bien"/>
 
                                                                     </p:selectOneMenu>
                                                                 </p:column>
@@ -403,10 +405,11 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control" id="wednesday" widgetVar="choice" value="#{candidatController.selected.optionBac}" style="width: 250px;height: 40px" >
-                                                                        <f:selectItems value="#{optionBacController.itemsAvailableSelectOne}" itemLabel="-- Profession --"
-                                                                                       var="optionBacItem"
-                                                                                       itemValue="#{optionBacItem}"/>
+                                                                    <p:selectOneMenu class="form-control" id="wednesday" widgetVar="choice" value="choice" style="width: 250px;height: 40px" >
+
+
+                                                                        <f:selectItem itemValue="1" itemLabel="SCIENCES EXPERIMENTALES"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="SCIENCES MATH"/>
 
                                                                     </p:selectOneMenu>
                                                                 </p:column>
@@ -430,14 +433,14 @@
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="a" placeholder="EX: 2016" value="#{candidatController.selected.anneeInscriptionEnsSup}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="a" placeholder="EX: 2016" value="Nom" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel for="b" value="Année BAC:" style="text-align: left;padding-top: 10px" />
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"    id="b" placeholder="EX: 2016" value="#{candidatController.selected.anneeBac}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"    id="b" placeholder="EX: 2016" value="Prénom" />
 
                                                                 </p:column>
                                                             </p:row>
@@ -447,18 +450,19 @@
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="c" placeholder="EX: 2016" value="#{candidatController.selected.anneeInscriptionUniv}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="c" placeholder="EX: 2016" value="Nom" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="Lycée du BAC: " for="d" style="text-align: left;padding-top: 10px" />
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="d" widgetVar="choice" value="#{candidatController.selected.lycee.titre}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                    <p:selectOneMenu class="form-control" id="d" widgetVar="choice" value="choice" style="width: 250px;height: 40px;padding-right: 00px;" >
 
-                                                                        <f:selectItems value="#{lyceeController.itemsAvailableSelectOne}" itemLabel="-- Profession --"
-                                                                                       var="lyceeItem"
-                                                                                       itemValue="#{lyceeItem}"/>
+
+                                                                        <f:selectItem itemValue="1" itemLabel=" Lycée 1 "/>
+                                                                        <f:selectItem itemValue="2" itemLabel="Lycée 2"/>
+
                                                                     </p:selectOneMenu>
                                                                 </p:column>
                                                             </p:row>
@@ -468,19 +472,18 @@
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="X" placeholder="EX: 2016" value="#{candidatController.selected.anneeInscriptionEtab}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="X" placeholder="EX: 2016" value="Nom" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="Province: " for="y" style="text-align: left;padding-top: 10px" />
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="y" widgetVar="choice" value="#{candidatController.selected.region.nom}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                    <p:selectOneMenu class="form-control" id="y" widgetVar="choice" value="choice" style="width: 250px;height: 40px;padding-right: 00px;" >
 
-                                                                        <f:selectItems value="#{regionController.itemsAvailableSelectOne}" itemLabel="-- PROVINCE --"
-                                                                                       var="regionItem"
-                                                                                       itemValue="#{regionItem}"/>
 
+                                                                        <f:selectItem itemValue="1" itemLabel=" Lycée 1 "/>
+                                                                        <f:selectItem itemValue="2" itemLabel="Lycée 2"/>
 
                                                                     </p:selectOneMenu>
                                                                 </p:column>
@@ -491,18 +494,18 @@
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="w" placeholder="FSTG Marrakech" value="#{candidatController.selected.etablissementPreInsc}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="w" placeholder="FSTG Marrakech" value="Nom" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="Accadémie: " for="z" style="text-align: left;padding-top: 10px" />
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="z" widgetVar="choice" value="#{candidatController.selected.academie}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                    <p:selectOneMenu class="form-control" id="z" widgetVar="choice" value="choice" style="width: 250px;height: 40px;padding-right: 00px;" >
 
-                                                                        <f:selectItems value="#{academieController.itemsAvailableSelectOne}" itemLabel="-- Accadémie --"
-                                                                                       var="academieItem"
-                                                                                       itemValue="#{academieItem}"/>
+
+                                                                        <f:selectItem itemValue="1" itemLabel=" acca 1 "/>
+                                                                        <f:selectItem itemValue="2" itemLabel="acca 2"/>
 
                                                                     </p:selectOneMenu>
                                                                 </p:column>

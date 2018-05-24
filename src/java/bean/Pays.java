@@ -21,6 +21,9 @@ import javax.persistence.OneToMany;
 public class Pays implements Serializable {
 
     @OneToMany(mappedBy = "pays")
+    private List<Candidat> candidats;
+
+    @OneToMany(mappedBy = "pays")
     private List<Region> regions;
 
     private static final long serialVersionUID = 1L;

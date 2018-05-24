@@ -28,12 +28,109 @@ public class CandidatController implements Serializable {
     private List<Candidat> items = null;
     private Candidat selected;
     private int typeInscription;
+    private boolean male;
+    private boolean female;
+    private boolean handicap;
+    private boolean nonHandicap;
 
     public CandidatController() {
     }
 
+    public void checkOnce0(Boolean sexe, Candidat candidat) {
+
+        if (male = true) {
+            candidat.setSexe(sexe);
+            female = false;
+        }
+
+        if (male == false) {
+            candidat.setSexe(sexe);
+            female = true;
+        }
+    }
+
+    public void checkMany0(Boolean sexe, Candidat candidat) {
+        if (female == true) {
+            candidat.setSexe(sexe);
+            male = false;
+        }
+        if (female == false) {
+            candidat.setSexe(sexe);
+            male = true;
+        }
+    }
+
+    public void checkOnce(Boolean sexe) {
+
+        if (male == true) {
+            female = false;
+        }
+        if (male == false) {
+            female = true;
+        }
+    }
+
+    public void checkMany() {
+        if (female == true) {
+            male = false;
+        }
+        if (female == false) {
+            male = true;
+        }
+    }
+
+    public void checkOnce1() {
+        if (handicap == true) {
+            nonHandicap = false;
+        }
+        if (handicap == false) {
+            nonHandicap = true;
+        }
+    }
+
+    public void checkMany1() {
+        if (nonHandicap == true) {
+            handicap = false;
+        }
+        if (nonHandicap == false) {
+            handicap = true;
+        }
+    }
+
+    public boolean isMale() {
+        return male;
+    }
+
+    public void setMale(boolean male) {
+        this.male = male;
+    }
+
+    public boolean isFemale() {
+        return female;
+    }
+
+    public void setFemale(boolean female) {
+        this.female = female;
+    }
+
+    public boolean isHandicap() {
+        return handicap;
+    }
+
+    public void setHandicap(boolean handicap) {
+        this.handicap = handicap;
+    }
+
+    public boolean isNonHandicap() {
+        return nonHandicap;
+    }
+
+    public void setNonHandicap(boolean nonHandicap) {
+        this.nonHandicap = nonHandicap;
+    }
+
     public Candidat getSelected() {
-        if(selected == null){
+        if (selected == null) {
             selected = new Candidat();
         }
         return selected;
@@ -166,12 +263,12 @@ public class CandidatController implements Serializable {
 
     }
     //test
-    
-     public void testwalo(Candidat e){
-         System.out.println("hahowa dkhel");
-         selected = e;
-         
-     }
+
+    public void testwalo(Candidat e) {
+        System.out.println("hahowa dkhel");
+        selected = e;
+
+    }
 
     public int getTypeInscription() {
         return typeInscription;
@@ -180,6 +277,5 @@ public class CandidatController implements Serializable {
     public void setTypeInscription(int typeInscription) {
         this.typeInscription = typeInscription;
     }
-     
 
 }

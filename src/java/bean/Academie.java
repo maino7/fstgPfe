@@ -22,6 +22,9 @@ import javax.persistence.OneToOne;
 public class Academie implements Serializable {
 
     @OneToMany(mappedBy = "academie")
+    private List<Candidat> candidats;
+
+    @OneToMany(mappedBy = "academie")
     private List<EtablissementType> etablissementTypes;
 
     private static final long serialVersionUID = 1L;

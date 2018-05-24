@@ -31,7 +31,7 @@ public class Candidat implements Serializable {
     private String cin;
     private String nomLat;
     private String prenomLat;
-    private int sexe;//1 male / 2 female
+    private boolean sexe;//1 male / 2 female
     private boolean handicap;
     @Email
     private String email;
@@ -56,23 +56,56 @@ public class Candidat implements Serializable {
     private int anneeInscriptionEnsSup;
     private int anneeInscriptionUniv;
     private int anneeInscriptionEtab;
-    private int etablissementPreInsc=15;
-    private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch-
-    
+    private int etablissementPreInsc = 15;
+    private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch- // hajar Fhmat daba tchr7 lik almklekh
+    @ManyToOne
+    private Profession professionDeLaMere;
+
     @ManyToOne
     private OptionBac optionBac;
     @ManyToOne
     private DernierDiplome dernierDiplome;
     @OneToOne(mappedBy = "candidat")
     private Condidature condidature;
- 
+    @ManyToOne
+    private Lycee lycee;
+
     @ManyToOne
     private EtablissementType etablissement;
     @OneToOne(mappedBy = "candidat")
     private Etudiant etudiant;
-   
+    @ManyToOne
+    private Pays pays;
+    @ManyToOne
+    private Region region;
+    @ManyToOne
+    private Academie academie;
 
     public Candidat() {
+    }
+
+    public Academie getAcademie() {
+        return academie;
+    }
+
+    public void setAcademie(Academie academie) {
+        this.academie = academie;
+    }
+
+    public boolean isSexe() {
+        return sexe;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
+    public void setSexe(boolean sexe) {
+        this.sexe = sexe;
     }
 
     public String getCin() {
@@ -90,10 +123,33 @@ public class Candidat implements Serializable {
     public void setEtudiant(Etudiant etudiant) {
         this.etudiant = etudiant;
     }
-    
+
+    public Profession getProfessionDeLaMere() {
+        return professionDeLaMere;
+    }
+
+    public void setProfessionDeLaMere(Profession professionDeLaMere) {
+        this.professionDeLaMere = professionDeLaMere;
+    }
+
+    public Pays getPays() {
+        return pays;
+    }
+
+    public void setPays(Pays pays) {
+        this.pays = pays;
+    }
 
     public Condidature getCondidature() {
         return condidature;
+    }
+
+    public Lycee getLycee() {
+        return lycee;
+    }
+
+    public void setLycee(Lycee lycee) {
+        this.lycee = lycee;
     }
 
     public void setCondidature(Condidature condidature) {
@@ -107,7 +163,6 @@ public class Candidat implements Serializable {
     public void setEtablissement(EtablissementType etablissement) {
         this.etablissement = etablissement;
     }
-    
 
     public String getNomLat() {
         return nomLat;
@@ -123,14 +178,6 @@ public class Candidat implements Serializable {
 
     public void setPrenomLat(String prenomLat) {
         this.prenomLat = prenomLat;
-    }
-
-    public int getSexe() {
-        return sexe;
-    }
-
-    public void setSexe(int sexe) {
-        this.sexe = sexe;
     }
 
     public boolean isHandicap() {
@@ -332,8 +379,7 @@ public class Candidat implements Serializable {
     public void setDernierDiplome(DernierDiplome dernierDiplome) {
         this.dernierDiplome = dernierDiplome;
     }
-    
-    
+
     public String getCne() {
         return cne;
     }
@@ -341,12 +387,7 @@ public class Candidat implements Serializable {
     public void setCne(String cne) {
         this.cne = cne;
     }
-    
 
-    
-    
-    
-    
     @Override
     public int hashCode() {
         int hash = 3;
