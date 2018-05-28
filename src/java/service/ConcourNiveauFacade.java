@@ -6,6 +6,8 @@
 package service;
 
 import bean.ConcourNiveau;
+import bean.Niveau;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,9 +26,23 @@ public class ConcourNiveauFacade extends AbstractFacade<ConcourNiveau> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    
+    @EJB
+    private service.CondidatureFacade condidatureFacade;
 
     public ConcourNiveauFacade() {
         super(ConcourNiveau.class);
+    }
+    
+    public int calculePlaceRest(Niveau niveau){
+        ConcourNiveau c = (ConcourNiveau) em.createQuery("SELECT c FROM ConcourNiveau c WHERE c.niveau.id="+niveau.getId()).getSingleResult();
+        int placeC = c.getNbrDePlaceEcrit();
+        int placeCond = condidatureFacade.placeReste(niveau);
+        if(placeCond >= placeC){
+            return -1;
+        } else {
+            return 1;
+        }
     }
     
 }

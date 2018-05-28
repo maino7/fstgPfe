@@ -31,6 +31,8 @@ public class CandidatController implements Serializable {
     @EJB
     private service.CondidatureFacade condidatureFacade;
     @EJB
+    private service.ConcourNiveauFacade concourNiveauFacade;
+    @EJB
     private service.PieceEtudiantFacade pieceEtudiantFacade;
     @EJB
     private service.NiveauFacade niveauFacade;
@@ -46,7 +48,7 @@ public class CandidatController implements Serializable {
     }
 
     public Candidat getSelected() {
-        if(selected == null){
+        if (selected == null) {
             selected = new Candidat();
         }
         return selected;
@@ -65,28 +67,45 @@ public class CandidatController implements Serializable {
     private CandidatFacade getFacade() {
         return ejbFacade;
     }
-    public void niveauBySection(){
-        
+
+    //========Methode==========//
+    public void niveauBySection() {
+
         niveaus = niveauFacade.findBySection(section);
-        System.out.println("ha les niveau===>"+niveaus);
+        System.out.println("ha les niveau===>" + niveaus);
     }
-    
-    public void findBycreataria(){
+
+    public void findBycreataria() {
         items = null;
-        System.out.println("ha niveau==>"+niveau+"o ha section==>"+section+"o ha cne==>"+cne);
-        items = pieceEtudiantFacade.findByNiveauAndSection(niveau,section,cne);
-       
-        System.out.println("ha l items===>"+items);
+        System.out.println("ha niveau==>" + niveau + "o ha section==>" + section + "o ha cne==>" + cne);
+        items = pieceEtudiantFacade.findByNiveauAndSection(niveau, section, cne);
+
+        System.out.println("ha l items===>" + items);
     }
-    public void validerCandidat(){
-        System.out.println("ha selected==>"+selected);
-        condidatureFacade.validerCandidature(selected);
-       
-        items.remove(items.indexOf(selected));
-        FacesContext.getCurrentInstance().addMessage(null, 
-            new FacesMessage("Candidat valider"));
-        System.out.println("ha l items==>"+items);
+
+    public int validerCandidat() {
+        System.out.println("ha selected==>" + selected);
+
+        if (concourNiveauFacade.calculePlaceRest(niveau) == -1) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Place limite atteint"));
+            return -1;
+        } else {
+            condidatureFacade.validerCandidature(selected);
+
+            items.remove(items.indexOf(selected));
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Candidat valider"));
+            System.out.println("ha l items==>" + items);
+            return 1;
+        }
     }
+
+    public void test() {
+        System.out.println("button khedam");
+        
+    }
+    //================//
 
     public Candidat prepareCreate() {
         selected = new Candidat();
@@ -201,12 +220,12 @@ public class CandidatController implements Serializable {
 
     }
     //test
-    
-     public void testwalo(Candidat e){
-         System.out.println("hahowa dkhel");
-         selected = e;
-         
-     }
+
+    public void testwalo(Candidat e) {
+        System.out.println("hahowa dkhel");
+        selected = e;
+
+    }
 
     public int getTypeInscription() {
         return typeInscription;
@@ -217,7 +236,7 @@ public class CandidatController implements Serializable {
     }
 
     public Section getSection() {
-        if(section == null){
+        if (section == null) {
             section = new Section();
         }
         return section;
@@ -228,7 +247,7 @@ public class CandidatController implements Serializable {
     }
 
     public List<Niveau> getNiveaus() {
-        
+
         return niveaus;
     }
 
@@ -237,6 +256,9 @@ public class CandidatController implements Serializable {
     }
 
     public Niveau getNiveau() {
+        if (niveau == null) {
+            niveau = new Niveau();
+        }
         return niveau;
     }
 
@@ -251,12 +273,5 @@ public class CandidatController implements Serializable {
     public void setCne(String cne) {
         this.cne = cne;
     }
-    
-    
-    
-    
-    
-    
-     
 
 }

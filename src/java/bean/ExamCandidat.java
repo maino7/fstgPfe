@@ -90,7 +90,7 @@ public class ExamCandidat implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.ExamCandidat[ id=" + id + " ]";
+        return matiereConcour.getTitre()+" : "+noteCalc;
     }
     
 }
