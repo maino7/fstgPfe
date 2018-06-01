@@ -6,6 +6,8 @@
 package service;
 
 import bean.Niveau;
+import bean.Section;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +29,9 @@ public class NiveauFacade extends AbstractFacade<Niveau> {
 
     public NiveauFacade() {
         super(Niveau.class);
+    }
+    public List<Niveau> findBySection(Section section){
+        return em.createQuery("SELECT n FROM Niveau n WHERE n.filiere.section.id="+section.getId()).getResultList();
     }
     
 }

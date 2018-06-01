@@ -66,6 +66,7 @@
     <class>bean.Ouvrage</class>
     <class>bean.Pays</class>
     <class>bean.Piece</class>
+    <class>bean.PieceEtudiant</class>
     <class>bean.PiecesParNiveau</class>
     <class>bean.Produit</class>
     <class>bean.Profession</class>
@@ -85,7 +86,6 @@
     <class>bean.User</class>
     <class>bean.UserMaster</class>
     <class>bean.UserStock</class>
-    <class>bean.PieceEtudiant</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

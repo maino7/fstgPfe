@@ -31,7 +31,7 @@ public class Candidat implements Serializable {
     private String cin;
     private String nomLat;
     private String prenomLat;
-    private boolean sexe;//1 male / 2 female
+    private boolean sexe;
     private boolean handicap;
     @Email
     private String email;
@@ -56,11 +56,20 @@ public class Candidat implements Serializable {
     private int anneeInscriptionEnsSup;
     private int anneeInscriptionUniv;
     private int anneeInscriptionEtab;
+    private float noteS1;
+    private float noteS2;
+    private float noteS3;
+    private float noteS4;
+    private float noteS5;
+    private float noteS6;
+
     private int etablissementPreInsc = 15;
     private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch- // hajar Fhmat daba tchr7 lik almklekh
     @ManyToOne
     private Profession professionDeLaMere;
 
+//    private int etablissementPreInsc=15;
+    // private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch-// hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch-
     @ManyToOne
     private OptionBac optionBac;
     @ManyToOne
@@ -77,7 +86,7 @@ public class Candidat implements Serializable {
     @ManyToOne
     private Pays pays;
     @ManyToOne
-    private Region region;
+    private Region region;//**
     @ManyToOne
     private Academie academie;
 
@@ -96,8 +105,41 @@ public class Candidat implements Serializable {
         return sexe;
     }
 
+    public void setNoteS1(float noteS1) {
+        this.noteS1 = noteS1;
+    }
+
+    public void setNoteS2(float noteS2) {
+        this.noteS2 = noteS2;
+    }
+
+    public void setNoteS3(float noteS3) {
+        this.noteS3 = noteS3;
+    }
+
+    public void setNoteS4(float noteS4) {
+        this.noteS4 = noteS4;
+    }
+    
+
     public Region getRegion() {
         return region;
+    }
+
+    public float getNoteS5() {
+        return noteS5;
+    }
+
+    public void setNoteS5(float noteS5) {
+        this.noteS5 = noteS5;
+    }
+
+    public float getNoteS6() {
+        return noteS6;
+    }
+
+    public void setNoteS6(float noteS6) {
+        this.noteS6 = noteS6;
     }
 
     public void setRegion(Region region) {
@@ -145,6 +187,9 @@ public class Candidat implements Serializable {
     }
 
     public Lycee getLycee() {
+        if(lycee==null){
+            lycee = new Lycee();
+        }
         return lycee;
     }
 
@@ -388,6 +433,38 @@ public class Candidat implements Serializable {
         this.cne = cne;
     }
 
+    public float getNoteS1() {
+        return noteS1;
+    }
+
+    public void setNoteS1(int noteS1) {
+        this.noteS1 = noteS1;
+    }
+
+    public float getNoteS2() {
+        return noteS2;
+    }
+
+    public void setNoteS2(int noteS2) {
+        this.noteS2 = noteS2;
+    }
+
+    public float getNoteS3() {
+        return noteS3;
+    }
+
+    public void setNoteS3(int noteS3) {
+        this.noteS3 = noteS3;
+    }
+
+    public float getNoteS4() {
+        return noteS4;
+    }
+
+    public void setNoteS4(int noteS4) {
+        this.noteS4 = noteS4;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -415,7 +492,7 @@ public class Candidat implements Serializable {
 
     @Override
     public String toString() {
-        return "Candidat{" + "cne=" + cne + '}';
+        return nomLat;
     }
 
 }

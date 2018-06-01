@@ -20,8 +20,8 @@
                             </div>
                         </div>
 
-                       </div>
-                     <div class="row">
+                    </div>
+                    <div class="row">
 
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
@@ -34,8 +34,8 @@
                             </div>
                         </div>
 
-                       </div>
-                     <div class="row">
+                    </div>
+                    <div class="row">
 
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
@@ -48,45 +48,46 @@
                             </div>
                         </div>
 
-                       </div>
-                     <div class="row">
-                         <h5>Moyenne des semestres</h5>
+                    </div>
+                    <div class="row">
+                        <h5>Moyenne des semestres</h5>
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <div class="form-group">
-                                <b:inputText value="#{candidatController.selected}" disabled="true" class="form-control" label="S1"/>
+                                <b:inputText value="#{candidatController.selected.noteS1}" disabled="true" class="form-control" label="S1"/>
                             </div>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <div class="form-group">
-                                <b:inputText value="#{candidatController.selected}" disabled="true" class="form-control" label="S2"/>
+                                <b:inputText value="#{candidatController.selected.noteS2}" disabled="true" class="form-control" label="S2"/>
                             </div>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <div class="form-group">
-                                <b:inputText value="#{candidatController.selected}" disabled="true" class="form-control" label="S3"/>
+                                <b:inputText value="#{candidatController.selected.noteS3}" disabled="true" class="form-control" label="S3"/>
                             </div>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <div class="form-group">
-                                <b:inputText value="#{candidatController.selected}" disabled="true" class="form-control" label="S4"/>
+                                <b:inputText value="#{candidatController.selected.noteS4}" disabled="true" class="form-control" label="S4"/>
                             </div>
                         </div>
-                        
 
-                       </div>
-                   
+
+                    </div>
+
                 </div>
 
 
 
 
-            </fieldset></form>
-        <f:facet name="footer">
-            <b:button value="Close" dismiss="modal" />
-            <b:commandButton value="rejeter" look="danger" onclick="$('.modalPseudoClass').modal('hide')"/>
-            <b:commandButton value="valider" look="success" onclick="$('.modalPseudoClass').modal('hide')" />
-            
-        </f:facet>
+            </fieldset>
+            <f:facet name="footer">
+                <b:button value="Close" dismiss="modal" />
+                <b:commandButton value="rejeter" look="danger" ajax="true" actionListener="#{candidatController.validerCandidat()}" update=":datalistform:datalist growlMsg" oncomplete="$('.modalPseudoClass').modal('hide')"/>
+                <b:commandButton value="valider" look="success" onclick="$('.modalPseudoClass').modal('hide')" />
+
+            </f:facet>
+        </form>
     </b:modal>
 </html>
 

@@ -47,6 +47,8 @@ public class Filiere implements Serializable {
 
     @OneToMany(mappedBy = "filiere")
     private List<Etudiant> etudiants;
+    @OneToMany(mappedBy = "filiere")
+    private List<Condidature> condidatures;
     
     
     public Filiere() {
@@ -181,7 +183,7 @@ public class Filiere implements Serializable {
 
     @Override
     public String toString() {
-        return libelle;
+        return abreviation;
     }
 
 }

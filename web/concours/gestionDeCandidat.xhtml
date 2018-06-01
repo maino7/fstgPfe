@@ -4,13 +4,16 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
     <ui:composition template="/template/adminTemplate.xhtml" >
         <ui:define name="titre">
-           Gestion des candidats
+            Gestion des candidats
         </ui:define>
         <ui:define name="content" >
-
+            <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+         show-detail="true" show-summary="false" allowDismiss="true"
+         delay="3000" escape="true" />
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -56,6 +59,7 @@
                     </div>
 
                 </div>
+                
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
@@ -63,24 +67,48 @@
                                 <h4 class="title">Dossier de candidature</h4>
 
                             </div>
+                            <p:messages for="somekey"  />
                             <div class="card-content table-responsive">
 
 
                                 <f:view>
 
 
-                                    <h:form>
+                                    <h:form id="searchBar">
+                                        <b:container>
+                                            <b:row>
+                                                <b:column span="4">
+                                                    <b:selectOneMenu id="filiere" value="#{candidatController.section}" process="filiere" onchange="ajax:candidatController.niveauBySection()" update="niveau" >
+                                                        <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                                        <f:selectItems value="#{sectionController.items}" 
+                                                                       var="sectionItem"
+                                                                       itemValue="#{sectionItem}"/>
+                                                    </b:selectOneMenu>
+                                                </b:column>
+                                                <b:column span="4">
+                                                    <b:selectOneMenu id="niveau" value="#{candidatController.niveau}">
+                                                         <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                                        <f:selectItems value="#{candidatController.niveaus}" />
+                                                    </b:selectOneMenu>
 
-                                        <b:selectOneMenu id="type_insc" value="#{candidatController.typeInscription}"  col-md="2" col-lg="2">
-                                            
-                                            <f:selectItem itemLabel="--Sélectionner la filiere--" itemValue=""/>
-                                            <f:selectItem itemValue="1" itemLabel="Tronc commun"/>
-                                            <f:selectItem itemValue="2" itemLabel="Cycle"/>
-                                            <f:selectItem itemValue="3" itemLabel="Master"/>
-                                        </b:selectOneMenu>
+                                                </b:column>
+                                                <b:column span="4">
+                                                    
+                                                    <b:inputText value="#{candidatController.cne}" placeholder="cne.." />
 
-
-                                        <b:dataTable value="#{candidatController.items}" var="item">
+                                                </b:column>
+                                                <b:column>
+                                                    <b:commandButton look="success" value="ok" actionListener="#{candidatController.findBycreataria()}" />
+                                                    
+                                                    <b:commandButton look="success" value="imprimer" action="#{candidatController.test}" rendered="true" />
+                                                  
+                                                    
+                                                </b:column>
+                                            </b:row>
+                                        </b:container>
+                                        </h:form>
+                                    <h:form id="datalistform" >
+                                        <b:dataTable id="datalist" value="#{candidatController.items}" var="item">
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
                                                     <h:outputText value="Cin"/>

@@ -41,9 +41,19 @@ public class Condidature implements Serializable {
     private List<PieceEtudiant> piecesFournies;
     @OneToMany(mappedBy = "condidature")
     private List<ExamCandidat> examCandidats;
+    @ManyToOne
+    private Filiere filiere;
 
     public AnneUniversitaire getAnneUniversitaire() {
         return anneUniversitaire;
+    }
+
+    public Filiere getFiliere() {
+        return filiere;
+    }
+
+    public void setFiliere(Filiere filiere) {
+        this.filiere = filiere;
     }
 
     public void setAnneUniversitaire(AnneUniversitaire anneUniversitaire) {
@@ -65,8 +75,6 @@ public class Condidature implements Serializable {
     public void setExamCandidats(List<ExamCandidat> examCandidats) {
         this.examCandidats = examCandidats;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -138,7 +146,6 @@ public class Condidature implements Serializable {
     public void setMoyenneGenerale(float moyenneGenerale) {
         this.moyenneGenerale = moyenneGenerale;
     }
-    
 
     public void setId(Long id) {
         this.id = id;
@@ -168,5 +175,5 @@ public class Condidature implements Serializable {
     public String toString() {
         return "bean.Inscription[ id=" + id + " ]";
     }
-    
+
 }

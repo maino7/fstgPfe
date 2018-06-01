@@ -1,8 +1,12 @@
 package controller;
 
 import bean.Candidat;
+import bean.Condidature;
+import bean.Niveau;
+import bean.Section;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.ServerConfigUtil;
 import service.CandidatFacade;
 
 import java.io.Serializable;
@@ -14,10 +18,13 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 @Named("candidatController")
 @SessionScoped
@@ -25,15 +32,68 @@ public class CandidatController implements Serializable {
 
     @EJB
     private service.CandidatFacade ejbFacade;
+    @EJB
+    private service.CondidatureFacade condidatureFacade;
+    @EJB
+    private service.PieceEtudiantFacade pieceEtudiantFacade;
+    @EJB
+    private service.NiveauFacade niveauFacade;
     private List<Candidat> items = null;
     private Candidat selected;
+    private Condidature condidature;
     private int typeInscription;
+    private UploadedFile uploadedFile;
+    private String fileName;
     private boolean male;
     private boolean female;
     private boolean handicap;
     private boolean nonHandicap;
+    private String cne;
+    private Section section;
+    private Niveau niveau;
+    private List<Niveau> niveaus = null;
 
     public CandidatController() {
+    }
+
+    public void hal3ar() {
+        //int i = getFacade().creer(selected, condidature);
+        // System.out.println("ha i==>"+i);
+        System.out.println("ha save t executa" + selected);
+
+    }
+
+    public String test() {
+        System.out.println("ha selected==>" + selected);
+        System.out.println("ha condidature==>" + condidature);
+        int i = getFacade().creer(selected, condidature);
+        System.out.println("ha i==>" + i);
+        System.out.println("khedam !!");
+        return "";
+    }
+
+    public Condidature getCondidature() {
+        if (condidature == null) {
+            condidature = new Condidature();
+        }
+        return condidature;
+    }
+
+    public void inscription() {
+        ejbFacade.creerMaster(selected, condidature);
+
+    }
+
+    public void setCondidature(Condidature condidature) {
+        this.condidature = condidature;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public void checkOnce0(Boolean sexe, Candidat candidat) {
@@ -97,6 +157,22 @@ public class CandidatController implements Serializable {
         }
     }
 
+    public void upload(FileUploadEvent event) {
+        fileName = event.getFile().getFileName();
+        System.out.println("ha lfilename" + fileName);
+
+        uploadedFile = event.getFile();
+        System.out.println("ha  l file" + uploadedFile);
+
+        JsfUtil.addSuccessMessage("File uploaded");
+        savePdf();
+    }
+
+    public void savePdf() {
+        selected.setLastPdf(ServerConfigUtil.uploadPdf(uploadedFile, fileName, "pdf"));
+        System.out.println("hanta dkhltiiiiii");
+    }
+
     public boolean isMale() {
         return male;
     }
@@ -150,6 +226,30 @@ public class CandidatController implements Serializable {
         return ejbFacade;
     }
 
+    public void niveauBySection() {
+
+        niveaus = niveauFacade.findBySection(section);
+        System.out.println("ha les niveau===>" + niveaus);
+    }
+
+    public void findBycreataria() {
+        items = null;
+        System.out.println("ha niveau==>" + niveau + "o ha section==>" + section + "o ha cne==>" + cne);
+        items = pieceEtudiantFacade.findByNiveauAndSection(niveau, section, cne);
+
+        System.out.println("ha l items===>" + items);
+    }
+
+    public void validerCandidat() {
+        System.out.println("ha selected==>" + selected);
+        condidatureFacade.validerCandidature(selected);
+
+        items.remove(items.indexOf(selected));
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("Candidat valider"));
+        System.out.println("ha l items==>" + items);
+    }
+
     public Candidat prepareCreate() {
         selected = new Candidat();
         initializeEmbeddableKey();
@@ -177,7 +277,7 @@ public class CandidatController implements Serializable {
 
     public List<Candidat> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = getFacade().findNonvalider();
         }
         return items;
     }
@@ -276,6 +376,42 @@ public class CandidatController implements Serializable {
 
     public void setTypeInscription(int typeInscription) {
         this.typeInscription = typeInscription;
+    }
+
+    public Section getSection() {
+        if (section == null) {
+            section = new Section();
+        }
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public List<Niveau> getNiveaus() {
+
+        return niveaus;
+    }
+
+    public void setNiveaus(List<Niveau> niveaus) {
+        this.niveaus = niveaus;
+    }
+
+    public Niveau getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(Niveau niveau) {
+        this.niveau = niveau;
+    }
+
+    public String getCne() {
+        return cne;
+    }
+
+    public void setCne(String cne) {
+        this.cne = cne;
     }
 
 }
