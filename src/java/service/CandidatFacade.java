@@ -6,6 +6,7 @@
 package service;
 
 import bean.Candidat;
+import bean.Niveau;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -33,6 +34,12 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
     public List<Candidat> findNonvalider(){
        return em.createQuery("SELECT c.candidat FROM Condidature c WHERE c.condidatureValide='0'").getResultList();
     }
-    
+    public List<Candidat> findByniveau(Niveau n){
+        return em.createQuery("SELECT p.condidature.candidat FROM PieceEtudiant p WHERE p.piecesParNiveau.niveau="+n.getId()).getResultList();
+    }
+    public float calculeMoy(Candidat c){
+        float moy = (c.getNoteS1() + c.getNoteS2() + c.getNoteS3() + c.getNoteS4())/3;
+        return moy;
+    }
     
 }

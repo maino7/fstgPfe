@@ -4,13 +4,17 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
     <ui:composition template="/template/adminTemplate.xhtml" >
         <ui:define name="titre">
-           Les preinscription
+            Les preinscription
         </ui:define>
         <ui:define name="content" >
-            <h:form>
+            <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+                     show-detail="true" show-summary="false" allowDismiss="true"
+                     delay="3000" escape="true" />
+            <h:form id="preForm" class="walo">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
@@ -56,6 +60,58 @@
                         </div>
 
                     </div>
+                    <div class="container-fluid">
+
+
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">Recherche</div>
+
+                            <div class="panel-body">
+                                <h:form id="searchBar">
+                                    <b:container>
+                                        <b:row>
+                                            <b:column span="2">
+                                                <b:selectOneMenu id="etablissement" value="#{coeffCalibrageController.et}" label="Etablissement">
+                                                    <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                                    <f:selectItems value="#{etablissementTypeController.itemsAvailableSelectOne}" 
+                                                                   var="etablissementItem"
+                                                                   itemValue="#{etablissementItem}"/>
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                            <b:column span="2">
+                                                <b:selectOneMenu id="anneeCoeff" value="#{coeffCalibrageController.annee}"  label="Annee">
+                                                    <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                                    <f:selectItem itemLabel="2017/2018" itemValue="2018" />
+                                                    <f:selectItem itemLabel="2016/2017" itemValue="2017" />
+                                                    <f:selectItem itemLabel="2015/2016" itemValue="2016" />
+
+                                                </b:selectOneMenu>
+                                            </b:column>
+                                            <b:column span="2">
+                                                <b:inputText value="#{coeffCalibrageController.coeffi}" label="Coefficient" />
+                                            </b:column>
+                                            <b:column span="2">
+                                                <b:inputText value="#{coeffCalibrageController.nbrMax}" label="nbr Max" />
+                                            </b:column>
+                                            <b:column span="2">
+                                                <b:inputText value="#{coeffCalibrageController.nbrMin}" label="nbr Min" />
+                                            </b:column>
+                                            <b:column span="2">
+                                                <b:inputText value="#{coeffCalibrageController.noteMin}" label="Seuille" />
+                                            </b:column>
+                                            <b:column>
+                                                <b:commandButton look="success" value="Rechercher" ajax="true" actionListener="#{coeffCalibrageController.findByCretar()}" update="preForm:preDatalist"  />
+
+                                                <b:commandButton look="success" value="imprimer"  rendered="true" />
+
+
+                                            </b:column>
+                                        </b:row>
+                                    </b:container>
+                                </h:form>
+                            </div>
+                        </div></div>
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
@@ -64,58 +120,42 @@
 
                                 </div>
                                 <div class="card-content table-responsive">
-                                    <table class="table table-hover">
-                                        <thead class="text-warning">
-                                            <th>Nom Filiere</th>
-                                            <th>Annee universitaire</th>
-                                            <th>Nombre de place</th>
-                                            <th>Moyenne de semestre</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>IRISI 2</td>
-                                                <td>2017/2018</td>
-                                                <td>3</td>
-                                                <td>16</td>
-                                            </tr>
-                                            <tr>
-                                                <td>IRISI 1</td>
-                                                <td>2017/2018</td>
-                                                <td>25</td>
-                                                <td>13</td>
-                                            </tr>
-                                            <tr>
-                                                <td>ISA 1</td>
-                                                <td>2017/2018</td>
-                                                <td>22</td>
-                                                <td>13</td>
-                                            </tr>
-                                            <tr>
-                                                <td>GMP 2</td>
-                                                <td>2017/2018</td>
-                                                <td>4</td>
-                                                <td>15</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <f:view>
 
 
+
+                                        <b:dataTable id="preDatalist" value="#{coeffCalibrageController.items}" var="item" class="table table-hover walo" excel="true">
+                                            <b:dataTableColumn value="#{item.coeff}" />
+
+                                            <b:dataTableColumn value="#{item.noteMinimal}" label="Seuille"/>
+
+                                            <b:dataTableColumn value="#{item.nbrMin}" />
+
+                                            <b:dataTableColumn value="#{item.nbrMax}" />
+
+                                            <b:dataTableColumn value="#{item.etablissement.titre}" />
+
+                                            <b:dataTableColumn value="#{item.annee}" />
+
+                                            <b:dataTableColumn label="Annee">
+
+                                                <b:commandButton value="edit" icon="edit">
+                                                </b:commandButton>
+                                            </b:dataTableColumn>
+                                        </b:dataTable>
+
+                                    </f:view>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">critere</button>
-                    </div>
-                    walo welah ila gha test ta3 jenkins 3
-                    walo welah ila gha test ta3 jenkins 3
-                    walo welah ila gha test ta3 jenkins 3
-                    walo welah ila gha test ta3 jenkins 3
+                    <b:commandButton value="Ajouter" look="success" ajax="true" actionListener="#{coeffCalibrageController.prepareCreate()}"  oncomplete="$('.modalPseudoClass1').modal('show')"  />
+
                 </div>
-                
+
             </h:form>
+
             <ui:include src="newCritereModal.xhtml"/>
-            
         </ui:define>
     </ui:composition>
 </html>

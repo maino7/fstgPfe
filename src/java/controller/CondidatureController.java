@@ -129,6 +129,7 @@ public class CondidatureController implements Serializable {
          //FacesMessage.SEVERITY_ERROR,"Error Title", "Error Message"
          noteF = 0;
          matieres.remove(matieres.indexOf(cEx));
+         update();
         }
         
     }

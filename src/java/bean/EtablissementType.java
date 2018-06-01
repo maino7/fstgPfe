@@ -93,7 +93,7 @@ public class EtablissementType implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.EtablissementType[ id=" + id + " ]";
+        return titre;
     }
     
 }

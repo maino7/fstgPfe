@@ -58,54 +58,84 @@
 
                     </div>
                     <h:form>
+
                         <div class="container-fluid">
+                            
+                           
+                                <div class="row">
+
+                                    <div id="demo" class="col-md-12 col-sm-12 col-lg-12">
+
+                                        <div class="panel panel-danger" style="height:50% ">
+
+                                            <div class="panel-heading"><h4>Creer un concours</h4></div>
 
 
-                            <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <dir class="form-group">
+                                                    <p:messages id="msgCritere" escape="true" autoUpdate="true" closable="true"/>
+                                                </dir>
 
-                                <div class="panel-heading">Recherche</div>
-
-                                <div class="panel-body">
-                                    <h:panelGrid id="display" columns="6">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-
-                                                <div class="form-group col-lg-4">
-                                                    <label class="control-label">Filiere:</label>
-                                                    <div class="input-group">
-
-                                                        <b:selectOneMenu id="type_insc" value="#{candidatController.typeInscription}" >
-
-                                                            <f:selectItem itemLabel="--Sélectionner la niveau--" itemValue=""/>
-                                                            <f:selectItem itemLabel="IRISI 1" itemValue=""/>
-                                                            <f:selectItem itemLabel="IRISI 2" itemValue=""/>
-                                                            <f:selectItem itemLabel="ISA 1" itemValue=""/>
-                                                            <f:selectItem itemLabel="ISA 2" itemValue=""/>
-                                                        </b:selectOneMenu>
-                                                    </div>
-
-                                                </div>
-                                                <div class="form-group col-lg-4">
-
-                                                    <div class="input-group">
-
-                                                        <b:commandButton value="rechercher" look="success" offset-lg="2" />
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label for="nbrEcrit">Nombre de place *</label>
+                                                    <b:selectOneMenu id="niveauC" value="#{concourNiveauController.selected.niveau}" class="form-control" required="true">
+                                                        <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                                        <f:selectItems value="#{niveauController.itemsAvailableSelectOne}" 
+                                                                       var="niveauItem"
+                                                                       itemValue="#{niveauItem}"/>
+                                                    </b:selectOneMenu>  
 
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label for="nbrEcrit">Nbr de Place pour l'ecrit</label>
+                                                    <b:inputText id="nbrEcrit" value="#{concourNiveauController.selected.nbrDePlaceEcrit}" class="form-control" required="true" >
+                                                        <f:validateDoubleRange minimum="1" />
+                                                    </b:inputText>
+                                                    <span id="error_lastname" class="text-danger" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="nbronrale">Nbr de Place pour l'orale</label>
+                                                    <b:inputText id="nbronrale" value="#{concourNiveauController.selected.nbrDePlaceOrale}" class="form-control" required="true" >
+                                                        <f:validateDoubleRange minimum="1" />
+                                                    </b:inputText>
+                                                    <span id="error_age" class="text-danger" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="nbradmis">Nbr de place finale</label>
+                                                    <b:inputText id="nbradmis" value="#{concourNiveauController.selected.nbrDePladeAdmis}" class="form-control" required="true" >
+                                                        <f:validateDoubleRange minimum="1" />
+                                                    </b:inputText>
+                                                    <span id="error_dob" class="text-danger" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="disc">Discription</label>
+                                                    <b:inputTextarea id="desc" value="#{concourNiveauController.selected.description}" class="form-control" required="true">
+                                                        <f:validateLength maximum="255" />
+                                                    </b:inputTextarea>
+                                                </div>
+
+                                                <b:commandButton actionListener="#{concourNiveauController.creer()}" value="Creer" look="primary" />
+
 
                                             </div>
                                         </div>
-                                    </h:panelGrid>
+                                    </div>
+
+
                                 </div>
-                            </div></div>
+                            
+                        </div>
                     </h:form>
                     <h:form>
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="card">
                                     <div class="card-header" data-background-color="orange">
-                                        <h4 class="title">Coefficient des concours ecrit </h4>
+                                        <h4 class="title">Les concours </h4>
 
                                     </div>
                                     <div class="card-content table-responsive">
@@ -113,44 +143,28 @@
 
 
                                             <h:form>
-                                                <b:dataTable value="#{concourExamMatiereController.items}" var="item"
-                                                             searching="true">
-                                                    <b:dataTableColumn>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Coeff"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{item.coeff}"/>
-                                                    </b:dataTableColumn>
-                                                    <b:dataTableColumn>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="DateExam"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{item.dateExam}">
-                                                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                        </h:outputText>
-                                                    </b:dataTableColumn>
-                                                    <b:dataTableColumn>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="MatiereConcour"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{item.matiereConcour.titre}"/>
-                                                    </b:dataTableColumn>
-                                                    <b:dataTableColumn>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Niveau"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{item.concourNiveau.niveau.filiere.libelle} #{item.concourNiveau.niveau.semestre.libelle} "/>
-                                                    </b:dataTableColumn>
-                                                    <b:dataTableColumn>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Action"/>
-                                                        </f:facet>
-                                                        <b:commandButton look="success" value="Modifier" />    
-                                                    </b:dataTableColumn>
 
+                                                <b:dataTable value="#{concourNiveauController.items}" var="item">
+                                                    <b:dataTableColumn  value="#{item.niveau}" />
+
+                                                    <b:dataTableColumn value="#{item.nbrDePladeAdmis}" />
+
+                                                    <b:dataTableColumn value="#{item.annee}" />
+
+                                                    <b:dataTableColumn value="#{item.description}" />
+
+                                                    <b:dataTableColumn value="#{item.nbrDePlaceEcrit}" />
+
+                                                    <b:dataTableColumn value="#{item.nbrDePlaceOrale}" />
+
+                                                    <b:dataTableColumn label="action">
+
+                                                        <b:commandButton look="primary" value="" />
+                                                    </b:dataTableColumn>
                                                 </b:dataTable>
                                             </h:form>
                                         </f:view>
+
 
                                     </div>
                                 </div>

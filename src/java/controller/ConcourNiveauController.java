@@ -1,11 +1,13 @@
 package controller;
 
 import bean.ConcourNiveau;
+import controller.util.DateUtil;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import service.ConcourNiveauFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,6 +16,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -32,6 +35,9 @@ public class ConcourNiveauController implements Serializable {
     }
 
     public ConcourNiveau getSelected() {
+        if(selected == null){
+            selected = new ConcourNiveau();
+        }
         return selected;
     }
 
@@ -54,6 +60,33 @@ public class ConcourNiveauController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    //=====Methode=====//
+    public void test(){
+        System.out.println("khedamt");
+        
+    }
+    public void creer(){
+        int i = getFacade().verification(selected);
+        if(i == -1){
+             FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"nbr orale supérieure a nbr ecrit",""));
+        }else if(i == -2){
+             FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"nbr d'admis superieure a nbr orale",""));
+        }else if(i == -3){
+             FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"ce Concours existe deja",""));
+        }else {
+            selected.setAnnee(DateUtil.format(new Date()));
+            create();
+             FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("success"));
+              selected = new ConcourNiveau();
+        }
+       
+        
+    }
+    //=================//
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ConcourNiveauCreated"));
