@@ -109,7 +109,7 @@ public class MatiereConcour implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.MatiereConcour[ id=" + id + " ]";
+        return titre;
     }
     
 }

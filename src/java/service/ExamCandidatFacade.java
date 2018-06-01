@@ -5,7 +5,12 @@
  */
 package service;
 
+import bean.ConcourExamMatiere;
+import bean.Condidature;
 import bean.ExamCandidat;
+import bean.MatiereConcour;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +33,51 @@ public class ExamCandidatFacade extends AbstractFacade<ExamCandidat> {
     public ExamCandidatFacade() {
         super(ExamCandidat.class);
     }
-    
+
+    public String findByCandidature(Condidature condidature) {
+        String examCand = "";
+        List<ExamCandidat> exams = em.createQuery("SELECT e FROM ExamCandidat e WHERE e.condidature.id=" + condidature.getId()).getResultList();
+        examCand = exams.stream().map(Object::toString).collect(Collectors.joining(", "));
+        System.out.println("ha la list li 3ta service==>" + examCand);
+        return examCand;
+    }
+
+    public int findByCondidatureMatiere(Condidature c, ConcourExamMatiere cm) {
+      
+        if (c == null || cm == null) {
+            return -1;
+        } else {
+            String qry = "SELECT e FROM ExamCandidat e WHERE e.condidature.id=" + c.getId() + " AND  e.matiereConcour.id=" + cm.getMatiereConcour().getId();
+            List<ExamCandidat> ex = em.createQuery(qry).getResultList();
+            if (ex.size() == 0) {
+               
+                return -1;
+            } else {
+              
+             return 1;
+            }
+        }
+    }
+
+    public int createExam(Condidature condidature, ConcourExamMatiere cem, float note) {
+        if(condidature == null || cem == null ){
+            System.out.println("-1");
+            return -1;
+        }else if(note >20){
+              System.out.println("-2");
+            return -2;
+        } else {
+              System.out.println("dazet");
+            ExamCandidat ex = new ExamCandidat();
+            ex.setCondidature(condidature);
+            ex.setMatiereConcour(cem.getMatiereConcour());
+            ex.setNoteCalc(note);
+            create(ex);
+            return 1;
+        }
+        
+    }
+    public List<ExamCandidat> finbByCandidature(Condidature c){
+        return em.createQuery("SELECT e FROM ExamCandidat e WHERE e.condidature.id="+c.getId()).getResultList();
+    }
 }

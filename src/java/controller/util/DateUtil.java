@@ -45,7 +45,7 @@ public class DateUtil {
     }
     
     public static String format(Date date) {//"yyyy-MM-dd"
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy ");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy ");
         return simpleDateFormat.format(date);
     }
 

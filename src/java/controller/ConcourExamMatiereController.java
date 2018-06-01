@@ -27,6 +27,7 @@ public class ConcourExamMatiereController implements Serializable {
     private service.ConcourExamMatiereFacade ejbFacade;
     private List<ConcourExamMatiere> items = null;
     private ConcourExamMatiere selected;
+    private int rendere;
 
     public ConcourExamMatiereController() {
     }
@@ -161,5 +162,14 @@ public class ConcourExamMatiereController implements Serializable {
         }
 
     }
+
+    public int getRendere() {
+        return rendere;
+    }
+
+    public void setRendere(int rendere) {
+        this.rendere = rendere;
+    }
+    
 
 }

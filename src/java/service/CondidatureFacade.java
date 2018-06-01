@@ -7,6 +7,8 @@ package service;
 
 import bean.Candidat;
 import bean.Condidature;
+import bean.Niveau;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -38,5 +40,10 @@ public class CondidatureFacade extends AbstractFacade<Condidature> {
         condidature.setCondidatureValide(1);
         edit(condidature);
     }
+    public int placeReste(Niveau niveau){
+        List<Condidature> l = em.createQuery("SELECT p.condidature FROM PieceEtudiant p WHERE p.condidature.condidatureValide='1' AND p.piecesParNiveau.niveau.id="+niveau.getId()).getResultList();
+        return  l.size();
+    }
+   
     
 }

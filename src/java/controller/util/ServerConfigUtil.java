@@ -74,13 +74,14 @@ public class ServerConfigUtil {
         try {
             String nameOfUploadedFile = uploadedFile.getFileName();
             File file = new File(nameOfUploadedFile.replace('\\', '/'));
+            System.out.println(nameOfUploadedFile);
 //            String fileSavePath = destinationPath + "\\" + nameOfUploadedFile;
             String fileName = uploadedFileName + "." + FilenameUtils.getExtension(nameOfUploadedFile);
-            String fileSavePath = pdfPath + "\\" + type + "\\" + fileName;
-
+            String fileSavePath = pdfPath + "\\"+ fileName;
+            System.out.println(fileSavePath);
             InputStream fileContent = uploadedFile.getInputstream();
             Path path = new File(fileSavePath).toPath();
-            System.out.println(path);
+            System.out.println("ha lpath azin" +path);
             Files.copy(fileContent, path, StandardCopyOption.REPLACE_EXISTING);
             return "/resources/pdfCycle/" + type + "/" + fileName;
         } catch (IOException e) {

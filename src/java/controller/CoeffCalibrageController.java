@@ -1,11 +1,14 @@
 package controller;
 
 import bean.CoeffCalibrage;
+import bean.EtablissementType;
+import controller.util.DateUtil;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import service.CoeffCalibrageFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,6 +17,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -27,11 +31,24 @@ public class CoeffCalibrageController implements Serializable {
     private service.CoeffCalibrageFacade ejbFacade;
     private List<CoeffCalibrage> items = null;
     private CoeffCalibrage selected;
-
+    private EtablissementType et;
+    private float coeffi;
+    private int nbrMax;
+    private int nbrMin;
+    private float noteMin;
+    private String annee;
+    private int editable;
+    
+    
     public CoeffCalibrageController() {
     }
 
     public CoeffCalibrage getSelected() {
+        if(selected == null){
+            selected = new CoeffCalibrage();
+            String d = DateUtil.format(new Date());
+            selected.setAnnee(d);
+        }
         return selected;
     }
 
@@ -54,6 +71,40 @@ public class CoeffCalibrageController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    //=======Methode=========//
+    public void creer(){
+        int i = getFacade().creerCoeff(selected);
+        if(i == -1 || i == -2){
+             FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Error"));
+        } else if(i == -3){
+             FacesContext.getCurrentInstance().addMessage("msgCritere",
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"Place Min > Place Max !","hadchi khayeb a sat welah"));
+        }
+        else {
+             FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("success"));
+        }
+        selected = null;
+        items = getFacade().findAll();
+        System.out.println("ha l i==>"+i);
+    }
+    public void findByCretar(){
+        System.out.println("ha coeff=>"+coeffi);
+        System.out.println("ha nbrMax=>"+nbrMax);
+        System.out.println("ha nbrMin=>"+nbrMin);
+        System.out.println("ha noteMin=>"+noteMin);
+        items = getFacade().findByCretaria(et, coeffi, nbrMax, nbrMin, noteMin, annee);
+    }
+    public void editable1(){
+        if(editable == 0){
+            editable = 1;
+        }else {
+            editable = 0;
+        }
+    }
+    
+    //=======================//
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("CoeffCalibrageCreated"));
@@ -161,5 +212,64 @@ public class CoeffCalibrageController implements Serializable {
         }
 
     }
+
+    public EtablissementType getEt() {
+        return et;
+    }
+
+    public void setEt(EtablissementType et) {
+        this.et = et;
+    }
+
+    public float getCoeffi() {
+        return coeffi;
+    }
+
+    public void setCoeffi(float coeffi) {
+        this.coeffi = coeffi;
+    }
+
+    public int getNbrMax() {
+        return nbrMax;
+    }
+
+    public void setNbrMax(int nbrMax) {
+        this.nbrMax = nbrMax;
+    }
+
+    public int getNbrMin() {
+        return nbrMin;
+    }
+
+    public void setNbrMin(int nbrMin) {
+        this.nbrMin = nbrMin;
+    }
+
+    public float getNoteMin() {
+        return noteMin;
+    }
+
+    public void setNoteMin(float noteMin) {
+        this.noteMin = noteMin;
+    }
+
+    public String getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(String annee) {
+        this.annee = annee;
+    }
+
+    public int getEditable() {
+        return editable;
+    }
+
+    public void setEditable(int editable) {
+        this.editable = editable;
+    }
+
+    
+    
 
 }

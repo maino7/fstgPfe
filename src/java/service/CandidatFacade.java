@@ -7,6 +7,7 @@ package service;
 
 import bean.Candidat;
 import bean.Condidature;
+import bean.Niveau;
 import bean.PieceEtudiant;
 import java.util.List;
 import javax.ejb.EJB;
@@ -41,7 +42,15 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
     public List<Candidat> findNonvalider() {
         return em.createQuery("SELECT c.candidat FROM Condidature c WHERE c.condidatureValide='0'").getResultList();
     }
-
+    public List<Candidat> findByniveau(Niveau n){
+        return em.createQuery("SELECT p.condidature.candidat FROM PieceEtudiant p WHERE p.piecesParNiveau.niveau="+n.getId()).getResultList();
+    }
+    public float calculeMoy(Candidat c){
+        float moy = (c.getNoteS1() + c.getNoteS2() + c.getNoteS3() + c.getNoteS4())/3;
+        return moy;
+    }
+    
+    
     public int creer(Candidat candidat, Condidature condidature) {
         if (candidat == null || condidature == null) {
             return -1;
@@ -72,8 +81,5 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
 //        return 1;
 
     }
-//      private int test(Condidature condidature){
-//          create(c)
-//      }
-
+    
 }

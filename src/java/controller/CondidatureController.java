@@ -1,11 +1,16 @@
 package controller;
 
+import bean.ConcourExamMatiere;
 import bean.Condidature;
+import bean.ExamCandidat;
+import bean.Niveau;
+import bean.Section;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import service.CondidatureFacade;
 
 import java.io.Serializable;
+import java.nio.charset.CodingErrorAction;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,10 +19,12 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.context.RequestContext;
 
 @Named("condidatureController")
 @SessionScoped
@@ -25,13 +32,33 @@ public class CondidatureController implements Serializable {
 
     @EJB
     private service.CondidatureFacade ejbFacade;
+    @EJB
+    private service.NiveauFacade niveauFacade;
+    @EJB
+    private service.PieceEtudiantFacade pieceEtudiantFacade;
+    @EJB
+    private service.ExamCandidatFacade examCandidatFacade;
+    @EJB
+    private service.ConcourExamMatiereFacade concourExamMatiereFacade;
     private List<Condidature> items = null;
     private Condidature selected;
+    private Section section;
+    private List<Niveau> niveaus = null;
+    private List<ConcourExamMatiere> matieres = null;
+    private List<ExamCandidat> exams = null;
+    private Niveau niveau;
+    private String cne;
+    private int editable;
+    private float noteF;
+    private String redirecT = "detailleNote"; 
 
     public CondidatureController() {
     }
 
     public Condidature getSelected() {
+        if(selected == null){
+            selected = new Condidature();
+        }
         return selected;
     }
 
@@ -48,6 +75,80 @@ public class CondidatureController implements Serializable {
     private CondidatureFacade getFacade() {
         return ejbFacade;
     }
+    //=====Methode=====//
+    public void niveauBySection() {
+
+        niveaus = niveauFacade.findBySection(section);
+        System.out.println("ha les niveau===>" + niveaus);
+    }
+
+    public void findBycreataria() {
+        items = null;
+        items = pieceEtudiantFacade.findByNiveauAndSection2(niveau, section, cne);
+    }
+    public String test(Condidature c){
+        return examCandidatFacade.findByCandidature(c);
+    }
+    
+    public String affectModal(){
+        return examCandidatFacade.findByCandidature(selected);
+    }
+    
+    public void affect(Condidature c){
+        if(selected == null){
+            selected = new Condidature();
+        }
+        selected = c;
+        matieres = concourExamMatiereFacade.findByCondidature(c);
+        redirecT = "detailleNote";
+        System.out.println("ha matere==>"+matieres);
+    }
+    public void affect2(Condidature c){
+        if(selected == null){
+            selected = new Condidature();
+        }
+        selected = c;
+        redirecT = "modifNote";
+        exams = examCandidatFacade.finbByCandidature(c);
+        System.out.println("ha exams==>"+exams);
+    }
+    public void enterNote(ConcourExamMatiere cEx){
+        System.out.println("ha note==>"+noteF);
+        int r = examCandidatFacade.createExam(selected, cEx, noteF);
+        if(r == -2){
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Note > 20 !"));
+            noteF = 0;
+        } else if(r == -1){
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Erro"));
+            noteF = 0;
+        } else {
+         FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("jamiiil"));
+         //FacesMessage.SEVERITY_ERROR,"Error Title", "Error Message"
+         noteF = 0;
+         matieres.remove(matieres.indexOf(cEx));
+         update();
+        }
+        
+    }
+    public int test2(ConcourExamMatiere cem){
+        return examCandidatFacade.findByCondidatureMatiere(selected, cem);
+    }
+    public void editable(){
+        System.out.println("ha editable==>"+editable);
+        if(editable == 1){
+            editable = 0;
+            
+        }else{
+            editable = 1;
+        }
+        System.out.println("o ha ach wela==>"+editable);
+        
+    }
+    
+    //================//
 
     public Condidature prepareCreate() {
         selected = new Condidature();
@@ -161,5 +262,85 @@ public class CondidatureController implements Serializable {
         }
 
     }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public List<Niveau> getNiveaus() {
+        return niveaus;
+    }
+
+    public void setNiveaus(List<Niveau> niveaus) {
+        this.niveaus = niveaus;
+    }
+
+    public Niveau getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(Niveau niveau) {
+        this.niveau = niveau;
+    }
+
+    public String getCne() {
+        return cne;
+    }
+
+    public void setCne(String cne) {
+        this.cne = cne;
+    }
+
+    public List<ConcourExamMatiere> getMatieres() {
+        return matieres;
+    }
+
+    public void setMatieres(List<ConcourExamMatiere> matieres) {
+        this.matieres = matieres;
+    }
+
+    public float getNoteF() {
+        return noteF;
+    }
+
+    public void setNoteF(float noteF) {
+        this.noteF = noteF;
+    }
+
+    public List<ExamCandidat> getExams() {
+       
+        return exams;
+    }
+
+    public void setExams(List<ExamCandidat> exams) {
+        this.exams = exams;
+    }
+
+    public String getRedirecT() {
+        return redirecT;
+    }
+
+    public void setRedirecT(String redirecT) {
+        this.redirecT = redirecT;
+    }
+
+    public int getEditable() {
+        return editable;
+    }
+
+    public void setEditable(int editable) {
+        this.editable = editable;
+    }
+
+    
+    
+    
+    
+    
+    
 
 }

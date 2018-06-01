@@ -6,6 +6,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class CoeffCalibrage implements Serializable {
     private float noteMinimal;
     private int nbrMin;
     private int nbrMax;
+    private String annee;
     
     @OneToOne
     private EtablissementType etablissement;
@@ -73,10 +75,16 @@ public class CoeffCalibrage implements Serializable {
     public void setEtablissement(EtablissementType etablissement) {
         this.etablissement = etablissement;
     }
-    
-    
-    
 
+    public String getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(String annee) {
+        this.annee = annee;
+    }
+
+   
     public Long getId() {
         return id;
     }

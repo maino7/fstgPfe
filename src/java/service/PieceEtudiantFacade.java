@@ -6,6 +6,7 @@
 package service;
 
 import bean.Candidat;
+import bean.Condidature;
 import bean.Niveau;
 import bean.PieceEtudiant;
 import bean.Section;
@@ -46,6 +47,25 @@ public class PieceEtudiantFacade extends AbstractFacade<PieceEtudiant> {
         }
             System.out.println("ha l qry==>"+qry);
        return em.createQuery(qry).getResultList();
+    }
+    public List<Condidature> findByNiveauAndSection2(Niveau niveau,Section section,String cne){
+        String qry = "SELECT DISTINCT p.condidature FROM PieceEtudiant p WHERE p.condidature.condidatureValide='0'";
+        
+        if(niveau != null){
+                qry+=SearchUtil.addConstraint("p", "piecesParNiveau.niveau.id", "=", niveau.getId());
+        }
+        if(section != null){
+            qry+=SearchUtil.addConstraint("p", "piecesParNiveau.niveau.filiere.section.id", "=", section.getId());
+        }if(!"".equals(cne)){
+            qry+=SearchUtil.addConstraint("p", "condidature.candidat.cne", "=", cne);
+        }
+            System.out.println("ha l qry==>"+qry);
+       return em.createQuery(qry).getResultList();
+    }
+    public Niveau findNiveau(Condidature c){
+        Niveau n = (Niveau) em.createQuery("SELECT p.piecesParNiveau.niveau FROM PieceEtudiant p WHERE p.condidature.id="+c.getId()).getResultList().get(0);
+        System.out.println("ha niveau li ja ==>"+n);
+        return n;
     }
     
 }

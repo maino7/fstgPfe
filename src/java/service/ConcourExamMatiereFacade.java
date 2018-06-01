@@ -6,6 +6,10 @@
 package service;
 
 import bean.ConcourExamMatiere;
+import bean.Condidature;
+import bean.Niveau;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,9 +28,17 @@ public class ConcourExamMatiereFacade extends AbstractFacade<ConcourExamMatiere>
     protected EntityManager getEntityManager() {
         return em;
     }
+    @EJB
+    private service.PieceEtudiantFacade etudiantFacade;
 
     public ConcourExamMatiereFacade() {
         super(ConcourExamMatiere.class);
     }
+    public List<ConcourExamMatiere> findByCondidature(Condidature c){
+        Niveau niveau = etudiantFacade.findNiveau(c);
+        return em.createQuery("SELECT c FROM ConcourExamMatiere c WHERE  c.concourNiveau.niveau.id="+niveau.getId()).getResultList();
+    }
+    
+    
     
 }

@@ -35,6 +35,8 @@ public class CandidatController implements Serializable {
     @EJB
     private service.CondidatureFacade condidatureFacade;
     @EJB
+    private service.ConcourNiveauFacade concourNiveauFacade;
+    @EJB
     private service.PieceEtudiantFacade pieceEtudiantFacade;
     @EJB
     private service.NiveauFacade niveauFacade;
@@ -52,6 +54,7 @@ public class CandidatController implements Serializable {
     private Section section;
     private Niveau niveau;
     private List<Niveau> niveaus = null;
+    private String test;
 
     public CandidatController() {
     }
@@ -157,6 +160,14 @@ public class CandidatController implements Serializable {
         }
     }
 
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
+    }
+
     public void upload(FileUploadEvent event) {
         fileName = event.getFile().getFileName();
         System.out.println("ha lfilename" + fileName);
@@ -165,12 +176,17 @@ public class CandidatController implements Serializable {
         System.out.println("ha  l file" + uploadedFile);
 
         JsfUtil.addSuccessMessage("File uploaded");
+        System.out.println("ha lmessage daz ");
         savePdf();
+        System.out.println("ha save daz wa akhiran");
     }
 
     public void savePdf() {
-        selected.setLastPdf(ServerConfigUtil.uploadPdf(uploadedFile, fileName, "pdf"));
         System.out.println("hanta dkhltiiiiii");
+        setTest(ServerConfigUtil.uploadPdf(uploadedFile, "pdf", fileName));
+        System.out.println("hahuwa lattribut" + test);
+        // selected.setLastPdf(ServerConfigUtil.uploadPdf(uploadedFile, fileName, "pdf"));
+        System.out.println("hanta hanta khrjti");
     }
 
     public boolean isMale() {
@@ -226,6 +242,7 @@ public class CandidatController implements Serializable {
         return ejbFacade;
     }
 
+    //========Methode==========//
     public void niveauBySection() {
 
         niveaus = niveauFacade.findBySection(section);
@@ -240,16 +257,26 @@ public class CandidatController implements Serializable {
         System.out.println("ha l items===>" + items);
     }
 
-    public void validerCandidat() {
+    public int validerCandidat() {
         System.out.println("ha selected==>" + selected);
-        condidatureFacade.validerCandidature(selected);
 
-        items.remove(items.indexOf(selected));
-        FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage("Candidat valider"));
-        System.out.println("ha l items==>" + items);
+        if (concourNiveauFacade.calculePlaceRest(niveau) == -1) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Place limite atteint"));
+            return -1;
+        } else {
+            condidatureFacade.validerCandidature(selected);
+
+            items.remove(items.indexOf(selected));
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Candidat valider"));
+            System.out.println("ha l items==>" + items);
+            return 1;
+        }
+
     }
 
+    //================//
     public Candidat prepareCreate() {
         selected = new Candidat();
         initializeEmbeddableKey();
@@ -399,6 +426,9 @@ public class CandidatController implements Serializable {
     }
 
     public Niveau getNiveau() {
+        if (niveau == null) {
+            niveau = new Niveau();
+        }
         return niveau;
     }
 
