@@ -6,9 +6,11 @@
 package service;
 
 import bean.Candidat;
+import bean.ConcourNiveau;
 import bean.Condidature;
 import bean.Niveau;
 import bean.PieceEtudiant;
+import bean.PiecesParNiveau;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -42,20 +44,25 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
     public List<Candidat> findNonvalider() {
         return em.createQuery("SELECT c.candidat FROM Condidature c WHERE c.condidatureValide='0'").getResultList();
     }
-    public List<Candidat> findByniveau(Niveau n){
-        return em.createQuery("SELECT p.condidature.candidat FROM PieceEtudiant p WHERE p.piecesParNiveau.niveau="+n.getId()).getResultList();
+
+    public List<Candidat> findByniveau(Niveau n) {
+        return em.createQuery("SELECT p.condidature.candidat FROM PieceEtudiant p WHERE p.piecesParNiveau.niveau=" + n.getId()).getResultList();
     }
-    public float calculeMoy(Candidat c){
-        float moy = (c.getNoteS1() + c.getNoteS2() + c.getNoteS3() + c.getNoteS4())/3;
+
+    public float calculeMoy(Candidat c) {
+        float moy = (c.getNoteS1() + c.getNoteS2() + c.getNoteS3() + c.getNoteS4()) / 3;
         return moy;
     }
-    
-    
-    public int creer(Candidat candidat, Condidature condidature) {
-        if (candidat == null || condidature == null) {
+
+    public int creerCycle(Candidat candidat, ConcourNiveau concourNiveau) {
+        if (candidat == null) {
             return -1;
         } else {
+            Condidature condidature = new Condidature();
+            Niveau niveau = concourNiveau.getNiveau();
+            PiecesParNiveau piecesParNiveau = (PiecesParNiveau) em.createQuery("SELECT p from PiecesParNiveau p where p.id=" + 1).getSingleResult();
             PieceEtudiant pieceEtudiant = new PieceEtudiant();
+            pieceEtudiant.setPiecesParNiveau(piecesParNiveau);
             condidature.setId(generateId("Condidature", "id"));
             candidat.setCondidature(condidature);
             condidature.setCandidat(candidat);
@@ -81,5 +88,5 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
 //        return 1;
 
     }
-    
+
 }

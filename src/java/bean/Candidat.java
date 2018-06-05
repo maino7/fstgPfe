@@ -93,7 +93,10 @@ public class Candidat implements Serializable {
     public Candidat() {
     }
 
-    public Academie getAcademie() {
+     public Academie getAcademie() {
+         if (academie == null){
+             academie = new Academie();
+         } 
         return academie;
     }
 

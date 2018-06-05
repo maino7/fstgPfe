@@ -1,9 +1,11 @@
 package controller;
 
 import bean.Candidat;
+import bean.ConcourNiveau;
 import bean.Condidature;
 import bean.Niveau;
 import bean.Section;
+import controller.util.EmailUtil;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import controller.util.ServerConfigUtil;
@@ -23,6 +25,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.mail.MessagingException;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -40,6 +43,8 @@ public class CandidatController implements Serializable {
     private service.PieceEtudiantFacade pieceEtudiantFacade;
     @EJB
     private service.NiveauFacade niveauFacade;
+    @EJB
+    private service.EmailFacade emailFacade;
     private List<Candidat> items = null;
     private Candidat selected;
     private Condidature condidature;
@@ -55,6 +60,7 @@ public class CandidatController implements Serializable {
     private Niveau niveau;
     private List<Niveau> niveaus = null;
     private String test;
+    ConcourNiveau concourNiveau = new ConcourNiveau();
 
     public CandidatController() {
     }
@@ -66,13 +72,33 @@ public class CandidatController implements Serializable {
 
     }
 
-    public String test() {
+    public UploadedFile getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(UploadedFile uploadedFile) {
+        this.uploadedFile = uploadedFile;
+    }
+
+    public ConcourNiveau getConcourNiveau() {
+        if (concourNiveau == null) {
+            concourNiveau = new ConcourNiveau();
+        }
+        return concourNiveau;
+    }
+
+    public void setConcourNiveau(ConcourNiveau concourNiveau) {
+        this.concourNiveau = concourNiveau;
+    }
+
+    public void save() throws MessagingException {
         System.out.println("ha selected==>" + selected);
         System.out.println("ha condidature==>" + condidature);
-        int i = getFacade().creer(selected, condidature);
-        System.out.println("ha i==>" + i);
-        System.out.println("khedam !!");
-        return "";
+        int i = getFacade().creerCycle(selected, getConcourNiveau());
+        savePdf();
+        System.out.println("bb" + i);
+        System.out.println("ha save daz wa akhiran");
+        emailFacade.SendMail(selected.getCne(), selected.getTelephone(), selected.getAdresse(), selected.getAnneeBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionEtab(), selected.getAnneeInscriptionUniv(), selected.getCin(), selected.getDateInscription(), selected.getDateNaissance(), selected.getEmail(), selected.getEtablissementPreInsc(), selected.getLieuNaissance(), selected.getNomAr(), selected.getPrenomAr(), selected.getNomLat(), selected.getPrenomLat(), selected.getNoteS1(), selected.getNoteS2(), selected.getNoteS3(), selected.getNoteS4(), selected.getNoteS5(), selected.getNoteS6(), fileName, selected.getDernierDiplome(), concourNiveau, selected.getOptionBac());
     }
 
     public Condidature getCondidature() {
@@ -177,15 +203,14 @@ public class CandidatController implements Serializable {
 
         JsfUtil.addSuccessMessage("File uploaded");
         System.out.println("ha lmessage daz ");
-        savePdf();
-        System.out.println("ha save daz wa akhiran");
+
     }
 
     public void savePdf() {
         System.out.println("hanta dkhltiiiiii");
-        setTest(ServerConfigUtil.uploadPdf(uploadedFile, "pdf", fileName));
-        System.out.println("hahuwa lattribut" + test);
-        // selected.setLastPdf(ServerConfigUtil.uploadPdf(uploadedFile, fileName, "pdf"));
+        // setTest(ServerConfigUtil.uploadPdf(uploadedFile, "pdf", fileName));
+        // System.out.println("hahuwa lattribut" + test);
+        selected.setLastPdf(ServerConfigUtil.uploadPdf(uploadedFile, fileName, "pdf"));
         System.out.println("hanta hanta khrjti");
     }
 
@@ -347,6 +372,7 @@ public class CandidatController implements Serializable {
 
     public List<Candidat> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+
     }
 
     @FacesConverter(forClass = Candidat.class)
@@ -389,7 +415,7 @@ public class CandidatController implements Serializable {
         }
 
     }
-    //test
+//test
 
     public void testwalo(Candidat e) {
         System.out.println("hahowa dkhel");

@@ -40,6 +40,33 @@ public class Academie implements Serializable {
         return id;
     }
 
+    public List<Candidat> getCandidats() {
+        return candidats;
+    }
+
+    public void setCandidats(List<Candidat> candidats) {
+        this.candidats = candidats;
+    }
+
+    public List<EtablissementType> getEtablissementTypes() {
+        return etablissementTypes;
+    }
+
+    public void setEtablissementTypes(List<EtablissementType> etablissementTypes) {
+        this.etablissementTypes = etablissementTypes;
+    }
+
+    public Region getRegion() {
+        if (region == null){
+            region = new Region();
+        }
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+   
     public void setId(Long id) {
         this.id = id;
     }

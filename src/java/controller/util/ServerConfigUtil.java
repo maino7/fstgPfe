@@ -76,14 +76,14 @@ public class ServerConfigUtil {
             File file = new File(nameOfUploadedFile.replace('\\', '/'));
             System.out.println(nameOfUploadedFile);
 //            String fileSavePath = destinationPath + "\\" + nameOfUploadedFile;
-            String fileName = uploadedFileName + "." + FilenameUtils.getExtension(nameOfUploadedFile);
-            String fileSavePath = pdfPath + "\\"+ fileName;
+           // String fileName = uploadedFileName + "." + FilenameUtils.getExtension(nameOfUploadedFile);
+            String fileSavePath = pdfPath + "\\"+ nameOfUploadedFile;
             System.out.println(fileSavePath);
             InputStream fileContent = uploadedFile.getInputstream();
             Path path = new File(fileSavePath).toPath();
             System.out.println("ha lpath azin" +path);
             Files.copy(fileContent, path, StandardCopyOption.REPLACE_EXISTING);
-            return "/resources/pdfCycle/" + type + "/" + fileName;
+            return "/resources/pdfCycle/" + nameOfUploadedFile;
         } catch (IOException e) {
             System.out.println("----- Mat uploada walo ==> No update==");
             JsfUtil.addErrorMessage(e, "Erreur Upload");
