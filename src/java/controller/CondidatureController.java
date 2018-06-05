@@ -5,6 +5,7 @@ import bean.Condidature;
 import bean.ExamCandidat;
 import bean.Niveau;
 import bean.Section;
+import bean.UserStock;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import service.CondidatureFacade;
@@ -25,6 +26,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.RowEditEvent;
 
 @Named("condidatureController")
 @SessionScoped
@@ -50,13 +52,13 @@ public class CondidatureController implements Serializable {
     private String cne;
     private int editable;
     private float noteF;
-    private String redirecT = "detailleNote"; 
+    private String redirecT = "detailleNote";
 
     public CondidatureController() {
     }
 
     public Condidature getSelected() {
-        if(selected == null){
+        if (selected == null) {
             selected = new Condidature();
         }
         return selected;
@@ -75,6 +77,7 @@ public class CondidatureController implements Serializable {
     private CondidatureFacade getFacade() {
         return ejbFacade;
     }
+
     //=====Methode=====//
     public void niveauBySection() {
 
@@ -86,70 +89,84 @@ public class CondidatureController implements Serializable {
         items = null;
         items = pieceEtudiantFacade.findByNiveauAndSection2(niveau, section, cne);
     }
-    public String test(Condidature c){
+
+    public String test(Condidature c) {
         return examCandidatFacade.findByCandidature(c);
     }
-    
-    public String affectModal(){
+
+    public String affectModal() {
         return examCandidatFacade.findByCandidature(selected);
     }
-    
-    public void affect(Condidature c){
-        if(selected == null){
+
+    public void affect(Condidature c) {
+        if (selected == null) {
             selected = new Condidature();
         }
         selected = c;
         matieres = concourExamMatiereFacade.findByCondidature(c);
         redirecT = "detailleNote";
-        System.out.println("ha matere==>"+matieres);
+        System.out.println("ha matere==>" + matieres);
     }
-    public void affect2(Condidature c){
-        if(selected == null){
+
+    public void affect2(Condidature c) {
+        if (selected == null) {
             selected = new Condidature();
         }
         selected = c;
         redirecT = "modifNote";
         exams = examCandidatFacade.finbByCandidature(c);
-        System.out.println("ha exams==>"+exams);
+        System.out.println("ha exams==>" + exams);
     }
-    public void enterNote(ConcourExamMatiere cEx){
-        System.out.println("ha note==>"+noteF);
+
+    public void enterNote(ConcourExamMatiere cEx) {
+        System.out.println("ha note==>" + noteF);
         int r = examCandidatFacade.createExam(selected, cEx, noteF);
-        if(r == -2){
+        if (r == -2) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Note > 20 !"));
             noteF = 0;
-        } else if(r == -1){
+        } else if (r == -1) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Erro"));
             noteF = 0;
         } else {
-         FacesContext.getCurrentInstance().addMessage(null,
+            FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("jamiiil"));
-         //FacesMessage.SEVERITY_ERROR,"Error Title", "Error Message"
-         noteF = 0;
-         matieres.remove(matieres.indexOf(cEx));
-         update();
+            //FacesMessage.SEVERITY_ERROR,"Error Title", "Error Message"
+            noteF = 0;
+            matieres.remove(matieres.indexOf(cEx));
+            update();
         }
-        
+
     }
-    public int test2(ConcourExamMatiere cem){
+
+    public int test2(ConcourExamMatiere cem) {
         return examCandidatFacade.findByCondidatureMatiere(selected, cem);
     }
-    public void editable(){
-        System.out.println("ha editable==>"+editable);
-        if(editable == 1){
+
+    public void editable() {
+        System.out.println("ha editable==>" + editable);
+        if (editable == 1) {
             editable = 0;
-            
-        }else{
+
+        } else {
             editable = 1;
         }
-        System.out.println("o ha ach wela==>"+editable);
-        
-    }
-    
-    //================//
+        System.out.println("o ha ach wela==>" + editable);
 
+    }
+
+    public void onEditEvent(RowEditEvent event) {
+        examCandidatFacade.edit((ExamCandidat) event.getObject());
+        JsfUtil.addSuccessMessage("User Edited Succesfully");
+
+    }
+
+    public void onCancel() {
+        JsfUtil.addErrorMessage("Modification annulée");
+    }
+
+    //================//
     public Condidature prepareCreate() {
         selected = new Condidature();
         initializeEmbeddableKey();
@@ -312,7 +329,7 @@ public class CondidatureController implements Serializable {
     }
 
     public List<ExamCandidat> getExams() {
-       
+
         return exams;
     }
 
@@ -335,12 +352,5 @@ public class CondidatureController implements Serializable {
     public void setEditable(int editable) {
         this.editable = editable;
     }
-
-    
-    
-    
-    
-    
-    
 
 }
