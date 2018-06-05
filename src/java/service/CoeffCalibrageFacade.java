@@ -74,8 +74,13 @@ public class CoeffCalibrageFacade extends AbstractFacade<CoeffCalibrage> {
     }
 
     public CoeffCalibrage findByEtab(EtablissementType etablissementType) {
-        String d = DateUtil.format(new Date());
-        return (CoeffCalibrage) em.createQuery("SELECT c FROM CoeffCalibrage c WHERE c.etablissement.id="+etablissementType.getId()+" AND c.annee='"+d+"'").getResultList().get(0);
+        if (etablissementType == null) {
+            System.out.println("l etab rah null");
+            return new CoeffCalibrage();
+        } else {
+            String d = DateUtil.format(new Date());
+            return (CoeffCalibrage) em.createQuery("SELECT c FROM CoeffCalibrage c WHERE c.etablissement.id=" + etablissementType.getId() + " AND c.annee='" + d + "'").getResultList().get(0);
+        }
 
     }
 }

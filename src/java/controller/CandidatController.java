@@ -7,6 +7,7 @@ import bean.Section;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import controller.util.ServerConfigUtil;
+import java.io.IOException;
 import service.CandidatFacade;
 
 import java.io.Serializable;
@@ -23,6 +24,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -37,10 +39,14 @@ public class CandidatController implements Serializable {
     @EJB
     private service.ConcourNiveauFacade concourNiveauFacade;
     @EJB
+    private service.ConcourExamMatiereFacade concourExamMatiereFacade;
+    @EJB
     private service.PieceEtudiantFacade pieceEtudiantFacade;
     @EJB
     private service.NiveauFacade niveauFacade;
     private List<Candidat> items = null;
+    private List<Candidat> candidatsAdmis = null;
+    private List<Candidat> candidatsEcrit = null;
     private Candidat selected;
     private Condidature condidature;
     private int typeInscription;
@@ -53,17 +59,11 @@ public class CandidatController implements Serializable {
     private String cne;
     private Section section;
     private Niveau niveau;
+    private Niveau niveau2;
     private List<Niveau> niveaus = null;
     private String test;
 
     public CandidatController() {
-    }
-
-    public void hal3ar() {
-        //int i = getFacade().creer(selected, condidature);
-        // System.out.println("ha i==>"+i);
-        System.out.println("ha save t executa" + selected);
-
     }
 
     public String test() {
@@ -276,6 +276,48 @@ public class CandidatController implements Serializable {
 
     }
 
+    public void walo() {
+        System.out.println("hahowa dkhel l walo");
+        System.out.println("ha niv===>" + niveau);
+        candidatsAdmis = getFacade().convoquer(niveau);
+
+    }
+
+    public void listEcrit() {
+        int i = concourExamMatiereFacade.findIfEnd(niveau);
+        if (i == 1) {
+            candidatsEcrit = getFacade().ListeEcrit(niveau);
+        }else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Le concours est en cours")); 
+        }
+
+    }
+
+    public void printList() throws JRException, IOException {
+        System.out.println("Imprimer====>OK" + niveau);
+        if (candidatsAdmis.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
+        } else {
+            getFacade().printPdf(niveau, "l'écrit");
+            FacesContext.getCurrentInstance().responseComplete();
+        }
+
+    }
+
+    public void printList2() throws JRException, IOException {
+        System.out.println("Imprimer====>OK" + niveau);
+        if (candidatsEcrit.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
+        } else {
+            getFacade().printPdf(niveau, "l'orale");
+            FacesContext.getCurrentInstance().responseComplete();
+        }
+
+    }
+
     //================//
     public Candidat prepareCreate() {
         selected = new Candidat();
@@ -442,6 +484,33 @@ public class CandidatController implements Serializable {
 
     public void setCne(String cne) {
         this.cne = cne;
+    }
+
+    public Niveau getNiveau2() {
+        if (niveau2 == null) {
+            niveau2 = new Niveau();
+        }
+        return niveau2;
+    }
+
+    public void setNiveau2(Niveau niveau2) {
+        this.niveau2 = niveau2;
+    }
+
+    public List<Candidat> getCandidatsAdmis() {
+        return candidatsAdmis;
+    }
+
+    public void setCandidatsAdmis(List<Candidat> candidatsAdmis) {
+        this.candidatsAdmis = candidatsAdmis;
+    }
+
+    public List<Candidat> getCandidatsEcrit() {
+        return candidatsEcrit;
+    }
+
+    public void setCandidatsEcrit(List<Candidat> candidatsEcrit) {
+        this.candidatsEcrit = candidatsEcrit;
     }
 
 }

@@ -32,8 +32,7 @@ public class Region implements Serializable {
     private Pays pays;
     @OneToOne(mappedBy = "region")
     private Academie academie;
-    @OneToMany(mappedBy = "region")
-    private List<Candidat> candidats;
+  
 
     public Academie getAcademie() {
         return academie;

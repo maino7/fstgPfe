@@ -62,6 +62,7 @@ public class Candidat implements Serializable {
     private float noteS4;
     private float noteS5;
     private float noteS6;
+    private float moyCalibr; // ajouter le 02-06
 
     private int etablissementPreInsc = 15;
     private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch- // hajar Fhmat daba tchr7 lik almklekh
@@ -85,8 +86,7 @@ public class Candidat implements Serializable {
     private Etudiant etudiant;
     @ManyToOne
     private Pays pays;
-    @ManyToOne
-    private Region region;//**
+  
     @ManyToOne
     private Academie academie;
 
@@ -122,10 +122,6 @@ public class Candidat implements Serializable {
     }
     
 
-    public Region getRegion() {
-        return region;
-    }
-
     public float getNoteS5() {
         return noteS5;
     }
@@ -142,9 +138,7 @@ public class Candidat implements Serializable {
         this.noteS6 = noteS6;
     }
 
-    public void setRegion(Region region) {
-        this.region = region;
-    }
+   
 
     public void setSexe(boolean sexe) {
         this.sexe = sexe;
@@ -464,6 +458,15 @@ public class Candidat implements Serializable {
     public void setNoteS4(int noteS4) {
         this.noteS4 = noteS4;
     }
+
+    public float getMoyCalibr() {
+        return moyCalibr;
+    }
+
+    public void setMoyCalibr(float moyCalibr) {
+        this.moyCalibr = moyCalibr;
+    }
+    
 
     @Override
     public int hashCode() {
