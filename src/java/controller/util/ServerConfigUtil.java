@@ -30,7 +30,7 @@ public class ServerConfigUtil {
     private static String rootPath = "/Users/mac/NetBeansProjects/FSG_WebSite/web/resources/images/UploadedImages";
     private static String departPath = "pfe.files.path";//chemin dont laquelle on va creer le dosqsier globale qui aura pour bute de contenir la totalitees des dossier d un abonnee
     public static String path1 = "/Users/HP/Documents/NetBeansProjects/Pfe/web/resources/pdfCycle";
-    public static String pdfPath = "C:\\Users\\HP\\Documents\\NetBeansProjects\\Pfe\\web\\resources\\pdfCycle";
+    public static String pdfPath = "C:\\Users\\ouss\\Documents\\NetBeansProjects\\stockfstg\\web\\resources\\pdfCycle";
     private static List<Item> articlePaths = new ArrayList();
 //    private static String pathPieceJoint = "resources";
 
@@ -76,14 +76,14 @@ public class ServerConfigUtil {
             File file = new File(nameOfUploadedFile.replace('\\', '/'));
             System.out.println(nameOfUploadedFile);
 //            String fileSavePath = destinationPath + "\\" + nameOfUploadedFile;
-            String fileName = uploadedFileName + "." + FilenameUtils.getExtension(nameOfUploadedFile);
-            String fileSavePath = pdfPath + "\\"+ fileName;
+           // String fileName = uploadedFileName + "." + FilenameUtils.getExtension(nameOfUploadedFile);
+            String fileSavePath = pdfPath + "\\"+ nameOfUploadedFile;
             System.out.println(fileSavePath);
             InputStream fileContent = uploadedFile.getInputstream();
             Path path = new File(fileSavePath).toPath();
             System.out.println("ha lpath azin" +path);
             Files.copy(fileContent, path, StandardCopyOption.REPLACE_EXISTING);
-            return "/resources/pdfCycle/" + type + "/" + fileName;
+            return "/resources/pdfCycle/" + nameOfUploadedFile;
         } catch (IOException e) {
             System.out.println("----- Mat uploada walo ==> No update==");
             JsfUtil.addErrorMessage(e, "Erreur Upload");

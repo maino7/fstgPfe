@@ -111,9 +111,9 @@
                                         <b:dataTable id="datalist" value="#{candidatController.items}" var="item">
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Cin"/>
+                                                    <h:outputText value="cne"/>
                                                 </f:facet>
-                                                <h:outputText value="#{item.cin}"/>
+                                                <h:outputText value="#{item.cne}"/>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn>
@@ -146,7 +146,7 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="DernierDiplome"/>
                                                 </f:facet>
-                                                <h:outputText value="#{item.dernierDiplome}"/>
+                                                <h:outputText value="#{item.dernierDiplome.titre}"/>
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">

@@ -36,17 +36,17 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="NoteCalc"/>
                                                 </f:facet>
-                                                <h:outputText id="input1" value="#{item.noteCalc}"/>
-                                                <b:inputText id="input2" value="#{condidatureController.noteF}" rendered="#{condidatureController.editable == 0 ? 'true' : 'false'}"/>
+                                                <h:outputText id="input1" value="#{item.noteCalc}" style="color: red"/>
+                                                <b:inputText id="input2" value="#{condidatureController.noteF}"/>
                                             </b:dataTableColumn>
                                             
                                              <b:dataTableColumn>
                                                 <f:facet name="header">
                                                     <h:outputText value="Note"/>
                                                 </f:facet>
-                                                 <p:commandButton id="createbotn2" value="Editer" actionListener="#{condidatureController.editable()}" oncomplete="ajax:" >
-                                                 <p:ajax  update=":formNote1:datalistTest:dataModif:input1" />
-                                                 </p:commandButton>
+                                                 <b:commandButton id="createbotn2" look="default" value="Editer"  actionListener="#{condidatureController.editNote(item)}"  >
+                                                 
+                                                 </b:commandButton>
                                             </b:dataTableColumn>
                                         </b:dataTable>
                                     </h:form>

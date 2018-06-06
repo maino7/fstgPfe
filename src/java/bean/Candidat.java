@@ -65,7 +65,7 @@ public class Candidat implements Serializable {
     private float moyCalibr; // ajouter le 02-06
 
     private int etablissementPreInsc = 15;
-    private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch- // hajar Fhmat daba tchr7 lik almklekh
+    private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch- 
     @ManyToOne
     private Profession professionDeLaMere;
 
@@ -93,7 +93,10 @@ public class Candidat implements Serializable {
     public Candidat() {
     }
 
-    public Academie getAcademie() {
+     public Academie getAcademie() {
+         if (academie == null){
+             academie = new Academie();
+         } 
         return academie;
     }
 

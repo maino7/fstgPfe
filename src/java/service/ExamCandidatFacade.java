@@ -80,4 +80,8 @@ public class ExamCandidatFacade extends AbstractFacade<ExamCandidat> {
     public List<ExamCandidat> finbByCandidature(Condidature c){
         return em.createQuery("SELECT e FROM ExamCandidat e WHERE e.condidature.id="+c.getId()).getResultList();
     }
+    
+    public void editTa3i(ExamCandidat examCandidat){
+        em.merge(examCandidat);
+    }
 }

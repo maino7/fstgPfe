@@ -1,5 +1,6 @@
 package controller;
 
+import bean.Candidat;
 import bean.ConcourExamMatiere;
 import bean.Condidature;
 import bean.ExamCandidat;
@@ -52,6 +53,7 @@ public class CondidatureController implements Serializable {
     private String cne;
     private int editable;
     private float noteF;
+    private float noteO;
     private String redirecT = "detailleNote";
 
     public CondidatureController() {
@@ -86,6 +88,7 @@ public class CondidatureController implements Serializable {
     }
 
     public void findBycreataria() {
+        System.out.println("ha cne li jat==>" + cne);
         items = null;
         items = pieceEtudiantFacade.findByNiveauAndSection2(niveau, section, cne);
     }
@@ -131,7 +134,7 @@ public class CondidatureController implements Serializable {
             noteF = 0;
         } else {
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("jamiiil"));
+                    new FacesMessage());
             //FacesMessage.SEVERITY_ERROR,"Error Title", "Error Message"
             noteF = 0;
             matieres.remove(matieres.indexOf(cEx));
@@ -144,15 +147,21 @@ public class CondidatureController implements Serializable {
         return examCandidatFacade.findByCondidatureMatiere(selected, cem);
     }
 
-    public void editable() {
-        System.out.println("ha editable==>" + editable);
-        if (editable == 1) {
-            editable = 0;
+    public void editNote(ExamCandidat ex) {
+        System.out.println("ha la note ==>" + noteF);
+        ex.setNoteCalc(noteF);
+        examCandidatFacade.edit(ex);
+        noteF = 0;
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("note modifier"));
+    }
 
-        } else {
-            editable = 1;
-        }
-        System.out.println("o ha ach wela==>" + editable);
+    public void editeOrale() {
+        System.out.println("ha la note li jat orale===+>" + selected.getMoyenneOrale());
+        getFacade().edit(selected);
+        selected = new Condidature();
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("note modifier"));
 
     }
 
@@ -321,6 +330,7 @@ public class CondidatureController implements Serializable {
     }
 
     public float getNoteF() {
+
         return noteF;
     }
 
@@ -351,6 +361,14 @@ public class CondidatureController implements Serializable {
 
     public void setEditable(int editable) {
         this.editable = editable;
+    }
+
+    public float getNoteO() {
+        return noteO;
+    }
+
+    public void setNoteO(float noteO) {
+        this.noteO = noteO;
     }
 
 }

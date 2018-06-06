@@ -6,14 +6,19 @@
 package service;
 
 import bean.Candidat;
+
 import bean.CoeffCalibrage;
 import bean.ConcourExamMatiere;
+
+import bean.ConcourNiveau;
+
 import bean.Condidature;
 import bean.EtablissementType;
 import bean.ExamCandidat;
 import bean.Facture;
 import bean.Niveau;
 import bean.PieceEtudiant;
+
 import controller.util.PdfUtil;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +26,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+
+import bean.PiecesParNiveau;
+import controller.CandidatController;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -53,6 +62,8 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
     private ConcourExamMatiereFacade cemf;
     List<Candidat> crest = new ArrayList();
     List<Candidat> Cabsent = new ArrayList();
+    List<Candidat> condAdmis = new ArrayList();
+    List<Candidat> condAttente = new ArrayList();
 
     @PersistenceContext(unitName = "Pfe_FstgProjectPU")
     private EntityManager em;
@@ -79,11 +90,19 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         return moy;
     }
 
-    public int creer(Candidat candidat, Condidature condidature) {
-        if (candidat == null || condidature == null) {
+
+   
+
+    public int creerCycle(Candidat candidat, ConcourNiveau concourNiveau) {
+        if (candidat == null) {
+
             return -1;
         } else {
+            Condidature condidature = new Condidature();
+            Niveau niveau = concourNiveau.getNiveau();
+            PiecesParNiveau piecesParNiveau = (PiecesParNiveau) em.createQuery("SELECT p from PiecesParNiveau p where p.id=" + 1).getSingleResult();
             PieceEtudiant pieceEtudiant = new PieceEtudiant();
+            pieceEtudiant.setPiecesParNiveau(piecesParNiveau);
             condidature.setId(generateId("Condidature", "id"));
             candidat.setCondidature(condidature);
             condidature.setCandidat(candidat);
@@ -109,6 +128,7 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
 //        return 1;
 
     }
+
 
     //)====Methode test ============//
     public int countCandiEtab(List<Candidat> c, Candidat cand) {
@@ -286,6 +306,39 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         }
         
     }
+    
+    public void listFinal(Niveau n){
+        List<Candidat> candEcrit = ListeEcrit(n);
+        int placeA = cnf.findByNiveau(n).get(0).getNbrDePladeAdmis();
+        System.out.println("*****************************************");
+        System.out.println("ha la list li jat==>"+candEcrit);
+        if(!candEcrit.isEmpty()){
+           List<Condidature> condidatures = new ArrayList<>();
+            for (int i = 0; i < candEcrit.size(); i++) {
+                condidatures.add(condidatureFacade.findByCandidat(candEcrit.get(i)));
+            }
+            for (Condidature condidature : condidatures) {
+                float moy = (condidature.getMoyenneEcrit() + condidature.getMoyenneOrale())/2;
+                condidature.setMoyenneGenerale(moy);
+                condidatureFacade.edit(condidature);
+            }
+             Collections.sort(condidatures, new Comparator<Condidature>() {
+                @Override
+                public int compare(Condidature o1, Condidature o2) {
+                    return Float.valueOf(o2.getMoyenneGenerale()).compareTo(o1.getMoyenneGenerale());
+                }
+            });
+            // CandidatController.candidatsFinalA.clear();
+             if(condidatures.size() > placeA){
+             List<Candidat> cccc = condidatures.stream().map(x->x.getCandidat()).collect(Collectors.toList()).subList(0, placeA-1);
+              CandidatController.candidatsFinalA = cccc;
+             }else{
+                  CandidatController.candidatsFinalA = condidatures.stream().map(x->x.getCandidat()).collect(Collectors.toList());
+             }
+            
+             
+        }
+    }
 
     //=======================================//
     public void printPdf(Niveau n,String typeC) throws JRException, IOException {
@@ -295,5 +348,6 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         List<Candidat> c = convoquer(n);
         PdfUtil.generatePdf(c, params, "Admis-"+typeC+"-"+ n.toString(), "/jasper/tetsTable.jasper");
     }
+
 
 }

@@ -85,9 +85,9 @@
                                             </b:selectOneMenu>
 
                                         </b:column>
-                                        <b:column span="4">
+                                        <b:column span="4" >
 
-                                            <b:inputText value="#{candidatController.cne}" placeholder="cne.." />
+                                            <b:inputText id="cne" value="#{condidatureController.cne}" placeholder="cne..." />
 
                                         </b:column>
                                         <b:column>
@@ -149,7 +149,7 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="note Orale"/>
                                                 </f:facet>
-                                                <b:inputText placeholder="0.0" />
+                                                <h:outputText value="#{item.moyenneOrale}" />
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
@@ -163,6 +163,7 @@
                                                 </f:facet>
                                                 <b:commandButton value="Valider" look="success" ajax="true" actionListener="#{condidatureController.affect(item)}" oncomplete="$('.modalPseudoClass').modal('show')"  />
                                             </b:dataTableColumn>
+                                            
 
                                         </b:dataTable>
 

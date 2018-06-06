@@ -213,7 +213,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea   rows="1" style="width:250px;"   id="nom" placeholder="tapez votre Nom ici" value="#{candidatController.selected.prenomAr}" />
+                                                                    <p:inputTextarea   rows="1" style="width:250px;"   id="nom" placeholder="tapez votre Nom ici" value="#{candidatController.selected.nomAr}" />
 
                                                                 </p:column>
                                                             </p:row>
@@ -359,8 +359,8 @@
                                                 <div class="row">
                                                     <h5 class="info-text"> Formations universitaires </h5>
 
-                                                    <div class="col-sm-10 col-md-10">
-                                                        <p:panelGrid id="companyGrid" styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
+                                                    <div class="col-sm-12 col-md-12">
+                                                        <p:panelGrid columns="3" id="companyGrid" styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
                                                             <p:row>
 
                                                                 <p:column>
@@ -473,7 +473,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="y" value="#{candidatController.selected.region}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                    <p:selectOneMenu class="form-control" id="y" value="#{candidatController.selected.academie.region}" style="width: 250px;height: 40px;padding-right: 00px;" >
 
                                                                         <f:selectItems value="#{regionController.itemsAvailableSelectOne}" 
                                                                                        var="regionItem"
@@ -538,7 +538,7 @@
                                                                     <p:outputLabel value="Fonctionnaire :" for="fction" />
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:selectBooleanButton id="fction" class="myBtn" value="#{candidatController.selected.fonctionnaire}" onLabel="Fonctionnaire" offLabel="pas fonctionnaire" style="width:100px;height: 40px;text-align: center;padding: 8px 0;"  >
+                                                                    <p:selectBooleanButton id="fction" class="myBtn" value="#{candidatController.selected.fonctionnaire}" onLabel="Fonctionnaire" offLabel="pas fonctionnaire" style="width:100px;height: 40px;text-align: center;"  >
                                                                     </p:selectBooleanButton>
                                                                 </p:column>
                                                                 <p:column >
@@ -546,7 +546,7 @@
                                                                 </p:column>
                                                                 <p:column>
                                                                     <!--fileUploadListener=""-->
-                                                                    <p:fileUpload  style="width: 130px" fileUploadListener="#{candidatController.upload}" mode="advanced" update="messages" auto="true" sizeLimit="100000" 
+                                                                    <p:fileUpload  style="width: 130px" fileUploadListener="#{candidatController.upload}" mode="advanced" update="messages" auto="true"  
                                                                                    allowTypes="/(\.|\/)(pdf)$/" multiple="false" />
 
                                                                     <p:growl id="messages" showDetail="true" />
@@ -570,15 +570,18 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control" id="saturday"  value="#{candidatController.condidature.filiere}" style="width: 250px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control" id="saturday"  value="#{candidatController.concourNiveau}" style="width: 250px;height: 40px" >
                                                                         <f:selectItem itemLabel="walo" itemValue="#{null}" />
-                                                                        <f:selectItems value="#{filiereController.itemsAvailableSelectOne}" 
+                                                                        <f:selectItems value="#{concourNiveauController.itemsAvailableSelectOne}" 
                                                                                        var="filiereItem"
                                                                                        itemValue="#{filiereItem}"/>
                                                                     </p:selectOneMenu>
                                                                 </p:column>
                                                             </p:row>
+                                                            <p:row>
+                                                                <p:commandButton ajax="false" actionListener="#{candidatController.save()}" update="display" value="Save" style="width:60px;height: 40px;text-align: center"  />  
 
+                                                            </p:row>
 
                                                         </p:panelGrid>
                                                     </div>
@@ -587,8 +590,8 @@
                                             <div class="tab-pane" id="summary">
                                                 <h5 class="info-text">A summary of your booking. </h5>
                                                 <div class="row">
-                                                    <p:commandButton ajax="false" actionListener="#{candidatController.test()}" value="Save" style="width:100%;height: 40px;text-align: center"  />  
-                                                        
+                                                    Merci pour votre préinscription en ligne au concours  du Cycle d'ingénieur de la F.S.T Marrakech, un mail email vous sera envoyer sur votre email 
+                                                    <h:outputText id="display" value="#{candidatController.selected.email}" />
                                                 </div>
                                             </div>
                                         </div>
