@@ -4,13 +4,14 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
     <ui:composition template="/template/adminTemplate.xhtml" >
-        <ui:define name="titre">
-           Gestion des admis 2
-        </ui:define>
-        <ui:define name="content" >
 
+        <ui:define name="content" >
+            <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+                     show-detail="true" show-summary="false" allowDismiss="true"
+                     delay="3000" escape="true" />
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -19,7 +20,7 @@
                                 <i class="material-icons">content_copy</i>
                             </div>
                             <div class="card-content">
-                                <a href="./gestionDeCandidat.xhtml?faces-redirect=true"><p>List principale</p></a>
+                                <a href="./listAdmisOrale.xhtml?faces-redirect=true"><p>List convoqueés</p></a>
                             </div>
                             <div class="card-footer">
 
@@ -32,7 +33,7 @@
                                 <i class="material-icons">person</i>
                             </div>
                             <div class="card-content">
-                                <a href="./gestionDesNotes.xhtml?faces-redirect=true"><p>List d'attente</p></a>
+                                <a href="./AdmisOrale.xhtml?faces-redirect=true"><p>List écrit</p></a>
                             </div>
                             <div class="card-footer">
 
@@ -56,7 +57,6 @@
                     </div>
 
                 </div>
-                <h:form>
                 <div class="container-fluid">
 
 
@@ -65,61 +65,34 @@
                         <div class="panel-heading">Recherche</div>
 
                         <div class="panel-body">
-                            <h:panelGrid id="display" columns="10">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                <div class="form-group col-lg-4">
-                                    <label class="control-label">cne:</label>
-                                    <div class="input-group">
-                                        
-                                        <b:inputText id="etudiant" value="" placeholder="CNE" required="true" requiredMessage="Veuillez saisir votre cin !" />
-                                    </div>
+                            <h:form id="searchBar">
+                                <b:container>
+                                    <b:row>
+                                        <b:column span="4">
+                                            <b:selectOneMenu id="niveau" value="#{candidatController.niveau}" >
+                                                <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                                <f:selectItems value="#{niveauController.itemsAvailableSelectOne}" />
+                                            </b:selectOneMenu>
 
-                                </div>
-                                <div class="form-group col-lg-4">
-                                    <label class="control-label">Filiere:</label>
-                                    <div class="input-group">
-                                        
-                                          <b:selectOneMenu id="type_insc" value="#{candidatController.typeInscription}" >
-                                            
-                                            <f:selectItem itemLabel="--Sélectionner la filiere--" itemValue=""/>
-                                            <f:selectItem itemLabel="IRISI 2" itemValue=""/>
-                                            <f:selectItem itemLabel="IRISI 1" itemValue=""/>
-                                            <f:selectItem itemLabel="ISA 1" itemValue=""/>
-                                        </b:selectOneMenu>
-                                    </div>
+                                        </b:column>
 
-                                </div>
-                                <div class="form-group col-lg-2">
-                                    
-                                    <div class="input-group">
-                                        
-                                        <b:commandButton value="rechercher" look="success" />
-                                        
-                                    </div>
+                                        <b:column>
+                                            <b:commandButton look="success" value="ok" actionListener="#{candidatController.walo()}" update=":aForm:aDatalist" />
 
-                                </div>
-                                <div class="form-group col-lg-2">
-                                    
-                                    <div class="input-group">
-                                        
-                                        <b:commandButton value="imprimer" look="success"  />
-                                        
-                                    </div>
+                                            <b:commandButton look="success" value="imprimer"  rendered="true" action="#{candidatController.printList()}" ajax="false"/>
 
-                                </div>
 
-                                        </div>
-                                </div>
-                            </h:panelGrid>
+                                        </b:column>
+                                    </b:row>
+                                </b:container>
+                            </h:form>
                         </div>
                     </div></div>
-                    </h:form>
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-header" data-background-color="orange">
-                                <h4 class="title">List des admis pour passer l'orale</h4>
+                                <h4 class="title">List des admis pour passer l'ecrit</h4>
 
                             </div>
                             <div class="card-content table-responsive">
@@ -129,58 +102,35 @@
 
 
 
-                                    <h:form>
-                                      <b:dataTable value="#{candidatController.items}" var="item">
-                                            <b:dataTableColumn>
+                                    <h:form id="aForm">
+                                        <p:dataTable id="aDatalist" value="#{candidatController.candidatsAdmis}" var="item">
+                                            <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Cin"/>
+                                                    <h:outputText value="CNE" />
                                                 </f:facet>
-                                                <h:outputText value="#{item.cin}"/>
-                                            </b:dataTableColumn>
+                                                <h:outputText value="#{item.cne}" />
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="PRENOM" />
+                                                </f:facet>
+                                                <h:outputText value="#{item.prenomLat}" />
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="NOM" />
+                                                </f:facet>
+                                                <h:outputText value="#{item.nomLat}" />
+                                            </p:column>
 
-                                            <b:dataTableColumn>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Etablissement"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.etablissement.titre}"/>
-                                            </b:dataTableColumn>
-                                            <b:dataTableColumn>
-                                                <f:facet name="header">
-                                                    <h:outputText value="NomLat"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.nomLat}"/>
-                                            </b:dataTableColumn>
-                                            <b:dataTableColumn>
-                                                <f:facet name="header">
-                                                    <h:outputText value="PrenomLat"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.prenomLat}"/>
-                                            </b:dataTableColumn>
-
-                                            <b:dataTableColumn>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Email"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.email}"/>
-                                            </b:dataTableColumn>
-
-                                            <b:dataTableColumn>
-                                                <f:facet name="header">
-                                                    <h:outputText value="DernierDiplome"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.dernierDiplome}"/>
-                                            </b:dataTableColumn>
-                                            <b:dataTableColumn>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Action"/>
-                                                </f:facet>
-                                                <b:commandButton look="warning" value="consulter" ajax="true" actionListener="#{candidatController.testwalo(item)}" oncomplete="$('.modalPseudoClass').modal('show')" />
-                                            </b:dataTableColumn>
-                                        </b:dataTable>
+                                        </p:dataTable>
 
 
 
-                                        <ui:include src="waloo.xhtml" />
+                                        <p:commandLink value="imprimer" class="btn btn-default">
+                                            <p:dataExporter target="aDatalist"  fileName="layRhemlikLwalidin" type="pdf"  />
+                                        </p:commandLink>
+                                        <p:commandButton value="Pdf(Jasper)" class="btn btn-primary" action="#{candidatController.printList()}" ajax="false" />
                                     </h:form>
                                 </f:view>
 

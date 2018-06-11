@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
     <ui:composition template="/template/adminTemplate.xhtml" >
         <ui:define name="titre">
             Gestion des candidats
@@ -84,9 +85,9 @@
                                             </b:selectOneMenu>
 
                                         </b:column>
-                                        <b:column span="4">
+                                        <b:column span="4" >
 
-                                            <b:inputText value="#{candidatController.cne}" placeholder="cne.." />
+                                            <b:inputText id="cne" value="#{condidatureController.cne}" placeholder="cne..." />
 
                                         </b:column>
                                         <b:column>
@@ -148,7 +149,7 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="note Orale"/>
                                                 </f:facet>
-                                                <b:inputText placeholder="0.0" />
+                                                <h:outputText value="#{item.moyenneOrale}" />
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
@@ -162,6 +163,7 @@
                                                 </f:facet>
                                                 <b:commandButton value="Valider" look="success" ajax="true" actionListener="#{condidatureController.affect(item)}" oncomplete="$('.modalPseudoClass').modal('show')"  />
                                             </b:dataTableColumn>
+                                            
 
                                         </b:dataTable>
 

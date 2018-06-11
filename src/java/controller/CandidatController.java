@@ -9,6 +9,7 @@ import controller.util.EmailUtil;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import controller.util.ServerConfigUtil;
+import java.io.IOException;
 import service.CandidatFacade;
 
 import java.io.Serializable;
@@ -25,9 +26,19 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+
+import net.sf.jasperreports.engine.JRException;
+
 import javax.mail.MessagingException;
+
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+import service.ConcourExamMatiereFacade;
+import service.ConcourNiveauFacade;
+import service.CondidatureFacade;
+import service.EmailFacade;
+import service.NiveauFacade;
+import service.PieceEtudiantFacade;
 
 @Named("candidatController")
 @SessionScoped
@@ -40,12 +51,20 @@ public class CandidatController implements Serializable {
     @EJB
     private service.ConcourNiveauFacade concourNiveauFacade;
     @EJB
+    private service.ConcourExamMatiereFacade concourExamMatiereFacade;
+    @EJB
     private service.PieceEtudiantFacade pieceEtudiantFacade;
     @EJB
     private service.NiveauFacade niveauFacade;
     @EJB
     private service.EmailFacade emailFacade;
+    @EJB
+    private service.SemestreFacade semestreFacade;
     private List<Candidat> items = null;
+    private List<Candidat> candidatsAdmis = null;
+    private List<Candidat> candidatsEcrit = null;
+    public static List<Candidat> candidatsFinalA = null;
+    public static List<Candidat> candidatsFinalT = null;
     private Candidat selected;
     private Condidature condidature;
     private int typeInscription;
@@ -58,18 +77,42 @@ public class CandidatController implements Serializable {
     private String cne;
     private Section section;
     private Niveau niveau;
+    private Niveau niveau2;
     private List<Niveau> niveaus = null;
     private String test;
     ConcourNiveau concourNiveau = new ConcourNiveau();
+    private float noteS1;
+    private float noteS2;
+    private float noteS3;
+    private float noteS4;
+    private float noteS5;
+    private float noteS6;
+    private String modeDeValidation1;
+    private String anneeDeValidation1;
+    private int nombreDinscription1;
+    private int valideApresRattrapage1;
+    private String modeDeValidation2;
+    private String anneeDeValidation2;
+    private int nombreDinscription2;
+    private int valideApresRattrapage2;
+    private String modeDeValidation3;
+    private String anneeDeValidation3;
+    private int nombreDinscription3;
+    private int valideApresRattrapage3;
+    private String modeDeValidation4;
+    private String anneeDeValidation4;
+    private int nombreDinscription4;
+    private int valideApresRattrapage4;
+    private String modeDeValidation5;
+    private String anneeDeValidation5;
+    private int nombreDinscription5;
+    private int valideApresRattrapage5;
+    private String modeDeValidation6;
+    private String anneeDeValidation6;
+    private int nombreDinscription6;
+    private int valideApresRattrapage6;
 
     public CandidatController() {
-    }
-
-    public void hal3ar() {
-        //int i = getFacade().creer(selected, condidature);
-        // System.out.println("ha i==>"+i);
-        System.out.println("ha save t executa" + selected);
-
     }
 
     public UploadedFile getUploadedFile() {
@@ -96,11 +139,20 @@ public class CandidatController implements Serializable {
         System.out.println("ha condidature==>" + condidature);
         int i = getFacade().creerCycle(selected, getConcourNiveau());
         savePdf();
-        System.out.println("bb" + i);
         System.out.println("ha save daz wa akhiran");
-        emailFacade.SendMail(selected.getCne(), selected.getTelephone(), selected.getAdresse(), selected.getAnneeBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionEtab(), selected.getAnneeInscriptionUniv(), selected.getCin(), selected.getDateInscription(), selected.getDateNaissance(), selected.getEmail(), selected.getEtablissementPreInsc(), selected.getLieuNaissance(), selected.getNomAr(), selected.getPrenomAr(), selected.getNomLat(), selected.getPrenomLat(), selected.getNoteS1(), selected.getNoteS2(), selected.getNoteS3(), selected.getNoteS4(), selected.getNoteS5(), selected.getNoteS6(), fileName, selected.getDernierDiplome(), concourNiveau, selected.getOptionBac());
+        emailFacade.SendMail(selected.getCne(), selected.getTelephone(), selected.getAdresse(), selected.getAnneeBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionEtab(), selected.getAnneeInscriptionUniv(), selected.getCin(), selected.getDateInscription(), selected.getDateNaissance(), selected.getEmail(), selected.getEtablissementPreInsc(), selected.getLieuNaissance(), selected.getNomAr(), selected.getPrenomAr(), selected.getNomLat(), selected.getPrenomLat(), selected.getNoteS1(), selected.getNoteS2(), selected.getNoteS3(), selected.getNoteS4(), selected.getNoteS5(), selected.getNoteS6(), selected.getEtablissement(), selected.getDernierDiplome(), concourNiveau, selected.getOptionBac());
     }
 
+    public void saveMaster() throws MessagingException {
+        ejbFacade.creerMaster(selected, getConcourNiveau());
+        emailFacade.SendMail(selected.getCne(), selected.getTelephone(), selected.getAdresse(), selected.getAnneeBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionEtab(), selected.getAnneeInscriptionUniv(), selected.getCin(), selected.getDateInscription(), selected.getDateNaissance(), selected.getEmail(), selected.getEtablissementPreInsc(), selected.getLieuNaissance(), selected.getNomAr(), selected.getPrenomAr(), selected.getNomLat(), selected.getPrenomLat(), selected.getNoteS1(), selected.getNoteS2(), selected.getNoteS3(), selected.getNoteS4(), selected.getNoteS5(), selected.getNoteS6(), selected.getEtablissement(), selected.getDernierDiplome(), concourNiveau, selected.getOptionBac());
+        semestreFacade.saveSemestres(noteS1, noteS2, noteS3, noteS4, noteS5, noteS6, modeDeValidation1, anneeDeValidation1, nombreDinscription1, valideApresRattrapage1, modeDeValidation2, anneeDeValidation2, nombreDinscription2, valideApresRattrapage2, modeDeValidation3, anneeDeValidation3, nombreDinscription3, valideApresRattrapage3, modeDeValidation4, anneeDeValidation4, nombreDinscription4, valideApresRattrapage4, modeDeValidation5, anneeDeValidation5, nombreDinscription5, valideApresRattrapage5, modeDeValidation6, anneeDeValidation6, nombreDinscription6, valideApresRattrapage6, selected);
+
+    }
+
+//    public void saveSemesteresMaster() {
+//        semestreFacade.saveSemestres(noteS1, noteS2, noteS3, noteS4, noteS5, noteS6, modeDeValidation1, anneeDeValidation1, nombreDinscription1, valideApresRattrapage1, modeDeValidation2, anneeDeValidation2, nombreDinscription2, valideApresRattrapage2, modeDeValidation3, anneeDeValidation3, nombreDinscription3, valideApresRattrapage3, modeDeValidation4, anneeDeValidation4, nombreDinscription4, valideApresRattrapage4, modeDeValidation5, anneeDeValidation5, nombreDinscription5, valideApresRattrapage5, modeDeValidation6, anneeDeValidation6, nombreDinscription6, valideApresRattrapage6, selected);
+//    }
     public Condidature getCondidature() {
         if (condidature == null) {
             condidature = new Condidature();
@@ -108,11 +160,10 @@ public class CandidatController implements Serializable {
         return condidature;
     }
 
-    public void inscription() {
-        ejbFacade.creerMaster(selected, condidature);
-
-    }
-
+//    public void inscription() {
+//        ejbFacade.creerMaster(selected, condidature);
+//
+//    }
     public void setCondidature(Condidature condidature) {
         this.condidature = condidature;
     }
@@ -301,6 +352,52 @@ public class CandidatController implements Serializable {
 
     }
 
+    public void walo() {
+        System.out.println("hahowa dkhel l walo");
+        System.out.println("ha niv===>" + niveau);
+        candidatsAdmis = getFacade().convoquer(niveau);
+
+    }
+
+    public void listEcrit() {
+        int i = concourExamMatiereFacade.findIfEnd(niveau);
+        if (i == 1) {
+            candidatsEcrit = getFacade().ListeEcrit(niveau);
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Le concours est en cours"));
+        }
+
+    }
+
+    public void listFinal() {
+        getFacade().listFinal(niveau);
+    }
+
+    public void printList() throws JRException, IOException {
+        System.out.println("Imprimer====>OK" + niveau);
+        if (candidatsAdmis.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
+        } else {
+            getFacade().printPdf(niveau, "l'écrit");
+            FacesContext.getCurrentInstance().responseComplete();
+        }
+
+    }
+
+    public void printList2() throws JRException, IOException {
+        System.out.println("Imprimer====>OK" + niveau);
+        if (candidatsEcrit.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
+        } else {
+            getFacade().printPdf(niveau, "l'orale");
+            FacesContext.getCurrentInstance().responseComplete();
+        }
+
+    }
+
     //================//
     public Candidat prepareCreate() {
         selected = new Candidat();
@@ -463,11 +560,349 @@ public class CandidatController implements Serializable {
     }
 
     public String getCne() {
+        if (cne == null) {
+            cne = "";
+        }
         return cne;
     }
 
     public void setCne(String cne) {
         this.cne = cne;
+    }
+
+    public Niveau getNiveau2() {
+        if (niveau2 == null) {
+            niveau2 = new Niveau();
+        }
+        return niveau2;
+    }
+
+    public void setNiveau2(Niveau niveau2) {
+        this.niveau2 = niveau2;
+    }
+
+    public List<Candidat> getCandidatsAdmis() {
+        return candidatsAdmis;
+    }
+
+    public void setCandidatsAdmis(List<Candidat> candidatsAdmis) {
+        this.candidatsAdmis = candidatsAdmis;
+    }
+
+    public List<Candidat> getCandidatsEcrit() {
+        return candidatsEcrit;
+    }
+
+    public void setCandidatsEcrit(List<Candidat> candidatsEcrit) {
+        this.candidatsEcrit = candidatsEcrit;
+    }
+
+    public List<Candidat> getCandidatsFinalA() {
+        return candidatsFinalA;
+    }
+
+    public static List<Candidat> getCandidatsFinalT() {
+        return candidatsFinalT;
+    }
+
+    public static void setCandidatsFinalT(List<Candidat> candidatsFinalT) {
+        CandidatController.candidatsFinalT = candidatsFinalT;
+    }
+
+    public CandidatFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(CandidatFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public CondidatureFacade getCondidatureFacade() {
+        return condidatureFacade;
+    }
+
+    public void setCondidatureFacade(CondidatureFacade condidatureFacade) {
+        this.condidatureFacade = condidatureFacade;
+    }
+
+    public ConcourNiveauFacade getConcourNiveauFacade() {
+        return concourNiveauFacade;
+    }
+
+    public void setConcourNiveauFacade(ConcourNiveauFacade concourNiveauFacade) {
+        this.concourNiveauFacade = concourNiveauFacade;
+    }
+
+    public ConcourExamMatiereFacade getConcourExamMatiereFacade() {
+        return concourExamMatiereFacade;
+    }
+
+    public void setConcourExamMatiereFacade(ConcourExamMatiereFacade concourExamMatiereFacade) {
+        this.concourExamMatiereFacade = concourExamMatiereFacade;
+    }
+
+    public PieceEtudiantFacade getPieceEtudiantFacade() {
+        return pieceEtudiantFacade;
+    }
+
+    public void setPieceEtudiantFacade(PieceEtudiantFacade pieceEtudiantFacade) {
+        this.pieceEtudiantFacade = pieceEtudiantFacade;
+    }
+
+    public NiveauFacade getNiveauFacade() {
+        return niveauFacade;
+    }
+
+    public void setNiveauFacade(NiveauFacade niveauFacade) {
+        this.niveauFacade = niveauFacade;
+    }
+
+    public EmailFacade getEmailFacade() {
+        return emailFacade;
+    }
+
+    public void setEmailFacade(EmailFacade emailFacade) {
+        this.emailFacade = emailFacade;
+    }
+
+    public float getNoteS1() {
+        return noteS1;
+    }
+
+    public void setNoteS1(float noteS1) {
+        this.noteS1 = noteS1;
+    }
+
+    public float getNoteS2() {
+        return noteS2;
+    }
+
+    public void setNoteS2(float noteS2) {
+        this.noteS2 = noteS2;
+    }
+
+    public float getNoteS3() {
+        return noteS3;
+    }
+
+    public void setNoteS3(float noteS3) {
+        this.noteS3 = noteS3;
+    }
+
+    public float getNoteS4() {
+        return noteS4;
+    }
+
+    public void setNoteS4(float noteS4) {
+        this.noteS4 = noteS4;
+    }
+
+    public float getNoteS5() {
+        return noteS5;
+    }
+
+    public void setNoteS5(float noteS5) {
+        this.noteS5 = noteS5;
+    }
+
+    public float getNoteS6() {
+        return noteS6;
+    }
+
+    public void setNoteS6(float noteS6) {
+        this.noteS6 = noteS6;
+    }
+
+    public String getModeDeValidation1() {
+        return modeDeValidation1;
+    }
+
+    public void setModeDeValidation1(String modeDeValidation1) {
+        this.modeDeValidation1 = modeDeValidation1;
+    }
+
+    public String getAnneeDeValidation1() {
+        return anneeDeValidation1;
+    }
+
+    public void setAnneeDeValidation1(String anneeDeValidation1) {
+        this.anneeDeValidation1 = anneeDeValidation1;
+    }
+
+    public int getNombreDinscription1() {
+        return nombreDinscription1;
+    }
+
+    public void setNombreDinscription1(int nombreDinscription1) {
+        this.nombreDinscription1 = nombreDinscription1;
+    }
+
+    public int getValideApresRattrapage1() {
+        return valideApresRattrapage1;
+    }
+
+    public void setValideApresRattrapage1(int valideApresRattrapage1) {
+        this.valideApresRattrapage1 = valideApresRattrapage1;
+    }
+
+    public String getModeDeValidation2() {
+        return modeDeValidation2;
+    }
+
+    public void setModeDeValidation2(String modeDeValidation2) {
+        this.modeDeValidation2 = modeDeValidation2;
+    }
+
+    public String getAnneeDeValidation2() {
+        return anneeDeValidation2;
+    }
+
+    public void setAnneeDeValidation2(String anneeDeValidation2) {
+        this.anneeDeValidation2 = anneeDeValidation2;
+    }
+
+    public int getNombreDinscription2() {
+        return nombreDinscription2;
+    }
+
+    public void setNombreDinscription2(int nombreDinscription2) {
+        this.nombreDinscription2 = nombreDinscription2;
+    }
+
+    public int getValideApresRattrapage2() {
+        return valideApresRattrapage2;
+    }
+
+    public void setValideApresRattrapage2(int valideApresRattrapage2) {
+        this.valideApresRattrapage2 = valideApresRattrapage2;
+    }
+
+    public String getModeDeValidation3() {
+        return modeDeValidation3;
+    }
+
+    public void setModeDeValidation3(String modeDeValidation3) {
+        this.modeDeValidation3 = modeDeValidation3;
+    }
+
+    public String getAnneeDeValidation3() {
+        return anneeDeValidation3;
+    }
+
+    public void setAnneeDeValidation3(String anneeDeValidation3) {
+        this.anneeDeValidation3 = anneeDeValidation3;
+    }
+
+    public int getNombreDinscription3() {
+        return nombreDinscription3;
+    }
+
+    public void setNombreDinscription3(int nombreDinscription3) {
+        this.nombreDinscription3 = nombreDinscription3;
+    }
+
+    public int getValideApresRattrapage3() {
+        return valideApresRattrapage3;
+    }
+
+    public void setValideApresRattrapage3(int valideApresRattrapage3) {
+        this.valideApresRattrapage3 = valideApresRattrapage3;
+    }
+
+    public String getModeDeValidation4() {
+        return modeDeValidation4;
+    }
+
+    public void setModeDeValidation4(String modeDeValidation4) {
+        this.modeDeValidation4 = modeDeValidation4;
+    }
+
+    public String getAnneeDeValidation4() {
+        return anneeDeValidation4;
+    }
+
+    public void setAnneeDeValidation4(String anneeDeValidation4) {
+        this.anneeDeValidation4 = anneeDeValidation4;
+    }
+
+    public int getNombreDinscription4() {
+        return nombreDinscription4;
+    }
+
+    public void setNombreDinscription4(int nombreDinscription4) {
+        this.nombreDinscription4 = nombreDinscription4;
+    }
+
+    public int getValideApresRattrapage4() {
+        return valideApresRattrapage4;
+    }
+
+    public void setValideApresRattrapage4(int valideApresRattrapage4) {
+        this.valideApresRattrapage4 = valideApresRattrapage4;
+    }
+
+    public String getModeDeValidation5() {
+        return modeDeValidation5;
+    }
+
+    public void setModeDeValidation5(String modeDeValidation5) {
+        this.modeDeValidation5 = modeDeValidation5;
+    }
+
+    public String getAnneeDeValidation5() {
+        return anneeDeValidation5;
+    }
+
+    public void setAnneeDeValidation5(String anneeDeValidation5) {
+        this.anneeDeValidation5 = anneeDeValidation5;
+    }
+
+    public int getNombreDinscription5() {
+        return nombreDinscription5;
+    }
+
+    public void setNombreDinscription5(int nombreDinscription5) {
+        this.nombreDinscription5 = nombreDinscription5;
+    }
+
+    public int getValideApresRattrapage5() {
+        return valideApresRattrapage5;
+    }
+
+    public void setValideApresRattrapage5(int valideApresRattrapage5) {
+        this.valideApresRattrapage5 = valideApresRattrapage5;
+    }
+
+    public String getModeDeValidation6() {
+        return modeDeValidation6;
+    }
+
+    public void setModeDeValidation6(String modeDeValidation6) {
+        this.modeDeValidation6 = modeDeValidation6;
+    }
+
+    public String getAnneeDeValidation6() {
+        return anneeDeValidation6;
+    }
+
+    public void setAnneeDeValidation6(String anneeDeValidation6) {
+        this.anneeDeValidation6 = anneeDeValidation6;
+    }
+
+    public int getNombreDinscription6() {
+        return nombreDinscription6;
+    }
+
+    public void setNombreDinscription6(int nombreDinscription6) {
+        this.nombreDinscription6 = nombreDinscription6;
+    }
+
+    public int getValideApresRattrapage6() {
+        return valideApresRattrapage6;
+    }
+
+    public void setValideApresRattrapage6(int valideApresRattrapage6) {
+        this.valideApresRattrapage6 = valideApresRattrapage6;
     }
 
 }

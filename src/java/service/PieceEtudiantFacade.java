@@ -62,6 +62,9 @@ public class PieceEtudiantFacade extends AbstractFacade<PieceEtudiant> {
             System.out.println("ha l qry==>"+qry);
        return em.createQuery(qry).getResultList();
     }
+    public List<Candidat> findnonValiderniveau(Niveau n){
+        return em.createQuery("SELECT DISTINCT p.condidature.candidat FROM PieceEtudiant p WHERE p.condidature.condidatureValide='0' AND p.piecesParNiveau.niveau.id="+n.getId()).getResultList();
+    }
     public Niveau findNiveau(Condidature c){
         Niveau n = (Niveau) em.createQuery("SELECT p.piecesParNiveau.niveau FROM PieceEtudiant p WHERE p.condidature.id="+c.getId()).getResultList().get(0);
         System.out.println("ha niveau li ja ==>"+n);

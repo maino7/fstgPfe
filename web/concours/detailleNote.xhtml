@@ -10,6 +10,9 @@
         <form class="form-inline"><fieldset>
                 <div class="form-group col-md-12">
                     <div class="row">
+                        <p:messages autoUpdate="true" closable="true" />
+                    </div>
+                    <div class="row">
 
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
@@ -68,16 +71,27 @@
                        
 
                     </div>
+                    <h:form>
                     <div class="row">
 
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                            
+                                <b:inputText value="#{condidatureController.selected.moyenneOrale}" >
+                                    <f:validateDoubleRange minimum="0" maximum="20" />
+                                </b:inputText>
+                
+                            </div>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2">
+                            <div class="form-group">
+                                <b:commandButton value="Note(orale)" look="success" actionListener="#{condidatureController.editeOrale()}" update="formNote1:datalist growlMsg"  />
+                
                             </div>
                         </div>
                         
 
                     </div>
+                    </h:form>
             
 
                 </div>
@@ -86,11 +100,7 @@
 
 
             </fieldset>
-            <f:facet name="footer">
-                <b:button value="Close" dismiss="modal" />
-             
-
-            </f:facet>
+            
         </form>
     </b:modal>
 </html>

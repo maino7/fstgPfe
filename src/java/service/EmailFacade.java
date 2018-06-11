@@ -5,12 +5,11 @@
  */
 package service;
 
-import bean.Academie;
-import static bean.ConcourExamMatiere_.concourNiveau;
+import static bean.Candidat_.etablissement;
 import bean.ConcourNiveau;
 import bean.DernierDiplome;
+import bean.EtablissementType;
 import bean.OptionBac;
-import bean.Pays;
 import controller.util.EmailUtil;
 import java.util.Date;
 import javax.ejb.Stateless;
@@ -33,7 +32,7 @@ public class EmailFacade  {
     
 
 
-    public void SendMail(String cne, String tel, String adresse, String anneeBac, int anneeInsSup, int anneeInsEtab, int anneeInsUniv, String cin, Date dateInscription, Date dateNaissance, String mail, int etabPreIns, String lieuNaissance, String nomAR, String prenomAR, String nomLAT, String prenomLAT, float noteS1, float noteS2, float noteS3, float noteS4, float noteS5, float noteS6, String etablissement, DernierDiplome dernierDiplome, ConcourNiveau concourNiveau, OptionBac serieBac) throws MessagingException {
+    public void SendMail(String cne, String tel, String adresse, String anneeBac, int anneeInsSup, int anneeInsEtab, int anneeInsUniv, String cin, Date dateInscription, Date dateNaissance, String mail, int etabPreIns, String lieuNaissance, String nomAR, String prenomAR, String nomLAT, String prenomLAT, float noteS1, float noteS2, float noteS3, float noteS4, float noteS5, float noteS6, EtablissementType etablissementType, DernierDiplome dernierDiplome, ConcourNiveau concourNiveau, OptionBac serieBac) throws MessagingException {
 
         String msg = "Merci pour votre préinscription en ligne au concours du Cycle Ingénieur de la FST Marrakech.</br>"
                 + "votre numéro de préinscription est : " + 2125 + "</br>"
@@ -88,7 +87,7 @@ public class EmailFacade  {
                 + "  </tr>\n"
                 + "  <tr>\n"
                 + "    <td><b> Etablissment :</b></td>\n"
-                + "    <td>" + etablissement + "</td>\n"
+                + "    <td>" + etablissementType.getTitre() + "</td>\n"
                 + "  </tr>\n"
                 + "  <tr>\n"
                 + "    <td><b> Ville:</b></td>\n"

@@ -7,12 +7,14 @@ package bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import org.hibernate.validator.constraints.Email;
@@ -71,9 +73,10 @@ public class Candidat implements Serializable {
     private String anneeDeValidation;
     private int nombreDinscription;
     private int valideApresRattrapage;
+    private float moyCalibr;
 
     private int etablissementPreInsc = 15;
-    private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch- // hajar Fhmat daba tchr7 lik almklekh
+    private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch- 
     @ManyToOne
     private Profession professionDeLaMere;
 
@@ -94,14 +97,23 @@ public class Candidat implements Serializable {
     private Etudiant etudiant;
     @ManyToOne
     private Pays pays;
-    @ManyToOne
-    private Region region;//**
+
     @ManyToOne
     private Academie academie;
     @ManyToOne
     private Licence licence;
+    @OneToMany(mappedBy = "candidat")
+    private List<Semestre> semestres;
 
     public Candidat() {
+    }
+
+    public List<Semestre> getSemestres() {
+        return semestres;
+    }
+
+    public void setSemestres(List<Semestre> semestres) {
+        this.semestres = semestres;
     }
 
     public Academie getAcademie() {
@@ -183,10 +195,6 @@ public class Candidat implements Serializable {
         this.noteS4 = noteS4;
     }
 
-    public Region getRegion() {
-        return region;
-    }
-
     public float getNoteS5() {
         return noteS5;
     }
@@ -201,10 +209,6 @@ public class Candidat implements Serializable {
 
     public void setNoteS6(float noteS6) {
         this.noteS6 = noteS6;
-    }
-
-    public void setRegion(Region region) {
-        this.region = region;
     }
 
     public void setSexe(boolean sexe) {
@@ -556,6 +560,14 @@ public class Candidat implements Serializable {
 
     public void setValideApresRattrapage(int valideApresRattrapage) {
         this.valideApresRattrapage = valideApresRattrapage;
+    }
+
+    public float getMoyCalibr() {
+        return moyCalibr;
+    }
+
+    public void setMoyCalibr(float moyCalibr) {
+        this.moyCalibr = moyCalibr;
     }
 
     @Override
