@@ -69,10 +69,7 @@ public class Candidat implements Serializable {
     private String mentionDiplome;
     private String optionLicence;
     private String anneeObtLicence;
-    private String modeDeValidation;
-    private String anneeDeValidation;
-    private int nombreDinscription;
-    private int valideApresRattrapage;
+
     private float moyCalibr;
 
     private int etablissementPreInsc = 15;
@@ -528,38 +525,6 @@ public class Candidat implements Serializable {
 
     public void setNoteS4(int noteS4) {
         this.noteS4 = noteS4;
-    }
-
-    public String getModeDeValidation() {
-        return modeDeValidation;
-    }
-
-    public void setModeDeValidation(String modeDeValidation) {
-        this.modeDeValidation = modeDeValidation;
-    }
-
-    public String getAnneeDeValidation() {
-        return anneeDeValidation;
-    }
-
-    public void setAnneeDeValidation(String anneeDeValidation) {
-        this.anneeDeValidation = anneeDeValidation;
-    }
-
-    public int getNombreDinscription() {
-        return nombreDinscription;
-    }
-
-    public void setNombreDinscription(int nombreDinscription) {
-        this.nombreDinscription = nombreDinscription;
-    }
-
-    public int getValideApresRattrapage() {
-        return valideApresRattrapage;
-    }
-
-    public void setValideApresRattrapage(int valideApresRattrapage) {
-        this.valideApresRattrapage = valideApresRattrapage;
     }
 
     public float getMoyCalibr() {
