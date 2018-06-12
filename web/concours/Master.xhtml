@@ -43,7 +43,11 @@
             <meta name="Author" content="Faculté des Sciences et Techniques Marrakech"/>
             <meta name="Identifier-URL" content="Faculté des Sciences et Techniques Marrakech"/>
             <meta name="Copyright" content="© fstg-marrakech"/>
-
+            <style>
+                .hajar input{
+                    width: 250px;
+                }
+            </style>
 
             <div class="image-container set-full-height" style="background-image: url('../resources/images/background-banner.jpg')">
 
@@ -327,7 +331,7 @@
                                                                     <p:outputLabel value="Date de Naissance" for="dateCreation" style="text-align: left;padding-top: 10px" />
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:calendar id="dateCreation" pattern="MM/dd/yyyy" value="#{candidatController.selected.dateNaissance}" showOn="button" styleClass="hajar" style="width:550px; height:100px;" />
+                                                                    <p:calendar id="dateCreation" pattern="MM/dd/yyyy" value="#{candidatController.selected.dateNaissance}" styleClass="hajar"  />
                                                                 </p:column>
                                                                 <p:column style="width: 100px">
                                                                     <p:outputLabel value="Profession de la mère :" for="maman" style="padding-top: 10px" />
@@ -925,7 +929,7 @@
                                             <div class="tab-pane" id="summary">
                                                 <h5 class="info-text">A summary of your booking. </h5>
                                                 <div class="row">
-                                                    Merci pour votre préinscription en ligne au concours  du Cycle d'ingénieur de la F.S.T Marrakech, un e-mail vous sera envoyer sur votre email : 
+                                                    Merci pour votre préinscription en ligne au concours  de Master de la F.S.T Marrakech, un e-mail vous sera envoyer sur votre email : 
                                                     <h:outputText id="out1" value="#{candidatController.selected.email}" /> <br></br>
                                                     Cliquez sur ce button pour recevoir un mail pour confirmer votre préinscription: 
                                                     <p:commandButton ajax="false" actionListener="#{candidatController.saveMaster()}" update="display" value="Save" style="width:60px;height: 40px;text-align: center"  />  

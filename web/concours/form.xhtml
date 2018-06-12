@@ -245,10 +245,13 @@
 
                                                                 <p:column>
                                                                     <p:outputLabel value="Adresse mail :" for="ad" style="text-align: left;padding-top: 10px;width: 200px"/>
+
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;" required="true"  id="ad" placeholder="tapez votre E-mail ici" value="#{candidatController.selected.email}" />
+                                                                    <p:inputText  style="width:250px;" required="true"  id="ad" placeholder="tapez votre E-mail ici" value="#{candidatController.selected.email}" >
+                                                                        <p:ajax event="keyup" update="out1" />
+                                                                    </p:inputText>
                                                                 </p:column>
 
                                                                 <p:column>
@@ -399,7 +402,7 @@
 
                                                                     </p:selectOneMenu>
                                                                 </p:column>
-                                                           
+
                                                                 <p:column>
                                                                     <p:outputLabel value="Option BAC : " for="wednesday" style="text-align: left;padding-top: 10px;width: 200px"/>
                                                                 </p:column>
@@ -430,7 +433,7 @@
                                                                     </p:selectOneButton>
                                                                 </p:column>
 
-                                                            
+
                                                                 <p:column>
                                                                     <p:outputLabel value="1ère inscription dans l'enseignement supérieur:" for="a" style="text-align: left;padding-top: 10px;width: 200px"/>
                                                                 </p:column>
@@ -446,7 +449,7 @@
                                                                     <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"    id="b" placeholder="EX: 2016" value="#{candidatController.selected.anneeBac}" />
 
                                                                 </p:column>
-                                                            
+
                                                                 <p:column>
                                                                     <p:outputLabel value="1ère inscription dans notre Université Cady Ayyad(UCA):" for="c" style="text-align: left;padding-top: 10px;width: 200px"/>
                                                                 </p:column>
@@ -466,7 +469,7 @@
                                                                                        itemValue="#{lyceeItem}"/>
                                                                     </p:selectOneMenu>
                                                                 </p:column>
-                                                            
+
                                                                 <p:column>
                                                                     <p:outputLabel value="1ère inscription dans notre établissment FSTG:" for="X" style="text-align: left;padding-top: 10px;width: 200px"/>
                                                                 </p:column>
@@ -490,7 +493,7 @@
 
                                                                     </p:selectOneMenu>
                                                                 </p:column>
-                                                            
+
                                                                 <p:column>
                                                                     <p:outputLabel value="Etablissmenet de préinscription:" for="w" style="text-align: left;padding-top: 10px;width: 200px"/>
                                                                 </p:column>
@@ -511,7 +514,7 @@
 
                                                                     </p:selectOneMenu>
                                                                 </p:column>
-                                                          
+
                                                                 <p:column >
                                                                     <p:outputLabel value="Moyenne du semestre 1 :" for="s1" />
                                                                     <p:inputText  style="width:100px;" placeholder="XX,XX"  id="s1" value="#{candidatController.selected.noteS1}" />
@@ -524,7 +527,7 @@
                                                                     <p:outputLabel value="Moyenne du semestre 3:" for="s3" />
                                                                     <p:inputText  style="width:100px;"   id="s3" placeholder="XX,XX" value="#{candidatController.selected.noteS3}" />
                                                                 </p:column>
-                                                            
+
                                                                 <p:column>
                                                                     <p:outputLabel for="s4" value="Moyenne du semestre 4:"  />
                                                                     <p:inputText  id="s4" placeholder="XX,XX" value="#{candidatController.selected.noteS4}" />
@@ -581,10 +584,7 @@
                                                                     </p:selectOneMenu>
                                                                 </p:column>
                                                             </p:row>
-                                                            <p:row>
-                                                                <p:commandButton ajax="false" actionListener="#{candidatController.save()}" update="display" value="Save" style="width:60px;height: 40px;text-align: center"  />  
 
-                                                            </p:row>
 
                                                         </p:panelGrid>
                                                     </div>
@@ -593,8 +593,10 @@
                                             <div class="tab-pane" id="summary">
                                                 <h5 class="info-text">A summary of your booking. </h5>
                                                 <div class="row">
-                                                    Merci pour votre préinscription en ligne au concours  du Cycle d'ingénieur de la F.S.T Marrakech, un mail email vous sera envoyer sur votre email 
-                                                    <h:outputText id="display" value="#{candidatController.selected.email}" />
+                                                    Merci pour votre préinscription en ligne au concours  du Cycle d'ingénieur de la F.S.T Marrakech, un e-mail vous sera envoyer sur votre email : 
+                                                    <h:outputText id="out1" value="#{candidatController.selected.email}" /> <br></br>
+                                                    Cliquez sur ce button pour recevoir un mail pour confirmer votre préinscription: 
+                                                    <p:commandButton ajax="false" actionListener="#{candidatController.save()}" update="display" value="Confirmer Votre préinscription" style="width:60px;height: 40px;text-align: center"  />
                                                 </div>
                                             </div>
                                         </div>
