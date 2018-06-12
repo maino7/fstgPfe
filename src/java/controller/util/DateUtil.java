@@ -17,7 +17,7 @@ public class DateUtil {
 
     public static Date convert(String date) {
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy"); //yyyy-MM-dd
             return simpleDateFormat.parse(date);
         } catch (ParseException ex) {
             return null;

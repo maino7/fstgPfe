@@ -10,7 +10,7 @@
     </h:head>-->
     <ui:composition template="/template/simpleTemplate.xhtml">
         <ui:define name="head">
-            
+           
         </ui:define>
         <ui:define name="title">
             FSTG | Connexion ADMIN
@@ -24,25 +24,27 @@
 
                 <div class="col-lg-6 col-lg-offset-1">
                     <h:form class="form-group">
-                        <h1><h:outputText value="Stock connexion"/></h1>
+                        <p:messages/>
+                        <h1><h:outputText value="Admin connexion"/></h1>
                         <!--<p:panelGrid columns="2">-->
                         <p:outputLabel value="CIN:" for="id" />
                         <p:inputText id="id" class="form-control" value="#{connectionController.selectedUserStock.id}" />
                         <p:outputLabel value="Password:" for="password" />
                         <p:password id="password" class="form-control" value="#{connectionController.selectedUserStock.password}" title="Password" />
+                        
                         <!--</p:panelGrid>-->
                         <br/>
-                        <!--<p:commandButton value="Se connecter" action="" />-->
-                        <p:commandButton value="Se connecter" style="background-color: #00cc33" class="btn center" action="#{connectionController.signInStock()}" update="" />
+                        <!--<p:commandButton value="Se connecter" action />-->
+                        <p:commandButton value="Se connecter" style="background-color: #00cc33" class="btn center" action="#{connectionController.signInAdmin()}" update="@form" />
                         <br/>
                         <br/>
-                        <p:commandLink value="forgot password ?" action="#{connectionController.redirect('../enseignant/forgotpassword.xhtml')}"></p:commandLink>
+                       
                         <br/>
-                        <!--<p:outputLabel id="messageConnection" value="# {connectionController.messageConnection}" />-->
+                        <p:outputLabel id="messageConnection" value="#{connectionController.messageConnection}" style="color: red" />
                     </h:form>
 
                 </div>
-            </div >
+            </div>
 
         </ui:define>
     </ui:composition>

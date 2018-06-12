@@ -103,7 +103,8 @@
 
 
                                     <h:form id="aForm">
-                                        <p:dataTable id="aDatalist" value="#{candidatController.candidatsAdmis}" var="item">
+                                        <p:dataTable id="aDatalist" value="#{candidatController.candidatsAdmis}" rowKey="#{item.cne}" selection="#{candidatController.candidatsRemove}" var="item">
+                                            <p:column selectionMode="multiple" style="width:30px;text-align:center"/>
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="CNE" />
@@ -122,15 +123,17 @@
                                                 </f:facet>
                                                 <h:outputText value="#{item.nomLat}" />
                                             </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Moyenne calibreé" />
+                                                </f:facet>
+                                                <h:outputText value="#{item.moyCalibr}" />
+                                            </p:column>
 
                                         </p:dataTable>
 
-
-
-                                        <p:commandLink value="imprimer" class="btn btn-default">
-                                            <p:dataExporter target="aDatalist"  fileName="layRhemlikLwalidin" type="pdf"  />
-                                        </p:commandLink>
-                                        <p:commandButton value="Pdf(Jasper)" class="btn btn-primary" action="#{candidatController.printList()}" ajax="false" />
+                                        
+                                        <p:commandButton value="supprimer" class="btn btn-default" actionListener="#{candidatController.removeCandidat()}" update="@form" />
                                     </h:form>
                                 </f:view>
 

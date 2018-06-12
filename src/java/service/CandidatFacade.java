@@ -28,7 +28,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 import bean.PiecesParNiveau;
-import bean.Semestre;
 import controller.CandidatController;
 
 import java.util.List;
@@ -200,7 +199,11 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         int z = 0;
         Condidature condi = condidatureFacade.findByCandidat(c);
         List<ExamCandidat> exams = examCandidatFacade.finbByCandidature(condi);
+        System.out.println("**********************");
+        System.out.println("ha ach dowez khona ==>" + exams);
         List<ConcourExamMatiere> matiers = cemf.findByCondidature(condi);
+        System.out.println("ha les exam li jaw==>" + matiers);
+        System.out.println("*************************");
         if (exams.isEmpty() || matiers.isEmpty()) {
             return -2;
         } else {
@@ -213,6 +216,8 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
                 }
 
             }
+            System.out.println("ha z==>" + z);
+            System.out.println("ha matiers.size()==>" + matiers.size());
             if (z == matiers.size()) {
                 return 1;
             } else {
@@ -279,7 +284,7 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
     }
 
     public List<Candidat> ListeEcrit(Niveau n) {
-        List<Candidat> c = convoquer(n);
+        List<Candidat> c = pef.findValiderniveau(n);
         List<Candidat> cecrit = new ArrayList<>();
         System.out.println("ha la list ta3 nass=>" + c);
         System.out.println("//===========//");
@@ -315,9 +320,11 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
 
     }
 
-    public void listFinal(Niveau n) {
+    public List<ArrayList<Candidat>> listFinal(Niveau n) {
         List<Candidat> candEcrit = ListeEcrit(n);
         int placeA = cnf.findByNiveau(n).get(0).getNbrDePladeAdmis();
+        List<ArrayList<Candidat>> l;
+        l = new ArrayList<>();
         System.out.println("*****************************************");
         System.out.println("ha la list li jat==>" + candEcrit);
         if (!candEcrit.isEmpty()) {
@@ -336,23 +343,30 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
                     return Float.valueOf(o2.getMoyenneGenerale()).compareTo(o1.getMoyenneGenerale());
                 }
             });
-            // CandidatController.candidatsFinalA.clear();
+
             if (condidatures.size() > placeA) {
-                List<Candidat> cccc = condidatures.stream().map(x -> x.getCandidat()).collect(Collectors.toList()).subList(0, placeA - 1);
-                CandidatController.candidatsFinalA = cccc;
+                l.add((ArrayList<Candidat>) condidatures.stream().map(x -> x.getCandidat()).collect(Collectors.toList()).subList(0, placeA - 1));
+                l.add((ArrayList<Candidat>) condidatures.stream().map(x -> x.getCandidat()).collect(Collectors.toList()).subList(placeA, condidatures.size() - 1));
             } else {
-                CandidatController.candidatsFinalA = condidatures.stream().map(x -> x.getCandidat()).collect(Collectors.toList());
+                l.add((ArrayList<Candidat>) condidatures.stream().map(x -> x.getCandidat()).collect(Collectors.toList()));
+                l.add(new ArrayList<>());
             }
 
+            return l;
+        } else {
+            l.add(new ArrayList<>());
+            l.add(new ArrayList<>());
+            return l;
         }
+
     }
 
     //=======================================//
-    public void printPdf(Niveau n, String typeC) throws JRException, IOException {
+    public void printPdf(Niveau n, String typeC, List<Candidat> c) throws JRException, IOException {
         Map<String, Object> params = new HashMap();
         params.put("filiere", n.toString());
         params.put("typeC", typeC);
-        List<Candidat> c = convoquer(n);
+
         PdfUtil.generatePdf(c, params, "Admis-" + typeC + "-" + n.toString(), "/jasper/tetsTable.jasper");
     }
 

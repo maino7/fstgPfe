@@ -48,6 +48,15 @@ public class ConcourExamMatiereFacade extends AbstractFacade<ConcourExamMatiere>
         }
     }
     
+    public int verfiyExist(ConcourExamMatiere selected){
+        List<ConcourExamMatiere> cx = em.createQuery("SELECT c FROM ConcourExamMatiere c WHERE c.concourNiveau.id='"+selected.getConcourNiveau().getId()+"' AND c.matiereConcour.id="+selected.getMatiereConcour().getId()).getResultList();
+        if(cx.isEmpty()){
+            return 1;
+        }else {
+            return -1;
+        }
+    }
+    
     
     
 }

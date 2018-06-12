@@ -78,7 +78,7 @@
                                         <b:container>
                                             <b:row>
                                                 <b:column span="4">
-                                                    <b:selectOneMenu id="filiere" value="#{candidatController.section}" process="filiere" onchange="ajax:candidatController.niveauBySection()" update="niveau" >
+                                                    <b:selectOneMenu id="filiere" value="#{candidatController.section}" process="filiere" onchange="ajax:candidatController.niveauBySection()" update="niveau" label="Niveau :" >
                                                         <f:selectItem itemLabel="--Selectionner--" itemValue="" />
                                                         <f:selectItems value="#{sectionController.items}" 
                                                                        var="sectionItem"
@@ -86,15 +86,22 @@
                                                     </b:selectOneMenu>
                                                 </b:column>
                                                 <b:column span="4">
-                                                    <b:selectOneMenu id="niveau" value="#{candidatController.niveau}">
+                                                    <b:selectOneMenu id="niveau" value="#{candidatController.niveau}" label="Filière:">
                                                          <f:selectItem itemLabel="--Selectionner--" itemValue="" />
                                                         <f:selectItems value="#{candidatController.niveaus}" />
                                                     </b:selectOneMenu>
 
                                                 </b:column>
-                                                <b:column span="4">
+                                                <b:column span="2">
+                                                    <b:selectOneMenu id="typeCandid" value="#{candidatController.typeCandidature}" label="Type:">
+                                                        <f:selectItem itemLabel="Candidature Validée" itemValue="1" />
+                                                        <f:selectItem itemLabel="Candidature non Validée" itemValue="0" />
+                                                    </b:selectOneMenu> 
+                                                   
+                                                </b:column>
+                                                <b:column span="2">
                                                     
-                                                    <b:inputText value="#{candidatController.cne}" placeholder="cne.." />
+                                                    <b:inputText value="#{candidatController.cne}" placeholder="cne.." label="CNE:" />
 
                                                 </b:column>
                                                 <b:column>

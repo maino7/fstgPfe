@@ -13,6 +13,7 @@ import java.io.IOException;
 import service.CandidatFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -63,8 +64,9 @@ public class CandidatController implements Serializable {
     private List<Candidat> items = null;
     private List<Candidat> candidatsAdmis = null;
     private List<Candidat> candidatsEcrit = null;
-    public static List<Candidat> candidatsFinalA = null;
-    public static List<Candidat> candidatsFinalT = null;
+    private  List<Candidat> candidatsFinalA = null;
+    private  List<Candidat> candidatsFinalT = null;
+    private  List<Candidat> candidatsRemove = null;
     private Candidat selected;
     private Condidature condidature;
     private int typeInscription;
@@ -78,6 +80,7 @@ public class CandidatController implements Serializable {
     private Section section;
     private Niveau niveau;
     private Niveau niveau2;
+    private int typeCandidature;
     private List<Niveau> niveaus = null;
     private String test;
     ConcourNiveau concourNiveau = new ConcourNiveau();
@@ -327,8 +330,8 @@ public class CandidatController implements Serializable {
 
     public void findBycreataria() {
         items = null;
-        System.out.println("ha niveau==>" + niveau + "o ha section==>" + section + "o ha cne==>" + cne);
-        items = pieceEtudiantFacade.findByNiveauAndSection(niveau, section, cne);
+        System.out.println("ha niveau==>" + niveau + "o ha section==>" + section + "o ha cne==>" + cne + "o ha type d candidature" +typeCandidature );
+        items = pieceEtudiantFacade.findByNiveauAndSection(niveau, section, cne,typeCandidature);
 
         System.out.println("ha l items===>" + items);
     }
@@ -371,7 +374,12 @@ public class CandidatController implements Serializable {
     }
 
     public void listFinal() {
+
+     candidatsFinalA =  getFacade().listFinal(niveau).get(0);
+     candidatsFinalT =  getFacade().listFinal(niveau).get(1);
+
         getFacade().listFinal(niveau);
+
     }
 
     public void printList() throws JRException, IOException {
@@ -380,7 +388,8 @@ public class CandidatController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
         } else {
-            getFacade().printPdf(niveau, "l'écrit");
+            condidatureFacade.validerPlusieurCand(candidatsAdmis);
+            getFacade().printPdf(niveau,"l'écrit",candidatsAdmis);
             FacesContext.getCurrentInstance().responseComplete();
         }
 
@@ -392,14 +401,26 @@ public class CandidatController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
         } else {
-            getFacade().printPdf(niveau, "l'orale");
+            getFacade().printPdf(niveau, "l'orale",candidatsEcrit);
             FacesContext.getCurrentInstance().responseComplete();
         }
 
     }
+    
+    public void removeCandidat(){
+        System.out.println("ha li khass remove==>"+candidatsRemove);
+        System.out.println("ha li kaynin aslan===>"+candidatsAdmis);
+        if(!candidatsRemove.isEmpty() && !candidatsAdmis.isEmpty()){
+            for (Candidat item : candidatsRemove) {
+                candidatsAdmis.remove(candidatsAdmis.indexOf(item));
+            }
+        }
+        System.out.println("ha li b9aw==>"+candidatsAdmis);
+    } 
 
     //================//
     public Candidat prepareCreate() {
+        System.out.println("ha la list ta3 checkbox==>"+candidatsRemove);
         selected = new Candidat();
         initializeEmbeddableKey();
         return selected;
@@ -601,13 +622,34 @@ public class CandidatController implements Serializable {
         return candidatsFinalA;
     }
 
-    public static List<Candidat> getCandidatsFinalT() {
-        return candidatsFinalT;
+
+    public void setCandidatsFinalA(List<Candidat> candidatsFinalA) {
+        this.candidatsFinalA = candidatsFinalA;
+    }
+ 
+
+    public void setCandidatsFinalT(List<Candidat> candidatsFinalT) {
+        this.candidatsFinalT = candidatsFinalT;
     }
 
-    public static void setCandidatsFinalT(List<Candidat> candidatsFinalT) {
-        CandidatController.candidatsFinalT = candidatsFinalT;
+
+    public List<Candidat> getCandidatsRemove() {
+        return candidatsRemove;
     }
+
+    public void setCandidatsRemove(List<Candidat> candidatsRemove) {
+        this.candidatsRemove = candidatsRemove;
+    }
+
+    public int getTypeCandidature() {
+        return typeCandidature;
+    }
+
+    public void setTypeCandidature(int typeCandidature) {
+        this.typeCandidature = typeCandidature;
+    }
+
+    
 
     public CandidatFacade getEjbFacade() {
         return ejbFacade;
@@ -904,5 +946,6 @@ public class CandidatController implements Serializable {
     public void setValideApresRattrapage6(int valideApresRattrapage6) {
         this.valideApresRattrapage6 = valideApresRattrapage6;
     }
+
 
 }

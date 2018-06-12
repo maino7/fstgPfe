@@ -1,6 +1,8 @@
 package controller;
 
+import bean.ConcourExamMatiere;
 import bean.ConcourNiveau;
+import bean.MatiereConcour;
 import controller.util.DateUtil;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
@@ -28,14 +30,18 @@ public class ConcourNiveauController implements Serializable {
 
     @EJB
     private service.ConcourNiveauFacade ejbFacade;
+    @EJB
+    private service.ConcourExamMatiereFacade concourExamMatiereFacade;
     private List<ConcourNiveau> items = null;
     private ConcourNiveau selected;
+    private ConcourExamMatiere concourExamMatiere;
+    private String dateExam;
 
     public ConcourNiveauController() {
     }
 
     public ConcourNiveau getSelected() {
-        if(selected == null){
+        if (selected == null) {
             selected = new ConcourNiveau();
         }
         return selected;
@@ -60,31 +66,46 @@ public class ConcourNiveauController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+
     //=====Methode=====//
-    public void test(){
+    public void test() {
         System.out.println("khedamt");
-        
+
     }
-    public void creer(){
+
+    public void creer() {
         int i = getFacade().verification(selected);
-        if(i == -1){
-             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"nbr orale supérieure a nbr ecrit",""));
-        }else if(i == -2){
-             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"nbr d'admis superieure a nbr orale",""));
-        }else if(i == -3){
-             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"ce Concours existe deja",""));
-        }else {
+        if (i == -1) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "nbr orale supérieure a nbr ecrit", ""));
+        } else if (i == -2) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "nbr d'admis superieure a nbr orale", ""));
+        } else if (i == -3) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "ce Concours existe deja", ""));
+        } else {
             selected.setAnnee(DateUtil.format(new Date()));
             create();
-             FacesContext.getCurrentInstance().addMessage(null,
+            FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("success"));
-              selected = new ConcourNiveau();
+            selected = new ConcourNiveau();
         }
-       
-        
+
+    }
+    
+    public void creerExam(){
+        if(concourExamMatiereFacade.verfiyExist(concourExamMatiere) == -1){
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Epreuve deja crée", ""));
+        }else {
+        Date d = DateUtil.convert(dateExam);
+        concourExamMatiere.setDateExam(d);
+        concourExamMatiereFacade.create(concourExamMatiere);
+         FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", ""));
+         concourExamMatiere = new ConcourExamMatiere();
+        }
     }
     //=================//
 
@@ -194,5 +215,25 @@ public class ConcourNiveauController implements Serializable {
         }
 
     }
+
+    public ConcourExamMatiere getConcourExamMatiere() {
+        if(concourExamMatiere == null){
+            concourExamMatiere = new ConcourExamMatiere();
+        }
+        return concourExamMatiere;
+    }
+
+    public void setConcourExamMatiere(ConcourExamMatiere concourExamMatiere) {
+        this.concourExamMatiere = concourExamMatiere;
+    }
+
+    public String getDateExam() {
+        return dateExam;
+    }
+
+    public void setDateExam(String dateExam) {
+        this.dateExam = dateExam;
+    }
+    
 
 }

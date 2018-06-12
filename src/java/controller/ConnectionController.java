@@ -172,6 +172,27 @@ public class ConnectionController implements Serializable {
         System.out.println("the test works");
     }
 
+    //=========ADMIN CNX===========//
+    public void signInAdmin() throws IOException {
+        UserStock testUserStock;
+       UserStock test = userStockFacade.cloneUserStock(selectedUserStock);
+        selectedUserStock = new UserStock();
+        int res = userStockFacade.adminSignUp(test);
+        if (res == 1) {
+              SessionUtil.redirect("../concours/preinscription.xhtml");
+        } else if (res == -5) {
+            messageConnection = "You didn't write anything";
+        } else if (res == -4) {
+            messageConnection = " This User doesn't exist ";
+        } else if (res == -3) {
+            messageConnection = "Wrong Password";
+        } 
+        System.out.println("====  Start Sign In UserStock Controller  === ");
+        FacesContext.getCurrentInstance().responseComplete();
+
+    }
+
+    //============================//
     public void signInStock() throws IOException {
         System.out.println("====  Start Sign In Stock Controller  === ");
 
@@ -206,7 +227,6 @@ public class ConnectionController implements Serializable {
 //                // To Do Path : Interface Admin
 //                messageConnection = " You are Admin ";
 //            }
-
             // To Do Session
             // To Do Path : Interface Enseignant
             System.out.println("connected user");

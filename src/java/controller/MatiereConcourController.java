@@ -14,10 +14,12 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.RowEditEvent;
 
 @Named("matiereConcourController")
 @SessionScoped
@@ -32,6 +34,9 @@ public class MatiereConcourController implements Serializable {
     }
 
     public MatiereConcour getSelected() {
+        if(selected == null){
+            selected = new MatiereConcour();
+        }
         return selected;
     }
 
@@ -54,6 +59,22 @@ public class MatiereConcourController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    //=========Methode==========//
+    public void supp(MatiereConcour m){
+        System.out.println("ha l matiere==>"+m.getId());
+        selected = m;
+        
+    }
+    public void creer(){
+        create();
+        selected = new MatiereConcour();
+    }
+    public void updatet(){
+        update();
+        selected = new MatiereConcour();
+    }
+
+    //==========================//
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MatiereConcourCreated"));
