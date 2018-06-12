@@ -26,7 +26,17 @@ public class Semestre implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int libelle;
-    
+    private float noteS1;
+    private float noteS2;
+    private float noteS3;
+    private float noteS4;
+    private float noteS5;
+    private float noteS6;
+    private String modeDeValidation;
+    private String anneeDeValidation;
+    private int nombreDinscription;
+    private int valideApresRattrapage;
+
     @ManyToOne
     private Filiere filiere;
 
@@ -34,12 +44,22 @@ public class Semestre implements Serializable {
     private List<Module> modules;
     @ManyToOne
     private Annee annee;
+    @ManyToOne
+    Candidat candidat;
 
     public Semestre() {
     }
-
+                               
     public Semestre(int numero) {
         this.libelle = numero;
+    }
+
+    public Candidat getCandidat() {
+        return candidat;
+    }
+
+    public void setCandidat(Candidat candidat) {
+        this.candidat = candidat;
     }
 
     public Annee getAnnee() {
@@ -50,7 +70,6 @@ public class Semestre implements Serializable {
         this.annee = annee;
     }
 
-    
     public Long getId() {
         return id;
     }
@@ -67,7 +86,6 @@ public class Semestre implements Serializable {
         this.modules = modules;
     }
 
-
     public Filiere getFiliere() {
         return filiere;
     }
@@ -83,7 +101,87 @@ public class Semestre implements Serializable {
     public void setLibelle(int libelle) {
         this.libelle = libelle;
     }
-    
+
+    public float getNoteS1() {
+        return noteS1;
+    }
+
+    public void setNoteS1(float noteS1) {
+        this.noteS1 = noteS1;
+    }
+
+    public float getNoteS2() {
+        return noteS2;
+    }
+
+    public void setNoteS2(float noteS2) {
+        this.noteS2 = noteS2;
+    }
+
+    public float getNoteS3() {
+        return noteS3;
+    }
+
+    public void setNoteS3(float noteS3) {
+        this.noteS3 = noteS3;
+    }
+
+    public float getNoteS4() {
+        return noteS4;
+    }
+
+    public void setNoteS4(float noteS4) {
+        this.noteS4 = noteS4;
+    }
+
+    public float getNoteS5() {
+        return noteS5;
+    }
+
+    public void setNoteS5(float noteS5) {
+        this.noteS5 = noteS5;
+    }
+
+    public float getNoteS6() {
+        return noteS6;
+    }
+
+    public void setNoteS6(float noteS6) {
+        this.noteS6 = noteS6;
+    }
+
+    public String getModeDeValidation() {
+        return modeDeValidation;
+    }
+
+    public void setModeDeValidation(String modeDeValidation) {
+        this.modeDeValidation = modeDeValidation;
+    }
+
+    public String getAnneeDeValidation() {
+        return anneeDeValidation;
+    }
+
+    public void setAnneeDeValidation(String anneeDeValidation) {
+        this.anneeDeValidation = anneeDeValidation;
+    }
+
+    public int getNombreDinscription() {
+        return nombreDinscription;
+    }
+
+    public void setNombreDinscription(int nombreDinscription) {
+        this.nombreDinscription = nombreDinscription;
+    }
+
+    public int getValideApresRattrapage() {
+        return valideApresRattrapage;
+    }
+
+    public void setValideApresRattrapage(int valideApresRattrapage) {
+        this.valideApresRattrapage = valideApresRattrapage;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -106,7 +204,7 @@ public class Semestre implements Serializable {
 
     @Override
     public String toString() {
-        return ""+libelle;
+        return "" + libelle;
     }
 
 }

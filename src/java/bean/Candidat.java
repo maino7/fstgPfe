@@ -7,12 +7,14 @@ package bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import org.hibernate.validator.constraints.Email;
@@ -62,7 +64,13 @@ public class Candidat implements Serializable {
     private float noteS4;
     private float noteS5;
     private float noteS6;
-    private float moyCalibr; // ajouter le 02-06
+    private String specialite;
+    private String mentionBac;
+    private String mentionDiplome;
+    private String optionLicence;
+    private String anneeObtLicence;
+
+    private float moyCalibr;
 
     private int etablissementPreInsc = 15;
     private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch- 
@@ -86,18 +94,78 @@ public class Candidat implements Serializable {
     private Etudiant etudiant;
     @ManyToOne
     private Pays pays;
-  
+
     @ManyToOne
     private Academie academie;
+    @ManyToOne
+    private Licence licence;
+    @OneToMany(mappedBy = "candidat")
+    private List<Semestre> semestres;
 
     public Candidat() {
     }
 
-     public Academie getAcademie() {
-         if (academie == null){
-             academie = new Academie();
-         } 
+    public List<Semestre> getSemestres() {
+        return semestres;
+    }
+
+    public void setSemestres(List<Semestre> semestres) {
+        this.semestres = semestres;
+    }
+
+    public Academie getAcademie() {
+        if (academie == null) {
+            academie = new Academie();
+        }
         return academie;
+    }
+
+    public String getSpecialite() {
+        return specialite;
+    }
+
+    public String getOptionLicence() {
+        return optionLicence;
+    }
+
+    public void setOptionLicence(String optionLicence) {
+        this.optionLicence = optionLicence;
+    }
+
+    public String getMentionBac() {
+        return mentionBac;
+    }
+
+    public String getAnneeObtLicence() {
+        return anneeObtLicence;
+    }
+
+    public Licence getLicence() {
+        return licence;
+    }
+
+    public void setLicence(Licence licence) {
+        this.licence = licence;
+    }
+
+    public void setAnneeObtLicence(String anneeObtLicence) {
+        this.anneeObtLicence = anneeObtLicence;
+    }
+
+    public void setMentionBac(String mentionBac) {
+        this.mentionBac = mentionBac;
+    }
+
+    public String getMentionDiplome() {
+        return mentionDiplome;
+    }
+
+    public void setMentionDiplome(String mentionDiplome) {
+        this.mentionDiplome = mentionDiplome;
+    }
+
+    public void setSpecialite(String specialite) {
+        this.specialite = specialite;
     }
 
     public void setAcademie(Academie academie) {
@@ -123,7 +191,6 @@ public class Candidat implements Serializable {
     public void setNoteS4(float noteS4) {
         this.noteS4 = noteS4;
     }
-    
 
     public float getNoteS5() {
         return noteS5;
@@ -140,8 +207,6 @@ public class Candidat implements Serializable {
     public void setNoteS6(float noteS6) {
         this.noteS6 = noteS6;
     }
-
-   
 
     public void setSexe(boolean sexe) {
         this.sexe = sexe;
@@ -184,7 +249,7 @@ public class Candidat implements Serializable {
     }
 
     public Lycee getLycee() {
-        if(lycee==null){
+        if (lycee == null) {
             lycee = new Lycee();
         }
         return lycee;
@@ -469,7 +534,6 @@ public class Candidat implements Serializable {
     public void setMoyCalibr(float moyCalibr) {
         this.moyCalibr = moyCalibr;
     }
-    
 
     @Override
     public int hashCode() {

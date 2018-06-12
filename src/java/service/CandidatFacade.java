@@ -80,7 +80,6 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
     public List<Candidat> findNonvalider() {
         return em.createQuery("SELECT c.candidat FROM Condidature c WHERE c.condidatureValide='0'").getResultList();
     }
-    
 
     public List<Candidat> findByniveau(Niveau n) {
         return em.createQuery("SELECT p.condidature.candidat FROM PieceEtudiant p WHERE p.piecesParNiveau.niveau=" + n.getId()).getResultList();
@@ -98,7 +97,7 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         } else {
             Condidature condidature = new Condidature();
             Niveau niveau = concourNiveau.getNiveau();
-            PiecesParNiveau piecesParNiveau = (PiecesParNiveau) em.createQuery("SELECT p from PiecesParNiveau p where p.id=" + 1).getSingleResult();
+            PiecesParNiveau piecesParNiveau = (PiecesParNiveau) em.createQuery("SELECT p from PiecesParNiveau p where p.niveaun.id" + niveau.getId()).getResultList().get(0);
             PieceEtudiant pieceEtudiant = new PieceEtudiant();
             pieceEtudiant.setPiecesParNiveau(piecesParNiveau);
             condidature.setId(generateId("Condidature", "id"));
@@ -116,15 +115,27 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
 
     }
 
-    public void creerMaster(Candidat candidat, Condidature condidature) {
-        candidat.setCondidature(condidature);
-        condidature.setCandidat(candidat);
-        condidature.setTypeInscription(2);
-        create(candidat);
-        condidatureFacade.create(condidature);
-        System.out.println("ha lcreation" + candidat);
-//        return 1;
+    public int creerMaster(Candidat candidat, ConcourNiveau concourNiveau) {
+        if (candidat == null) {
 
+            return -1;
+        } else {
+            Condidature condidature = new Condidature();
+            Niveau niveau = concourNiveau.getNiveau();
+            PiecesParNiveau piecesParNiveau = (PiecesParNiveau) em.createQuery("SELECT p from PiecesParNiveau p where p.niveaun.id" + niveau.getId()).getResultList().get(0);
+            PieceEtudiant pieceEtudiant = new PieceEtudiant();
+            pieceEtudiant.setPiecesParNiveau(piecesParNiveau);
+            condidature.setId(generateId("Condidature", "id"));
+            candidat.setCondidature(condidature);
+            condidature.setCandidat(candidat);
+            condidature.setTypeInscription(2);
+            pieceEtudiant.setCondidature(condidature);
+            condidatureFacade.create(condidature);
+            etudiantFacade.create(pieceEtudiant);
+            create(candidat);
+            System.out.println("ha lcreation" + candidat);
+            return 1;
+        }
     }
 
     //)====Methode test ============//
@@ -189,9 +200,9 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         Condidature condi = condidatureFacade.findByCandidat(c);
         List<ExamCandidat> exams = examCandidatFacade.finbByCandidature(condi);
         System.out.println("**********************");
-        System.out.println("ha ach dowez khona ==>"+exams);
+        System.out.println("ha ach dowez khona ==>" + exams);
         List<ConcourExamMatiere> matiers = cemf.findByCondidature(condi);
-        System.out.println("ha les exam li jaw==>"+matiers);
+        System.out.println("ha les exam li jaw==>" + matiers);
         System.out.println("*************************");
         if (exams.isEmpty() || matiers.isEmpty()) {
             return -2;
@@ -205,8 +216,8 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
                 }
 
             }
-            System.out.println("ha z==>"+z);
-            System.out.println("ha matiers.size()==>"+matiers.size());
+            System.out.println("ha z==>" + z);
+            System.out.println("ha matiers.size()==>" + matiers.size());
             if (z == matiers.size()) {
                 return 1;
             } else {
@@ -335,27 +346,27 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
 
             if (condidatures.size() > placeA) {
                 l.add((ArrayList<Candidat>) condidatures.stream().map(x -> x.getCandidat()).collect(Collectors.toList()).subList(0, placeA - 1));
-                l.add((ArrayList<Candidat>) condidatures.stream().map(x -> x.getCandidat()).collect(Collectors.toList()).subList(placeA, condidatures.size()-1));
+                l.add((ArrayList<Candidat>) condidatures.stream().map(x -> x.getCandidat()).collect(Collectors.toList()).subList(placeA, condidatures.size() - 1));
             } else {
                 l.add((ArrayList<Candidat>) condidatures.stream().map(x -> x.getCandidat()).collect(Collectors.toList()));
                 l.add(new ArrayList<>());
             }
-           
-                return l;
-        }else{
-             l.add(new ArrayList<>());
-             l.add(new ArrayList<>());
-             return l;
+
+            return l;
+        } else {
+            l.add(new ArrayList<>());
+            l.add(new ArrayList<>());
+            return l;
         }
-        
+
     }
 
     //=======================================//
-    public void printPdf(Niveau n, String typeC,List<Candidat> c) throws JRException, IOException {
+    public void printPdf(Niveau n, String typeC, List<Candidat> c) throws JRException, IOException {
         Map<String, Object> params = new HashMap();
         params.put("filiere", n.toString());
         params.put("typeC", typeC);
-        
+
         PdfUtil.generatePdf(c, params, "Admis-" + typeC + "-" + n.toString(), "/jasper/tetsTable.jasper");
     }
 
