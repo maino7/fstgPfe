@@ -100,7 +100,7 @@ public class ConcourExamMatiere implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.ConcourExamMatiere[ id=" + id + " ]";
+        return "bean.ConcourExamMatiere[ matiere=" + matiereConcour + " ]";
     }
     
 }

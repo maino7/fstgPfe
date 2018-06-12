@@ -80,6 +80,7 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
     public List<Candidat> findNonvalider() {
         return em.createQuery("SELECT c.candidat FROM Condidature c WHERE c.condidatureValide='0'").getResultList();
     }
+    
 
     public List<Candidat> findByniveau(Niveau n) {
         return em.createQuery("SELECT p.condidature.candidat FROM PieceEtudiant p WHERE p.piecesParNiveau.niveau=" + n.getId()).getResultList();
@@ -89,9 +90,6 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         float moy = (c.getNoteS1() + c.getNoteS2() + c.getNoteS3() + c.getNoteS4()) / 4;
         return moy;
     }
-
-
-   
 
     public int creerCycle(Candidat candidat, ConcourNiveau concourNiveau) {
         if (candidat == null) {
@@ -129,7 +127,6 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
 
     }
 
-
     //)====Methode test ============//
     public int countCandiEtab(List<Candidat> c, Candidat cand) {
         EtablissementType type = cand.getEtablissement();
@@ -142,7 +139,6 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         }
         return j;
     }
-    
 
     public List<Candidat> minConvoquer(List<Candidat> c) {
         List<Candidat> cc = new ArrayList<>();
@@ -192,7 +188,11 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         int z = 0;
         Condidature condi = condidatureFacade.findByCandidat(c);
         List<ExamCandidat> exams = examCandidatFacade.finbByCandidature(condi);
+        System.out.println("**********************");
+        System.out.println("ha ach dowez khona ==>"+exams);
         List<ConcourExamMatiere> matiers = cemf.findByCondidature(condi);
+        System.out.println("ha les exam li jaw==>"+matiers);
+        System.out.println("*************************");
         if (exams.isEmpty() || matiers.isEmpty()) {
             return -2;
         } else {
@@ -205,6 +205,8 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
                 }
 
             }
+            System.out.println("ha z==>"+z);
+            System.out.println("ha matiers.size()==>"+matiers.size());
             if (z == matiers.size()) {
                 return 1;
             } else {
@@ -212,21 +214,22 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
             }
         }
     }
-    public List<Candidat> sortByMoy(List<Candidat> c){
+
+    public List<Candidat> sortByMoy(List<Candidat> c) {
         List<Condidature> cond = new ArrayList<>();
-        
+
         for (int i = 0; i < c.size(); i++) {
-           Condidature condi = condidatureFacade.findByCandidat(c.get(i));
-           cond.add(condi);
+            Condidature condi = condidatureFacade.findByCandidat(c.get(i));
+            cond.add(condi);
         }
-         Collections.sort(cond, new Comparator<Condidature>() {
-                @Override
-                public int compare(Condidature o1, Condidature o2) {
-                    return Float.valueOf(o2.getMoyenneEcrit()).compareTo(o1.getMoyenneEcrit());
-                }
-            });
-         List<Candidat> candidats = cond.stream().map(x->x.getCandidat()).collect(Collectors.toList());
-         return candidats;
+        Collections.sort(cond, new Comparator<Condidature>() {
+            @Override
+            public int compare(Condidature o1, Condidature o2) {
+                return Float.valueOf(o2.getMoyenneEcrit()).compareTo(o1.getMoyenneEcrit());
+            }
+        });
+        List<Candidat> candidats = cond.stream().map(x -> x.getCandidat()).collect(Collectors.toList());
+        return candidats;
     }
 
     //==============================//
@@ -262,7 +265,6 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
 
             }
 
-
             crest = new ArrayList<>();
             return ccfinal;
 
@@ -271,83 +273,90 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
     }
 
     public List<Candidat> ListeEcrit(Niveau n) {
-        List<Candidat> c = convoquer(n);
+        List<Candidat> c = pef.findValiderniveau(n);
         List<Candidat> cecrit = new ArrayList<>();
-        System.out.println("ha la list ta3 nass=>"+c);
+        System.out.println("ha la list ta3 nass=>" + c);
         System.out.println("//===========//");
         int place = cnf.findByNiveau(n).get(0).getNbrDePlaceOrale();
-        System.out.println("ha nbr de place==>"+place);
+        System.out.println("ha nbr de place==>" + place);
         System.out.println("//===========//");
-        if(!c.isEmpty()){
-        for (int i = 0; i < c.size(); i++) {
-            if(verfiPasseExam(c.get(i), n)==1){
-                System.out.println("ha siyed rah dowez=>"+c.get(i).getNomLat());
-                
-            float moy = 0;
-            Condidature cond = condidatureFacade.findByCandidat(c.get(i));
-            List<ExamCandidat> e = examCandidatFacade.finbByCandidature(cond);
-                System.out.println("ha les exam li dowez==>"+e);
-            if(!e.isEmpty()){
-            for (int j = 0; j < e.size(); j++) {
-                 moy = e.get(j).getNoteCalc() + moy;
+        if (!c.isEmpty()) {
+            for (int i = 0; i < c.size(); i++) {
+                if (verfiPasseExam(c.get(i), n) == 1) {
+                    System.out.println("ha siyed rah dowez=>" + c.get(i).getNomLat());
+
+                    float moy = 0;
+                    Condidature cond = condidatureFacade.findByCandidat(c.get(i));
+                    List<ExamCandidat> e = examCandidatFacade.finbByCandidature(cond);
+                    System.out.println("ha les exam li dowez==>" + e);
+                    if (!e.isEmpty()) {
+                        for (int j = 0; j < e.size(); j++) {
+                            moy = e.get(j).getNoteCalc() + moy;
+                        }
+                    }
+                    moy = moy / e.size();
+                    System.out.println("ha l moyen te3o==>" + moy);
+                    cond.setMoyenneEcrit(moy);
+                    condidatureFacade.edit(cond);
+                    cecrit.add(c.get(i));
+                }
             }
-            }
-            moy = moy/e.size();
-                System.out.println("ha l moyen te3o==>"+moy);
-            cond.setMoyenneEcrit(moy);
-            condidatureFacade.edit(cond);
-            cecrit.add(c.get(i));
-            }
-        }
-        List<Candidat> cfinal = sortByMoy(cecrit);
-        return cfinal;
-        } else{
+            List<Candidat> cfinal = sortByMoy(cecrit);
+            return cfinal;
+        } else {
             return cecrit;
         }
-        
+
     }
-    
-    public void listFinal(Niveau n){
+
+    public List<ArrayList<Candidat>> listFinal(Niveau n) {
         List<Candidat> candEcrit = ListeEcrit(n);
         int placeA = cnf.findByNiveau(n).get(0).getNbrDePladeAdmis();
+        List<ArrayList<Candidat>> l;
+        l = new ArrayList<>();
         System.out.println("*****************************************");
-        System.out.println("ha la list li jat==>"+candEcrit);
-        if(!candEcrit.isEmpty()){
-           List<Condidature> condidatures = new ArrayList<>();
+        System.out.println("ha la list li jat==>" + candEcrit);
+        if (!candEcrit.isEmpty()) {
+            List<Condidature> condidatures = new ArrayList<>();
             for (int i = 0; i < candEcrit.size(); i++) {
                 condidatures.add(condidatureFacade.findByCandidat(candEcrit.get(i)));
             }
             for (Condidature condidature : condidatures) {
-                float moy = (condidature.getMoyenneEcrit() + condidature.getMoyenneOrale())/2;
+                float moy = (condidature.getMoyenneEcrit() + condidature.getMoyenneOrale()) / 2;
                 condidature.setMoyenneGenerale(moy);
                 condidatureFacade.edit(condidature);
             }
-             Collections.sort(condidatures, new Comparator<Condidature>() {
+            Collections.sort(condidatures, new Comparator<Condidature>() {
                 @Override
                 public int compare(Condidature o1, Condidature o2) {
                     return Float.valueOf(o2.getMoyenneGenerale()).compareTo(o1.getMoyenneGenerale());
                 }
             });
-            // CandidatController.candidatsFinalA.clear();
-             if(condidatures.size() > placeA){
-             List<Candidat> cccc = condidatures.stream().map(x->x.getCandidat()).collect(Collectors.toList()).subList(0, placeA-1);
-              CandidatController.candidatsFinalA = cccc;
-             }else{
-                  CandidatController.candidatsFinalA = condidatures.stream().map(x->x.getCandidat()).collect(Collectors.toList());
-             }
-            
-             
+
+            if (condidatures.size() > placeA) {
+                l.add((ArrayList<Candidat>) condidatures.stream().map(x -> x.getCandidat()).collect(Collectors.toList()).subList(0, placeA - 1));
+                l.add((ArrayList<Candidat>) condidatures.stream().map(x -> x.getCandidat()).collect(Collectors.toList()).subList(placeA, condidatures.size()-1));
+            } else {
+                l.add((ArrayList<Candidat>) condidatures.stream().map(x -> x.getCandidat()).collect(Collectors.toList()));
+                l.add(new ArrayList<>());
+            }
+           
+                return l;
+        }else{
+             l.add(new ArrayList<>());
+             l.add(new ArrayList<>());
+             return l;
         }
+        
     }
 
     //=======================================//
-    public void printPdf(Niveau n,String typeC) throws JRException, IOException {
+    public void printPdf(Niveau n, String typeC,List<Candidat> c) throws JRException, IOException {
         Map<String, Object> params = new HashMap();
         params.put("filiere", n.toString());
         params.put("typeC", typeC);
-        List<Candidat> c = convoquer(n);
-        PdfUtil.generatePdf(c, params, "Admis-"+typeC+"-"+ n.toString(), "/jasper/tetsTable.jasper");
+        
+        PdfUtil.generatePdf(c, params, "Admis-" + typeC + "-" + n.toString(), "/jasper/tetsTable.jasper");
     }
-
 
 }

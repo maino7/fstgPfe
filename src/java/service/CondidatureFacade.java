@@ -44,6 +44,12 @@ public class CondidatureFacade extends AbstractFacade<Condidature> {
         List<Condidature> l = em.createQuery("SELECT p.condidature FROM PieceEtudiant p WHERE p.condidature.condidatureValide='1' AND p.piecesParNiveau.niveau.id="+niveau.getId()).getResultList();
         return  l.size();
     }
-   
+   public void validerPlusieurCand(List<Candidat> c){
+       if(!c.isEmpty()){
+           for (Candidat candidat : c) {
+               validerCandidature(candidat);
+           }
+       }
+   }
     
 }

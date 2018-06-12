@@ -22,6 +22,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.RowEditEvent;
 
 @Named("coeffCalibrageController")
 @SessionScoped
@@ -74,6 +75,8 @@ public class CoeffCalibrageController implements Serializable {
     //=======Methode=========//
     public void creer(){
         int i = getFacade().creerCoeff(selected);
+        System.out.println("ha get annee==>"+selected.getAnnee());
+        System.out.println("ha get selected==>"+selected);
         if(i == -1 || i == -2){
              FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Error"));
@@ -103,6 +106,29 @@ public class CoeffCalibrageController implements Serializable {
             editable = 0;
         }
     }
+    
+     public void onRowEdit(RowEditEvent event) {
+         CoeffCalibrage cf = (CoeffCalibrage)event.getObject();
+         System.out.println("ha cf==>"+cf);
+         System.out.println("nbr nim==>"+cf.getNbrMin());
+         System.out.println("nbr max==>"+cf.getNbrMax());
+                if(cf.getNbrMax() < cf.getNbrMin()){
+                    System.out.println("dkhel l hadi");
+                    FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Place Minimum > Place Maximum !"));
+                } else{
+        getFacade().edit(cf);
+        FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("success"));
+                }
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        
+       FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("update canceled"));
+    }
+     
     
     //=======================//
 

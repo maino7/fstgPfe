@@ -135,7 +135,7 @@ public class ConcourNiveau implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.Concour[ id=" + id + " ]";
+        return niveau+"";
     }
     
 }
