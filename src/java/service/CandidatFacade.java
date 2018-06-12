@@ -98,7 +98,7 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         } else {
             Condidature condidature = new Condidature();
             Niveau niveau = concourNiveau.getNiveau();
-            PiecesParNiveau piecesParNiveau = (PiecesParNiveau) em.createQuery("SELECT p from PiecesParNiveau p where p.niveaun.id" + niveau.getId()).getResultList().get(0);
+            PiecesParNiveau piecesParNiveau = (PiecesParNiveau) em.createQuery("SELECT p from PiecesParNiveau p where p.niveau.id" + niveau.getId()).getResultList().get(0);
             PieceEtudiant pieceEtudiant = new PieceEtudiant();
             pieceEtudiant.setPiecesParNiveau(piecesParNiveau);
             condidature.setId(generateId("Condidature", "id"));
@@ -123,7 +123,7 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         } else {
             Condidature condidature = new Condidature();
             Niveau niveau = concourNiveau.getNiveau();
-            PiecesParNiveau piecesParNiveau = (PiecesParNiveau) em.createQuery("SELECT p from PiecesParNiveau p where p.niveaun.id" + niveau.getId()).getResultList().get(0);
+            PiecesParNiveau piecesParNiveau = (PiecesParNiveau) em.createQuery("SELECT p from PiecesParNiveau p where p.niveau.id=" + niveau.getId()).getResultList().get(0);
             PieceEtudiant pieceEtudiant = new PieceEtudiant();
             pieceEtudiant.setPiecesParNiveau(piecesParNiveau);
             condidature.setId(generateId("Condidature", "id"));
