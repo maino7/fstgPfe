@@ -29,9 +29,12 @@ import java.util.HashMap;
 
 import bean.PiecesParNiveau;
 import controller.CandidatController;
+import controller.util.HashageUtil;
+import java.util.Date;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -90,10 +93,24 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         return moy;
     }
 
-    public int creerCycle(Candidat candidat, ConcourNiveau concourNiveau) {
+    public String randomPw() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 8) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        System.out.println("random pw==>" + saltStr);
+        return saltStr;
+
+    }
+
+    public Candidat creerCycle(Candidat candidat, ConcourNiveau concourNiveau) {
         if (candidat == null) {
 
-            return -1;
+            return null;
         } else {
             Condidature condidature = new Condidature();
             Niveau niveau = concourNiveau.getNiveau();
@@ -102,6 +119,10 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
             pieceEtudiant.setPiecesParNiveau(piecesParNiveau);
             condidature.setId(generateId("Condidature", "id"));
             candidat.setCondidature(condidature);
+            Date date = new Date();
+            String rndPassword = randomPw();
+            candidat.setPassword(rndPassword);
+            candidat.setDateInscription(date);
             condidature.setCandidat(candidat);
             condidature.setTypeInscription(3);
             pieceEtudiant.setCondidature(condidature);
@@ -109,16 +130,16 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
             etudiantFacade.create(pieceEtudiant);
             create(candidat);
             System.out.println("ha lcreation" + candidat);
-            return 1;
+            return candidat;
         }
 //        return 1;
 
     }
 
-    public int creerMaster(Candidat candidat, ConcourNiveau concourNiveau) {
+    public Candidat creerMaster(Candidat candidat, ConcourNiveau concourNiveau) {
         if (candidat == null) {
 
-            return -1;
+            return null;
         } else {
             Condidature condidature = new Condidature();
             Niveau niveau = concourNiveau.getNiveau();
@@ -127,6 +148,8 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
             pieceEtudiant.setPiecesParNiveau(piecesParNiveau);
             condidature.setId(generateId("Condidature", "id"));
             candidat.setCondidature(condidature);
+            Date date = new Date();
+            candidat.setDateInscription(date);
             condidature.setCandidat(candidat);
             condidature.setTypeInscription(2);
             pieceEtudiant.setCondidature(condidature);
@@ -134,8 +157,12 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
             etudiantFacade.create(pieceEtudiant);
             create(candidat);
             System.out.println("ha lcreation" + candidat);
-            return 1;
+            return candidat;
         }
+    }
+
+    public void infosCandidat() {
+
     }
 
     //)====Methode test ============//

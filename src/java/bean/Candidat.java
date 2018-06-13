@@ -71,7 +71,7 @@ public class Candidat implements Serializable {
     private String anneeObtLicence;
 
     private float moyCalibr;
-
+    private String password;
     private int etablissementPreInsc = 15;
     private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch- 
     @ManyToOne
@@ -533,6 +533,14 @@ public class Candidat implements Serializable {
 
     public void setMoyCalibr(float moyCalibr) {
         this.moyCalibr = moyCalibr;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
