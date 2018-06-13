@@ -5,6 +5,7 @@
  */
 package controller;
 
+import bean.Candidat;
 import bean.Enseignant;
 import bean.Etudiant;
 import bean.UserStock;
@@ -17,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import service.CandidatFacade;
 import service.EnseignantFacade;
 import service.EtudiantFacade;
 import service.UserFacade;
@@ -32,6 +34,7 @@ public class ConnectionController implements Serializable {
 
     private Enseignant selectedEns;
     private Etudiant selectedEtud;
+    private Candidat selectedCand;
     private UserStock selectedUserStock;
     private String messageConnection;
     private String key;
@@ -41,6 +44,8 @@ public class ConnectionController implements Serializable {
     private EtudiantFacade etudiantFacade;
     @EJB
     private UserStockFacade userStockFacade;
+    @EJB
+    private CandidatFacade candidatFacade;
 
     /**
      * Creates a new instance of ConnectionController
@@ -174,7 +179,7 @@ public class ConnectionController implements Serializable {
 
     //=========ADMIN CNX===========//
     public void signInAdmin() throws IOException {
-        UserStock testUserStock;
+      
        UserStock test = userStockFacade.cloneUserStock(selectedUserStock);
         selectedUserStock = new UserStock();
         int res = userStockFacade.adminSignUp(test);
@@ -186,6 +191,31 @@ public class ConnectionController implements Serializable {
             messageConnection = " This User doesn't exist ";
         } else if (res == -3) {
             messageConnection = "Wrong Password";
+        } 
+        System.out.println("====  Start Sign In UserStock Controller  === ");
+        FacesContext.getCurrentInstance().responseComplete();
+
+    }
+
+    //============================//
+    //=========Candidat CNX===========//
+    public void signInCandiat() throws IOException {
+        
+       
+        int res = candidatFacade.candidatSignUp(selectedCand);
+        
+        if (res == 1) {
+              SessionUtil.redirect("../candidat/MesInfo.xhtml");
+              selectedCand = new Candidat();
+        } else if (res == -5) {
+            messageConnection = "You didn't write anything";
+            selectedCand = new Candidat();
+        } else if (res == -4) {
+            messageConnection = " This User doesn't exist ";
+            selectedCand = new Candidat();
+        } else if (res == -3) {
+            messageConnection = "Wrong Password";
+            selectedCand = new Candidat();
         } 
         System.out.println("====  Start Sign In UserStock Controller  === ");
         FacesContext.getCurrentInstance().responseComplete();
@@ -348,5 +378,17 @@ public class ConnectionController implements Serializable {
     public void setMessageConnection(String messageConnection) {
         this.messageConnection = messageConnection;
     }
+
+    public Candidat getSelectedCand() {
+        if(selectedCand == null){
+            selectedCand = new Candidat();
+        }
+        return selectedCand;
+    }
+
+    public void setSelectedCand(Candidat selectedCand) {
+        this.selectedCand = selectedCand;
+    }
+    
 
 }

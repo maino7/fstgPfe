@@ -69,7 +69,7 @@ public class PieceEtudiantFacade extends AbstractFacade<PieceEtudiant> {
     }
 
     public List<Candidat> findnonValiderniveau(Niveau n) {
-        return em.createQuery("SELECT DISTINCT p.condidature.candidat FROM PieceEtudiant p WHERE p.condidature.condidatureValide='0' AND p.piecesParNiveau.niveau.id=" + n.getId()).getResultList();
+        return em.createQuery("SELECT DISTINCT p.condidature.candidat FROM PieceEtudiant p WHERE p.condidature.condidatureValide='2' AND p.piecesParNiveau.niveau.id=" + n.getId()).getResultList();
     }
 
     public List<Candidat> findValiderniveau(Niveau n) {

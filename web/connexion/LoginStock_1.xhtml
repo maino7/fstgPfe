@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="col-lg-6 col-lg-offset-1">
-                    <h:form class="form-group">
+                    <h:form class="form-group" id="formsignIn">
                         <p:messages/>
                         <h1><h:outputText value="Admin connexion"/></h1>
                         <!--<p:panelGrid columns="2">-->
@@ -35,7 +35,7 @@
                         <!--</p:panelGrid>-->
                         <br/>
                         <!--<p:commandButton value="Se connecter" action />-->
-                        <p:commandButton value="Se connecter" style="background-color: #00cc33" class="btn center" action="#{connectionController.signInAdmin()}" update="@form" />
+                        <p:commandButton value="Se connecter" style="background-color: #00cc33" class="btn center" action="#{connectionController.signInAdmin()}" update=":formsignIn" />
                         <br/>
                         <br/>
                        

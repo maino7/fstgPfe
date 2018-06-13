@@ -28,10 +28,14 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 import bean.PiecesParNiveau;
+import bean.UserStock;
 import controller.CandidatController;
+import controller.util.HashageUtil;
+import controller.util.SessionUtil;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -97,8 +101,10 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         } else {
             Condidature condidature = new Condidature();
             Niveau niveau = concourNiveau.getNiveau();
-            PiecesParNiveau piecesParNiveau = (PiecesParNiveau) em.createQuery("SELECT p from PiecesParNiveau p where p.niveau.id" + niveau.getId()).getResultList().get(0);
+            PiecesParNiveau piecesParNiveau = (PiecesParNiveau) em.createQuery("SELECT p from PiecesParNiveau p where p.niveau.id=" + niveau.getId()).getResultList().get(0);
+            System.out.println("ha lpiece par niveau" + piecesParNiveau);
             PieceEtudiant pieceEtudiant = new PieceEtudiant();
+            pieceEtudiant.setId(generateId("PieceEtudiant", "id"));
             pieceEtudiant.setPiecesParNiveau(piecesParNiveau);
             condidature.setId(generateId("Condidature", "id"));
             candidat.setCondidature(condidature);
@@ -139,6 +145,40 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
     }
 
     //)====Methode test ============//
+    public String randomPw() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 8) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        System.out.println("random pw==>"+saltStr);
+        return saltStr;
+
+    }
+    
+     public int candidatSignUp(Candidat candidat){
+        System.out.println("========= Sign In ===========");
+        if (candidat == null || candidat.getCne() == null) {
+            return -5; // You must type your login
+        } else {
+            Candidat loadUsr = find(candidat.getCne());
+            System.out.println("loadUsr === " + loadUsr);
+
+            if (loadUsr == null) {
+                return -4; // there is no User here
+            } else if (!loadUsr.getPassword().equals(HashageUtil.sha256(candidat.getPassword()))) {
+               
+                return -3; // Wrong Password
+            } else {
+               
+                return 1;
+            }
+        }
+    }
+    
     public int countCandiEtab(List<Candidat> c, Candidat cand) {
         EtablissementType type = cand.getEtablissement();
         int j = 0;

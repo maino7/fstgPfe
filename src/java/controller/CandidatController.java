@@ -338,21 +338,20 @@ public class CandidatController implements Serializable {
 
     public int validerCandidat() {
         System.out.println("ha selected==>" + selected);
-
-        if (concourNiveauFacade.calculePlaceRest(niveau) == -1) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Place limite atteint"));
-            return -1;
-        } else {
             condidatureFacade.validerCandidature(selected);
-
             items.remove(items.indexOf(selected));
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("Candidat valider"));
             System.out.println("ha l items==>" + items);
             return 1;
-        }
-
+    }
+    
+    public void rejeterCandiat(){
+        items.remove(items.indexOf(selected));
+        getFacade().remove(selected);
+         FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Candidature annulée"));
+        
     }
 
     public void walo() {
@@ -626,11 +625,18 @@ public class CandidatController implements Serializable {
     public void setCandidatsFinalA(List<Candidat> candidatsFinalA) {
         this.candidatsFinalA = candidatsFinalA;
     }
- 
+
+    public List<Candidat> getCandidatsFinalT() {
+        return candidatsFinalT;
+    }
 
     public void setCandidatsFinalT(List<Candidat> candidatsFinalT) {
         this.candidatsFinalT = candidatsFinalT;
     }
+ 
+
+    
+    
 
 
     public List<Candidat> getCandidatsRemove() {
@@ -946,6 +952,13 @@ public class CandidatController implements Serializable {
     public void setValideApresRattrapage6(int valideApresRattrapage6) {
         this.valideApresRattrapage6 = valideApresRattrapage6;
     }
+    
+    public String testRandom(){
+        System.out.println("dkhel");
+        getFacade().randomPw();
+        return "";
+    }
+    
 
 
 }

@@ -69,6 +69,7 @@ public class Candidat implements Serializable {
     private String mentionDiplome;
     private String optionLicence;
     private String anneeObtLicence;
+    private String password;
 
     private float moyCalibr;
 
@@ -534,6 +535,15 @@ public class Candidat implements Serializable {
     public void setMoyCalibr(float moyCalibr) {
         this.moyCalibr = moyCalibr;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
 
     @Override
     public int hashCode() {
