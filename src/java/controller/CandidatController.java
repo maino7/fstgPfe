@@ -64,9 +64,9 @@ public class CandidatController implements Serializable {
     private List<Candidat> items = null;
     private List<Candidat> candidatsAdmis = null;
     private List<Candidat> candidatsEcrit = null;
-    private  List<Candidat> candidatsFinalA = null;
-    private  List<Candidat> candidatsFinalT = null;
-    private  List<Candidat> candidatsRemove = null;
+    private List<Candidat> candidatsFinalA = null;
+    private List<Candidat> candidatsFinalT = null;
+    private List<Candidat> candidatsRemove = null;
     private Candidat selected;
     private Condidature condidature;
     private int typeInscription;
@@ -137,13 +137,19 @@ public class CandidatController implements Serializable {
         this.concourNiveau = concourNiveau;
     }
 
-    public void save() throws MessagingException {
-        System.out.println("ha selected==>" + selected);
-        System.out.println("ha condidature==>" + condidature);
-        int i = getFacade().creerCycle(selected, getConcourNiveau());
-        savePdf();
-        System.out.println("ha save daz wa akhiran");
-        emailFacade.SendMail(selected.getCne(), selected.getTelephone(), selected.getAdresse(), selected.getAnneeBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionEtab(), selected.getAnneeInscriptionUniv(), selected.getCin(), selected.getDateInscription(), selected.getDateNaissance(), selected.getEmail(), selected.getEtablissementPreInsc(), selected.getLieuNaissance(), selected.getNomAr(), selected.getPrenomAr(), selected.getNomLat(), selected.getPrenomLat(), selected.getNoteS1(), selected.getNoteS2(), selected.getNoteS3(), selected.getNoteS4(), selected.getNoteS5(), selected.getNoteS6(), selected.getEtablissement(), selected.getDernierDiplome(), concourNiveau, selected.getOptionBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionUniv(), selected.getAnneeInscriptionEtab(), selected.getProfessionDeLaMere());
+    public int save() throws MessagingException {
+        int i = savePdf();
+        if (i == -1) {
+            return -2;
+        } else {
+
+            System.out.println("ha selected==>" + selected);
+            System.out.println("ha condidature==>" + condidature);
+            getFacade().creerCycle(selected, getConcourNiveau());
+            System.out.println("ha save daz wa akhiran");
+            emailFacade.SendMail(selected.getCne(), selected.getTelephone(), selected.getAdresse(), selected.getAnneeBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionEtab(), selected.getAnneeInscriptionUniv(), selected.getCin(), selected.getDateInscription(), selected.getDateNaissance(), selected.getEmail(), selected.getEtablissementPreInsc(), selected.getLieuNaissance(), selected.getNomAr(), selected.getPrenomAr(), selected.getNomLat(), selected.getPrenomLat(), selected.getNoteS1(), selected.getNoteS2(), selected.getNoteS3(), selected.getNoteS4(), selected.getNoteS5(), selected.getNoteS6(), selected.getEtablissement(), selected.getDernierDiplome(), concourNiveau, selected.getOptionBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionUniv(), selected.getAnneeInscriptionEtab(), selected.getProfessionDeLaMere());
+            return 2;
+        }
     }
 
     public void saveMaster() throws MessagingException {
@@ -163,10 +169,6 @@ public class CandidatController implements Serializable {
         return condidature;
     }
 
-//    public void inscription() {
-//        ejbFacade.creerMaster(selected, condidature);
-//
-//    }
     public void setCondidature(Condidature condidature) {
         this.condidature = condidature;
     }
@@ -179,93 +181,14 @@ public class CandidatController implements Serializable {
         this.fileName = fileName;
     }
 
-    public void checkOnce0(Boolean sexe, Candidat candidat) {
-
-        if (male = true) {
-            candidat.setSexe(sexe);
-            female = false;
+    public int savePdf() {
+        if (uploadedFile == null) {
+            return -1;
+        } else {
+            selected.setLastPdf(ServerConfigUtil.uploadPdf(uploadedFile, fileName, "pdf"));
+            System.out.println("hanta hanta khrjti");
+            return 1;
         }
-
-        if (male == false) {
-            candidat.setSexe(sexe);
-            female = true;
-        }
-    }
-
-    public void checkMany0(Boolean sexe, Candidat candidat) {
-        if (female == true) {
-            candidat.setSexe(sexe);
-            male = false;
-        }
-        if (female == false) {
-            candidat.setSexe(sexe);
-            male = true;
-        }
-    }
-
-    public void checkOnce(Boolean sexe) {
-
-        if (male == true) {
-            female = false;
-        }
-        if (male == false) {
-            female = true;
-        }
-    }
-
-    public void checkMany() {
-        if (female == true) {
-            male = false;
-        }
-        if (female == false) {
-            male = true;
-        }
-    }
-
-    public void checkOnce1() {
-        if (handicap == true) {
-            nonHandicap = false;
-        }
-        if (handicap == false) {
-            nonHandicap = true;
-        }
-    }
-
-    public void checkMany1() {
-        if (nonHandicap == true) {
-            handicap = false;
-        }
-        if (nonHandicap == false) {
-            handicap = true;
-        }
-    }
-
-    public String getTest() {
-        return test;
-    }
-
-    public void setTest(String test) {
-        this.test = test;
-    }
-
-    public void upload(FileUploadEvent event) {
-        fileName = event.getFile().getFileName();
-        System.out.println("ha lfilename" + fileName);
-
-        uploadedFile = event.getFile();
-        System.out.println("ha  l file" + uploadedFile);
-
-        JsfUtil.addSuccessMessage("File uploaded");
-        System.out.println("ha lmessage daz ");
-
-    }
-
-    public void savePdf() {
-        System.out.println("hanta dkhltiiiiii");
-        // setTest(ServerConfigUtil.uploadPdf(uploadedFile, "pdf", fileName));
-        // System.out.println("hahuwa lattribut" + test);
-        selected.setLastPdf(ServerConfigUtil.uploadPdf(uploadedFile, fileName, "pdf"));
-        System.out.println("hanta hanta khrjti");
     }
 
     public boolean isMale() {
@@ -330,8 +253,8 @@ public class CandidatController implements Serializable {
 
     public void findBycreataria() {
         items = null;
-        System.out.println("ha niveau==>" + niveau + "o ha section==>" + section + "o ha cne==>" + cne + "o ha type d candidature" +typeCandidature );
-        items = pieceEtudiantFacade.findByNiveauAndSection(niveau, section, cne,typeCandidature);
+        System.out.println("ha niveau==>" + niveau + "o ha section==>" + section + "o ha cne==>" + cne + "o ha type d candidature" + typeCandidature);
+        items = pieceEtudiantFacade.findByNiveauAndSection(niveau, section, cne, typeCandidature);
 
         System.out.println("ha l items===>" + items);
     }
@@ -375,8 +298,8 @@ public class CandidatController implements Serializable {
 
     public void listFinal() {
 
-     candidatsFinalA =  getFacade().listFinal(niveau).get(0);
-     candidatsFinalT =  getFacade().listFinal(niveau).get(1);
+        candidatsFinalA = getFacade().listFinal(niveau).get(0);
+        candidatsFinalT = getFacade().listFinal(niveau).get(1);
 
         getFacade().listFinal(niveau);
 
@@ -389,7 +312,7 @@ public class CandidatController implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
         } else {
             condidatureFacade.validerPlusieurCand(candidatsAdmis);
-            getFacade().printPdf(niveau,"l'écrit",candidatsAdmis);
+            getFacade().printPdf(niveau, "l'écrit", candidatsAdmis);
             FacesContext.getCurrentInstance().responseComplete();
         }
 
@@ -401,26 +324,26 @@ public class CandidatController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
         } else {
-            getFacade().printPdf(niveau, "l'orale",candidatsEcrit);
+            getFacade().printPdf(niveau, "l'orale", candidatsEcrit);
             FacesContext.getCurrentInstance().responseComplete();
         }
 
     }
-    
-    public void removeCandidat(){
-        System.out.println("ha li khass remove==>"+candidatsRemove);
-        System.out.println("ha li kaynin aslan===>"+candidatsAdmis);
-        if(!candidatsRemove.isEmpty() && !candidatsAdmis.isEmpty()){
+
+    public void removeCandidat() {
+        System.out.println("ha li khass remove==>" + candidatsRemove);
+        System.out.println("ha li kaynin aslan===>" + candidatsAdmis);
+        if (!candidatsRemove.isEmpty() && !candidatsAdmis.isEmpty()) {
             for (Candidat item : candidatsRemove) {
                 candidatsAdmis.remove(candidatsAdmis.indexOf(item));
             }
         }
-        System.out.println("ha li b9aw==>"+candidatsAdmis);
-    } 
+        System.out.println("ha li b9aw==>" + candidatsAdmis);
+    }
 
     //================//
     public Candidat prepareCreate() {
-        System.out.println("ha la list ta3 checkbox==>"+candidatsRemove);
+        System.out.println("ha la list ta3 checkbox==>" + candidatsRemove);
         selected = new Candidat();
         initializeEmbeddableKey();
         return selected;
@@ -622,16 +545,13 @@ public class CandidatController implements Serializable {
         return candidatsFinalA;
     }
 
-
     public void setCandidatsFinalA(List<Candidat> candidatsFinalA) {
         this.candidatsFinalA = candidatsFinalA;
     }
- 
 
     public void setCandidatsFinalT(List<Candidat> candidatsFinalT) {
         this.candidatsFinalT = candidatsFinalT;
     }
-
 
     public List<Candidat> getCandidatsRemove() {
         return candidatsRemove;
@@ -648,8 +568,6 @@ public class CandidatController implements Serializable {
     public void setTypeCandidature(int typeCandidature) {
         this.typeCandidature = typeCandidature;
     }
-
-    
 
     public CandidatFacade getEjbFacade() {
         return ejbFacade;
@@ -946,6 +864,5 @@ public class CandidatController implements Serializable {
     public void setValideApresRattrapage6(int valideApresRattrapage6) {
         this.valideApresRattrapage6 = valideApresRattrapage6;
     }
-
 
 }

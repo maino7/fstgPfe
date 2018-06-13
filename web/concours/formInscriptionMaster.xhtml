@@ -19,7 +19,7 @@
             <h:outputStylesheet name="bootstrap-3.3.6/css/bootstrap.min.css"/>
             <h:outputStylesheet name="css/paper-bootstrap-wizard.css"/>
             <h:outputStylesheet name="css/loginStyle.css"/>
-            <h:outputStylesheet name="css/themify-icons.css"/>
+            <h:outputStylesheet name="css/themify-icons.css"/> 
 
 
 
@@ -201,6 +201,7 @@
 
                                                     <h5 class="info-text"> Informations Personnelles</h5>
                                                     <div class="col-sm-12">
+                                                        <p:messages id="msgs" />
                                                         <p:panelGrid id="infoGrid" styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
                                                             <p:row>
 
@@ -209,7 +210,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="n" placeholder="tapez votre Nom ici" value="#{candidatController.selected.nomLat}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="n" placeholder="tapez votre Nom ici" value="#{candidatController.selected.nomLat}" required="true" />
                                                                 </p:column>
 
                                                                 <p:column>
@@ -217,7 +218,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea   rows="1" style="width:250px;"   id="nom" placeholder="tapez votre Nom ici" value="#{candidatController.selected.nomAr}" />
+                                                                    <p:inputTextarea   rows="1" style="width:250px;"   id="nom" placeholder="tapez votre Nom ici" value="#{candidatController.selected.nomAr}" required="true" />
 
                                                                 </p:column>
                                                             </p:row>
@@ -228,7 +229,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="pr" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.prenomLat}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="pr" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.prenomLat}" required="true" />
                                                                 </p:column>
 
                                                                 <p:column>
@@ -236,7 +237,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"    id="p" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.prenomAr}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;"    id="p" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.prenomAr}" required="true" />
 
                                                                 </p:column>
                                                             </p:row>
@@ -247,7 +248,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputText style="width:250px;"   id="ad" placeholder="tapez votre E-mail ici" value="#{candidatController.selected.email}"  >
+                                                                    <p:inputText style="width:250px;"   id="ad" placeholder="tapez votre E-mail ici" value="#{candidatController.selected.email}" required="true" >
                                                                         <p:ajax event="keyup" update="out1" />
                                                                     </p:inputText>
                                                                 </p:column>
@@ -257,7 +258,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"    id="pa" placeholder="tapez votre lieu de naissance ici" value="#{candidatController.selected.lieuNaissance}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;"    id="pa" placeholder="tapez votre lieu de naissance ici" value="#{candidatController.selected.lieuNaissance}" required="true" />
                                                                 </p:column>
                                                             </p:row>
                                                             <p:row>
@@ -266,7 +267,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px">
-                                                                    <p:selectOneMenu class="form-control" id="ana"  value="#{candidatController.selected.pays}" style="width: 250px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control" id="ana"  value="#{candidatController.selected.pays}" style="width: 250px;height: 40px" required="true" >
                                                                         <f:selectItems value="#{paysController.itemsAvailableSelectOne}" 
                                                                                        var="paysItem"
                                                                                        itemValue="#{paysItem}"/>
@@ -277,7 +278,11 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="tel" placeholder="tapez votre Téléphone ici" value="#{candidatController.selected.telephone}" />
+                                                                    <p:inputText style="width:250px;"   id="tel" placeholder="06 XX XX XX XX" value="#{candidatController.selected.telephone}" required="true" >
+                                                                        <f:validateLength minimum="10" />
+                                                                        <p:ajax update="msgLastname" event="keyup" />
+                                                                    </p:inputText>
+                                                                    <p:message for="tel" id="msgLastname" display="icon" />
                                                                 </p:column>
 
                                                             </p:row>
@@ -289,7 +294,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:selectOneRadio id="malee" value="#{candidatController.selected.sexe}">
+                                                                    <p:selectOneRadio id="malee" value="#{candidatController.selected.sexe}" required="true">
                                                                         <f:selectItem itemLabel="male" itemValue="#{true}" />
                                                                         <f:selectItem itemLabel="female" itemValue="#{false}" />
 
@@ -301,7 +306,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:selectOneRadio id="mama" value="#{candidatController.selected.handicap}">
+                                                                    <p:selectOneRadio id="mama" value="#{candidatController.selected.handicap}" required="true">
                                                                         <f:selectItem itemLabel="Handicap" itemValue="#{true}" />
                                                                         <f:selectItem itemLabel="Non handicap" itemValue="#{false}" />
 
@@ -314,14 +319,23 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="CNE" placeholder="Le CNE doit contenir 10 chiffres" value="#{candidatController.selected.cne}" />
+                                                                    <p:inputText style="width:250px;"   id="CNE" placeholder="Le CNE doit contenir 10 chiffres"  value="#{candidatController.selected.cne}" required="true">
+
+                                                                        <f:validateLength minimum="10" />
+                                                                        <p:ajax update="msgLastname" event="keyup" />
+                                                                    </p:inputText>
+                                                                    <p:message for="CNE" id="msgLastname" display="icon" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="CIN :(ou numéro de passport pour les étrangers)" for="CIN" style="text-align: left;padding-top: 10px;width: 200px"/>
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="CIN" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.cin}" />
+                                                                    <p:inputText  style="width:250px;"   id="CIN" placeholder="tapez votre CIN ici" value="#{candidatController.selected.cin}" required="true" >
+                                                                        <f:validateLength minimum="8" />
+                                                                        <p:ajax update="msgLastname" event="keyup" />
+                                                                    </p:inputText>
+                                                                    <p:message for="CIN" id="msgLastname" display="icon" />
                                                                 </p:column>
 
                                                             </p:row>
@@ -331,14 +345,14 @@
                                                                     <p:outputLabel value="Date de Naissance" for="dateCreation" style="text-align: left;padding-top: 10px" />
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:calendar id="dateCreation" pattern="MM/dd/yyyy" value="#{candidatController.selected.dateNaissance}" styleClass="hajar"  />
+                                                                    <p:calendar id="dateCreation" pattern="MM/dd/yyyy" value="#{candidatController.selected.dateNaissance}" styleClass="hajar" required="true" />
                                                                 </p:column>
                                                                 <p:column style="width: 100px">
                                                                     <p:outputLabel value="Profession de la mère :" for="maman" style="padding-top: 10px" />
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px">
-                                                                    <p:selectOneMenu class="form-control" id="maman"  value="#{candidatController.selected.professionDeLaMere}" style="width: 250px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control" id="maman"  value="#{candidatController.selected.professionDeLaMere}" style="width: 250px;height: 40px" required="true" >
                                                                         <f:selectItems value="#{professionController.itemsAvailableSelectOne}" 
                                                                                        var="professionItem"
                                                                                        itemValue="#{professionItem}"/>
@@ -351,7 +365,7 @@
                                                                     <p:outputLabel value="Adresse :" for="instructions" style="text-align: left;padding-top: 10px;width: 210px" />
                                                                 </p:column>
                                                                 <p:column colspan="3">
-                                                                    <p:inputTextarea rows="6" style="width: 100%"   id="instructions" placeholder="Adresse" value="#{candidatController.selected.adresse}" />
+                                                                    <p:inputTextarea rows="6" style="width: 100%"   id="instructions" placeholder="Adresse" value="#{candidatController.selected.adresse}" required="true" />
                                                                 </p:column>
                                                             </p:row>
                                                         </p:panelGrid>
@@ -372,7 +386,7 @@
                                                                     <p:outputLabel value="Année d'obtention du baccalauréat:" for="animal" style="text-align: left;padding-top: 10px;width: 200px"/>
                                                                 </p:column>
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control" id="animal"  value="#{candidatController.selected.anneeBac}" style="width: 250px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control" id="animal"  value="#{candidatController.selected.anneeBac}" style="width: 250px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="2014" itemLabel="2014"/>
                                                                         <f:selectItem itemValue="2015" itemLabel="2015"/>
                                                                         <f:selectItem itemValue="2016" itemLabel="2016"/>
@@ -385,7 +399,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control" id="ouss"  value="#{candidatController.selected.mentionBac}" style="width: 250px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control" id="ouss"  value="#{candidatController.selected.mentionBac}" style="width: 250px;height: 40px" required="true" >
 
                                                                         <f:selectItem itemValue="Passable" itemLabel="Passable"/>
                                                                         <f:selectItem itemValue="Assez Bien" itemLabel="Assez Bien"/>
@@ -398,20 +412,20 @@
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="hans" placeholder="EX: 2016" value="#{candidatController.selected.anneeInscriptionEnsSup}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="hans" placeholder="EX: 2016" required="true" value="#{candidatController.selected.anneeInscriptionEnsSup}" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="Année d'obtention de licence:" for="c" style="text-align: left;padding-top: 10px;width: 200px"/>
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="c" placeholder="EX: 2016" value="#{candidatController.selected.anneeObtLicence}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px" required="true"  id="c" placeholder="EX: 2016" value="#{candidatController.selected.anneeObtLicence}" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="Fonctionnaire :" for="fction" />
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:selectBooleanButton id="fction" class="myBtn" value="#{candidatController.selected.fonctionnaire}" onLabel="Fonctionnaire" offLabel="Pas fonctionnaire" style="width:130px;height: 40px;text-align: center;padding: 8px 0;"  >
+                                                                    <p:selectBooleanButton id="fction" class="myBtn" required="true" value="#{candidatController.selected.fonctionnaire}" onLabel="Fonctionnaire" offLabel="Pas fonctionnaire" style="width:130px;height: 40px;text-align: center;padding: 8px 0;"  >
                                                                     </p:selectBooleanButton>
                                                                 </p:column>
                                                             </p:row>
@@ -421,7 +435,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="thursday"  value="#{candidatController.selected.specialite}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                    <p:selectOneMenu class="form-control" id="thursday" required="true" value="#{candidatController.selected.specialite}" style="width: 250px;height: 40px;padding-right: 00px;" >
                                                                         <f:selectItem itemValue="Chimie" itemLabel="Chimie"/>
                                                                         <f:selectItem itemValue="Physiques" itemLabel="Physiques"/>
                                                                         <f:selectItem itemValue="Informatiques" itemLabel="Informatiques"/>
@@ -434,7 +448,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="mamati"  value="#{candidatController.selected.licence}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                    <p:selectOneMenu class="form-control" id="mamati" required="true" value="#{candidatController.selected.licence}" style="width: 250px;height: 40px;padding-right: 00px;" >
                                                                         <f:selectItems value="#{licenceController.itemsAvailableSelectOne}" 
                                                                                        var="licenceItem"
                                                                                        itemValue="#{licenceItem}"/>
@@ -446,7 +460,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"    id="b" placeholder="EX: 2016" value="#{candidatController.selected.optionLicence}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"  required="true"  id="b" placeholder="EX: 2016" value="#{candidatController.selected.optionLicence}" />
 
                                                                 </p:column>
                                                                 <p:column>
@@ -454,7 +468,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="d"  value="#{candidatController.selected.mentionDiplome}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                    <p:selectOneMenu class="form-control" id="d" required="true" value="#{candidatController.selected.mentionDiplome}" style="width: 250px;height: 40px;padding-right: 00px;" >
 
                                                                         <f:selectItems value="#{mentionDiplomeController.itemsAvailableSelectOne}" 
                                                                                        var="mentionDiplomeItem"
@@ -465,7 +479,7 @@
                                                                     <p:outputLabel value="Etablissmenet ayant délivré la licence : " for="w" style="text-align: left;padding-top: 10px;width: 200px"/>
                                                                 </p:column>
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="w"  value="#{candidatController.selected.etablissement}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                    <p:selectOneMenu class="form-control" id="w"  required="true" value="#{candidatController.selected.etablissement}" style="width: 250px;height: 40px;padding-right: 00px;" >
 
                                                                         <f:selectItems value="#{etablissementTypeController.itemsAvailableSelectOne}" 
                                                                                        var="etablissementTypeItem"
@@ -483,7 +497,7 @@
                                                                     <p:outputLabel value="Note S1:"  />
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS1}" />
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS1}" required="true" />
                                                                 </p:column>
                                                             </p:row>
                                                             <p:row>
@@ -491,7 +505,7 @@
                                                                     <p:outputLabel value="Mode de validation :" />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation1}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation1}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="VPC" itemLabel="VPC"/>
                                                                         <f:selectItem itemValue="Valide" itemLabel="Validé"/>
                                                                     </p:selectOneMenu>
@@ -502,7 +516,7 @@
                                                                     <p:outputLabel value="Année validation :"  />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation1}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation1}" style="width: 150px;height: 40px" required="true"  >
                                                                         <f:selectItem itemValue="2012-2013" itemLabel="2012-2013"/>
                                                                         <f:selectItem itemValue="2013-2014" itemLabel="2013-2014"/>
                                                                         <f:selectItem itemValue="2014-2015" itemLabel="2014-2015"/>
@@ -517,7 +531,7 @@
                                                                     <p:outputLabel value="Nombre d'inscription :"  />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription1}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription1}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="0" itemLabel="0"/>
                                                                         <f:selectItem itemValue="1" itemLabel="1"/>
                                                                         <f:selectItem itemValue="2" itemLabel="2"/>
@@ -534,7 +548,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage1}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage1}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="0" itemLabel="0"/>
                                                                         <f:selectItem itemValue="1" itemLabel="1"/>
                                                                         <f:selectItem itemValue="2" itemLabel="2"/>
@@ -553,7 +567,7 @@
                                                                     <p:outputLabel value="Note S2:"  />
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS2}" />
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS2}" required="true" />
                                                                 </p:column>
                                                             </p:row>
                                                             <p:row>
@@ -561,7 +575,7 @@
                                                                     <p:outputLabel value="Mode de validation :" />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation2}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation2}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="VPC" itemLabel="VPC"/>
                                                                         <f:selectItem itemValue="Valide" itemLabel="Validé"/>
                                                                     </p:selectOneMenu>
@@ -572,7 +586,7 @@
                                                                     <p:outputLabel value="Année validation :"  />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation2}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation2}" style="width: 150px;height: 40px" required="true">
                                                                         <f:selectItem itemValue="2012-2013" itemLabel="2012-2013"/>
                                                                         <f:selectItem itemValue="2013-2014" itemLabel="2013-2014"/>
                                                                         <f:selectItem itemValue="2014-2015" itemLabel="2014-2015"/>
@@ -587,7 +601,7 @@
                                                                     <p:outputLabel value="Nombre d'inscription :"  />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription2}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription2}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="0" itemLabel="0"/>
                                                                         <f:selectItem itemValue="1" itemLabel="1"/>
                                                                         <f:selectItem itemValue="2" itemLabel="2"/>
@@ -604,7 +618,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage2}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage2}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="0" itemLabel="0"/>
                                                                         <f:selectItem itemValue="1" itemLabel="1"/>
                                                                         <f:selectItem itemValue="2" itemLabel="2"/>
@@ -623,7 +637,7 @@
                                                                     <p:outputLabel value="Note S3:"  />
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS3}" />
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS3}" required="true" />
                                                                 </p:column>
                                                             </p:row>
                                                             <p:row>
@@ -631,7 +645,7 @@
                                                                     <p:outputLabel value="Mode de validation :" />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation3}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation3}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="VPC" itemLabel="VPC"/>
                                                                         <f:selectItem itemValue="Valide" itemLabel="Validé"/>
                                                                     </p:selectOneMenu>
@@ -642,7 +656,7 @@
                                                                     <p:outputLabel value="Année validation :"  />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation3}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation3}" style="width: 150px;height: 40px" required="true">
                                                                         <f:selectItem itemValue="2012-2013" itemLabel="2012-2013"/>
                                                                         <f:selectItem itemValue="2013-2014" itemLabel="2013-2014"/>
                                                                         <f:selectItem itemValue="2014-2015" itemLabel="2014-2015"/>
@@ -657,7 +671,7 @@
                                                                     <p:outputLabel value="Nombre d'inscription :"  />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription3}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription3}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="0" itemLabel="0"/>
                                                                         <f:selectItem itemValue="1" itemLabel="1"/>
                                                                         <f:selectItem itemValue="2" itemLabel="2"/>
@@ -674,7 +688,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage3}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage3}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="0" itemLabel="0"/>
                                                                         <f:selectItem itemValue="1" itemLabel="1"/>
                                                                         <f:selectItem itemValue="2" itemLabel="2"/>
@@ -693,7 +707,7 @@
                                                                     <p:outputLabel value="Note S4:"  />
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS4}" />
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS4}" required="true"/>
                                                                 </p:column>
                                                             </p:row>
                                                             <p:row>
@@ -701,7 +715,7 @@
                                                                     <p:outputLabel value="Mode de validation :" />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation4}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation4}" style="width: 150px;height: 40px" required="true">
                                                                         <f:selectItem itemValue="VPC" itemLabel="VPC"/>
                                                                         <f:selectItem itemValue="Valide" itemLabel="Validé"/>
                                                                     </p:selectOneMenu>
@@ -712,7 +726,7 @@
                                                                     <p:outputLabel value="Année validation :"  />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation4}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation4}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="2012-2013" itemLabel="2012-2013"/>
                                                                         <f:selectItem itemValue="2013-2014" itemLabel="2013-2014"/>
                                                                         <f:selectItem itemValue="2014-2015" itemLabel="2014-2015"/>
@@ -727,7 +741,7 @@
                                                                     <p:outputLabel value="Nombre d'inscription :"  />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription4}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription4}" style="width: 150px;height: 40px" required="true">
                                                                         <f:selectItem itemValue="0" itemLabel="0"/>
                                                                         <f:selectItem itemValue="1" itemLabel="1"/>
                                                                         <f:selectItem itemValue="2" itemLabel="2"/>
@@ -744,7 +758,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage4}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage4}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="0" itemLabel="0"/>
                                                                         <f:selectItem itemValue="1" itemLabel="1"/>
                                                                         <f:selectItem itemValue="2" itemLabel="2"/>
@@ -763,7 +777,7 @@
                                                                     <p:outputLabel value="Note S5:"  />
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS5}" />
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS5}" required="true" />
                                                                 </p:column>
                                                             </p:row>
                                                             <p:row>
@@ -771,7 +785,7 @@
                                                                     <p:outputLabel value="Mode de validation :" />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation5}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation5}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="VPC" itemLabel="VPC"/>
                                                                         <f:selectItem itemValue="Valide" itemLabel="Validé"/>
                                                                     </p:selectOneMenu>
@@ -782,7 +796,7 @@
                                                                     <p:outputLabel value="Année validation :"  />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation5}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation5}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="2012-2013" itemLabel="2012-2013"/>
                                                                         <f:selectItem itemValue="2013-2014" itemLabel="2013-2014"/>
                                                                         <f:selectItem itemValue="2014-2015" itemLabel="2014-2015"/>
@@ -797,7 +811,7 @@
                                                                     <p:outputLabel value="Nombre d'inscription :"  />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription5}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription5}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="0" itemLabel="0"/>
                                                                         <f:selectItem itemValue="1" itemLabel="1"/>
                                                                         <f:selectItem itemValue="2" itemLabel="2"/>
@@ -814,7 +828,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage5}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage5}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="0" itemLabel="0"/>
                                                                         <f:selectItem itemValue="1" itemLabel="1"/>
                                                                         <f:selectItem itemValue="2" itemLabel="2"/>
@@ -830,10 +844,10 @@
 
                                                             <p:row>
                                                                 <p:column>
-                                                                    <p:outputLabel value="Note S6:"  />
+                                                                    <p:outputLabel value="Note S6:"  /> required="true"
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS6}" />
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS6}" required="true" />
                                                                 </p:column>
                                                             </p:row>
                                                             <p:row>
@@ -841,7 +855,7 @@
                                                                     <p:outputLabel value="Mode de validation :" />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation6}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation6}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="VPC" itemLabel="VPC"/>
                                                                         <f:selectItem itemValue="Valide" itemLabel="Validé"/>
                                                                     </p:selectOneMenu>
@@ -852,7 +866,7 @@
                                                                     <p:outputLabel value="Année validation :"  />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation6}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation6}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="2012-2013" itemLabel="2012-2013"/>
                                                                         <f:selectItem itemValue="2013-2014" itemLabel="2013-2014"/>
                                                                         <f:selectItem itemValue="2014-2015" itemLabel="2014-2015"/>
@@ -867,7 +881,7 @@
                                                                     <p:outputLabel value="Nombre d'inscription :"  />
                                                                 </p:column>
                                                                 <p:column style="width: 160px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription6}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription6}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="0" itemLabel="0"/>
                                                                         <f:selectItem itemValue="1" itemLabel="1"/>
                                                                         <f:selectItem itemValue="2" itemLabel="2"/>
@@ -884,7 +898,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage6}" style="width: 150px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage6}" style="width: 150px;height: 40px" required="true" >
                                                                         <f:selectItem itemValue="0" itemLabel="0"/>
                                                                         <f:selectItem itemValue="1" itemLabel="1"/>
                                                                         <f:selectItem itemValue="2" itemLabel="2"/>
@@ -913,7 +927,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control" id="choix1"  value="#{candidatController.concourNiveau}" style="width: 250px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control" id="choix1"  value="#{candidatController.concourNiveau}" style="width: 250px;height: 40px" required="true" >
                                                                         <f:selectItem itemLabel="walo" itemValue="#{null}" />
                                                                         <f:selectItems value="#{concourNiveauController.itemsAvailableSelectOne}" 
                                                                                        var="filiereItem"
@@ -931,8 +945,8 @@
                                                 <div class="row">
                                                     Merci pour votre préinscription en ligne au concours  de Master de la F.S.T Marrakech, un e-mail vous sera envoyer sur votre email : 
                                                     <h:outputText id="out1" value="#{candidatController.selected.email}" /> <br></br>
-                                                    Cliquez sur ce button pour recevoir un mail pour confirmer votre préinscription: 
-                                                    <p:commandButton ajax="false" actionListener="#{candidatController.saveMaster()}" update="display" value="Save" style="width:60px;height: 40px;text-align: center"  />  
+                                                    Cliquez sur ce button pour recevoir un mail pour confirmer votre préinscription: <br></br>
+                                                    <p:commandButton ajax="false" actionListener="#{candidatController.saveMaster()}" update="display" value="Confirmer Votre préinscription" style="width:100%;height: 40px;text-align: center"  />  
 
                                                 </div>
                                             </div>

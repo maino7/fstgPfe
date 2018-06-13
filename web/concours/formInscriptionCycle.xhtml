@@ -200,8 +200,8 @@
 
                                                     <h5 class="info-text"> Informations Personnelles</h5>
                                                     <div class="col-sm-12">
+                                                        <p:messages id="msgs" />
                                                         <p:panelGrid id="infoGrid" styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
-                                                            <p:messages id="msgs" />
                                                             <p:row>
 
                                                                 <p:column>
@@ -209,8 +209,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"  required="true" id="n" placeholder="tapez votre Nom ici" value="#{candidatController.selected.nomLat}" />
-
+                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="n" placeholder="tapez votre Nom ici" value="#{candidatController.selected.nomLat}" required="true" />
                                                                 </p:column>
 
                                                                 <p:column>
@@ -218,7 +217,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea   rows="1" style="width:250px;"   required="true" id="nom" placeholder="tapez votre Nom ici" value="#{candidatController.selected.nomAr}" />
+                                                                    <p:inputTextarea   rows="1" style="width:250px;"   id="nom" placeholder="tapez votre Nom ici" value="#{candidatController.selected.nomAr}" required="true" />
 
                                                                 </p:column>
                                                             </p:row>
@@ -229,7 +228,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"   required="true" id="pr" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.prenomLat}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="pr" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.prenomLat}" required="true" />
                                                                 </p:column>
 
                                                                 <p:column>
@@ -237,7 +236,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"   required="true"  id="p" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.prenomAr}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;"    id="p" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.prenomAr}" required="true" />
 
                                                                 </p:column>
                                                             </p:row>
@@ -245,11 +244,10 @@
 
                                                                 <p:column>
                                                                     <p:outputLabel value="Adresse mail :" for="ad" style="text-align: left;padding-top: 10px;width: 200px"/>
-
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputText  style="width:250px;" required="true"  id="ad" placeholder="tapez votre E-mail ici" value="#{candidatController.selected.email}" >
+                                                                    <p:inputText style="width:250px;"   id="ad" placeholder="tapez votre E-mail ici" value="#{candidatController.selected.email}" required="true" >
                                                                         <p:ajax event="keyup" update="out1" />
                                                                     </p:inputText>
                                                                 </p:column>
@@ -259,7 +257,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;"   required="true" id="pa" placeholder="tapez votre lieu de naissance ici" value="#{candidatController.selected.lieuNaissance}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;"    id="pa" placeholder="tapez votre lieu de naissance ici" value="#{candidatController.selected.lieuNaissance}" required="true" />
                                                                 </p:column>
                                                             </p:row>
                                                             <p:row>
@@ -268,7 +266,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px">
-                                                                    <p:selectOneMenu class="form-control" id="ana" required="true"  value="#{candidatController.selected.pays}" style="width: 250px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control" id="ana"  value="#{candidatController.selected.pays}" style="width: 250px;height: 40px" required="true" >
                                                                         <f:selectItems value="#{paysController.itemsAvailableSelectOne}" 
                                                                                        var="paysItem"
                                                                                        itemValue="#{paysItem}"/>
@@ -279,13 +277,11 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputText  style="width:250px;" required="true"  id="tel" placeholder="tapez votre Téléphone ici" value="#{candidatController.selected.telephone}" >
-                                                                        <p:clientValidator event="keyup"/>
-                                                                        <f:validateLength minimum="2" />
+                                                                    <p:inputText style="width:250px;"   id="tel" placeholder="06 XX XX XX XX" value="#{candidatController.selected.telephone}" required="true" >
+                                                                        <f:validateLength minimum="10" />
                                                                         <p:ajax update="msgLastname" event="keyup" />
                                                                     </p:inputText>
                                                                     <p:message for="tel" id="msgLastname" display="icon" />
-
                                                                 </p:column>
 
                                                             </p:row>
@@ -297,7 +293,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:selectOneRadio required="true" id="malee" value="#{candidatController.selected.sexe}">
+                                                                    <p:selectOneRadio id="malee" value="#{candidatController.selected.sexe}" required="true">
                                                                         <f:selectItem itemLabel="male" itemValue="#{true}" />
                                                                         <f:selectItem itemLabel="female" itemValue="#{false}" />
 
@@ -309,7 +305,7 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:selectOneRadio required="true" id="mama" value="#{candidatController.selected.handicap}">
+                                                                    <p:selectOneRadio id="mama" value="#{candidatController.selected.handicap}" required="true">
                                                                         <f:selectItem itemLabel="Handicap" itemValue="#{true}" />
                                                                         <f:selectItem itemLabel="Non handicap" itemValue="#{false}" />
 
@@ -322,14 +318,23 @@
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;" required="true"  id="CNE" placeholder="Le CNE doit contenir 10 chiffres" value="#{candidatController.selected.cne}" />
+                                                                    <p:inputText style="width:250px;"   id="CNE" placeholder="Le CNE doit contenir 10 chiffres"  value="#{candidatController.selected.cne}" required="true">
+
+                                                                        <f:validateLength minimum="10" />
+                                                                        <p:ajax update="msgLastname" event="keyup" />
+                                                                    </p:inputText>
+                                                                    <p:message for="CNE" id="msgLastname" display="icon" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="CIN :(ou numéro de passport pour les étrangers)" for="CIN" style="text-align: left;padding-top: 10px;width: 200px"/>
                                                                 </p:column>
 
                                                                 <p:column>
-                                                                    <p:inputTextarea rows="1" style="width:250px;" required="true" id="CIN" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.cin}" />
+                                                                    <p:inputText  style="width:250px;"   id="CIN" placeholder="tapez votre CIN ici" value="#{candidatController.selected.cin}" required="true" >
+                                                                        <f:validateLength minimum="8" />
+                                                                        <p:ajax update="msgLastname" event="keyup" />
+                                                                    </p:inputText>
+                                                                    <p:message for="CIN" id="msgLastname" display="icon" />
                                                                 </p:column>
 
                                                             </p:row>
@@ -339,14 +344,14 @@
                                                                     <p:outputLabel value="Date de Naissance" for="dateCreation" style="text-align: left;padding-top: 10px" />
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:calendar id="dateCreation" pattern="MM/dd/yyyy" required="true" value="#{candidatController.selected.dateNaissance}" styleClass="hajar"   />
+                                                                    <p:calendar id="dateCreation" pattern="MM/dd/yyyy" value="#{candidatController.selected.dateNaissance}" styleClass="hajar" required="true" />
                                                                 </p:column>
                                                                 <p:column style="width: 100px">
                                                                     <p:outputLabel value="Profession de la mère :" for="maman" style="padding-top: 10px" />
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px">
-                                                                    <p:selectOneMenu class="form-control" id="maman" required="true"  value="#{candidatController.selected.professionDeLaMere}" style="width: 250px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control" id="maman"  value="#{candidatController.selected.professionDeLaMere}" style="width: 250px;height: 40px" required="true" >
                                                                         <f:selectItems value="#{professionController.itemsAvailableSelectOne}" 
                                                                                        var="professionItem"
                                                                                        itemValue="#{professionItem}"/>
@@ -356,10 +361,10 @@
                                                             <p:row>
 
                                                                 <p:column>
-                                                                    <p:outputLabel value="Adresse :" for="instructions" style="text-align: left;padding-top: 10px;width: 200px" />
+                                                                    <p:outputLabel value="Adresse :" for="instructions" style="text-align: left;padding-top: 10px;width: 210px" />
                                                                 </p:column>
                                                                 <p:column colspan="3">
-                                                                    <p:inputTextarea rows="6" style="width: 100%"  required="true"  id="instructions" placeholder="Adresse" value="#{candidatController.selected.adresse}" />
+                                                                    <p:inputTextarea rows="6" style="width: 100%"   id="instructions" placeholder="Adresse" value="#{candidatController.selected.adresse}" required="true" />
                                                                 </p:column>
                                                             </p:row>
                                                         </p:panelGrid>
@@ -381,7 +386,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control" id="monday"  value="#{candidatController.selected.dernierDiplome}" style="width: 250px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control" id="monday"  value="#{candidatController.selected.dernierDiplome}" style="width: 250px;height: 40px" required="true" >
 
                                                                         <f:selectItems value="#{dernierDiplomeController.itemsAvailableSelectOne}" 
                                                                                        var="dernierDiplomeItem"
@@ -394,7 +399,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="thursday"  value="#{candidatController.selected.dernierDiplome.mentionDiplome}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                    <p:selectOneMenu class="form-control" id="thursday"  value="#{candidatController.selected.dernierDiplome.mentionDiplome}" style="width: 250px;height: 40px;padding-right: 00px;" required="true">
                                                                         <f:selectItem itemLabel="walo" itemValue="#{null}" />
                                                                         <f:selectItems value="#{mentionBacControllers.itemsAvailableSelectOne}" 
                                                                                        var="mentionBacItem"
@@ -408,7 +413,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control" id="wednesday"  value="#{candidatController.selected.optionBac}" style="width: 250px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control" id="wednesday"  value="#{candidatController.selected.optionBac}" required="true" style="width: 250px;height: 40px" >
                                                                         <f:selectItems value="#{optionBacController.itemsAvailableSelectOne}" 
                                                                                        var="optionBacItem"
                                                                                        itemValue="#{optionBacItem}"/>
@@ -426,7 +431,7 @@
                                                                                                                                         </p:selectBooleanButton>
                                                                                                                                         <p:selectBooleanButton id="hello" class="myBtn" value="Public" onLabel="Public" offLabel="Public" style="width:80px;height: 40px;text-align: center;padding: 8px 0;" onchange="PF('NetoyagePlusieursFoisDialog').show()">
                                                                                                                                         </p:selectBooleanButton>-->
-                                                                    <p:selectOneButton  id="console" value="#{candidatController.selected.lycee.type}">
+                                                                    <p:selectOneButton  id="console" value="#{candidatController.selected.lycee.type}" required="true">
                                                                         <f:selectItem itemLabel="Libre" itemValue="1" />
                                                                         <f:selectItem itemLabel="Prive" itemValue="2" />
                                                                         <f:selectItem itemLabel="Public" itemValue="3" />
@@ -439,14 +444,14 @@
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="a" placeholder="EX: 2016" value="#{candidatController.selected.anneeInscriptionEnsSup}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"  required="true" id="a" placeholder="EX: 2016" value="#{candidatController.selected.anneeInscriptionEnsSup}" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel for="b" value="Année BAC:" style="text-align: left;padding-top: 10px" />
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"    id="b" placeholder="EX: 2016" value="#{candidatController.selected.anneeBac}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   required="true" id="b" placeholder="EX: 2016" value="#{candidatController.selected.anneeBac}" />
 
                                                                 </p:column>
 
@@ -455,7 +460,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="c" placeholder="EX: 2016" value="#{candidatController.selected.anneeInscriptionUniv}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px" required="true"  id="c" placeholder="EX: 2016" value="#{candidatController.selected.anneeInscriptionUniv}" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="Lycée du BAC: " for="d" style="text-align: left;padding-top: 10px" />
@@ -475,7 +480,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="X" placeholder="EX: 2016" value="#{candidatController.selected.anneeInscriptionEtab}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"  required="true" id="X" placeholder="EX: 2016" value="#{candidatController.selected.anneeInscriptionEtab}" />
                                                                 </p:column>
                                                             </p:row>
                                                             <p:row>
@@ -484,7 +489,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="y" value="#{candidatController.selected.academie.region}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                    <p:selectOneMenu class="form-control" id="y" required="true" value="#{candidatController.selected.academie.region}" style="width: 250px;height: 40px;padding-right: 00px;" >
 
                                                                         <f:selectItems value="#{regionController.itemsAvailableSelectOne}" 
                                                                                        var="regionItem"
@@ -499,14 +504,14 @@
                                                                 </p:column>
 
                                                                 <p:column style="padding-top: 10px">
-                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="w" placeholder="FSTG Marrakech" value="#{candidatController.selected.etablissementPreInsc}" />
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"  required="true" id="w" placeholder="FSTG Marrakech" value="#{candidatController.selected.etablissementPreInsc}" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="Accadémie: " for="z" style="text-align: left;padding-top: 10px" />
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="z"  value="#{candidatController.selected.academie}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                    <p:selectOneMenu class="form-control" id="z" required="true"  value="#{candidatController.selected.academie}" style="width: 250px;height: 40px;padding-right: 00px;" >
 
                                                                         <f:selectItems value="#{academieController.itemsAvailableSelectOne}" 
                                                                                        var="academieItem"
@@ -517,34 +522,34 @@
 
                                                                 <p:column >
                                                                     <p:outputLabel value="Moyenne du semestre 1 :" for="s1" />
-                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"  id="s1" value="#{candidatController.selected.noteS1}" />
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX" required="true" id="s1" value="#{candidatController.selected.noteS1}" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel for="s2" value="Moyenne du semestre 2 : "  />
-                                                                    <p:inputText style="width:100px;"    id="s2" placeholder="XX,XX" value="#{candidatController.selected.noteS2}" />
+                                                                    <p:inputText style="width:100px;"    id="s2" placeholder="XX,XX" required="true" value="#{candidatController.selected.noteS2}" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="Moyenne du semestre 3:" for="s3" />
-                                                                    <p:inputText  style="width:100px;"   id="s3" placeholder="XX,XX" value="#{candidatController.selected.noteS3}" />
+                                                                    <p:inputText  style="width:100px;"   id="s3" placeholder="XX,XX" required="true" value="#{candidatController.selected.noteS3}" />
                                                                 </p:column>
 
                                                                 <p:column>
                                                                     <p:outputLabel for="s4" value="Moyenne du semestre 4:"  />
-                                                                    <p:inputText  id="s4" placeholder="XX,XX" value="#{candidatController.selected.noteS4}" />
+                                                                    <p:inputText  id="s4" placeholder="XX,XX" required="true" value="#{candidatController.selected.noteS4}" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel for="s5" value="Moyenne du semestre 5:"  />
-                                                                    <p:inputText style="width:100px;"    id="s5" placeholder="XX,XX" value="#{candidatController.selected.noteS5}" />
+                                                                    <p:inputText style="width:100px;" required="true"   id="s5" placeholder="XX,XX" value="#{candidatController.selected.noteS5}" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel for="s6" value="Moyenne du semestre 6(si disponible):"  />
-                                                                    <p:inputText style="width:100px;"    id="s6" placeholder="XX,XX" value="#{candidatController.selected.noteS6}" />
+                                                                    <p:inputText style="width:100px;" required="true"   id="s6" placeholder="XX,XX" value="#{candidatController.selected.noteS6}" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="Fonctionnaire :" for="fction" />
                                                                 </p:column>
                                                                 <p:column>
-                                                                    <p:selectBooleanButton id="fction" class="myBtn" value="#{candidatController.selected.fonctionnaire}" onLabel="Fonctionnaire" offLabel="pas fonctionnaire" style="width:100px;height: 40px;text-align: center;"  >
+                                                                    <p:selectBooleanButton id="fction" required="true" class="myBtn" value="#{candidatController.selected.fonctionnaire}" onLabel="Fonctionnaire" offLabel="pas fonctionnaire" style="width:100px;height: 40px;text-align: center;"  >
                                                                     </p:selectBooleanButton>
                                                                 </p:column>
                                                                 <p:column >
@@ -552,7 +557,7 @@
                                                                 </p:column>
                                                                 <p:column>
                                                                     <!--fileUploadListener=""-->
-                                                                    <p:fileUpload  style="width: 130px" fileUploadListener="#{candidatController.upload}" mode="advanced" update="messages" auto="true"  
+                                                                    <p:fileUpload  style="width: 130px" fileUploadListener="#{candidatController.upload}" mode="advanced"  required="true" update="messages" auto="true"  
                                                                                    allowTypes="/(\.|\/)(pdf)$/" multiple="false" />
 
                                                                     <p:growl id="messages" showDetail="true" />
@@ -576,7 +581,7 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;padding-right: 360px;">
-                                                                    <p:selectOneMenu class="form-control" id="saturday"  value="#{candidatController.concourNiveau}" style="width: 250px;height: 40px" >
+                                                                    <p:selectOneMenu class="form-control" id="saturday" required="true" value="#{candidatController.concourNiveau}" style="width: 250px;height: 40px" >
                                                                         <f:selectItem itemLabel="walo" itemValue="#{null}" />
                                                                         <f:selectItems value="#{concourNiveauController.itemsAvailableSelectOne}" 
                                                                                        var="filiereItem"
@@ -595,8 +600,8 @@
                                                 <div class="row">
                                                     Merci pour votre préinscription en ligne au concours  du Cycle d'ingénieur de la F.S.T Marrakech, un e-mail vous sera envoyer sur votre email : 
                                                     <h:outputText id="out1" value="#{candidatController.selected.email}" /> <br></br>
-                                                    Cliquez sur ce button pour recevoir un mail pour confirmer votre préinscription: 
-                                                    <p:commandButton ajax="false" actionListener="#{candidatController.save()}" update="display" value="Confirmer Votre préinscription" style="width:60px;height: 40px;text-align: center"  />
+                                                    Cliquez sur ce button pour recevoir un mail pour confirmer votre préinscription: <BR></BR>
+                                                    <p:commandButton ajax="false" actionListener="#{candidatController.save()}" update="display" value="Confirmer Votre préinscription" style="width:100%;height: 40px;text-align: center"  />
                                                 </div>
                                             </div>
                                         </div>
