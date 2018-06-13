@@ -37,6 +37,11 @@ public class CondidatureFacade extends AbstractFacade<Condidature> {
     }
     public void validerCandidature(Candidat candidat){
         Condidature condidature = findByCandidat(candidat);
+        condidature.setCondidatureValide(2);
+        edit(condidature);
+    }
+    public void validerCandidature2(Candidat candidat){
+        Condidature condidature = findByCandidat(candidat);
         condidature.setCondidatureValide(1);
         edit(condidature);
     }
@@ -47,7 +52,7 @@ public class CondidatureFacade extends AbstractFacade<Condidature> {
    public void validerPlusieurCand(List<Candidat> c){
        if(!c.isEmpty()){
            for (Candidat candidat : c) {
-               validerCandidature(candidat);
+               validerCandidature2(candidat);
            }
        }
    }
