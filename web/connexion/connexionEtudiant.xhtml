@@ -17,6 +17,12 @@
         </ui:define>
         <ui:define name="content">
             <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+            <style>
+                .master button{
+                    background-color: blue;
+                }
+            </style>
+
             <div class="row" >
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h:outputText value="Pour une première visite, cliquez sur s'inscrire "/><br></br>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h:outputText value="Sinon utilisez votre adresse e-mail et votre mot de passe, fournis lors de la création de votre compte, pour vous connecter."/>
@@ -62,15 +68,13 @@
 
                             Cliquez sur le bouton ci-dessous pour commencer la création de votre compte
 
-                            <br/>
-                            <p:commandButton value="S'inscrire au Master" style="background-color: #f9dbec;border-color:#f9dbec " class="btn center" action="../concours/formInscriptionMaster.xhtml?faces-redirect=true" update="@form" />
-                            <br/>
-                            <br/>
-                            <p:commandButton value="S'inscrire au cycle d'ingénierie" style="background-color: #f9dbec;border-color:#f9dbec " class="btn center" action="../concours/formInscriptionCycle.xhtml?faces-redirect=true" update="@form" />
-                            <br/>
-                            <br/>
 
-                            <br/>
+
+                            <p:commandLink value="inscription au Master" class="btn btn-info"  action="#{connectionController.redirect('../concours/formInscriptionMaster.xhtml')}"></p:commandLink>
+                            <br></br>
+                            <br></br>
+                            <p:commandLink value="inscription au Cycle" class="btn btn-info"  action="#{connectionController.redirect('../concours/formInscriptionCycle.xhtml')}"></p:commandLink>
+
                             <p:outputLabel id="messageConnection" value="#{connectionController.messageConnection}" style="color: red" />
                         </h:form>
 

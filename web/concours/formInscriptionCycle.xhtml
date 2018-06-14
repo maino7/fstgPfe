@@ -279,9 +279,9 @@
                                                                 <p:column>
                                                                     <p:inputText style="width:250px;"   id="tel" placeholder="06 XX XX XX XX" value="#{candidatController.selected.telephone}" required="true" >
                                                                         <f:validateLength minimum="10" />
-                                                                        <p:ajax update="msgLastname" event="keyup" />
+                                                                        <p:ajax update="daily" event="keyup" />
                                                                     </p:inputText>
-                                                                    <p:message for="tel" id="msgLastname" display="icon" />
+                                                                    <p:message for="tel" id="daily" display="icon" />
                                                                 </p:column>
 
                                                             </p:row>
@@ -321,9 +321,9 @@
                                                                     <p:inputText style="width:250px;"   id="CNE" placeholder="Le CNE doit contenir 10 chiffres"  value="#{candidatController.selected.cne}" required="true">
 
                                                                         <f:validateLength minimum="10" />
-                                                                        <p:ajax update="msgLastname" event="keyup" />
+                                                                        <p:ajax update="taata" event="keyup" />
                                                                     </p:inputText>
-                                                                    <p:message for="CNE" id="msgLastname" display="icon" />
+                                                                    <p:message for="CNE" id="taata" display="icon" />
                                                                 </p:column>
                                                                 <p:column>
                                                                     <p:outputLabel value="CIN :(ou numéro de passport pour les étrangers)" for="CIN" style="text-align: left;padding-top: 10px;width: 200px"/>
@@ -399,11 +399,11 @@
                                                                 </p:column>
 
                                                                 <p:column style="width: 260px;">
-                                                                    <p:selectOneMenu class="form-control" id="thursday"  value="#{candidatController.selected.dernierDiplome.mentionDiplome}" style="width: 250px;height: 40px;padding-right: 00px;" required="true">
+                                                                    <p:selectOneMenu class="form-control" id="thursday"  value="#{candidatController.selected.mentionDiplome}" style="width: 250px;height: 40px;padding-right: 00px;" required="true">
                                                                         <f:selectItem itemLabel="walo" itemValue="#{null}" />
-                                                                        <f:selectItems value="#{mentionBacControllers.itemsAvailableSelectOne}" 
-                                                                                       var="mentionBacItem"
-                                                                                       itemValue="#{mentionBacItem}"/>
+                                                                        <f:selectItems value="#{mentionDiplomeController.itemsAvailableSelectOne}" 
+                                                                                       var="mentionDiplomeItem"
+                                                                                       itemValue="#{mentionDiplomeItem}"/>
 
                                                                     </p:selectOneMenu>
                                                                 </p:column>

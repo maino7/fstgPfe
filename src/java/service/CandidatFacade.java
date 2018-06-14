@@ -141,6 +141,15 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
 
     }
 
+    public int hashagePassword(String password, Candidat candidat) {
+        System.out.println("ha lpassword mamhachich"+password);
+        String pw = HashageUtil.sha256(password);
+        System.out.println("ha lpassword mhachi"+pw);
+        candidat.setPassword(pw);
+        return 1;
+
+    }
+
     public Candidat creerMaster(Candidat candidat, ConcourNiveau concourNiveau) {
         if (candidat == null) {
 
@@ -165,7 +174,6 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
             return candidat;
         }
     }
-
 
     //)====Methode test ============//
     public int candidatSignUp(Candidat candidat) {
