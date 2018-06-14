@@ -146,6 +146,7 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         String pw = HashageUtil.sha256(password);
         System.out.println("ha lpassword mhachi"+pw);
         candidat.setPassword(pw);
+        edit(candidat);
         return 1;
 
     }
