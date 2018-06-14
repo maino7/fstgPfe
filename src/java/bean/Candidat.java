@@ -72,8 +72,8 @@ public class Candidat implements Serializable {
     private String password;
 
     private float moyCalibr;
-
-    private int etablissementPreInsc = 15;
+    
+    private int etablissementPreInsc ;
     private Long secret; // hada wa7d lcode tayt3ta l les etudiant 3la wd les document dialhom -ta ana mafhmtch- 
     @ManyToOne
     private Profession professionDeLaMere;
@@ -543,8 +543,8 @@ public class Candidat implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
 
+    
     @Override
     public int hashCode() {
         int hash = 3;
