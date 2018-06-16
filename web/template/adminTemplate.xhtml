@@ -65,13 +65,11 @@
                                 <p>List des admis</p>
                             </a>
                         </li>
-
+                        <h:form>
                         <li class="active-pro">
-                            <a href="#">
-                                <i class="material-icons">unarchive</i>
-                                <p>Upgrade to PRO</p>
-                            </a>
+                            <p:commandButton actionListener="#{connectionController.logOut()}" ajax="false" value="log out" />
                         </li>
+                        </h:form>
                     </ul>
                 </div>
             </div>

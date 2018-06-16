@@ -35,12 +35,12 @@
                         <!--</p:panelGrid>-->
                         <br/>
                         <!--<p:commandButton value="Se connecter" action />-->
-                        <p:commandButton value="Se connecter" style="background-color: #00cc33" class="btn center" action="#{connectionController.signInAdmin()}" update=":formsignIn" />
+                        <p:commandButton value="Se connecter" style="background-color: #00cc33" class="btn center" action="#{connectionController.signInAdmin()}" />
                         <br/>
                         <br/>
                        
                         <br/>
-                        <p:outputLabel id="messageConnection" value="#{connectionController.messageConnection}" style="color: red" />
+                        <p:messages autoUpdate="true" closable="true" />
                     </h:form>
 
                 </div>

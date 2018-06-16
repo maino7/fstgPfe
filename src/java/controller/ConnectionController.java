@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import service.CandidatFacade;
 import service.EnseignantFacade;
@@ -55,8 +56,10 @@ public class ConnectionController implements Serializable {
 
     public boolean isConnected() {
         if (SessionUtil.getConnectedUser() != null) {
+            System.out.println("connected");
             return true;
         }
+        System.out.println("no connected");
         return false;
     }
 
@@ -179,21 +182,24 @@ public class ConnectionController implements Serializable {
 
     //=========ADMIN CNX===========//
     public void signInAdmin() throws IOException {
-      
+        System.out.println("======== controler signIn ========");
        UserStock test = userStockFacade.cloneUserStock(selectedUserStock);
         selectedUserStock = new UserStock();
         int res = userStockFacade.adminSignUp(test);
         if (res == 1) {
               SessionUtil.redirect("../concours/preinscription.xhtml");
         } else if (res == -5) {
-            messageConnection = "You didn't write anything";
+             FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"You didn't write anything", "You didn't write anything"));
         } else if (res == -4) {
-            messageConnection = " This User doesn't exist ";
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR," This User doesn't exist ", " This User doesn't exist "));
         } else if (res == -3) {
-            messageConnection = "Wrong Password";
+             FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"Wrong Password", "Wrong Password"));
         } 
         System.out.println("====  Start Sign In UserStock Controller  === ");
-        FacesContext.getCurrentInstance().responseComplete();
+      //  FacesContext.getCurrentInstance().responseComplete();
 
     }
 
@@ -311,22 +317,8 @@ public class ConnectionController implements Serializable {
     }
 
     /*TEST*/
- /*
-    Test Controller 
-    Edit
-    
-    
-    public void editEns()
-    {
-        //enseignantFacade.editPass(selectedEns.getCin());
-        etudiantFacade.editPass(selectedEtud.getCne());
-        messageConnection = "Password Changed from EditEns";
-    }
-    
-    
-    Test Controller 
-    Edit
-     */
+ 
+     
     public String getKey() {
         return key;
     }
