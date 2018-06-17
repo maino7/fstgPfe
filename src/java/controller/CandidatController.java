@@ -9,6 +9,7 @@ import controller.util.EmailUtil;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import controller.util.ServerConfigUtil;
+import controller.util.SessionUtil;
 import java.io.IOException;
 import service.CandidatFacade;
 
@@ -145,23 +146,30 @@ public class CandidatController implements Serializable {
 
             System.out.println("ha selected==>" + selected);
             System.out.println("ha condidature==>" + condidature);
-            getFacade().creerCycle(selected, getConcourNiveau());
+            Candidat c = getFacade().creerCycle(selected, getConcourNiveau());
             System.out.println("ha save daz wa akhiran");
-            emailFacade.SendMail(selected.getCne(), selected.getTelephone(), selected.getAdresse(), selected.getAnneeBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionEtab(), selected.getAnneeInscriptionUniv(), selected.getCin(), selected.getDateInscription(), selected.getDateNaissance(), selected.getEmail(), selected.getEtablissementPreInsc(), selected.getLieuNaissance(), selected.getNomAr(), selected.getPrenomAr(), selected.getNomLat(), selected.getPrenomLat(), selected.getNoteS1(), selected.getNoteS2(), selected.getNoteS3(), selected.getNoteS4(), selected.getNoteS5(), selected.getNoteS6(), selected.getEtablissement(), selected.getDernierDiplome(), concourNiveau, selected.getOptionBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionUniv(), selected.getAnneeInscriptionEtab(), selected.getProfessionDeLaMere());
+            emailFacade.SendMail(selected.getCne(), selected.getTelephone(), selected.getAdresse(), selected.getAnneeBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionEtab(), selected.getAnneeInscriptionUniv(), selected.getCin(), selected.getDateInscription(), selected.getDateNaissance(), selected.getEmail(), selected.getEtablissementPreInsc(), selected.getLieuNaissance(), selected.getNomAr(), selected.getPrenomAr(), selected.getNomLat(), selected.getPrenomLat(), selected.getNoteS1(), selected.getNoteS2(), selected.getNoteS3(), selected.getNoteS4(), selected.getNoteS5(), selected.getNoteS6(), selected.getEtablissement(), selected.getDernierDiplome(), concourNiveau, selected.getOptionBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionUniv(), selected.getAnneeInscriptionEtab(), selected.getProfessionDeLaMere(), c);
+            ejbFacade.hashagePassword(c.getPassword(), c);
+            System.out.println("ha lpass mhachi wa akhiran ->"+c.getPassword());
             return 2;
         }
     }
 
     public void saveMaster() throws MessagingException {
-        ejbFacade.creerMaster(selected, getConcourNiveau());
-        emailFacade.SendMailMaster(selected.getCne(), selected.getTelephone(), selected.getAdresse(), selected.getAnneeBac(), selected.getProfessionDeLaMere(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionEtab(), selected.getAnneeInscriptionUniv(), selected.getCin(), selected.getDateInscription(), selected.getDateNaissance(), selected.getEmail(), selected.getEtablissementPreInsc(), selected.getLieuNaissance(), selected.getNomAr(), selected.getPrenomAr(), selected.getNomLat(), selected.getPrenomLat(), selected.getEtablissement(), selected.getDernierDiplome(), concourNiveau, selected.getMentionDiplome(), selected.getOptionLicence(), selected.getAnneeObtLicence(), noteS1, noteS2, noteS3, noteS4, noteS5, noteS6, modeDeValidation1, anneeDeValidation1, nombreDinscription1, valideApresRattrapage1, modeDeValidation2, anneeDeValidation2, nombreDinscription2, valideApresRattrapage2, modeDeValidation3, anneeDeValidation3, nombreDinscription3, valideApresRattrapage3, modeDeValidation4, anneeDeValidation4, nombreDinscription4, valideApresRattrapage4, modeDeValidation5, anneeDeValidation5, nombreDinscription5, valideApresRattrapage5, modeDeValidation6, anneeDeValidation6, nombreDinscription6, valideApresRattrapage6);
+        Candidat c = ejbFacade.creerMaster(selected, getConcourNiveau());
+        emailFacade.SendMailMaster(selected.getCne(), selected.getTelephone(), selected.getAdresse(), selected.getAnneeBac(), selected.getProfessionDeLaMere(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionEtab(), selected.getAnneeInscriptionUniv(), selected.getCin(), selected.getDateInscription(), selected.getDateNaissance(), selected.getEmail(), selected.getEtablissementPreInsc(), selected.getLieuNaissance(), selected.getNomAr(), selected.getPrenomAr(), selected.getNomLat(), selected.getPrenomLat(), selected.getEtablissement(), selected.getDernierDiplome(), concourNiveau, selected.getMentionDiplome(), selected.getOptionLicence(), selected.getAnneeObtLicence(), noteS1, noteS2, noteS3, noteS4, noteS5, noteS6, modeDeValidation1, anneeDeValidation1, nombreDinscription1, valideApresRattrapage1, modeDeValidation2, anneeDeValidation2, nombreDinscription2, valideApresRattrapage2, modeDeValidation3, anneeDeValidation3, nombreDinscription3, valideApresRattrapage3, modeDeValidation4, anneeDeValidation4, nombreDinscription4, valideApresRattrapage4, modeDeValidation5, anneeDeValidation5, nombreDinscription5, valideApresRattrapage5, modeDeValidation6, anneeDeValidation6, nombreDinscription6, valideApresRattrapage6, c);
         semestreFacade.saveSemestres(noteS1, noteS2, noteS3, noteS4, noteS5, noteS6, modeDeValidation1, anneeDeValidation1, nombreDinscription1, valideApresRattrapage1, modeDeValidation2, anneeDeValidation2, nombreDinscription2, valideApresRattrapage2, modeDeValidation3, anneeDeValidation3, nombreDinscription3, valideApresRattrapage3, modeDeValidation4, anneeDeValidation4, nombreDinscription4, valideApresRattrapage4, modeDeValidation5, anneeDeValidation5, nombreDinscription5, valideApresRattrapage5, modeDeValidation6, anneeDeValidation6, nombreDinscription6, valideApresRattrapage6, selected);
+        ejbFacade.hashagePassword(c.getPassword(), c);
 
     }
 
+    public void redirect(String r) throws IOException {
+        SessionUtil.redirect(r);
+    }
 //    public void saveSemesteresMaster() {
 //        semestreFacade.saveSemestres(noteS1, noteS2, noteS3, noteS4, noteS5, noteS6, modeDeValidation1, anneeDeValidation1, nombreDinscription1, valideApresRattrapage1, modeDeValidation2, anneeDeValidation2, nombreDinscription2, valideApresRattrapage2, modeDeValidation3, anneeDeValidation3, nombreDinscription3, valideApresRattrapage3, modeDeValidation4, anneeDeValidation4, nombreDinscription4, valideApresRattrapage4, modeDeValidation5, anneeDeValidation5, nombreDinscription5, valideApresRattrapage5, modeDeValidation6, anneeDeValidation6, nombreDinscription6, valideApresRattrapage6, selected);
 //    }
+
     public Condidature getCondidature() {
         if (condidature == null) {
             condidature = new Condidature();
@@ -179,6 +187,18 @@ public class CandidatController implements Serializable {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public void upload(FileUploadEvent event) {
+        fileName = event.getFile().getFileName();
+        System.out.println("ha lfilename" + fileName);
+
+        uploadedFile = event.getFile();
+        System.out.println("ha  l file" + uploadedFile);
+
+        JsfUtil.addSuccessMessage("File uploaded");
+        System.out.println("ha lmessage daz ");
+
     }
 
     public int savePdf() {
@@ -261,20 +281,20 @@ public class CandidatController implements Serializable {
 
     public int validerCandidat() {
         System.out.println("ha selected==>" + selected);
-            condidatureFacade.validerCandidature(selected);
-            items.remove(items.indexOf(selected));
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Candidat valider"));
-            System.out.println("ha l items==>" + items);
-            return 1;
+        condidatureFacade.validerCandidature(selected);
+        items.remove(items.indexOf(selected));
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("Candidat valider"));
+        System.out.println("ha l items==>" + items);
+        return 1;
     }
-    
-    public void rejeterCandiat(){
+
+    public void rejeterCandiat() {
         items.remove(items.indexOf(selected));
         getFacade().remove(selected);
-         FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Candidature annulée"));
-        
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage("Candidature annulée"));
+
     }
 
     public void walo() {
@@ -555,7 +575,6 @@ public class CandidatController implements Serializable {
     public void setCandidatsFinalT(List<Candidat> candidatsFinalT) {
         this.candidatsFinalT = candidatsFinalT;
     }
-
 
     public List<Candidat> getCandidatsRemove() {
         return candidatsRemove;
@@ -869,14 +888,10 @@ public class CandidatController implements Serializable {
         this.valideApresRattrapage6 = valideApresRattrapage6;
     }
 
-    
-    public String testRandom(){
+    public String testRandom() {
         System.out.println("dkhel");
         getFacade().randomPw();
         return "";
     }
-    
-
-
 
 }
