@@ -16,6 +16,7 @@
             FSTG | Connexion ADMIN
         </ui:define>
         <ui:define name="content">
+           
             <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
             <div >
                 <div class="col-lg-offset-1  ">
@@ -26,6 +27,7 @@
                     <h:form class="form-group" id="formsignIn">
                         <p:messages/>
                         <h1><h:outputText value="Admin connexion"/></h1>
+                        <h1><h:outputText value="#{param['redirectO']}"/></h1>
                         <!--<p:panelGrid columns="2">-->
                         <p:outputLabel value="CIN:" for="id" />
                         <p:inputText id="id" class="form-control" value="#{connectionController.selectedUserStock.id}" />

@@ -57,6 +57,13 @@ public class SessionUtil {
         FacesContext.getCurrentInstance().getExternalContext().redirect(pagePath);
 
     }
+    public static void redirect2(String pagePath) throws IOException {
+        if (!pagePath.endsWith(".xhtml")) {
+            pagePath += ".xhtml";
+        }
+        FacesContext.getCurrentInstance().getExternalContext().redirect(pagePath+"?includeViewParams=true");
+
+    }
 
     private static boolean isContextOk(FacesContext fc) {
         boolean res = (fc != null

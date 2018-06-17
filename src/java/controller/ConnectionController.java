@@ -39,6 +39,7 @@ public class ConnectionController implements Serializable {
     private UserStock selectedUserStock;
     private String messageConnection;
     private String key;
+    private int redirectO;
     @EJB
     private EnseignantFacade enseignantFacade;
     @EJB
@@ -300,6 +301,13 @@ public class ConnectionController implements Serializable {
     }
 
     /*TEST*/
+    
+    public void redirectIfNotLogged() throws IOException{
+        if(SessionUtil.getConnectedUser() == null){
+            
+             SessionUtil.redirect("../connexion/LoginAdminP.xhtml");
+        }
+    }
     public void forgetPassEns() {
         enseignantFacade.sendEmailPassword(key);
     }
@@ -381,6 +389,16 @@ public class ConnectionController implements Serializable {
     public void setSelectedCand(Candidat selectedCand) {
         this.selectedCand = selectedCand;
     }
+
+    public int getRedirectO() {
+        return redirectO;
+    }
+
+    public void setRedirectO(int redirectO) {
+        this.redirectO = redirectO;
+    }
+
+    
     
 
 }
