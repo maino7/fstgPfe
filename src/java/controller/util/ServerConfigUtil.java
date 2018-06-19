@@ -30,7 +30,8 @@ public class ServerConfigUtil {
     private static String rootPath = "/Users/mac/NetBeansProjects/FSG_WebSite/web/resources/images/UploadedImages";
     private static String departPath = "pfe.files.path";//chemin dont laquelle on va creer le dosqsier globale qui aura pour bute de contenir la totalitees des dossier d un abonnee
     public static String path1 = "/Users/HP/Documents/NetBeansProjects/Pfe/web/resources/pdfCycle";
-    public static String pdfPath = "C:\\Users\\HP\\Documents\\NetBeansProjects\\Pfe\\web\\resources\\pdfCycle";
+    public static String pdfPath = "C:\\Users\\ouss\\Documents\\NetBeansProjects\\stockfstg\\web\\resources\\pdfCycle";
+            //"C:\\Users\\HP\\Documents\\NetBeansProjects\\Pfe\\web\\resources\\pdfCycle";
     private static List<Item> articlePaths = new ArrayList();
 //    private static String pathPieceJoint = "resources";
 

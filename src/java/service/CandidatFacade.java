@@ -191,10 +191,16 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
 
                 return -3; // Wrong Password
             } else {
-
+                SessionUtil.setAttribute("candidat", loadUsr);
                 return 1;
             }
         }
+    }
+    
+    public int candidatSignUpTest(){
+        Candidat loadUsr = find("jh12345");
+         SessionUtil.setAttribute("candidat", loadUsr);
+         return 1;
     }
 
     public int countCandiEtab(List<Candidat> c, Candidat cand) {
@@ -426,6 +432,14 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         params.put("typeC", typeC);
 
         PdfUtil.generatePdf(c, params, "Admis-" + typeC + "-" + n.toString(), "/jasper/tetsTable.jasper");
+    }
+    public void printPdf2(Niveau n, String typeC, List<Candidat> c, String fileName) throws JRException, IOException {
+        Map<String, Object> params = new HashMap();
+        params.put("filiere", n.toString());
+        params.put("typeC", typeC);
+
+        PdfUtil.generatePdfAddExportPath(c, params, "Admis-" + typeC + "-" + n.toString(), "/jasper/tetsTable.jasper", "C:\\Users\\ouss\\Desktop\\pfe",fileName+".pdf");
+//        C:\\Users\\ouss\\Desktop\\pfe
     }
 
 }

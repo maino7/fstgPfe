@@ -5,6 +5,7 @@ import bean.ConcourNiveau;
 import bean.Condidature;
 import bean.Niveau;
 import bean.Section;
+import controller.util.DateUtil;
 import controller.util.EmailUtil;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
@@ -15,6 +16,7 @@ import service.CandidatFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -84,7 +86,7 @@ public class CandidatController implements Serializable {
     private int typeCandidature;
     private List<Niveau> niveaus = null;
     private String test;
-    ConcourNiveau concourNiveau = new ConcourNiveau();
+    ConcourNiveau concourNiveau = new ConcourNiveau(); // ach hadchi ?
     private float noteS1;
     private float noteS2;
     private float noteS3;
@@ -115,6 +117,7 @@ public class CandidatController implements Serializable {
     private String anneeDeValidation6;
     private int nombreDinscription6;
     private int valideApresRattrapage6;
+    private Candidat logeddCand;
 
     public CandidatController() {
     }
@@ -266,7 +269,6 @@ public class CandidatController implements Serializable {
 
     //========Methode==========//
     public void niveauBySection() {
-
         niveaus = niveauFacade.findBySection(section);
         System.out.println("ha les niveau===>" + niveaus);
     }
@@ -278,6 +280,18 @@ public class CandidatController implements Serializable {
 
         System.out.println("ha l items===>" + items);
     }
+    
+    public void rejeterPlusieur(){
+        if(items.isEmpty()){
+            JsfUtil.addErrorMessage("Veuillez faire une recherche");
+        }else {
+            condidatureFacade.rejeterPlusieurCand(items);
+            items.clear();
+            JsfUtil.addSuccessMessage("vous avez tout supprimer");
+        }
+    }
+    
+    
 
     public int validerCandidat() {
         System.out.println("ha selected==>" + selected);
@@ -331,7 +345,9 @@ public class CandidatController implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
         } else {
             condidatureFacade.validerPlusieurCand(candidatsAdmis);
-            getFacade().printPdf(niveau, "l'écrit", candidatsAdmis);
+            concourNiveauFacade.listIsPrint("listC", niveau);
+            String d = DateUtil.format(new Date());
+            getFacade().printPdf2(niveau, "l'écrit", candidatsAdmis,niveau.toString()+"C"+d);
             FacesContext.getCurrentInstance().responseComplete();
         }
 
@@ -343,7 +359,31 @@ public class CandidatController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
         } else {
-            getFacade().printPdf(niveau, "l'orale", candidatsEcrit);
+            concourNiveauFacade.listIsPrint("listO", niveau);
+             String d = DateUtil.format(new Date());
+            getFacade().printPdf2(niveau, "l'orale", candidatsEcrit,niveau.toString()+"O"+d);
+            FacesContext.getCurrentInstance().responseComplete();
+        }
+
+    }
+    public void printListAdmisF() throws JRException, IOException {
+        System.out.println("Imprimer====>OK" + niveau);
+        if (candidatsFinalA.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
+        } else {
+            getFacade().printPdf2(niveau, "l'orale", candidatsEcrit,niveau.toString()+"O");
+            FacesContext.getCurrentInstance().responseComplete();
+        }
+
+    }
+    public void printListAttente() throws JRException, IOException {
+        System.out.println("Imprimer====>OK" + niveau);
+        if (candidatsFinalT.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
+        } else {
+            getFacade().printPdf2(niveau, "l'orale", candidatsEcrit,niveau.toString()+"O");
             FacesContext.getCurrentInstance().responseComplete();
         }
 
@@ -888,10 +928,17 @@ public class CandidatController implements Serializable {
         this.valideApresRattrapage6 = valideApresRattrapage6;
     }
 
-    public String testRandom() {
-        System.out.println("dkhel");
-        getFacade().randomPw();
-        return "";
+    public Candidat getLogeddCand() {
+        if(logeddCand == null){
+            logeddCand = (Candidat) SessionUtil.getAttribute("candidat");
+        }
+        return logeddCand;
     }
+
+    public void setLogeddCand(Candidat logeddCand) {
+        this.logeddCand = logeddCand;
+    }
+    
+    
 
 }

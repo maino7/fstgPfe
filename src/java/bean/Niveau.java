@@ -114,7 +114,7 @@ public class Niveau implements Serializable {
 
     @Override
     public String toString() {
-        return filiere+" "+semestre;
+        return filiere+""+semestre;
     }
     
 }

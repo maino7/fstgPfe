@@ -40,15 +40,17 @@
                             <h5><b>Vous avez déjà créé un compte</b></h5>
 
                             Connectez vous en utilisant votre adresse e-mail et votre mot de passe, fourni lors de la création de votre compte
+                            <br/>
+                            <br/>
                             <p:outputLabel value="Adresse Mail:" for="id" />
-                            <p:inputText id="id" class="form-control" value="#{connectionController.selectedUserStock.id}" />
-                            <p:outputLabel value="Password:" for="password" />
-                            <p:password id="password" class="form-control" value="#{connectionController.selectedUserStock.password}" title="Password" />
+                            <p:inputText id="id" class="form-control" value="#{connectionController.selectedCand.cne}" />
+                            <p:outputLabel value="Mot de passe:" for="password" />
+                            <p:password id="password" class="form-control" value="#{connectionController.selectedCand.password}" title="Mot de passe" />
 
                             <!--</p:panelGrid>-->
                             <br/>
                             <!--<p:commandButton value="Se connecter" action />-->
-                            <p:commandButton value="Se connecter" style="background-color: #f9dbec ;border-color:#f9dbec "  class="btn center" action="#{connectionController.signInAdmin()}" update="@form" />
+                            <p:commandButton value="Se connecter"   class="btn center btn-info" action="#{connectionController.signInCandiat()}"/>
                             <br/>
                             <br/>
 

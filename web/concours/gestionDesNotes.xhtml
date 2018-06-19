@@ -35,7 +35,7 @@
                                 <i class="material-icons">person</i>
                             </div>
                             <div class="card-content">
-                                <a href="./gestionDesNotes.xhtml?faces-redirect=true"><p>Gestion de note</p></a>
+                                <a href="./gestionDesNotes.xhtml?faces-redirect=true"><p>Gestion de notes</p></a>
                             </div>
                             <div class="card-footer">
 
@@ -43,20 +43,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-stats">
-                            <div class="card-header" data-background-color="red">
-                                <i class="material-icons">local_library</i>
-                            </div>
-                            <div class="card-content">
-
-                                <a href="./gestionAdmis.xhtml?faces-redirect=true"><p>List des admis a l'écrit</p></a>
-                            </div>
-                            <div class="card-footer">
-
-                            </div>
-                        </div>
-                    </div>
+                    
 
                 </div>
                 <div class="container-fluid">
@@ -93,7 +80,7 @@
                                         <b:column>
                                             <b:commandButton look="success" value="ok" actionListener="#{condidatureController.findBycreataria()}" />
 
-                                            <b:commandButton look="success" value="imprimer" actionListener="#{candidatController.test()}" rendered="true" />
+                                        
 
 
                                         </b:column>
@@ -127,19 +114,19 @@
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Prenom"/>
+                                                    <h:outputText value="Prénom"/>
                                                 </f:facet>
-                                                <h:outputText value="#{item.candidat.nomLat}"/>
+                                                <h:outputText value="#{item.candidat.prenomLat}"/>
                                             </b:dataTableColumn>
                                             <b:dataTableColumn rendered="#{condidatureController.niveau !=null}">
                                                 <f:facet name="header">
-                                                    <h:outputText value="Filiere"/>
+                                                    <h:outputText value="Filière"/>
                                                 </f:facet>
                                                 <b:inputText value="#{condidatureController.niveau.filiere.abreviation}" disabled="true"/>
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
-                                                    <h:outputText value="note"/>
+                                                    <h:outputText value="notes"/>
                                                 </f:facet>
                                                 <p>
                                                     #{condidatureController.test(item)}
@@ -147,21 +134,21 @@
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
-                                                    <h:outputText value="note Orale"/>
+                                                    <h:outputText value="note Oral"/>
                                                 </f:facet>
                                                 <h:outputText value="#{item.moyenneOrale}" />
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Detaille"/>
+                                                    <h:outputText value="Modification"/>
                                                 </f:facet>
-                                                <b:commandButton value="Detaille" look="primary" ajax="true" actionListener="#{condidatureController.affect2(item)}" oncomplete="$('.modalPseudoClass2').modal('show')"  />
+                                                <b:commandButton value="Modifier" look="primary" ajax="true" actionListener="#{condidatureController.affect2(item)}" oncomplete="$('.modalPseudoClass2').modal('show')"  />
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
                                                     <h:outputText value="Action"/>
                                                 </f:facet>
-                                                <b:commandButton value="Valider" look="success" ajax="true" actionListener="#{condidatureController.affect(item)}" oncomplete="$('.modalPseudoClass').modal('show')"  />
+                                                <b:commandButton value="Notes" look="success" ajax="true" actionListener="#{condidatureController.affect(item)}" oncomplete="$('.modalPseudoClass').modal('show')"  />
                                             </b:dataTableColumn>
                                             
 

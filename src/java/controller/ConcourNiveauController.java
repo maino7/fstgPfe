@@ -1,5 +1,6 @@
 package controller;
 
+import bean.CoeffCalibrage;
 import bean.ConcourExamMatiere;
 import bean.ConcourNiveau;
 import bean.MatiereConcour;
@@ -23,6 +24,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.RowEditEvent;
 
 @Named("concourNiveauController")
 @SessionScoped
@@ -106,6 +108,30 @@ public class ConcourNiveauController implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", ""));
          concourExamMatiere = new ConcourExamMatiere();
         }
+    }
+    
+         public void onRowEdit(RowEditEvent event) {
+         ConcourNiveau cf = (ConcourNiveau)event.getObject();
+         System.out.println("ha cf==>"+cf);
+         System.out.println("nbr nim==>"+cf.getNbrDePlaceOrale());
+         System.out.println("nbr max==>"+cf.getNbrDePlaceEcrit());
+                if(cf.getNbrDePlaceOrale() > cf.getNbrDePlaceEcrit()){
+                    System.out.println("dkhel l hadi");
+                    FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Nombre orale > Nombre écrit !"));
+                } else if(cf.getNbrDePladeAdmis()> cf.getNbrDePlaceOrale()){
+                    JsfUtil.addErrorMessage2("Place admis > place orale");
+                } else{
+        getFacade().edit(cf);
+        FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("success"));
+                }
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        
+       FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("update canceled"));
     }
     //=================//
 

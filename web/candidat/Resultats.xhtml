@@ -8,7 +8,7 @@
       xmlns:b="http://bootsfaces.net/ui">
     <ui:composition template="/template/candidatTemplate.xhtml" >
         <ui:define name="titre">
-            Hello !
+            welcome #{candidatController.logeddCand.nomLat}
         </ui:define>
         <ui:define name="content" >
             <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
@@ -49,10 +49,26 @@
                     <div class="panel panel-default">
 
                         <div class="panel-heading">Mes Notes:</div>
-
+                        <br/>
+                        <br/>
+                        <h:outputText value=" #{examCandidatController.stringExams()}" style="margin: auto" />
                         <div class="panel-body">
-                            
-                                
+
+
+
+                        </div>
+                    </div></div>
+                <div class="container-fluid">
+
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">Les liste :</div>
+                        <br/>
+                        <br/>
+                        <a href="C:\\Users\\ouss\\Desktop\\pfe\\IRISI1C2018 .pdf">Liste</a>
+                       
+                        <div class="panel-body">
 
                         </div>
                     </div></div>

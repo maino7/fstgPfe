@@ -11,6 +11,10 @@
             Les preinscription
         </ui:define>
         <ui:define name="content" >
+            <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+                     show-detail="true" show-summary="false" allowDismiss="true"
+                     delay="3000" escape="true" />
+
 
             <div class="container-fluid">
                 <div class="row">
@@ -174,26 +178,32 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header" data-background-color="orange">
-                            <h4 class="title">Les concours </h4>
+                        <div class="card">
+                            <div class="card-header" data-background-color="orange">
+                                <h4 class="title">Les concours </h4>
 
-                        </div>
-                        <div class="card-content table-responsive">
-                            <f:view>
+                            </div>
+                            <div class="card-content table-responsive">
+                                <f:view>
 
 
-                                <h:form>
+                                    <h:form>
 
-                                      <p:dataTable  var="item" value="#{concourNiveauController.items}"  rows="5"
-                                                     paginator="true"
-                                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                     rowsPerPageTemplate="5,10,15">
+                                        <p:dataTable  var="item" value="#{concourNiveauController.items}"  rows="5"
+                                                      paginator="true"
+                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                      rowsPerPageTemplate="5,10,15"
+                                                      editable="true">
+                                            <p:ajax event="rowEdit" listener="#{concourNiveauController.onRowEdit}" update="growlMsg" />
+                                            <p:ajax event="rowEditCancel" listener="#{concourNiveauController.onRowCancel}" update="growlMsg" />
                                             <p:column headerText="Filière">
-                                                <h:outputText  value="#{item.niveau}" />
+                                                <h:outputText  value="#{item.niveau.filiere} #{item.niveau.semestre}" />
                                             </p:column>
                                             <p:column headerText="Nombre de place admis">
-                                                <h:outputText value="#{item.nbrDePladeAdmis}" />
+                                                <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{item.nbrDePladeAdmis}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{item.nbrDePladeAdmis}" style="width:100%"/></f:facet>
+                                                </p:cellEditor>
                                             </p:column>
                                             <p:column headerText="Annee">
                                                 <h:outputText value="#{item.annee}" />
@@ -202,39 +212,49 @@
                                                 <h:outputText value="#{item.description}" />
                                             </p:column>
                                             <p:column headerText="Nombre de place Ecrit">
-                                                <h:outputText value="#{item.nbrDePlaceEcrit}" />
+                                                <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{item.nbrDePlaceEcrit}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{item.nbrDePlaceEcrit}" style="width:100%"/></f:facet>
+                                                </p:cellEditor>
                                             </p:column>
                                             <p:column headerText="Nombre de place orale">
-                                                <h:outputText value="#{item.nbrDePlaceOrale}" />
+                                                 <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{item.nbrDePlaceOrale}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{item.nbrDePlaceOrale}" style="width:100%"/></f:facet>
+                                                </p:cellEditor>
                                             </p:column>
-                                           
+                                            <p:column style="width:32px">
+                                                <p:rowEditor />
+                                            </p:column>
+
                                         </p:dataTable>
-                                    
-                                </h:form>
-                            </f:view>
+
+                                    </h:form>
+                                </f:view>
 
 
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div class="col-md-6" >
                         <div class="card">
-                        <div class="card-header" data-background-color="orange">
-                            <h4 class="title">Les Examens: </h4>
+                            <div class="card-header" data-background-color="orange">
+                                <h4 class="title">Les Examens: </h4>
 
-                        </div>
-                        <div class="card-content table-responsive">
-                            <f:view>
+                            </div>
+                            <div class="card-content table-responsive">
+                                <f:view>
 
 
-                                <h:form>
+                                    <h:form>
 
-                                      <p:dataTable  var="item" value="#{concourExamMatiereController.items}"  rows="5"
-                                                     paginator="true"
-                                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                     rowsPerPageTemplate="5,10,15">
+                                        <p:dataTable  var="item" value="#{concourExamMatiereController.items}"  rows="5"
+                                                      paginator="true"
+                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                      rowsPerPageTemplate="5,10,15"
+                                                      >
                                             <p:column headerText="Filière">
-                                                <h:outputText  value="#{item.concourNiveau.niveau}" />
+                                                <h:outputText  value="#{item.concourNiveau.niveau.filiere} #{item.concourNiveau.niveau.semestre}" />
                                             </p:column>
                                             <p:column headerText="Sujet">
                                                 <h:outputText value="#{item.matiereConcour.titre}" />
@@ -242,14 +262,14 @@
                                             <p:column headerText="Coefficient">
                                                 <h:outputText value="#{item.coeff}" />
                                             </p:column>
-                                           
+
                                         </p:dataTable>
-                                </h:form>
-                            </f:view>
+                                    </h:form>
+                                </f:view>
 
 
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
 

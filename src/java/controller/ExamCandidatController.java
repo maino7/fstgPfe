@@ -1,8 +1,11 @@
 package controller;
 
+import bean.Candidat;
+import bean.Condidature;
 import bean.ExamCandidat;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.SessionUtil;
 import service.ExamCandidatFacade;
 
 import java.io.Serializable;
@@ -25,8 +28,11 @@ public class ExamCandidatController implements Serializable {
 
     @EJB
     private service.ExamCandidatFacade ejbFacade;
+    @EJB
+    private service.CondidatureFacade condidatureFacade;
     private List<ExamCandidat> items = null;
     private ExamCandidat selected;
+    private Condidature condidature;
 
     public ExamCandidatController() {
     }
@@ -81,6 +87,26 @@ public class ExamCandidatController implements Serializable {
         return items;
     }
 
+    //============== Methode================//
+    public String stringExams() {
+        System.out.println("====String controler======");
+        Candidat c = (Candidat) SessionUtil.getAttribute("candidat");
+        System.out.println(" Candidat session===>" + c);
+        if (c != null) {
+            Condidature cond = condidatureFacade.findByCandidat(c);
+            String s = getFacade().findByCandidature(cond);
+            if (s.equals("")) {
+                return "les résultats sont indisponibles pour le moment";
+            } else {
+                return s;
+            }
+        } else {
+            return "";
+        }
+
+    }
+
+    //======================================//
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -160,6 +186,17 @@ public class ExamCandidatController implements Serializable {
             }
         }
 
+    }
+
+    public Condidature getCondidature() {
+        if (condidature == null) {
+            condidature = new Condidature();
+        }
+        return condidature;
+    }
+
+    public void setCondidature(Condidature condidature) {
+        this.condidature = condidature;
     }
 
 }

@@ -207,25 +207,26 @@ public class ConnectionController implements Serializable {
     //============================//
     //=========Candidat CNX===========//
     public void signInCandiat() throws IOException {
-        
-       
+        System.out.println("======cand signIn=======");
         int res = candidatFacade.candidatSignUp(selectedCand);
+      //  int res = candidatFacade.candidatSignUpTest();
         
         if (res == 1) {
               SessionUtil.redirect("../candidat/MesInfo.xhtml");
-              selectedCand = new Candidat();
+            
         } else if (res == -5) {
             messageConnection = "You didn't write anything";
-            selectedCand = new Candidat();
+          
         } else if (res == -4) {
             messageConnection = " This User doesn't exist ";
-            selectedCand = new Candidat();
+            
         } else if (res == -3) {
             messageConnection = "Wrong Password";
-            selectedCand = new Candidat();
+           
         } 
         System.out.println("====  Start Sign In UserStock Controller  === ");
-        FacesContext.getCurrentInstance().responseComplete();
+        selectedCand = new Candidat();
+       // FacesContext.getCurrentInstance().responseComplete();
 
     }
 
@@ -297,6 +298,15 @@ public class ConnectionController implements Serializable {
             SessionUtil.deconnectUser();
         }
         System.out.println("getConnected After === " + SessionUtil.getConnectedUser());
+        SessionUtil.redirect("../template/Home.xhtml");
+    }
+    public void logOutCand() throws IOException {
+        System.out.println("=== Log Out ===");
+        System.out.println("getConnected Before === " + SessionUtil.getAttribute("candidat"));
+        if (SessionUtil.getAttribute("candidat") != null) {
+           // SessionUtil.deconnectUser();
+        }
+        //System.out.println("getConnected After === " + SessionUtil.getConnectedUser());
         SessionUtil.redirect("../template/Home.xhtml");
     }
 

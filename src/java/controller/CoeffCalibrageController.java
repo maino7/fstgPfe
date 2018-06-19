@@ -128,6 +128,10 @@ public class CoeffCalibrageController implements Serializable {
        FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage("update canceled"));
     }
+    
+    public void test(){
+        System.out.println("dkhel l button !");
+    }
      
     
     //=======================//

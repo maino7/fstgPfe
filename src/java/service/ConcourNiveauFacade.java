@@ -97,6 +97,19 @@ public class ConcourNiveauFacade extends AbstractFacade<ConcourNiveau> {
             return 1;
         }
     }
+    public void listIsPrint(String type,Niveau n){
+         List<ConcourNiveau> cList = findByNiveau(n);
+         if(!cList.isEmpty()){
+             ConcourNiveau c = cList.get(0);
+             if(type.equals("listC")){
+                 c.setListC(1);
+             }else if(type.equals("listO")){
+                 c.setListO(1);
+             }else {
+                 c.setListF(1);
+             }
+         }
+    }
     
     //===========================//
     

@@ -16,7 +16,7 @@
 
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <h4>Note du candidat</h4>
+                              
                                    #{condidatureController.affectModal()}
                             </div>
                         </div>
@@ -31,7 +31,7 @@
 
 
                                     <h:form id="formNote">
-                                        <h4><h:outputText value="List des notes"/></h4>
+                                        
                                   
                                       
                                         <b:dataTable id="datalist1" value="#{condidatureController.matieres}" var="item">
@@ -46,7 +46,7 @@
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
-                                                    <h:outputText value="MatiereConcour"/>
+                                                    <h:outputText value="Matière"/>
                                                 </f:facet>
                                                 <h:outputText value="#{item.matiereConcour.titre}"/>
                                             </b:dataTableColumn>
@@ -58,7 +58,7 @@
                                             </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Note"/>
+                                                    <h:outputText value="Action"/>
                                                 </f:facet>
                                                 <b:commandButton id="createbotn" value="enter" look="primary" ajax="true" actionListener="#{condidatureController.enterNote(item)}"  update="formNote1:amodal:formNote:datalist1 formNote1:datalist growlMsg"  />
                                             </b:dataTableColumn>

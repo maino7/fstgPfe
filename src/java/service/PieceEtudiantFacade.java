@@ -53,7 +53,7 @@ public class PieceEtudiantFacade extends AbstractFacade<PieceEtudiant> {
     }
 
     public List<Condidature> findByNiveauAndSection2(Niveau niveau, Section section, String cne) {
-        String qry = "SELECT DISTINCT p.condidature FROM PieceEtudiant p WHERE p.condidature.condidatureValide='1'";
+        String qry = "SELECT DISTINCT p.condidature FROM PieceEtudiant p WHERE p.condidature.condidatureValide='1' AND p.condidature.reussi='0'";
 
         if (niveau != null) {
             qry += SearchUtil.addConstraint("p", "piecesParNiveau.niveau.id", "=", niveau.getId());

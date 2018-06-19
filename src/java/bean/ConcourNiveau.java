@@ -34,6 +34,12 @@ public class ConcourNiveau implements Serializable {
     private String Description;
     private int nbrDePlaceEcrit;
     private int nbrDePlaceOrale;
+    //==========// 1: generer , 0:non generer
+    private int listC;
+    private int listO;
+    private int listF;
+    //==========//
+
     @OneToMany(mappedBy = "concourNiveau")
     private List<ConcourExamMatiere> concourExamMatieres;
 
@@ -101,6 +107,31 @@ public class ConcourNiveau implements Serializable {
     public void setNbrDePlaceOrale(int nbrDePlaceOrale) {
         this.nbrDePlaceOrale = nbrDePlaceOrale;
     }
+
+    public int getListC() {
+        return listC;
+    }
+
+    public void setListC(int listC) {
+        this.listC = listC;
+    }
+
+    public int getListO() {
+        return listO;
+    }
+
+    public void setListO(int listO) {
+        this.listO = listO;
+    }
+
+    public int getListF() {
+        return listF;
+    }
+
+    public void setListF(int listF) {
+        this.listF = listF;
+    }
+    
     
     
     

@@ -45,6 +45,11 @@ public class CondidatureFacade extends AbstractFacade<Condidature> {
         condidature.setCondidatureValide(1);
         edit(condidature);
     }
+    public void rejeterCandidature(Candidat candidat){
+        Condidature condidature = findByCandidat(candidat);
+        condidature.setCondidatureValide(3);
+        edit(condidature);
+    }
     public int placeReste(Niveau niveau){
         List<Condidature> l = em.createQuery("SELECT p.condidature FROM PieceEtudiant p WHERE p.condidature.condidatureValide='1' AND p.piecesParNiveau.niveau.id="+niveau.getId()).getResultList();
         return  l.size();
@@ -56,5 +61,14 @@ public class CondidatureFacade extends AbstractFacade<Condidature> {
            }
        }
    }
+   public void rejeterPlusieurCand(List<Candidat> c){
+       if(!c.isEmpty()){
+           for (Candidat candidat : c) {
+               rejeterCandidature(candidat);
+           }
+       }
+   }
+   
+   
     
 }

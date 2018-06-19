@@ -8,21 +8,21 @@
       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="/template/adminTemplate.xhtml" >
         <ui:define name="titre">
-           Gestion des admis
+            Gestion des admis
         </ui:define>
         <ui:define name="content" >
-           <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+            <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
                      show-detail="true" show-summary="false" allowDismiss="true"
                      delay="3000" escape="true" />
             <div class="container-fluid">
-                <div class="row">
+                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="card card-stats">
                             <div class="card-header" data-background-color="orange">
                                 <i class="material-icons">content_copy</i>
                             </div>
                             <div class="card-content">
-                                 <a href="./listAdmisOrale.xhtml?faces-redirect=true"><p>List convoqueés</p></a>
+                                <a href="./listAdmisOrale.xhtml?faces-redirect=true"><p>Liste des convoqués</p></a>
                             </div>
                             <div class="card-footer">
 
@@ -35,7 +35,7 @@
                                 <i class="material-icons">person</i>
                             </div>
                             <div class="card-content">
-                                 <a href="./AdmisOrale.xhtml?faces-redirect=true"><p>List écrit</p></a>
+                                <a href="./AdmisOrale.xhtml?faces-redirect=true"><p>Admis a l'examen l'oral</p></a>
                             </div>
                             <div class="card-footer">
 
@@ -49,15 +49,17 @@
                                 <i class="material-icons">local_library</i>
                             </div>
                             <div class="card-content">
-                                <a href="./ListFinal.xhtml?faces-redirect=true"><p>List finale</p></a>
+
+                                <a href="./ListFinal.xhtml?faces-redirect=true"><p>Liste finale</p></a>
                             </div>
                             <div class="card-footer">
+
                             </div>
                         </div>
                     </div>
 
                 </div>
-               <div class="container-fluid">
+                <div class="container-fluid">
 
 
                     <div class="panel panel-default">
@@ -88,11 +90,11 @@
                             </h:form>
                         </div>
                     </div></div>
-                 <div class="row">
+                <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="card">
                             <div class="card-header" data-background-color="orange">
-                                <h4 class="title">List des admis:</h4>
+                                <h4 class="title">Liste des admis:</h4>
 
                             </div>
                             <div class="card-content table-responsive">
@@ -125,17 +127,17 @@
 
                                         </p:dataTable>
 
-                                        <p:commandButton value="Pdf(Jasper)" class="btn btn-primary" action="#{candidatController.printList()}" ajax="false" />
+                                        <p:commandButton value="Imprimer" class="btn btn-primary" action="#{candidatController.printListAdmisF()}" ajax="false" />
                                     </h:form>
                                 </f:view>
 
                             </div>
                         </div>
                     </div>
-                     <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="card">
                             <div class="card-header" data-background-color="orange">
-                                <h4 class="title">List d'attente:</h4>
+                                <h4 class="title">Liste d'attente:</h4>
 
                             </div>
                             <div class="card-content table-responsive">
@@ -170,8 +172,8 @@
 
 
 
-                                       
-                                        <p:commandButton value="Pdf(Jasper)" class="btn btn-primary" action="#{candidatController.printList()}" ajax="false" />
+
+                                        <p:commandButton value="Imprimer" class="btn btn-primary" action="#{candidatController.printListAttente()}" ajax="false" />
                                     </h:form>
                                 </f:view>
 
@@ -179,8 +181,8 @@
                         </div>
                     </div>
                 </div>
-                  
-           
+
+
                 <div>
 
                 </div>
