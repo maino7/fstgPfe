@@ -10,12 +10,19 @@
         <ui:define name="titre">
             Gestion des admis
         </ui:define>
+        <f:metadata>
+            <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
+        </f:metadata>
         <ui:define name="content" >
+            <f:metadata>
+                <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
+            </f:metadata>
             <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
                      show-detail="true" show-summary="false" allowDismiss="true"
                      delay="3000" escape="true" />
+
             <div class="container-fluid">
-                 <div class="row">
+                <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="card card-stats">
                             <div class="card-header" data-background-color="orange">

@@ -12,6 +12,7 @@ import bean.DernierDiplome;
 import bean.EtablissementType;
 import bean.OptionBac;
 import bean.Profession;
+import controller.util.DateUtil;
 import controller.util.EmailUtil;
 import java.util.Date;
 import javax.ejb.Stateless;
@@ -29,11 +30,11 @@ public class EmailFacade {
     @PersistenceContext(unitName = "Pfe_FstgProjectPU")
     private EntityManager em;
 
-    public void SendMail(String cne, String tel, String adresse, String anneeBac, int anneeInsSup, int anneeInsEtab, int anneeInsUniv, String cin, Date dateInscription, Date dateNaissance, String mail, int etabPreIns, String lieuNaissance, String nomAR, String prenomAR, String nomLAT, String prenomLAT, float noteS1, float noteS2, float noteS3, float noteS4, float noteS5, float noteS6, EtablissementType etablissementType, DernierDiplome dernierDiplome, ConcourNiveau concourNiveau, OptionBac serieBac, int anneeInscriptionEnsSup, int anneeInscriptionUniv, int anneeInscriptionEtab, Profession professionMere,Candidat candidat) throws MessagingException {
+    public void SendMail(String cne, String tel, String adresse, String anneeBac, int anneeInsSup, int anneeInsEtab, int anneeInsUniv, String cin, Date dateInscription, Date dateNaissance, String mail, int etabPreIns, String lieuNaissance, String nomAR, String prenomAR, String nomLAT, String prenomLAT, float noteS1, float noteS2, float noteS3, float noteS4, float noteS5, float noteS6, EtablissementType etablissementType, DernierDiplome dernierDiplome, ConcourNiveau concourNiveau, OptionBac serieBac, int anneeInscriptionEnsSup, int anneeInscriptionUniv, int anneeInscriptionEtab, Profession professionMere, Candidat candidat) throws MessagingException {
 
-        String msg = "Merci pour votre préinscription en ligne au concours du Cycle Ingénieur de la FST Marrakech.</br>"
-                + "Connectez vous avec le mot de passe suivant : " + candidat.getPassword() + "</br>"
-                + "Vous avez soumis les données suivantes: </br><table>\n"
+        String msg = "<b>Merci pour votre préinscription en ligne au concours du Cycle d'Ingénierie de la FSTG Marrakech.</b><br></br>"
+                + "<br></br> <b>Connectez vous avec le mot de passe suivant :</b> " + candidat.getPassword() + "</br>"
+                + "<b>Vous avez soumis les données suivantes:</b> </br><table>\n"
                 + " <tr>\n"
                 + "    <td> <b>Filière choisie:</b> </td>\n"
                 + "    <td>" + concourNiveau + "</td>\n"
@@ -56,7 +57,7 @@ public class EmailFacade {
                 + "  </tr>\n"
                 + "  <tr>\n"
                 + "    <td><b>Date de naissance : :</b></td>\n"
-                + "    <td>" + dateNaissance + "</td>\n"
+                + "    <td>" + DateUtil.format2(dateNaissance) + "</td>\n"
                 + "  </tr>\n"
                 + "  <tr>\n"
                 + "    <td><b>Lieu de naissance :</b></td>\n"
@@ -126,9 +127,9 @@ public class EmailFacade {
 
     public void SendMailMaster(String cne, String tel, String adresse, String anneeBac, Profession professionMere, int anneeInsSup, int anneeInsEtab, int anneeInsUniv, String cin, Date dateInscription, Date dateNaissance, String mail, int etabPreIns, String lieuNaissance, String nomAR, String prenomAR, String nomLAT, String prenomLAT, EtablissementType etablissementType, DernierDiplome dernierDiplome, ConcourNiveau concourNiveau, String mentionDiplome, String optionLicence, String anneeObtLicence, float noteS1, float noteS2, float noteS3, float noteS4, float noteS5, float noteS6, String modeDeValidation1, String anneeDeValidation1, int nombreDinscription1, int valideApresRattrapage1, String modeDeValidation2, String anneeDeValidation2, int nombreDinscription2, int valideApresRattrapage2, String modeDeValidation3, String anneeDeValidation3, int nombreDinscription3, int valideApresRattrapage3, String modeDeValidation4, String anneeDeValidation4, int nombreDinscription4, int valideApresRattrapage4, String modeDeValidation5, String anneeDeValidation5, int nombreDinscription5, int valideApresRattrapage5, String modeDeValidation6, String anneeDeValidation6, int nombreDinscription6, int valideApresRattrapage6, Candidat candidat) throws MessagingException {
 
-        String msg = "Merci pour votre préinscription en ligne au concours du Cycle Ingénieur de la FST Marrakech.</br>"
-                + "votre mot de passe : " + candidat.getPassword() + "</br>"
-                + "Vous avez soumis les données suivantes: </br><table>\n"
+        String msg = "<b>Merci pour votre préinscription en ligne au concours du Master de la FSTG Marrakech.</b><br></br>"
+                + "<br></br><b>Connectez vous avec le mot de passe suivant:</b> " + candidat.getPassword() + "</br>"
+                + "<b>Vous avez soumis les données suivantes:</b> </br><table>\n"
                 + " <tr>\n"
                 + "    <td> <b>Filière choisie:</b> </td>\n"
                 + "    <td>" + concourNiveau + "</td>\n"
@@ -151,7 +152,7 @@ public class EmailFacade {
                 + "  </tr>\n"
                 + "  <tr>\n"
                 + "    <td><b>Date de naissance : :</b></td>\n"
-                + "    <td>" + dateNaissance + "</td>\n"
+                + "    <td>" + DateUtil.format2(dateNaissance) + "</td>\n"
                 + "  </tr>\n"
                 + "  <tr>\n"
                 + "    <td><b>Lieu de naissance :</b></td>\n"

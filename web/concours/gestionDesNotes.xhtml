@@ -11,6 +11,9 @@
             Gestion des candidats
         </ui:define>
         <ui:define name="content" >
+            <f:metadata>
+                <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
+            </f:metadata>
             <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
                      show-detail="true" show-summary="false" allowDismiss="true"
                      delay="3000" escape="true" />
@@ -66,7 +69,7 @@
                                             </b:selectOneMenu>
                                         </b:column>
                                         <b:column span="4">
-                                            <b:selectOneMenu id="niveau" value="#{condidatureController.niveau}" onselect="#{condidatureController.test()}">
+                                            <b:selectOneMenu id="niveau" value="#{condidatureController.niveau}">
                                                 <f:selectItem itemLabel="--Selectionner--" itemValue="" />
                                                 <f:selectItems value="#{condidatureController.niveaus}" />
                                             </b:selectOneMenu>
@@ -101,11 +104,14 @@
 
                                 <f:view>
 
-
-
                                     <h:form id="formNote1">
                                         <b:dataTable id="datalist" value="#{condidatureController.items}" var="item">
-
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="CNE"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.candidat.cne}"/>
+                                            </b:dataTableColumn>
                                             <b:dataTableColumn>
                                                 <f:facet name="header">
                                                     <h:outputText value="Nom"/>

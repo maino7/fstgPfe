@@ -153,7 +153,7 @@ public class CandidatController implements Serializable {
             System.out.println("ha save daz wa akhiran");
             emailFacade.SendMail(selected.getCne(), selected.getTelephone(), selected.getAdresse(), selected.getAnneeBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionEtab(), selected.getAnneeInscriptionUniv(), selected.getCin(), selected.getDateInscription(), selected.getDateNaissance(), selected.getEmail(), selected.getEtablissementPreInsc(), selected.getLieuNaissance(), selected.getNomAr(), selected.getPrenomAr(), selected.getNomLat(), selected.getPrenomLat(), selected.getNoteS1(), selected.getNoteS2(), selected.getNoteS3(), selected.getNoteS4(), selected.getNoteS5(), selected.getNoteS6(), selected.getEtablissement(), selected.getDernierDiplome(), concourNiveau, selected.getOptionBac(), selected.getAnneeInscriptionEnsSup(), selected.getAnneeInscriptionUniv(), selected.getAnneeInscriptionEtab(), selected.getProfessionDeLaMere(), c);
             ejbFacade.hashagePassword(c.getPassword(), c);
-            System.out.println("ha lpass mhachi wa akhiran ->"+c.getPassword());
+            System.out.println("ha lpass mhachi wa akhiran ->" + c.getPassword());
             return 2;
         }
     }
@@ -268,6 +268,22 @@ public class CandidatController implements Serializable {
     }
 
     //========Methode==========//
+//    public void editPassword() {
+//        int mdp = ejbFacade.editPassword(selected, mdpActuel, mdpNouveau, mdpConfirm);
+//        switch (mdp) {
+//            case -1:
+//                showMessage("ERREUR", "Le mot de passe actuel est incorrect !");
+//                break;
+//            case -2:
+//                showMessage("ERREUR", "Le nouveau mot de passe et la confirmation sont incompatibles !");
+//                break;
+//            default:
+//                ejbFacade.edit(selected);
+//                showMessage("MESSAGE", "Votre mot de passe a été modifié avec succès !");
+//                break;
+//        }
+//    }
+
     public void niveauBySection() {
         niveaus = niveauFacade.findBySection(section);
         System.out.println("ha les niveau===>" + niveaus);
@@ -280,18 +296,16 @@ public class CandidatController implements Serializable {
 
         System.out.println("ha l items===>" + items);
     }
-    
-    public void rejeterPlusieur(){
-        if(items.isEmpty()){
+
+    public void rejeterPlusieur() {
+        if (items.isEmpty()) {
             JsfUtil.addErrorMessage("Veuillez faire une recherche");
-        }else {
+        } else {
             condidatureFacade.rejeterPlusieurCand(items);
             items.clear();
             JsfUtil.addSuccessMessage("vous avez tout supprimer");
         }
     }
-    
-    
 
     public int validerCandidat() {
         System.out.println("ha selected==>" + selected);
@@ -347,7 +361,7 @@ public class CandidatController implements Serializable {
             condidatureFacade.validerPlusieurCand(candidatsAdmis);
             concourNiveauFacade.listIsPrint("listC", niveau);
             String d = DateUtil.format(new Date());
-            getFacade().printPdf2(niveau, "l'écrit", candidatsAdmis,niveau.toString()+"C"+d);
+            getFacade().printPdf2(niveau, "l'écrit", candidatsAdmis, niveau.toString() + "C" + d);
             FacesContext.getCurrentInstance().responseComplete();
         }
 
@@ -360,30 +374,33 @@ public class CandidatController implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
         } else {
             concourNiveauFacade.listIsPrint("listO", niveau);
-             String d = DateUtil.format(new Date());
-            getFacade().printPdf2(niveau, "l'orale", candidatsEcrit,niveau.toString()+"O"+d);
+            String d = DateUtil.format(new Date());
+            getFacade().printPdf2(niveau, "l'orale", candidatsEcrit, niveau.toString() + "O" + d);
             FacesContext.getCurrentInstance().responseComplete();
         }
 
     }
+
     public void printListAdmisF() throws JRException, IOException {
         System.out.println("Imprimer====>OK" + niveau);
         if (candidatsFinalA.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
         } else {
-            getFacade().printPdf2(niveau, "l'orale", candidatsEcrit,niveau.toString()+"O");
+            condidatureFacade.reussirCandidat(candidatsFinalA);
+            getFacade().printPdfListFinal(niveau, candidatsFinalA, niveau.toString()+"F");
             FacesContext.getCurrentInstance().responseComplete();
         }
 
     }
+
     public void printListAttente() throws JRException, IOException {
         System.out.println("Imprimer====>OK" + niveau);
         if (candidatsFinalT.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
         } else {
-            getFacade().printPdf2(niveau, "l'orale", candidatsEcrit,niveau.toString()+"O");
+            getFacade().printPdf2(niveau, "l'orale", candidatsEcrit, niveau.toString() + "O");
             FacesContext.getCurrentInstance().responseComplete();
         }
 
@@ -929,7 +946,7 @@ public class CandidatController implements Serializable {
     }
 
     public Candidat getLogeddCand() {
-        if(logeddCand == null){
+        if (logeddCand == null) {
             logeddCand = (Candidat) SessionUtil.getAttribute("candidat");
         }
         return logeddCand;
@@ -938,7 +955,5 @@ public class CandidatController implements Serializable {
     public void setLogeddCand(Candidat logeddCand) {
         this.logeddCand = logeddCand;
     }
-    
-    
 
 }

@@ -6,77 +6,72 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <b:modal id="modalTest" title="Note du Candidat N°" styleClass="modalPseudoClass2" >
-       
-            <fieldset>
-                <div class="form-group col-md-12">
-                    
-                    <div class="row">
 
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <f:view>
+        <fieldset>
+            <div class="form-group col-md-12">
 
+                <div class="row">
 
-                                    <h:form id="datalistTest">
-                                        <h4><h:outputText value="List"/></h4>
-                                        <b:dataTable id="dataModif" value="#{condidatureController.exams}" var="item">
-                                            <b:dataTableColumn>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Cne Candidat"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.condidature.candidat.cne}"/>
-                                            </b:dataTableColumn>
-                                            <b:dataTableColumn>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Matiere "/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.matiereConcour.titre}"/>
-                                            </b:dataTableColumn>
-                                            <b:dataTableColumn>
-                                                <f:facet name="header">
-                                                    <h:outputText value="NoteCalc"/>
-                                                </f:facet>
-                                                <h:outputText id="input1" value="#{item.noteCalc}" style="color: red"/>
-                                                <b:inputText id="input2" value="#{condidatureController.noteF}"/>
-                                            </b:dataTableColumn>
-                                            
-                                             <b:dataTableColumn>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Note"/>
-                                                </f:facet>
-                                                 <b:commandButton id="createbotn2" look="default" value="Editer"  actionListener="#{condidatureController.editNote(item)}"  >
-                                                 
-                                                 </b:commandButton>
-                                            </b:dataTableColumn>
-                                        </b:dataTable>
-                                    </h:form>
-                                </f:view>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <f:view>
 
 
-                            </div>
+                                <h:form id="datalistTest">
+                                    <h4><h:outputText value="List"/></h4>
+                                    <p:dataTable id="dataModif" value="#{condidatureController.exams}" var="item" editable="true">
+                                        <p:ajax event="rowEdit" listener="#{condidatureController.onRowEdit}" update=":growlMsg  :formNote1:datalist" />
+                                        <p:ajax event="rowEditCancel" listener="#{coeffCalibrageController.onRowCancel}" update="growlMsg" />
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Cne Candidat"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.condidature.candidat.cne}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Matiere "/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.matiereConcour.titre}"/>
+                                        </p:column>
+                                        <p:column headerText="Note">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText  value="#{item.noteCalc}" /></f:facet>
+                                                <f:facet name="input"><p:inputText id="modelInput"  value="#{item.noteCalc}" style="width:100%"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column style="width:32px">
+                                            <p:rowEditor />
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                            </f:view>
+
+
                         </div>
-                       
-
                     </div>
-                    <div class="row">
 
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group">
-                            
-                            </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+
                         </div>
-                        
-
                     </div>
-            
+
 
                 </div>
 
 
+            </div>
 
 
-            </fieldset>
-        
+
+
+        </fieldset>
+
     </b:modal>
 </html>
 

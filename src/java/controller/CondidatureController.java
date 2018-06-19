@@ -1,6 +1,7 @@
 package controller;
 
 import bean.Candidat;
+import bean.CoeffCalibrage;
 import bean.ConcourExamMatiere;
 import bean.Condidature;
 import bean.ExamCandidat;
@@ -174,6 +175,19 @@ public class CondidatureController implements Serializable {
     public void onCancel() {
         JsfUtil.addErrorMessage("Modification annulée");
     }
+    
+     public void onRowEdit(RowEditEvent event) {
+         ExamCandidat cf = (ExamCandidat)event.getObject();
+                if(cf.getNoteCalc() > 20){
+                    System.out.println("dkhel l hadi");
+                    FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"","Note > 20"));
+                } else{
+        examCandidatFacade.edit(cf);
+        FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("success"));
+                }
+    }
 
     //================//
     public Condidature prepareCreate() {
@@ -203,7 +217,7 @@ public class CondidatureController implements Serializable {
 
     public List<Condidature> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = getFacade().findAllnonReussi();
         }
         return items;
     }

@@ -30,6 +30,7 @@ import java.util.HashMap;
 import bean.PiecesParNiveau;
 import bean.UserStock;
 import controller.CandidatController;
+import controller.util.DateUtil;
 import controller.util.HashageUtil;
 
 import java.util.Date;
@@ -142,9 +143,9 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
     }
 
     public int hashagePassword(String password, Candidat candidat) {
-        System.out.println("ha lpassword mamhachich"+password);
+        System.out.println("ha lpassword mamhachich" + password);
         String pw = HashageUtil.sha256(password);
-        System.out.println("ha lpassword mhachi"+pw);
+        System.out.println("ha lpassword mhachi" + pw);
         candidat.setPassword(pw);
         edit(candidat);
         return 1;
@@ -196,11 +197,11 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
             }
         }
     }
-    
-    public int candidatSignUpTest(){
+
+    public int candidatSignUpTest() {
         Candidat loadUsr = find("jh12345");
-         SessionUtil.setAttribute("candidat", loadUsr);
-         return 1;
+        SessionUtil.setAttribute("candidat", loadUsr);
+        return 1;
     }
 
     public int countCandiEtab(List<Candidat> c, Candidat cand) {
@@ -309,6 +310,18 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
 
     //==============================//
     //======Methode de Liste=====//
+    public int editPassword(Candidat candidat, String actuel, String nouveau, String confirm) {
+        if (!candidat.getPassword().equals(HashageUtil.sha256(actuel))) {
+            return -1;
+        } else {
+            if (!nouveau.equals(confirm)) {
+                return -2;
+            }
+            candidat.setPassword(HashageUtil.sha256(nouveau));
+            return 1;
+        }
+    }
+
     public List<Candidat> convoquer(Niveau n) {
         List<Candidat> c = new ArrayList<>();
         c = pef.findnonValiderniveau(n);
@@ -433,13 +446,23 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
 
         PdfUtil.generatePdf(c, params, "Admis-" + typeC + "-" + n.toString(), "/jasper/tetsTable.jasper");
     }
+
     public void printPdf2(Niveau n, String typeC, List<Candidat> c, String fileName) throws JRException, IOException {
         Map<String, Object> params = new HashMap();
         params.put("filiere", n.toString());
         params.put("typeC", typeC);
 
-        PdfUtil.generatePdfAddExportPath(c, params, "Admis-" + typeC + "-" + n.toString(), "/jasper/tetsTable.jasper", "C:\\Users\\ouss\\Desktop\\pfe",fileName+".pdf");
+        PdfUtil.generatePdfAddExportPath(c, params, "Admis-" + typeC + "-" + n.toString(), "/jasper/tetsTable.jasper", "C:\\Users\\ouss\\Desktop\\pfe", fileName+".pdf");
 //        C:\\Users\\ouss\\Desktop\\pfe
     }
+    public void printPdfListFinal(Niveau n,List<Candidat> c, String fileName) throws JRException, IOException {
+        Map<String, Object> params = new HashMap();
+        params.put("filiere", n.toString());
+        String d = DateUtil.format(new Date());
+        PdfUtil.generatePdfAddExportPath(c, params,"ListeAdmis"+n.toString()+"d", "/jasper/ListeAdmis.jasper", "C:\\Users\\ouss\\Desktop\\pfe", fileName+"d"+".pdf");
+//        C:\\Users\\ouss\\Desktop\\pfe
+    }
+    
+   
 
 }
