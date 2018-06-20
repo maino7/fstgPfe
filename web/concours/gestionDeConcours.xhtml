@@ -11,9 +11,7 @@
             Les preinscription
         </ui:define>
         <ui:define name="content" >
-            <f:metadata>
-                <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
-            </f:metadata>
+            
            
             <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
                      show-detail="true" show-summary="false" allowDismiss="true"
@@ -55,7 +53,7 @@
 
                             <div class="panel panel-danger" style="height:50% ">
 
-                                <div class="panel-heading"><h4>Creer un concours</h4></div>
+                                <div class="panel-heading"><h4>Créer un concours</h4></div>
 
 
                                 <div class="panel-body">
@@ -64,7 +62,7 @@
                                     </dir>
 
                                     <div class="form-group">
-                                        <label for="nbrEcrit">Nombre de place *</label>
+                                        <label for="nbrEcrit">Filière </label>
                                         <b:selectOneMenu id="niveauC" value="#{concourNiveauController.selected.niveau}" class="form-control" required="true">
                                             <f:selectItem itemLabel="--Selectionner--" itemValue="" />
                                             <f:selectItems value="#{niveauController.itemsAvailableSelectOne}" 
@@ -75,7 +73,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="nbrEcrit">Nbr de Place pour l'ecrit</label>
+                                        <label for="nbrEcrit">Nombre de Place pour l'écrit</label>
                                         <b:inputText id="nbrEcrit" value="#{concourNiveauController.selected.nbrDePlaceEcrit}" class="form-control" required="true" >
                                             <f:validateDoubleRange minimum="1" />
                                         </b:inputText>
@@ -83,7 +81,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="nbronrale">Nbr de Place pour l'orale</label>
+                                        <label for="nbronrale">Nombre de Places pour l'oral</label>
                                         <b:inputText id="nbronrale" value="#{concourNiveauController.selected.nbrDePlaceOrale}" class="form-control" required="true" >
                                             <f:validateDoubleRange minimum="1" />
                                         </b:inputText>
@@ -91,7 +89,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="nbradmis">Nbr de place finale</label>
+                                        <label for="nbradmis">Nombre de places finales</label>
                                         <b:inputText id="nbradmis" value="#{concourNiveauController.selected.nbrDePladeAdmis}" class="form-control" required="true" >
                                             <f:validateDoubleRange minimum="1" />
                                         </b:inputText>
@@ -99,7 +97,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="disc">Discription</label>
+                                        <label for="disc">Description</label>
                                         <b:inputTextarea id="desc" value="#{concourNiveauController.selected.description}" class="form-control" required="true">
                                             <f:validateLength maximum="255" />
                                         </b:inputTextarea>
@@ -119,7 +117,7 @@
                         <h:form>
                             <div class="panel panel-danger" style="height:50% ">
 
-                                <div class="panel-heading"><h4>Creer un Examen</h4></div>
+                                <div class="panel-heading"><h4>Créer un Examen</h4></div>
 
 
                                 <div class="panel-body">
@@ -169,7 +167,7 @@
 
 
 
-                                    <b:commandButton actionListener="#{concourNiveauController.creerExam()}" value="Creer" look="primary" process="@form" />
+                                    <b:commandButton actionListener="#{concourNiveauController.creerExam()}" value="Creer" look="primary" process="@form" update=":examForm:examDatalist" />
 
 
                                 </div>
@@ -250,9 +248,9 @@
                                 <f:view>
 
 
-                                    <h:form>
+                                    <h:form id="examForm">
 
-                                        <p:dataTable  var="item" value="#{concourExamMatiereController.items}"  rows="5"
+                                        <p:dataTable id="examDatalist"  var="item" value="#{concourExamMatiereController.items}"  rows="5"
                                                       paginator="true"
                                                       paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                       rowsPerPageTemplate="5,10,15"

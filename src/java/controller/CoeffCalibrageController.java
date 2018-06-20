@@ -112,6 +112,7 @@ public class CoeffCalibrageController implements Serializable {
          System.out.println("ha cf==>"+cf);
          System.out.println("nbr nim==>"+cf.getNbrMin());
          System.out.println("nbr max==>"+cf.getNbrMax());
+         System.out.println("nbr max==>"+cf.getNbrMax());
                 if(cf.getNbrMax() < cf.getNbrMin()){
                     System.out.println("dkhel l hadi");
                     FacesContext.getCurrentInstance().addMessage(null,

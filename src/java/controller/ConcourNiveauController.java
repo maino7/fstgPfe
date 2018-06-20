@@ -97,10 +97,12 @@ public class ConcourNiveauController implements Serializable {
     }
     
     public void creerExam(){
+        System.out.println("=========CREEREXAM=============");
         if(concourExamMatiereFacade.verfiyExist(concourExamMatiere) == -1){
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Epreuve deja crée", ""));
         }else {
+         System.out.println("HA L EXAas===========>"+concourExamMatiere);
         Date d = DateUtil.convert(dateExam);
         concourExamMatiere.setDateExam(d);
         concourExamMatiereFacade.create(concourExamMatiere);

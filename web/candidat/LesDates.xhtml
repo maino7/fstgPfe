@@ -26,28 +26,45 @@
                                 <i class="material-icons">content_copy</i>
                             </div>
                             <div class="card-content">
-                                <a href="./Resultats.xhtml"><p>Mes résultats</p></a>
+                                <a href="./LesDates.xhtml"><p>Mes dates</p></a>
                             </div>
 
                         </div>
                     </div>
                 </div>
-
                 <div class="container-fluid">
 
 
                     <div class="panel panel-default">
 
-                        <div class="panel-heading">Mes Notes:</div>
+                        <div class="panel-heading">Dates à retenir</div>
                         <br/>
                         <br/>
-                        <h:outputText value=" #{examCandidatController.stringExams()}" style="margin: auto" />
+
                         <div class="panel-body">
 
+                            <b:dataTable id="datalist1" value="#{candidatController.concourExamMatiere}" var="item">
+
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Date Exam"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dateExam}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Matière"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.matiereConcour.titre}"/>
+                                </b:dataTableColumn>
+                            </b:dataTable>
 
 
                         </div>
                     </div></div>
+
 
             </div>
 

@@ -11,9 +11,7 @@
             Gestion des admis
         </ui:define>
         <ui:define name="content" >
-            <f:metadata>
-                <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
-            </f:metadata>
+            
             <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
                      show-detail="true" show-summary="false" allowDismiss="true"
                      delay="3000" escape="true" />
@@ -85,7 +83,6 @@
                                         <b:column>
                                             <b:commandButton look="success" value="Générer" actionListener="#{candidatController.listFinal()}" ajax="false" />
 
-                                            <b:commandButton look="success" value="imprimer"  rendered="true" action="#{candidatController.printList2()}" ajax="false"/>
 
 
                                         </b:column>

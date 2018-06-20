@@ -11,9 +11,7 @@
             Gestion des admis
         </ui:define>
         <ui:define name="content" >
-            <f:metadata>
-                <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
-            </f:metadata>
+            
             
             <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
                      show-detail="true" show-summary="false" allowDismiss="true"
@@ -98,7 +96,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-header" data-background-color="orange">
-                                <h4 class="title">Liste des admis pour passer l'écrit</h4>
+                                <h4 class="title">Liste des admis à l'écrit</h4>
 
                             </div>
                             <div class="card-content table-responsive">
@@ -131,7 +129,7 @@
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Moyenne calibreé" />
+                                                    <h:outputText value="Moyenne calibrée" />
                                                 </f:facet>
                                                 <h:outputText value="#{item.moyCalibr}" />
                                             </p:column>

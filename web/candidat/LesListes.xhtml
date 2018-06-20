@@ -26,29 +26,37 @@
                                 <i class="material-icons">content_copy</i>
                             </div>
                             <div class="card-content">
-                                <a href="./Resultats.xhtml"><p>Mes résultats</p></a>
+                                <a href="./LesListes.xhtml"><p>Mes Listes</p></a>
                             </div>
 
                         </div>
                     </div>
                 </div>
 
-                <div class="container-fluid">
+                <h:form>
+                    <div class="container-fluid">
 
 
-                    <div class="panel panel-default">
+                        <div class="panel panel-default">
 
-                        <div class="panel-heading">Mes Notes:</div>
-                        <br/>
-                        <br/>
-                        <h:outputText value=" #{examCandidatController.stringExams()}" style="margin: auto" />
-                        <div class="panel-body">
+                            <div class="panel-heading">Les listes :</div>
+                            <br/>
+                            <br/>
+                            <p:panel rendered="#{candidatController.renderList(1)}">
+                                <a href="#{candidatController.listPath('C')}">Liste des convoqués au concours</a>
+                            </p:panel>
+                            <p:panel rendered="#{candidatController.renderList(2)}">
+                                <a href="#{candidatController.listPath('O')}">Liste des admis pour passer l'examen oral</a>
+                            </p:panel>
+                            <p:panel rendered="#{candidatController.renderList(3)}">
+                                <a href="#{candidatController.listPath('F')}">Liste des admis</a>
+                            </p:panel>
 
+                            <div class="panel-body">
 
-
-                        </div>
-                    </div></div>
-
+                            </div>
+                        </div></div>
+                </h:form>
             </div>
 
 
