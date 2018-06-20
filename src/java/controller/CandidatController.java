@@ -1,6 +1,7 @@
 package controller;
 
 import bean.Candidat;
+import bean.ConcourExamMatiere;
 import bean.ConcourNiveau;
 import bean.Condidature;
 import bean.Niveau;
@@ -34,6 +35,7 @@ import javax.faces.convert.FacesConverter;
 import net.sf.jasperreports.engine.JRException;
 
 import javax.mail.MessagingException;
+import org.primefaces.context.RequestContext;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -70,6 +72,7 @@ public class CandidatController implements Serializable {
     private List<Candidat> candidatsFinalA = null;
     private List<Candidat> candidatsFinalT = null;
     private List<Candidat> candidatsRemove = null;
+    private List<ConcourExamMatiere> concourExamMatiere = null;
     private Candidat selected;
     private Condidature condidature;
     private int typeInscription;
@@ -283,6 +286,26 @@ public class CandidatController implements Serializable {
 //                break;
 //        }
 //    }
+    
+    public String listPath(String type){
+        Niveau n = concourNiveauFacade.findNiveauByCandidat(getLogeddCand());
+        String d = DateUtil.format(new Date());
+        return "../pdf/"+n.toString()+""+type+""+d+".pdf";
+
+    }
+    
+   
+    public String renderList(int type){
+      ConcourNiveau conc =  concourNiveauFacade.findByCandidat(getLogeddCand());
+       int i = concourNiveauFacade.ifListIsPrint(conc, type);
+       if(i == 1){
+           return "true";
+       }else{
+           return "false";
+       }
+    }
+    
+    
 
     public void niveauBySection() {
         niveaus = niveauFacade.findBySection(section);
@@ -388,7 +411,9 @@ public class CandidatController implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "List vide", "List vide"));
         } else {
             condidatureFacade.reussirCandidat(candidatsFinalA);
-            getFacade().printPdfListFinal(niveau, candidatsFinalA, niveau.toString()+"F");
+            concourNiveauFacade.listIsPrint("listF", niveau);
+            String d = DateUtil.format(new Date());
+            getFacade().printPdfListFinal(niveau, candidatsFinalA, niveau.toString()+"F"+d);
             FacesContext.getCurrentInstance().responseComplete();
         }
 
@@ -955,5 +980,19 @@ public class CandidatController implements Serializable {
     public void setLogeddCand(Candidat logeddCand) {
         this.logeddCand = logeddCand;
     }
+
+    public List<ConcourExamMatiere> getConcourExamMatiere() {
+        if(concourExamMatiere == null){
+            Condidature c = condidatureFacade.findByCandidat(getLogeddCand());
+            concourExamMatiere= concourExamMatiereFacade.findByCondidature(c);
+        }
+        return concourExamMatiere;
+    }
+
+    public void setConcourExamMatiere(List<ConcourExamMatiere> concourExamMatiere) {
+        this.concourExamMatiere = concourExamMatiere;
+    }
+    
+    
 
 }

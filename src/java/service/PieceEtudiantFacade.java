@@ -12,6 +12,7 @@ import bean.PieceEtudiant;
 import bean.Section;
 import controller.util.SearchUtil;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,6 +35,7 @@ public class PieceEtudiantFacade extends AbstractFacade<PieceEtudiant> {
     public PieceEtudiantFacade() {
         super(PieceEtudiant.class);
     }
+    
 
     public List<Candidat> findByNiveauAndSection(Niveau niveau, Section section, String cne, int type) {
         String qry = "SELECT DISTINCT p.condidature.candidat FROM PieceEtudiant p WHERE 1=1";
@@ -81,5 +83,7 @@ public class PieceEtudiantFacade extends AbstractFacade<PieceEtudiant> {
         System.out.println("ha niveau li ja ==>" + n);
         return n;
     }
+    
+   
 
 }

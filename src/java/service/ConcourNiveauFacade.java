@@ -8,6 +8,7 @@ package service;
 import bean.Candidat;
 import bean.CoeffCalibrage;
 import bean.ConcourNiveau;
+import bean.Condidature;
 import bean.EtablissementType;
 import bean.Niveau;
 import controller.util.DateUtil;
@@ -39,6 +40,8 @@ public class ConcourNiveauFacade extends AbstractFacade<ConcourNiveau> {
     private service.CandidatFacade candidatFacade;
     @EJB
     private service.CoeffCalibrageFacade ccf;
+    @EJB
+    private service.PieceEtudiantFacade pieceEtudiantFacade;
 
     
     
@@ -110,6 +113,55 @@ public class ConcourNiveauFacade extends AbstractFacade<ConcourNiveau> {
              }
          }
     }
+    
+     public ConcourNiveau findByCandidat(Candidat candidat){
+        Niveau n = new Niveau();
+        ConcourNiveau concourNiveau = new ConcourNiveau();
+        Condidature cond = condidatureFacade.findByCandidat(candidat);
+        if(cond != null){
+             n = pieceEtudiantFacade.findNiveau(cond);
+             if(n != null){
+                  concourNiveau = findByNiveau(n).get(0);
+             }
+        }
+        
+        return concourNiveau;
+       
+    }
+     
+    public Niveau findNiveauByCandidat(Candidat candidat){
+        Niveau n = new Niveau();
+        Condidature condidature = condidatureFacade.findByCandidat(candidat);
+        if(condidature != null){
+            n = pieceEtudiantFacade.findNiveau(condidature);
+        }
+        return n;
+    }
+      // type : 1 listC - 2 : listO - 3: listF
+     public int ifListIsPrint(ConcourNiveau c,int type){
+         if(type == 1){
+             if(c.getListC() == 1){
+                 return 1;
+             }else {
+                 return -1;
+             }
+         }else if(type == 2){
+             if(c.getListO() == 1){
+                 return 1;
+             }else {
+                 return -1;
+             }
+         }else{
+             if(c.getListF() == 1){
+                 return 1;
+             }else {
+                 return -1;
+             }
+         }
+        
+     }
+    
+    
     
     //===========================//
     

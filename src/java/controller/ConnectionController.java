@@ -304,10 +304,10 @@ public class ConnectionController implements Serializable {
         System.out.println("=== Log Out ===");
         System.out.println("getConnected Before === " + SessionUtil.getAttribute("candidat"));
         if (SessionUtil.getAttribute("candidat") != null) {
-           // SessionUtil.deconnectUser();
+            SessionUtil.deconnect("candidat");
         }
         //System.out.println("getConnected After === " + SessionUtil.getConnectedUser());
-        SessionUtil.redirect("../template/Home.xhtml");
+        SessionUtil.redirect("../connexion/connexionEtudiant.xhtml");
     }
 
     /*TEST*/
@@ -316,6 +316,12 @@ public class ConnectionController implements Serializable {
         if(SessionUtil.getConnectedUser() == null){
             
              SessionUtil.redirect("../connexion/LoginAdminP.xhtml");
+        }
+    }
+    public void redirectIfNotLoggedCand() throws IOException{
+        if(SessionUtil.getAttribute("candidat") == null){
+            
+             SessionUtil.redirect("../connexion/connexionEtudiant.xhtml");
         }
     }
     public void forgetPassEns() {

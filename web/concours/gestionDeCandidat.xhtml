@@ -13,6 +13,7 @@
         <f:metadata>
             <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
         </f:metadata>
+        
         <ui:define name="content" >
             <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
                      show-detail="true" show-summary="false" allowDismiss="true"
@@ -76,7 +77,7 @@
                                         </b:column>
                                         <b:column span="2">
                                             <b:selectOneMenu id="typeCandid" value="#{candidatController.typeCandidature}" label="Type:">
-                                                <f:selectItem itemLabel="Validée" itemValue="1" />
+                                                <f:selectItem itemLabel="Convoqués" itemValue="1" />
                                                 <f:selectItem itemLabel="Validée par admin" itemValue="2" />
                                                 <f:selectItem itemLabel="non Validée" itemValue="0" />
                                             </b:selectOneMenu> 

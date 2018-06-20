@@ -8,8 +8,11 @@
       xmlns:b="http://bootsfaces.net/ui">
     <ui:composition template="/template/candidatTemplate.xhtml" >
         <ui:define name="titre">
-            welcome #{candidatController.logeddCand.nomLat}
+            #{candidatController.logeddCand.nomLat}
         </ui:define>
+        <f:metadata>
+            <f:viewAction action="#{connectionController.redirectIfNotLoggedCand()}" />
+        </f:metadata>
         <ui:define name="content" >
             <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
                      show-detail="true" show-summary="false" allowDismiss="true"
@@ -48,6 +51,38 @@
 
                     <div class="panel panel-default">
 
+                        <div class="panel-heading">Dates à retenir</div>
+                        <br/>
+                        <br/>
+
+                        <div class="panel-body">
+
+                            <b:dataTable id="datalist1" value="#{candidatController.concourExamMatiere}" var="item">
+
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Date Exam"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dateExam}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </b:dataTableColumn>
+                                <b:dataTableColumn>
+                                    <f:facet name="header">
+                                        <h:outputText value="Matière"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.matiereConcour.titre}"/>
+                                </b:dataTableColumn>
+                            </b:dataTable>
+
+
+                        </div>
+                    </div></div>
+                <div class="container-fluid">
+
+
+                    <div class="panel panel-default">
+
                         <div class="panel-heading">Mes Notes:</div>
                         <br/>
                         <br/>
@@ -58,21 +93,30 @@
 
                         </div>
                     </div></div>
-                <div class="container-fluid">
+                <h:form>
+                    <div class="container-fluid">
 
 
-                    <div class="panel panel-default">
+                        <div class="panel panel-default">
 
-                        <div class="panel-heading">Les liste :</div>
-                        <br/>
-                        <br/>
-                        <a href="C:\\Users\\ouss\\Desktop\\pfe\\IRISI1C2018 .pdf">Liste</a>
-                       
-                        <div class="panel-body">
+                            <div class="panel-heading">Les listes :</div>
+                            <br/>
+                            <br/>
+                            <p:panel rendered="#{candidatController.renderList(1)}">
+                                <a href="#{candidatController.listPath('C')}">Liste des convoqués au concours</a>
+                            </p:panel>
+                            <p:panel rendered="#{candidatController.renderList(2)}">
+                                <a href="#{candidatController.listPath('O')}">Liste des admis pour passer l'examen oral</a>
+                            </p:panel>
+                            <p:panel rendered="#{candidatController.renderList(3)}">
+                                <a href="#{candidatController.listPath('F')}">Liste des admis</a>
+                            </p:panel>
 
-                        </div>
-                    </div></div>
+                            <div class="panel-body">
 
+                            </div>
+                        </div></div>
+                </h:form>
             </div>
 
 

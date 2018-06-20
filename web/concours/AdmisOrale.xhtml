@@ -8,13 +8,14 @@
       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="/template/adminTemplate.xhtml" >
         <ui:define name="titre">
-           Gestion des admis
+            Gestion des admis
         </ui:define>
         <ui:define name="content" >
             <f:metadata>
                 <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
             </f:metadata>
-           <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+            
+            <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
                      show-detail="true" show-summary="false" allowDismiss="true"
                      delay="3000" escape="true" />
             <div class="container-fluid">
@@ -25,7 +26,7 @@
                                 <i class="material-icons">content_copy</i>
                             </div>
                             <div class="card-content">
-                                 <a href="./listAdmisOrale.xhtml?faces-redirect=true"><p>Liste des convoqueés</p></a>
+                                <a href="./listAdmisOrale.xhtml?faces-redirect=true"><p>Liste des convoqueés</p></a>
                             </div>
                             <div class="card-footer">
 
@@ -38,7 +39,7 @@
                                 <i class="material-icons">person</i>
                             </div>
                             <div class="card-content">
-                                 <a href="./AdmisOrale.xhtml?faces-redirect=true"><p>Liste admis a l'examen l'oral</p></a>
+                                <a href="./AdmisOrale.xhtml?faces-redirect=true"><p>Liste admis a l'examen l'oral</p></a>
                             </div>
                             <div class="card-footer">
 
@@ -61,7 +62,7 @@
                     </div>
 
                 </div>
-               <div class="container-fluid">
+                <div class="container-fluid">
 
 
                     <div class="panel panel-default">
@@ -81,7 +82,7 @@
                                         </b:column>
 
                                         <b:column>
-                                           <b:commandButton look="success" value="Générer" actionListener="#{candidatController.listEcrit()}" ajax="false" />
+                                            <b:commandButton look="success" value="Générer" actionListener="#{candidatController.listEcrit()}" ajax="false" />
 
                                             <b:commandButton look="success" value="imprimer"  rendered="true" action="#{candidatController.printList2()}" ajax="false"/>
 
@@ -92,7 +93,7 @@
                             </h:form>
                         </div>
                     </div></div>
-                 <div class="row">
+                <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-header" data-background-color="orange">
@@ -142,7 +143,7 @@
                         </div>
                     </div>
                 </div>
-           
+
                 <div>
 
                 </div>

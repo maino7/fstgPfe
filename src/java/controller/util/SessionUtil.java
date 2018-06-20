@@ -99,6 +99,13 @@ public class SessionUtil {
             getSession(fc).removeAttribute("user");
         }
     }
+    public static void deconnect(String key) {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        if (fc != null && fc.getExternalContext() != null) {
+            getSession(fc).removeValue(key);
+            getSession(fc).removeAttribute(key);
+        }
+    }
     public static void deconnectSelectedUser(String cle) {
         FacesContext fc = FacesContext.getCurrentInstance();
         if (fc != null && fc.getExternalContext() != null) {

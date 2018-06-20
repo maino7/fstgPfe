@@ -14,6 +14,7 @@
             <f:metadata>
                 <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
             </f:metadata>
+           
             <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
                      show-detail="true" show-summary="false" allowDismiss="true"
                      delay="3000" escape="true" />
@@ -204,8 +205,8 @@
                                             </p:column>
                                             <p:column headerText="Nombre de place admis">
                                                 <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{item.nbrDePladeAdmis}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{item.nbrDePladeAdmis}" style="width:100%"/></f:facet>
+                                                    <f:facet name="output"><h:outputText value="#{item.nbrDePladeAdmis}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{item.nbrDePladeAdmis}" style="width:100%"/></f:facet>
                                                 </p:cellEditor>
                                             </p:column>
                                             <p:column headerText="Annee">
@@ -216,14 +217,14 @@
                                             </p:column>
                                             <p:column headerText="Nombre de place Ecrit">
                                                 <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{item.nbrDePlaceEcrit}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{item.nbrDePlaceEcrit}" style="width:100%"/></f:facet>
+                                                    <f:facet name="output"><h:outputText value="#{item.nbrDePlaceEcrit}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{item.nbrDePlaceEcrit}" style="width:100%"/></f:facet>
                                                 </p:cellEditor>
                                             </p:column>
                                             <p:column headerText="Nombre de place orale">
-                                                 <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{item.nbrDePlaceOrale}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{item.nbrDePlaceOrale}" style="width:100%"/></f:facet>
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{item.nbrDePlaceOrale}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{item.nbrDePlaceOrale}" style="width:100%"/></f:facet>
                                                 </p:cellEditor>
                                             </p:column>
                                             <p:column style="width:32px">

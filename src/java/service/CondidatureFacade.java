@@ -33,7 +33,7 @@ public class CondidatureFacade extends AbstractFacade<Condidature> {
         super(Condidature.class);
     }
     public Condidature findByCandidat(Candidat candidat){
-        return (Condidature) em.createQuery("SELECT c FROM Condidature c WHERE c.candidat.cne='"+candidat.getCne()+"'").getSingleResult();
+        return (Condidature) em.createQuery("SELECT c FROM Condidature c WHERE  c.candidat.cne='"+candidat.getCne()+"'").getSingleResult();
     }
     public void validerCandidature(Candidat candidat){
         Condidature condidature = findByCandidat(candidat);
