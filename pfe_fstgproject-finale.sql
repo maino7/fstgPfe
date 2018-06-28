@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  sam. 19 mai 2018 à 15:46
+-- Généré le :  jeu. 28 juin 2018 à 23:14
 -- Version du serveur :  10.1.24-MariaDB
 -- Version de PHP :  7.1.6
 
@@ -81,26 +81,6 @@ CREATE TABLE `actualite` (
   `AUTEUR_CIN` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `actualite`
---
-
-INSERT INTO `actualite` (`ID`, `CONTENUE`, `DATECREATION`, `DATEDEBUT`, `DATEEXPIRATION`, `DESCRIPTION`, `ETAT`, `FILE`, `PATH`, `POSITION`, `PRIORITY`, `TITRE`, `AUTEUR_CIN`) VALUES
-(1302, '<p class=\"MsoNormal\" align=\"center\" style=\"margin: 0cm 0cm 0.0001pt; font-size: 10pt; font-family: \" times=\"\" new=\"\" roman\";=\"\" text-align:=\"\" center;\"=\"\"><b><span class=\"style4\" style=\"color: rgb(0, 0, 102); font-size: 24pt;\"><br></span></b></p><p class=', '2017-06-17', '2017-06-17', '2017-06-29', '  Depuis la rentrée universitaire 2006-2007, l’organisation...', 1, 'images (1).jpg', NULL, 1, 2, 'Les études à la Faculté des Sciences & Techniques – Marrakech', 'EE0005'),
-(1306, '<p style=\"font-size: 16px; color: rgb(51, 51, 51); margin: 2px 0px 12px; padding: 0px; border-bottom-style: none; border-bottom-width: 0px; border-top-style: none; border-top-width: 0px; line-height: 22px;\"><font face=\"Arial, Verdana\" style=\"font-size: 10', '2017-06-18', '2017-06-05', '2017-06-30', '  L\'inscription Des Bacheliers...', 1, 'GetArticleImage (1).gif', NULL, 1, 0, 'Inscription Des Bacheliers , Déposer vos candidatures en ligne sur la plateforme UCA avant le 30 juin 2017.   ', 'EE0005'),
-(1307, '<div style=\"font-family: Arial, Verdana; font-size: 10pt; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal;\"><img src=\"http://www.centrebeaulieu-lemans.fr/wp-content/uploads/2017/05/pr%C3%A9inscription.jpg', '2017-06-18', '2017-06-18', '2017-06-30', 'le Doyen de la Faculté des Sciences...', 1, 'artfichier_728001_7172065_201705245956586.gif', NULL, 1, 1, 'Préinscription   : Cycle Di\'ngénieur 2017-2018', 'EE0005'),
-(1308, '<p style=\"margin: 15px 0px; padding: 0px; border: 0px; font-family: lato; letter-spacing: 1px; line-height: 31px; font-size: 15px; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); text-align: justify;\"><span style=\"margin: 0px; padding: 0px; ', '2017-06-18', '2017-06-18', '2017-06-23', 'Les entretiens oraux du LC3 vont..', 1, 'images (2).jpg', NULL, 1, 4, 'Avis aux étudiants de la filière BCG- II Groupes : 1-2-3', 'EE0003'),
-(1351, '<h2 class=\"contentheading\" style=\"margin: 0px; padding: 0px 0px 5px; border: 0px; line-height: 1.2; font-family: mohave; letter-spacing: 1px; background-color: rgb(255, 255, 255); font-size: 26px !important; color: rgb(221, 216, 216) !important;\"><a href=', '2017-06-18', '2017-06-04', '2017-06-07', 'Une rencontre a eu lieu...', 2, 'Fotolia_4713529_S.jpg', NULL, 1, 6, 'AVIS AUX ETUDIANTS', 'EE0006'),
-(1352, '<h2 class=\"contentheading\" style=\"margin: 0px; padding: 0px 0px 5px; border: 0px; line-height: 1.2; font-family: mohave; letter-spacing: 1px; background-color: rgb(255, 255, 255); font-size: 26px !important; color: rgb(221, 216, 216) !important;\"><br></h2', '2017-06-18', '2017-02-06', '2017-05-07', '', 2, 'formation.jpg', NULL, 2, 6, 'Formation des Formateurs : « Intégration des Soft-Skills dans les Curricula »', 'EE0007'),
-(1355, '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img src=\"http://www.fstg-marrakech.ac.ma/calen_clip_image002.png\">&nbsp;<d', '2017-06-18', '2017-06-18', '2017-06-23', 'A l’occasion de sa première particip...', 1, 'ikhtira3.png', NULL, 2, 1, 'la première création de la FSTG', 'EE0005'),
-(1401, '<h2 class=\"contentheading\" style=\"margin: 0px; padding: 0px 0px 5px; border: 0px; line-height: 1.2; font-family: mohave; letter-spacing: 1px; background-color: rgb(255, 255, 255); font-size: 26px !important; color: rgb(221, 216, 216) !important;\"><a href=', '2017-06-18', '2017-06-18', '2017-06-30', 'DANOSA a le plaisir de vous...', 1, 'images.jpg', NULL, 2, 3, 'Danosa- IX SEMINAIRE SUR LES SOLUTIONS DANOSA DANS LE BÂTIMENT', 'EE0004'),
-(1402, '<h2 style=\"margin: 15px 0px; padding: 0px; border: 0px; font-size: 19.8px; line-height: 1.2; color: rgb(51, 51, 51); font-family: Arial, Helvetica, sans-serif; background-color: rgb(255, 255, 255);\"><span style=\"margin: 0px; padding: 0px; border: 0px; tex', '2017-06-18', '2017-06-18', '2017-06-28', 'Membres de la ...', 1, 'fsts_act1.png', NULL, 2, 4, 'Commission Pédagogique', 'EE0006'),
-(1403, '<p style=\"margin: 0px; font-family: TitilliumText14L-400wt; font-size: 12px; background-color: rgb(255, 255, 255);\"><br></p><p style=\"margin: 0px; font-family: TitilliumText14L-400wt; font-size: 12px; background-color: rgb(255, 255, 255);\"><br></p><p styl', '2017-06-18', '2017-06-18', '2017-06-21', 'Sur le plan de l\'archit...', 1, 'informatique.gif', NULL, 2, 4, 'L’approche pédagogique', 'EE0003'),
-(1404, '<div class=\"field field-name-body field-type-text-with-summary field-label-hidden\" style=\"width: 766px; font-family: TitilliumText14L-600wt; font-size: 12.852px; background-color: rgb(255, 255, 255);\"><div class=\"field-items\"><div class=\"field-item even\" ', '2017-06-18', '2017-06-18', '2017-06-29', 'le Centre d’Etudes...', 1, 'doctorat.jpg', NULL, 3, 2, 'Présentation Du centre D’étude Doctorat', 'EE0005'),
-(1405, '<span style=\"color: rgb(233, 142, 0); font-family: TitilliumText14L-600wt; font-size: 14px; background-color: rgb(255, 255, 255);\">&nbsp; &nbsp; &nbsp;</span><div><span style=\"color: rgb(233, 142, 0); font-family: TitilliumText14L-600wt; font-size: 14px; ', '2017-06-18', '2017-06-18', '2017-06-29', '    Centre Régional d’An....', 1, 'crac01.jpg', NULL, 3, 5, ' Centre Régional d’Analyses et de caractérisation', 'EE0003'),
-(1406, '<div class=\"field field-name-body field-type-text-with-summary field-label-hidden\" style=\"float: right; width: 372px; margin: -8px 0px 0px; font-family: TitilliumText14L-600wt; font-size: 12.852px; background-color: rgb(255, 255, 255);\"><div class=\"field-', '2017-06-18', '2017-06-18', '2017-06-23', 'Depuis la mise ...', 1, 'Recherche-scientifique-pres_0.jpg', NULL, 3, 4, 'Présentation Du cycle de doctorat', 'EE0006'),
-(1408, '<h1 pt=\"\" sans\",=\"\" sans-serif;=\"\" color:=\"\" rgb(1,=\"\" 106,=\"\" 141);\"=\"\" style=\"margin: 0px; padding: 10px 0px 10px 20px; border: 0px; font-variant-numeric: inherit; font-weight: inherit; font-stretch: inherit; font-size: 22px; line-height: inherit;\"><fon', '2017-06-18', '2017-06-18', '2017-06-30', 'Acitvités Scientifiques...', 1, 'These.jpg', NULL, 3, 0, 'Activité scientifiques', 'EE0004');
-
 -- --------------------------------------------------------
 
 --
@@ -162,22 +142,6 @@ CREATE TABLE `article` (
   `TYPE` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `article`
---
-
-INSERT INTO `article` (`ID`, `CONTENT`, `DATEPUBLICATION`, `IMAGES`, `TITLE`, `TYPE`) VALUES
-(1501, ' <br/><br/> <h1 style=\"font-size: 300% ;background-color: #f9f9f9 ;color: #666cb0  ; text-align: center ;\">Mot du doyen </h1>\n           <div style=\" background-color: #f9f9f9 ; text-align: center \"><img style=\"position: relative ; height: 20% ; width: 20', NULL, 0xaced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a6578700000000177040000000174003f2e2e2f7265736f75726365732f696d616765732f55706c6f61646564496d616765732f4469726563746575725f4d6f68615f54616f7572697274652e6a706778, 'Mot de Mr le doyen :', 0),
-(1502, '<br><br>\n        <h1 style=\"text-align: center ; color: #666cb0 ; font-size: 30px \" >La FSTG en bref : </h1>\n        <br><br>\n       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;La Faculté des Sciences et Techniques de Marrakech (FSTMarrakech),\n    ', NULL, 0xaced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a657870000000017704000000017400282e2e2f7265736f75726365732f696d616765732f55706c6f61646564496d616765732f312e706e6778, 'FSTG En bref', 0),
-(1601, '', NULL, 0xaced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a657870000000017704000000017400312e2e2f7265736f75726365732f696d616765732f55706c6f61646564496d616765732f41524348492d504544412e706e6778, 'Architecture Pedagogique', 0),
-(1602, '<br> <h1 style=\" font-size: 30px ; color: #666cb0 ; text-align: center ;\"> Règlement intérieur de l\'etablisement </h1> \n        <p><strong style=\"color: #666cb0;\" ><em><u>Les fraudes</u>&nbsp;:</em></strong><em><u>  </u></em></p>\n        <p class=\"ql-alig', NULL, 0xaced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a657870000000017704000000017400282e2e2f7265736f75726365732f696d616765732f55706c6f61646564496d616765732f332e706e6778, 'Reglement Interieur', 0),
-(1651, '', NULL, 0xaced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a657870000000017704000000017400232e2e2f7265736f75726365732f696d616765732f55706c6f61646564496d616765732f78, 'Planning Annuel', 0),
-(1702, ' <br></br>\n                                    <h1 style=\"color: #666cb0 ;text-align: center; font-size: 300%\" >Equipes de recherche </h1><br></br>\n                                    <div style=\"width: 80% ; position: relative ; left : 10%\" >            ', NULL, 0xaced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a657870000000017704000000017400232e2e2f7265736f75726365732f696d616765732f55706c6f61646564496d616765732f78, 'Equipe', 0),
-(1703, '<table height=\"284\" width=\"565\" align=\"center\" border=\"1\">                <tbody><tr>           <td height=\"34\" colspan=\"2\" bordercolor=\"#666666\" bgcolor=\"#cccccc\"><div align=\"center\" class=\"style2\"><span style=\"font-size:10pt;\">Locaux d\'enseignement</spa', NULL, 0xaced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a657870000000017704000000017400232e2e2f7265736f75726365732f696d616765732f55706c6f61646564496d616765732f78, 'FSTG en chiffre', 0),
-(1706, '<br/><table style=\" border: 0px; background-color: #f9f9f9\" cellspacing=\"0\" cellpadding=\"0\" width=\"635\" align=\"center\">  \n            <tbody>  \n                <tr style=\"background-color: #f9f9f9\">  \n                    \n                    <td width=\"55', NULL, 0xaced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a657870000000017704000000017400232e2e2f7265736f75726365732f696d616765732f55706c6f61646564496d616765732f78, 'CED-Si', 0),
-(1707, '<br/><br/><h1 style=\"font-size: 300% ; color: #666cb0 ; text-align: center\">Unités de formation et de recherche</h1>\n           <br/>     <table style=\"  background-color: #f9f9f9 ; color : inherit    ;  border-style: inset ;  border-color : gray ;  backg', NULL, 0xaced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a657870000000017704000000017400232e2e2f7265736f75726365732f696d616765732f55706c6f61646564496d616765732f78, 'UFR', 0),
-(1753, '<br/><br/><h1 style=\"font-size: 300% ; color: #666cb0 ; text-align: center ;\" > Bourse d\'excellence </h1><table width=\"597\" style=\"border: 0\" >\n                            <tbody><tr  style=\"background-color: #f9f9f9 ; \">                                  ', NULL, 0xaced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149000473697a657870000000017704000000017400232e2e2f7265736f75726365732f696d616765732f55706c6f61646564496d616765732f78, 'Bourse excellence :', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -191,6 +155,7 @@ CREATE TABLE `candidat` (
   `ANNEEINSCRIPTIONENSSUP` int(11) DEFAULT NULL,
   `ANNEEINSCRIPTIONETAB` int(11) DEFAULT NULL,
   `ANNEEINSCRIPTIONUNIV` int(11) DEFAULT NULL,
+  `ANNEEOBTLICENCE` varchar(255) DEFAULT NULL,
   `CIN` varchar(255) DEFAULT NULL,
   `DATEINSCRIPTION` date DEFAULT NULL,
   `DATENAISSANCE` date DEFAULT NULL,
@@ -204,31 +169,62 @@ CREATE TABLE `candidat` (
   `LASTPDF` varchar(255) DEFAULT NULL,
   `LIEUAR` varchar(255) DEFAULT NULL,
   `LIEUNAISSANCE` varchar(255) DEFAULT NULL,
-  `NOMAR` varchar(255) DEFAULT NULL,
+  `MENTIONBAC` varchar(255) DEFAULT NULL,
+  `MENTIONDIPLOME` varchar(255) DEFAULT NULL,
+  `MOYCALIBR` float DEFAULT NULL,
+  `NOMAR` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `NOMLAT` varchar(255) DEFAULT NULL,
+  `NOTES1` float DEFAULT NULL,
+  `NOTES2` float DEFAULT NULL,
+  `NOTES3` float DEFAULT NULL,
+  `NOTES4` float DEFAULT NULL,
+  `NOTES5` float DEFAULT NULL,
+  `NOTES6` float DEFAULT NULL,
+  `OPTIONLICENCE` varchar(255) DEFAULT NULL,
   `PHOTO` varchar(255) DEFAULT NULL,
-  `PRENOMAR` varchar(255) DEFAULT NULL,
+  `PRENOMAR` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `PRENOMLAT` varchar(255) DEFAULT NULL,
   `SECRET` bigint(20) DEFAULT NULL,
-  `SEXE` int(11) DEFAULT NULL,
+  `SEXE` tinyint(1) DEFAULT '0',
+  `SPECIALITE` varchar(255) DEFAULT NULL,
   `TELEPHONE` varchar(255) DEFAULT NULL,
   `TYPEINSCRIPTION` tinyint(1) DEFAULT '0',
+  `ACADEMIE_ID` bigint(20) DEFAULT NULL,
   `DERNIERDIPLOME_ID` bigint(20) DEFAULT NULL,
   `ETABLISSEMENT_ID` bigint(20) DEFAULT NULL,
+  `LICENCE_ID` bigint(20) DEFAULT NULL,
+  `LYCEE_ID` bigint(20) DEFAULT NULL,
   `OPTIONBAC_ID` bigint(20) DEFAULT NULL,
-  `noteS1` int(11) DEFAULT NULL,
-  `noteS4` int(11) NOT NULL,
-  `noteS3` int(11) NOT NULL,
-  `noteS2` int(11) NOT NULL
+  `PAYS_ID` bigint(20) DEFAULT NULL,
+  `PROFESSIONDELAMERE_ID` bigint(20) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `candidat`
 --
 
-INSERT INTO `candidat` (`CNE`, `ADRESSE`, `ANNEEBAC`, `ANNEEINSCRIPTIONENSSUP`, `ANNEEINSCRIPTIONETAB`, `ANNEEINSCRIPTIONUNIV`, `CIN`, `DATEINSCRIPTION`, `DATENAISSANCE`, `EMAIL`, `ETABLISSEMENTPREINSC`, `ETAT`, `EXPORT`, `FONCTIONNAIRE`, `HANDICAP`, `IP`, `LASTPDF`, `LIEUAR`, `LIEUNAISSANCE`, `NOMAR`, `NOMLAT`, `PHOTO`, `PRENOMAR`, `PRENOMLAT`, `SECRET`, `SEXE`, `TELEPHONE`, `TYPEINSCRIPTION`, `DERNIERDIPLOME_ID`, `ETABLISSEMENT_ID`, `OPTIONBAC_ID`, `noteS1`, `noteS4`, `noteS3`, `noteS2`) VALUES
-('', '', '2014', 0, 0, 0, '1412025033', NULL, '1996-05-25', 'ouss@hans', 15, 0, 0, 0, 0, '', '', '', 'agadir', '', 'hans', '', '', 'ouss', NULL, 0, '0691816200', 0, 7, NULL, NULL, NULL, 0, 0, 0),
-('jh12345', '', '2014', 0, 0, 0, '1412025123', NULL, '1996-04-22', 'test@test', 15, 0, 0, 0, 0, '', '', '', 'rabat', '', 'bouhouch', '', '', 'khalid', NULL, 0, '0691816123', 0, 7, NULL, NULL, NULL, 0, 0, 0);
+INSERT INTO `candidat` (`CNE`, `ADRESSE`, `ANNEEBAC`, `ANNEEINSCRIPTIONENSSUP`, `ANNEEINSCRIPTIONETAB`, `ANNEEINSCRIPTIONUNIV`, `ANNEEOBTLICENCE`, `CIN`, `DATEINSCRIPTION`, `DATENAISSANCE`, `EMAIL`, `ETABLISSEMENTPREINSC`, `ETAT`, `EXPORT`, `FONCTIONNAIRE`, `HANDICAP`, `IP`, `LASTPDF`, `LIEUAR`, `LIEUNAISSANCE`, `MENTIONBAC`, `MENTIONDIPLOME`, `MOYCALIBR`, `NOMAR`, `NOMLAT`, `NOTES1`, `NOTES2`, `NOTES3`, `NOTES4`, `NOTES5`, `NOTES6`, `OPTIONLICENCE`, `PHOTO`, `PRENOMAR`, `PRENOMLAT`, `SECRET`, `SEXE`, `SPECIALITE`, `TELEPHONE`, `TYPEINSCRIPTION`, `ACADEMIE_ID`, `DERNIERDIPLOME_ID`, `ETABLISSEMENT_ID`, `LICENCE_ID`, `LYCEE_ID`, `OPTIONBAC_ID`, `PAYS_ID`, `PROFESSIONDELAMERE_ID`, `password`) VALUES
+('123123123', 'agadirouffla', '2016', 2010, 2014, 2011, NULL, '25698', NULL, NULL, 'ouss.kopp@gmail.com', 15, 0, 0, 0, 0, NULL, NULL, NULL, 'jahnam', NULL, NULL, 0, '???', 'hansali', 0, 0, 0, 0, 0, 0, NULL, NULL, '??? ???', 'oussama', NULL, 0, NULL, '28', 0, 1, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL),
+('123456887', 'imm', '2014', NULL, NULL, NULL, NULL, 'JH1234', NULL, NULL, 'ouss.kopp@gmail.com', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 1.2525, NULL, 'salimi', 12.6, 15.5, 12, 10, NULL, NULL, NULL, NULL, NULL, 'abdallah', NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 1, NULL, NULL, NULL),
+('1236541', 'sidi abbad', '', 0, 0, 0, NULL, '58965', NULL, '2018-06-06', 'ouss.kopp@gmail.com', 15, 0, 0, 0, 0, NULL, NULL, NULL, 'Marrakech', NULL, NULL, 0, 'hidi', 'hajar', 0, 0, 0, 0, 0, 0, NULL, NULL, 'lkhayb', 'ouss', NULL, 0, NULL, '063225555', 0, 1, 1, NULL, NULL, NULL, 1, 1, 1, NULL),
+('12365411', 'sidi abbad', '', 0, 0, 0, NULL, '58965', NULL, '2018-06-06', 'ouss.kopp@gmail.com', 15, 0, 0, 0, 0, NULL, NULL, NULL, 'Marrakech', NULL, NULL, 0, 'hidi', 'hajar', 0, 0, 0, 0, 0, 0, NULL, NULL, 'lkhayb', 'ouss', NULL, 0, NULL, '063225555', 0, 1, 1, NULL, NULL, NULL, 1, 1, 1, NULL),
+('123655', 'chi lassa', '', 0, 0, 0, NULL, '552222', NULL, '2018-06-27', 'ouss.kopp@gmail.com', 15, 0, 0, 0, 0, NULL, NULL, NULL, 'Agadir', NULL, NULL, 0, 'hidi', 'hajar', 0, 0, 0, 0, 0, 0, NULL, NULL, 'tl3alam', 'zin', NULL, 0, NULL, '063526336', 0, 1, 1, NULL, NULL, NULL, 1, 1, 1, NULL),
+('1412025000', 'walo walo walo', '2014', 2014, 2014, 2018, NULL, 'JH124567', '2018-06-18', '2018-06-18', 'ouss.kopp@gmail.com', 2018, 0, 0, 0, 0, NULL, '', NULL, 'agadir', NULL, 'très bien', 0, 'هرديك', 'herdik', 15, 15, 14, 17, 18, 19, NULL, NULL, 'عزدين', 'azzedin', NULL, 1, NULL, '0691815151', 0, 5, 2, NULL, NULL, NULL, 1, 1, 1, '6a18d73d343eab873f6117a42681b8957978cffee89630a52a119e6bd37f014f'),
+('1412064444', 'Sidi Abbad n1112', '2014', 2014, 2014, 2014, NULL, 'EE895879', '2018-06-18', '1991-06-05', 'hgyyti985_h@gmail.com', 2014, 0, 0, 0, 0, NULL, '/resources/pdfCycle/creationDuconcours-casD.pdf', NULL, 'Agadir', NULL, 'Bien', 3.135, 'لاود', 'loud', 10, 10, 10, 11.8, 12, 15, NULL, NULL, 'مروى', 'Marwa', NULL, 0, NULL, '0634293555', 0, 5, 9, 0, NULL, NULL, 2, 1, 1, 'cfe9d1ff148a0ef7ffde3cbb04e853f33ddb93ec2e49b6f8b0cd14ffdc8ea55e'),
+('1412068888', 'Sidi Abbad n96', '2014', 2014, 2014, 2014, NULL, 'EE895879', '2018-06-18', '1996-06-05', 'ouss.kopp@gmail.com', 2014, 0, 0, 0, 0, NULL, '/resources/pdfCycle/consultationDeDossierFinale-CasD.pdf', NULL, 'Agadir', NULL, 'Bien', 5.225, 'حنصالي', 'Hansali', 10, 10, 10, 11.8, 12, 15, NULL, NULL, 'أسامة ', 'Oussama', NULL, 0, NULL, '0634293555', 0, 8, 8, 1, NULL, NULL, 2, 1, 1, 'd85406c9407336575b0c39757d92ad38a305b7747f2632f4588b0ed9866f4dcf'),
+('1412069966', 'LOT Tasseltante n88 SYBA Marrakech', '2014', 2014, 2014, 2014, NULL, 'EE895869', '2018-06-18', '1997-06-05', 'hajar.hidi@aiesec.net', 2014, 0, 0, 0, 0, NULL, '/resources/pdfCycle/IRISI1C2018 .pdf', NULL, 'Marrakech', NULL, 'Bien', 3.135, 'حيدي', 'Hidi', 10, 10, 10, 11.8, 12, 15, NULL, NULL, 'هاجر', 'Hajar', NULL, 0, NULL, '0634293599', 0, 8, 8, 0, NULL, NULL, 2, 1, 1, '600fe3524b0ee0b54bdbf1416c7f9bf3bf1b6552597d6c0a75524907fe5f47c9'),
+('1412220593', NULL, '2014', NULL, NULL, NULL, NULL, 'JH12344', NULL, '1996-04-22', 'ouss@kopp', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 1.21925, NULL, 'hansali', 12.02, 10, 14.54, 12.21, NULL, NULL, NULL, NULL, 'mouaas', 'mouaad', NULL, NULL, NULL, '0691816222', 0, NULL, 7, 0, NULL, NULL, 2, NULL, NULL, NULL),
+('1594873', 'imm al ouaha', NULL, NULL, NULL, NULL, NULL, 'JH125', NULL, NULL, 'ouss@ouss', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 1.325, NULL, 'abdallah', 15, 16, 12, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 2, NULL, NULL, NULL),
+('1817514678', 'walop ', '0214', 25015, 2545, 0, NULL, 'JH124567', '2018-06-18', '2018-06-18', 'ouss.kopp@gmail.com', 195, 0, 0, 0, 0, NULL, '', NULL, 'KNVK/B', NULL, 'Bien', 0, 'VMKJVKM', 'bvcbvwcbvcbKVMK', 14, 14, 14, 14, 0, 0, NULL, NULL, 'MKNVMKV', 'VKV', NULL, 0, NULL, '0691815151', 0, 1, 2, NULL, NULL, NULL, 1, 1, 1, '48ef3996886c0dce194bf0949d0e8cf1da13ab1be8311de6dc0dc67653feacec'),
+('555', 'cazddzec', 'hmar', 2020, 3000, 2050, NULL, '2412211111111111111', NULL, '2018-06-14', 'ouss.kopp@gmail.com', 15, 0, 0, 1, 0, NULL, NULL, NULL, '', NULL, NULL, 0, 'hansz', 'oussama', 0, 0, 0, 0, 0, 0, NULL, NULL, '', 'hansali', NULL, 1, NULL, '', 0, 1, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL),
+('788', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 5.5, NULL, 'test2', 11, 11, 11, 11, 11, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 1, NULL, NULL, 2, NULL, NULL, NULL),
+('789', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 6, NULL, 'test1', 12, 12, 12, 12, 12, 12, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 1, NULL, NULL, 1, NULL, NULL, NULL),
+('893', 'walo walo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'aitsidi@aitsidi', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 5.125, NULL, 'ait sidi', 12, 15, 4, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 1, NULL, NULL, 2, NULL, NULL, NULL),
+('894', 'walo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'halza@hamza', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 6.5, NULL, 'hamza', 10, 12, 15, 15, 17, 12, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 1, NULL, NULL, 1, NULL, NULL, NULL),
+('9999991', 'walo', '2014', 2018, 2018, 2018, NULL, '', NULL, NULL, 'ouss.kopp@gmail', 15, 0, 0, 0, 0, NULL, NULL, NULL, '', NULL, NULL, 0, '', 'ouss', 10, 10, 10, 10, 10, 10, NULL, NULL, '', 'hans', NULL, 1, NULL, '', 0, 3, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL),
+('9999998', 'walo', '2014', 2018, 2018, 2018, NULL, '', NULL, NULL, 'ouss.kopp@gmail', 15, 0, 0, 0, 0, NULL, NULL, NULL, '', NULL, NULL, 0, '', 'ouss', 10, 10, 10, 10, 10, 10, NULL, NULL, '', 'hans', NULL, 1, NULL, '', 0, 3, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL),
+('jh12345', '', '2014', 0, 0, 0, NULL, '1412025123', NULL, '1996-04-22', 'test@test', 15, 0, 0, 0, 0, '', '', '', 'rabat', NULL, NULL, 1.275, '', 'bouhouch', 12, 10, 14, 15, NULL, NULL, NULL, '', '', 'khalid', NULL, 0, NULL, '0691816123', 0, NULL, 7, 0, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -260,12 +256,22 @@ INSERT INTO `categorie` (`ID`, `LIBELLE`) VALUES
 
 CREATE TABLE `coeffcalibrage` (
   `ID` bigint(20) NOT NULL,
+  `ANNEE` varchar(255) DEFAULT NULL,
   `COEFF` float DEFAULT NULL,
   `NBRMAX` int(11) DEFAULT NULL,
   `NBRMIN` int(11) DEFAULT NULL,
   `NOTEMINIMAL` float DEFAULT NULL,
   `ETABLISSEMENT_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `coeffcalibrage`
+--
+
+INSERT INTO `coeffcalibrage` (`ID`, `ANNEE`, `COEFF`, `NBRMAX`, `NBRMIN`, `NOTEMINIMAL`, `ETABLISSEMENT_ID`) VALUES
+(1451, '2018 ', 0.2, 12, 3, 0, 2),
+(2651, '2018 ', 0.3, 2, 1, 0, 0),
+(2701, '2018 ', 0.5, 12, 5, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -281,28 +287,6 @@ CREATE TABLE `commande` (
   `USER_ID` varchar(255) DEFAULT NULL,
   `USERSTOCK_ID` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `commande`
---
-
-INSERT INTO `commande` (`ID`, `DATECOMMANDE`, `LIVREE`, `NOMBRECOMMANDE`, `USER_ID`, `USERSTOCK_ID`) VALUES
-('CMD-2018-1', '2018-04-01', 1, 1, NULL, 'SH184344'),
-('CMD-2018-10', '2018-04-05', 2, 10, NULL, 'SH184344'),
-('CMD-2018-11', '2018-04-22', 2, 11, NULL, 'SH184344'),
-('CMD-2018-12', '2018-04-23', 2, 12, NULL, 'SH184344'),
-('CMD-2018-13', '2018-04-23', 0, 13, NULL, 'SH184344'),
-('CMD-2018-14', '2018-04-23', 0, 14, NULL, 'SH184344'),
-('CMD-2018-15', '2018-04-23', 0, 15, NULL, 'SH184344'),
-('CMD-2018-16', '2018-04-23', 0, 16, NULL, 'SH184344'),
-('CMD-2018-17', '2018-04-23', 0, 17, NULL, 'SH184344'),
-('CMD-2018-18', '2018-04-24', 0, 18, NULL, 'SH184344'),
-('CMD-2018-19', '2018-04-24', 0, 19, NULL, 'SH184344'),
-('CMD-2018-2', '2018-04-01', 0, 2, NULL, 'SH184344'),
-('CMD-2018-3', '2018-04-01', 0, 3, NULL, 'SH184344'),
-('CMD-2018-4', '2018-04-01', 0, 4, NULL, 'SH184344'),
-('CMD-2018-5', '2018-04-01', 2, 5, NULL, 'SH184344'),
-('CMD-2018-6', '2018-04-05', 0, 6, NULL, 'SH184344');
 
 -- --------------------------------------------------------
 
@@ -323,8 +307,19 @@ CREATE TABLE `concourexammatiere` (
 --
 
 INSERT INTO `concourexammatiere` (`ID`, `COEFF`, `DATEEXAM`, `CONCOURNIVEAU_ID`, `MATIERECONCOUR_ID`) VALUES
-(0, 2, '2018-05-18', 101, 52),
-(53, 2, '2018-05-16', 101, 51);
+(0, 2, '2018-05-17', 101, 52),
+(53, 2, '2018-05-16', 101, 51),
+(251, 0.5, '2018-02-02', 201, 1453),
+(252, 0.5, '2018-02-02', 1, 1454),
+(301, 0.8, '2018-07-21', 201, 52),
+(351, 0.7, '2018-02-02', 201, 1452),
+(352, 0.8, '2018-07-21', 201, 1454),
+(1101, 5, '2018-02-02', 1, 901),
+(1151, 3, '2018-05-03', 1, 51),
+(1152, 3, '2018-05-03', 1, 52),
+(1251, 5, '2018-03-02', 1, 851),
+(1351, 2, '2018-02-02', 151, 51),
+(1352, 3, '2018-02-02', 151, 52);
 
 -- --------------------------------------------------------
 
@@ -339,15 +334,21 @@ CREATE TABLE `concourniveau` (
   `NBRDEPLACEECRIT` int(11) DEFAULT NULL,
   `NBRDEPLACEORALE` int(11) DEFAULT NULL,
   `NBRDEPLADEADMIS` int(11) DEFAULT NULL,
-  `NIVEAU_ID` bigint(20) DEFAULT NULL
+  `NIVEAU_ID` bigint(20) DEFAULT NULL,
+  `listF` int(25) NOT NULL DEFAULT '0',
+  `listO` int(25) NOT NULL DEFAULT '0',
+  `listC` int(25) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `concourniveau`
 --
 
-INSERT INTO `concourniveau` (`ID`, `DESCRIPTION`, `ANNEE`, `NBRDEPLACEECRIT`, `NBRDEPLACEORALE`, `NBRDEPLADEADMIS`, `NIVEAU_ID`) VALUES
-(101, '', '2018', 60, 40, 25, 0);
+INSERT INTO `concourniveau` (`ID`, `DESCRIPTION`, `ANNEE`, `NBRDEPLACEECRIT`, `NBRDEPLACEORALE`, `NBRDEPLADEADMIS`, `NIVEAU_ID`, `listF`, `listO`, `listC`) VALUES
+(1, 'Ingénierie en Finance et Actuariat', '2018 ', 40, 30, 20, 1, 0, 0, 0),
+(101, 'Ingénierie en Résaux informatique et Système d\'information', '2018', 50, 40, 25, 0, 1, 1, 1),
+(151, '\r\nIndustrie et Sécurité des Aliments', '2018 ', 40, 20, 18, 2, 0, 0, 0),
+(201, 'Génie des Matériaux et Procédés', '2018 ', 40, 20, 11, 4, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -378,6 +379,7 @@ CREATE TABLE `condidature` (
   `REUSSI` tinyint(1) DEFAULT '0',
   `TYPEINSCRIPTION` int(11) DEFAULT NULL,
   `ANNEUNIVERSITAIRE_ID` bigint(20) DEFAULT NULL,
+  `FILIERE_ID` bigint(20) DEFAULT NULL,
   `CANDIDAT_CNE` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -385,9 +387,31 @@ CREATE TABLE `condidature` (
 -- Déchargement des données de la table `condidature`
 --
 
-INSERT INTO `condidature` (`ID`, `CONDIDATUREVALIDE`, `MOYENNEECRIT`, `MOYENNEGENERALE`, `MOYENNEORALE`, `PIECEVALIDE`, `REUSSI`, `TYPEINSCRIPTION`, `ANNEUNIVERSITAIRE_ID`, `CANDIDAT_CNE`) VALUES
-(1, 0, 0, 0, 0, 0, 0, 3, NULL, NULL),
-(2, 0, 0, 0, 0, 0, 0, 2, NULL, 'jh12345');
+INSERT INTO `condidature` (`ID`, `CONDIDATUREVALIDE`, `MOYENNEECRIT`, `MOYENNEGENERALE`, `MOYENNEORALE`, `PIECEVALIDE`, `REUSSI`, `TYPEINSCRIPTION`, `ANNEUNIVERSITAIRE_ID`, `FILIERE_ID`, `CANDIDAT_CNE`) VALUES
+(2, 1, 9.5, 10.75, 12, 0, 1, 2, NULL, NULL, 'jh12345'),
+(3, 3, 11.5, 13.25, 15, NULL, 1, NULL, NULL, NULL, '1412220593'),
+(4, 1, 4.5, 9.75, 15, NULL, 1, NULL, NULL, 1, '1594873'),
+(5, 1, 15.5, 7.75, NULL, NULL, 1, NULL, NULL, 1, '123456887'),
+(6, 3, 13.5, 13.25, 13, NULL, 0, NULL, NULL, 1, '788'),
+(7, 3, 10.5, 11.25, 12, NULL, 0, NULL, NULL, 1, '789'),
+(8, 3, 12.25, 13.625, 15, NULL, 0, NULL, NULL, 2, '893'),
+(9, 3, 13.5, 13.75, 14, NULL, 0, NULL, NULL, 2, '894'),
+(10, 3, 0, 0, 0, 0, 0, 3, NULL, NULL, '9999998'),
+(11, 3, 0, 0, 0, 0, 0, 3, NULL, NULL, '9999991'),
+(12, 3, 0, 0, 0, 0, 0, 3, NULL, NULL, '555'),
+(13, 3, 0, 0, 0, 0, 0, 3, NULL, NULL, '123123123'),
+(107, 0, 0, 0, 2, 0, 0, 0, NULL, NULL, NULL),
+(605, 0, 0, 0, 11, 0, 0, 0, NULL, NULL, NULL),
+(655, 0, 0, 0, 13, 0, 0, 0, NULL, NULL, NULL),
+(656, 0, 0, 0, 13, 0, 0, 0, NULL, NULL, NULL),
+(657, 0, 20, 20, 20, 0, 0, 3, NULL, NULL, '12365411'),
+(658, 0, 19.9, 19.45, 19, 0, 0, 3, NULL, NULL, '1236541'),
+(659, 0, 19.8, 18.9, 18, 0, 0, 3, NULL, NULL, '123655'),
+(660, 3, 0, 0, 0, 0, 0, 3, NULL, NULL, '1412025000'),
+(661, 3, 0, 0, 0, 0, 0, 3, NULL, NULL, '1817514678'),
+(662, 0, 16.5, 18.25, 20, 0, 1, 3, NULL, NULL, '1412069966'),
+(663, 0, 17, 18, 19, 0, 1, 3, NULL, NULL, '1412068888'),
+(664, 0, 16.5, 14.25, 12, 0, 1, 3, NULL, NULL, '1412064444');
 
 -- --------------------------------------------------------
 
@@ -401,16 +425,6 @@ CREATE TABLE `demande` (
   `ETAT` int(11) DEFAULT NULL,
   `ETUDIANT_CNE` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `demande`
---
-
-INSERT INTO `demande` (`ID`, `DESCRIPTION`, `ETAT`, `ETUDIANT_CNE`) VALUES
-(1, 'hhhhhhhhhhhhhh', NULL, 11001003),
-(2, 'zzzzzzzzzz', -1, 11001003),
-(3, 'eeeeee', 1, 11001003),
-(4, '', -1, 11001003);
 
 -- --------------------------------------------------------
 
@@ -443,13 +457,6 @@ CREATE TABLE `demandederogation` (
   `FILIERE_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `demandederogation`
---
-
-INSERT INTO `demandederogation` (`ID`, `ANNE_BACCALAUREAT`, `ANNE_ETUDE`, `DESCRIPTION`, `ETAT`, `NOMBREMDULESVALIDE`, `NOMBRESEMESTRESVALIDE`, `ETUDIANT_CNE`, `FILIERE_ID`) VALUES
-(6, 2012, 2, 'ssssss', 0, 20, 20, 11001003, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -463,30 +470,6 @@ CREATE TABLE `demandeitem` (
   `SEMESTRE_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `demandeitem`
---
-
-INSERT INTO `demandeitem` (`ID`, `DEMANDE_ID`, `MODULE_ID`, `SEMESTRE_ID`) VALUES
-(1, 1, 10, 1),
-(2, 1, 11, 1),
-(3, 1, 13, 1),
-(4, 1, 19, 5),
-(5, 1, 20, 5),
-(6, 1, 1, 9),
-(7, 2, 10, 1),
-(8, 2, 11, 1),
-(9, 2, 13, 1),
-(10, 2, 19, 5),
-(11, 2, 20, 5),
-(12, 2, 1, 9),
-(13, 3, 10, 1),
-(14, 3, 11, 1),
-(15, 3, 13, 1),
-(16, 4, 10, 1),
-(17, 4, 11, 1),
-(18, 4, 13, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -498,13 +481,6 @@ CREATE TABLE `demandelicence` (
   `ETUDIANT_CNE` bigint(20) DEFAULT NULL,
   `ANNEUNIVERSITAIRE_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `demandelicence`
---
-
-INSERT INTO `demandelicence` (`ID`, `ETUDIANT_CNE`, `ANNEUNIVERSITAIRE_ID`) VALUES
-(17, 11001001, NULL);
 
 -- --------------------------------------------------------
 
@@ -519,17 +495,6 @@ CREATE TABLE `demandelicenceitem` (
   `LICENCE_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `demandelicenceitem`
---
-
-INSERT INTO `demandelicenceitem` (`ID`, `PRIORITE`, `DEMANDELICENCE_ID`, `LICENCE_ID`) VALUES
-(22, 1, 17, 1),
-(23, 2, 17, 3),
-(24, 3, 17, 4),
-(25, 4, 17, 6),
-(26, 5, 17, 8);
-
 -- --------------------------------------------------------
 
 --
@@ -542,15 +507,6 @@ CREATE TABLE `demanderelevenote` (
   `ETUDIANT_CNE` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `demanderelevenote`
---
-
-INSERT INTO `demanderelevenote` (`ID`, `ETAT`, `ETUDIANT_CNE`) VALUES
-(1, 0, 11001001),
-(2, 0, 11001003),
-(3, 0, 11001003);
-
 -- --------------------------------------------------------
 
 --
@@ -562,14 +518,6 @@ CREATE TABLE `demanderelevenoteitem` (
   `DEMANDERELEVENOTE_ID` bigint(20) DEFAULT NULL,
   `SEMESTRE_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `demanderelevenoteitem`
---
-
-INSERT INTO `demanderelevenoteitem` (`ID`, `DEMANDERELEVENOTE_ID`, `SEMESTRE_ID`) VALUES
-(1, 2, 1),
-(2, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -739,6 +687,15 @@ CREATE TABLE `etablissementtype` (
   `ACADEMIE_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `etablissementtype`
+--
+
+INSERT INTO `etablissementtype` (`ID`, `ABRAPG`, `TITRE`, `ACADEMIE_ID`) VALUES
+(0, 'BTS', 'Brevet de Technicien Supérieur', NULL),
+(1, 'FST', 'La Faculté des Sciences et Techniques', NULL),
+(2, 'FS', 'Faculté Des Science', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -824,6 +781,48 @@ CREATE TABLE `examcandidat` (
   `MATIERECONCOUR_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `examcandidat`
+--
+
+INSERT INTO `examcandidat` (`ID`, `NOTECALC`, `CONDIDATURE_ID`, `MATIERECONCOUR_ID`) VALUES
+(1, 20, 657, 52),
+(2, 20, 657, 51),
+(3, 19.9, 658, 52),
+(4, 19.9, 658, 51),
+(5, 19.8, 659, 52),
+(6, 19.8, 659, 51),
+(51, 18, 5, 52),
+(151, 19, 662, 51),
+(152, 14, 662, 52),
+(153, 14, 663, 51),
+(154, 20, 663, 52),
+(155, 18, 664, 52),
+(156, 15, 664, 51),
+(551, 0, 2, 51),
+(552, 19, 2, 52),
+(601, 0, 4, 51),
+(602, 9, 4, 52),
+(603, 12, 12, 51),
+(604, 11.5, 12, 52),
+(652, 13, 5, 51),
+(653, 13, 6, 51),
+(654, 14, 6, 52),
+(1201, 15, 3, 901),
+(1202, 14, 3, 52),
+(1203, 2, 3, 51),
+(1205, 13, 8, 901),
+(1206, 14, 8, 52),
+(1207, 5, 8, 51),
+(1209, 15, 9, 901),
+(1210, 14, 9, 52),
+(1211, 13, 9, 51),
+(1301, 15, 3, 851),
+(1302, 17, 8, 851),
+(1303, 12, 9, 851),
+(1455, 12, 7, 51),
+(1456, 9, 7, 52);
+
 -- --------------------------------------------------------
 
 --
@@ -877,7 +876,8 @@ CREATE TABLE `filiere` (
 INSERT INTO `filiere` (`ID`, `ABREVIATION`, `LIBELLE`, `OBJECTIF`, `TYPEFILIERE`, `TYPEFORMATION`, `DEPARTEMENT_ID`, `SECTION_ID`, `RESPONSABLEFILIERE_CIN`) VALUES
 (1, 'IRISI', 'irisi', '', 0, 2, NULL, 55, NULL),
 (2, 'IFA', NULL, NULL, NULL, 2, 1, 55, 'ana'),
-(3, 'ISA', NULL, NULL, NULL, NULL, NULL, 55, 'EE0001');
+(3, 'ISA', NULL, NULL, NULL, NULL, NULL, 55, 'EE0001'),
+(4, 'GMP', 'gmp', NULL, NULL, NULL, 2, 55, 'ana');
 
 -- --------------------------------------------------------
 
@@ -1113,8 +1113,14 @@ CREATE TABLE `matiereconcour` (
 --
 
 INSERT INTO `matiereconcour` (`ID`, `NUMAPG`, `TITRE`) VALUES
-(51, 'lanc', 'Language c'),
-(52, 'thermo', 'Thermodynamique');
+(51, 'progc', 'Programmation c'),
+(52, 'thermoo', 'Thermodynamique'),
+(353, 'adt', 'Audit'),
+(851, 'Adonnee', 'Analyse de donnee '),
+(901, 'thermoo', 'Thermodynamique'),
+(1452, 'Math', 'Mathématique'),
+(1453, 'mang', 'Management'),
+(1454, 'cdg', 'Controle de gestion');
 
 -- --------------------------------------------------------
 
@@ -1127,6 +1133,16 @@ CREATE TABLE `mentiondiplome` (
   `NUMAPG` varchar(255) DEFAULT NULL,
   `TITRE` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `mentiondiplome`
+--
+
+INSERT INTO `mentiondiplome` (`ID`, `NUMAPG`, `TITRE`) VALUES
+(1, 'bien', 'Bien'),
+(2, 'ab', 'Assez bien'),
+(3, 'psble', 'Passable'),
+(4, 'Tb', 'très bien');
 
 -- --------------------------------------------------------
 
@@ -1178,7 +1194,8 @@ CREATE TABLE `niveau` (
 INSERT INTO `niveau` (`ID`, `FILIERE_ID`, `SEMESTRE_ID`) VALUES
 (0, 1, 1),
 (1, 2, 1),
-(2, 3, 1);
+(2, 3, 1),
+(4, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -1242,6 +1259,14 @@ CREATE TABLE `optionbac` (
   `TITRE` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `optionbac`
+--
+
+INSERT INTO `optionbac` (`ID`, `NUMAPG`, `TITRE`) VALUES
+(1, 'SMA', 'Sience Mathematique A'),
+(2, 'SP', 'Sience Physique');
+
 -- --------------------------------------------------------
 
 --
@@ -1266,6 +1291,13 @@ CREATE TABLE `pays` (
   `NUMAPG` varchar(255) DEFAULT NULL,
   `TITRE` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `pays`
+--
+
+INSERT INTO `pays` (`ID`, `NUMAPG`, `TITRE`) VALUES
+(1, 'mrc', 'Maroc');
 
 -- --------------------------------------------------------
 
@@ -1313,10 +1345,37 @@ INSERT INTO `piece` (`ID`, `FONCTIONNAIRE`, `NATIONALITE`, `NOMBRE`, `TITRE`, `T
 
 CREATE TABLE `pieceetudiant` (
   `ID` bigint(20) NOT NULL,
+  `NBR` int(11) DEFAULT NULL,
   `CONDIDATURE_ID` bigint(20) DEFAULT NULL,
-  `PIECESPARNIVEAU_ID` bigint(20) DEFAULT NULL,
-  `nbr` int(11) NOT NULL
+  `PIECESPARNIVEAU_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `pieceetudiant`
+--
+
+INSERT INTO `pieceetudiant` (`ID`, `NBR`, `CONDIDATURE_ID`, `PIECESPARNIVEAU_ID`) VALUES
+(0, 1, 2, 0),
+(1, 2, 2, 1),
+(5, 5, 3, 5),
+(6, 1, 4, 1),
+(7, 1, 5, 1),
+(8, 1, 6, 1),
+(9, 1, 7, 1),
+(10, 1, 8, 5),
+(11, 1, 9, 5),
+(301, 0, 10, 1),
+(303, 0, 11, 1),
+(351, 0, 12, 1),
+(401, 0, 13, 1),
+(402, 0, 657, 12),
+(403, 0, 658, 12),
+(404, 0, 659, 12),
+(405, 0, 660, 12),
+(406, 0, 661, 12),
+(407, 0, 662, 0),
+(408, 0, 663, 0),
+(409, 0, 664, 0);
 
 -- --------------------------------------------------------
 
@@ -1339,7 +1398,9 @@ INSERT INTO `piecesparniveau` (`ID`, `NOMBRE`, `NIVEAU_ID`, `PIECESJOINTE_ID`) V
 (0, 1, 0, 1),
 (1, 1, 0, 14),
 (2, 2, 0, 11),
-(3, 3, 0, 19);
+(3, 3, 0, 19),
+(5, 1, 1, 1),
+(12, 2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -1368,6 +1429,13 @@ CREATE TABLE `profession` (
   `NUMAPG` varchar(255) DEFAULT NULL,
   `TITRE` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `profession`
+--
+
+INSERT INTO `profession` (`ID`, `NUMAPG`, `TITRE`) VALUES
+(1, 'doc', 'Docteur');
 
 -- --------------------------------------------------------
 
@@ -1429,6 +1497,15 @@ CREATE TABLE `region` (
   `NOM` varchar(255) DEFAULT NULL,
   `PAYS_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `region`
+--
+
+INSERT INTO `region` (`ID`, `NOM`, `PAYS_ID`) VALUES
+(1, 'Tanger-Tétouan-Al Hoceïma', 1),
+(2, ' Rabat-Salé-Kénitra', 1),
+(4, 'Souss-Massa', 1);
 
 -- --------------------------------------------------------
 
@@ -1495,8 +1572,19 @@ CREATE TABLE `secure` (
 
 CREATE TABLE `semestre` (
   `ID` bigint(20) NOT NULL,
+  `ANNEEDEVALIDATION` varchar(255) DEFAULT NULL,
   `LIBELLE` int(11) DEFAULT NULL,
+  `MODEDEVALIDATION` varchar(255) DEFAULT NULL,
+  `NOMBREDINSCRIPTION` int(11) DEFAULT NULL,
+  `NOTES1` float DEFAULT NULL,
+  `NOTES2` float DEFAULT NULL,
+  `NOTES3` float DEFAULT NULL,
+  `NOTES4` float DEFAULT NULL,
+  `NOTES5` float DEFAULT NULL,
+  `NOTES6` float DEFAULT NULL,
+  `VALIDEAPRESRATTRAPAGE` int(11) DEFAULT NULL,
   `ANNEE_ID` bigint(20) DEFAULT NULL,
+  `CANDIDAT_CNE` varchar(255) DEFAULT NULL,
   `FILIERE_ID` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1504,9 +1592,9 @@ CREATE TABLE `semestre` (
 -- Déchargement des données de la table `semestre`
 --
 
-INSERT INTO `semestre` (`ID`, `LIBELLE`, `ANNEE_ID`, `FILIERE_ID`) VALUES
-(1, 1, 6, 1),
-(2, 2, 6, 1);
+INSERT INTO `semestre` (`ID`, `ANNEEDEVALIDATION`, `LIBELLE`, `MODEDEVALIDATION`, `NOMBREDINSCRIPTION`, `NOTES1`, `NOTES2`, `NOTES3`, `NOTES4`, `NOTES5`, `NOTES6`, `VALIDEAPRESRATTRAPAGE`, `ANNEE_ID`, `CANDIDAT_CNE`, `FILIERE_ID`) VALUES
+(1, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, NULL, 1),
+(2, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1524,7 +1612,7 @@ CREATE TABLE `sequence` (
 --
 
 INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '100');
+('SEQ_GEN', '400');
 
 -- --------------------------------------------------------
 
@@ -1611,6 +1699,13 @@ CREATE TABLE `userstock` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Déchargement des données de la table `userstock`
+--
+
+INSERT INTO `userstock` (`ID`, `ADMINE`, `BLOCKED`, `DATENAISSANCE`, `EMAIL`, `GENDER`, `GRADE`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TELEPHONE`, `ENTITEADMINISTRATIVE_ID`, `ROLE_ID`) VALUES
+('159487', 1, 0, '1980-06-20', 'ouss@ouss', NULL, NULL, 0, 0, 'Hansali', '5058da477ed7c0bd2997d080333baf5970cd62e5db91a7230619afc84d367d8b', 'Oussama', '0691816262', NULL, NULL);
+
+--
 -- Index pour les tables déchargées
 --
 
@@ -1659,9 +1754,14 @@ ALTER TABLE `article`
 --
 ALTER TABLE `candidat`
   ADD PRIMARY KEY (`CNE`),
+  ADD KEY `FK_CANDIDAT_ACADEMIE_ID` (`ACADEMIE_ID`),
+  ADD KEY `FK_CANDIDAT_PAYS_ID` (`PAYS_ID`),
+  ADD KEY `FK_CANDIDAT_PROFESSIONDELAMERE_ID` (`PROFESSIONDELAMERE_ID`),
+  ADD KEY `FK_CANDIDAT_LYCEE_ID` (`LYCEE_ID`),
   ADD KEY `FK_CANDIDAT_OPTIONBAC_ID` (`OPTIONBAC_ID`),
   ADD KEY `FK_CANDIDAT_DERNIERDIPLOME_ID` (`DERNIERDIPLOME_ID`),
-  ADD KEY `FK_CANDIDAT_ETABLISSEMENT_ID` (`ETABLISSEMENT_ID`);
+  ADD KEY `FK_CANDIDAT_ETABLISSEMENT_ID` (`ETABLISSEMENT_ID`),
+  ADD KEY `FK_CANDIDAT_LICENCE_ID` (`LICENCE_ID`);
 
 --
 -- Index pour la table `categorie`
@@ -1711,7 +1811,8 @@ ALTER TABLE `concouroral`
 ALTER TABLE `condidature`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_CONDIDATURE_ANNEUNIVERSITAIRE_ID` (`ANNEUNIVERSITAIRE_ID`),
-  ADD KEY `FK_CONDIDATURE_CANDIDAT_CNE` (`CANDIDAT_CNE`);
+  ADD KEY `FK_CONDIDATURE_CANDIDAT_CNE` (`CANDIDAT_CNE`),
+  ADD KEY `FK_CONDIDATURE_FILIERE_ID` (`FILIERE_ID`);
 
 --
 -- Index pour la table `demande`
@@ -2195,6 +2296,7 @@ ALTER TABLE `secure`
 ALTER TABLE `semestre`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_SEMESTRE_ANNEE_ID` (`ANNEE_ID`),
+  ADD KEY `FK_SEMESTRE_CANDIDAT_CNE` (`CANDIDAT_CNE`),
   ADD KEY `FK_SEMESTRE_FILIERE_ID` (`FILIERE_ID`);
 
 --
@@ -2261,7 +2363,7 @@ ALTER TABLE `anneeinscription`
 -- AUTO_INCREMENT pour la table `demande`
 --
 ALTER TABLE `demande`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `demandeattestaion`
 --
@@ -2271,32 +2373,32 @@ ALTER TABLE `demandeattestaion`
 -- AUTO_INCREMENT pour la table `demandederogation`
 --
 ALTER TABLE `demandederogation`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `demandeitem`
 --
 ALTER TABLE `demandeitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `demandelicence`
 --
 ALTER TABLE `demandelicence`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `demandelicenceitem`
 --
 ALTER TABLE `demandelicenceitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `demanderelevenote`
 --
 ALTER TABLE `demanderelevenote`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `demanderelevenoteitem`
 --
 ALTER TABLE `demanderelevenoteitem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `device`
 --
@@ -2311,7 +2413,7 @@ ALTER TABLE `equiperecherche`
 -- AUTO_INCREMENT pour la table `filiere`
 --
 ALTER TABLE `filiere`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `laboratoire`
 --
@@ -2404,9 +2506,14 @@ ALTER TABLE `anneuniversitaire`
 -- Contraintes pour la table `candidat`
 --
 ALTER TABLE `candidat`
+  ADD CONSTRAINT `FK_CANDIDAT_ACADEMIE_ID` FOREIGN KEY (`ACADEMIE_ID`) REFERENCES `academie` (`ID`),
   ADD CONSTRAINT `FK_CANDIDAT_DERNIERDIPLOME_ID` FOREIGN KEY (`DERNIERDIPLOME_ID`) REFERENCES `dernierdiplome` (`ID`),
   ADD CONSTRAINT `FK_CANDIDAT_ETABLISSEMENT_ID` FOREIGN KEY (`ETABLISSEMENT_ID`) REFERENCES `etablissementtype` (`ID`),
-  ADD CONSTRAINT `FK_CANDIDAT_OPTIONBAC_ID` FOREIGN KEY (`OPTIONBAC_ID`) REFERENCES `optionbac` (`ID`);
+  ADD CONSTRAINT `FK_CANDIDAT_LICENCE_ID` FOREIGN KEY (`LICENCE_ID`) REFERENCES `licence` (`ID`),
+  ADD CONSTRAINT `FK_CANDIDAT_LYCEE_ID` FOREIGN KEY (`LYCEE_ID`) REFERENCES `lycee` (`ID`),
+  ADD CONSTRAINT `FK_CANDIDAT_OPTIONBAC_ID` FOREIGN KEY (`OPTIONBAC_ID`) REFERENCES `optionbac` (`ID`),
+  ADD CONSTRAINT `FK_CANDIDAT_PAYS_ID` FOREIGN KEY (`PAYS_ID`) REFERENCES `pays` (`ID`),
+  ADD CONSTRAINT `FK_CANDIDAT_PROFESSIONDELAMERE_ID` FOREIGN KEY (`PROFESSIONDELAMERE_ID`) REFERENCES `profession` (`ID`);
 
 --
 -- Contraintes pour la table `coeffcalibrage`
@@ -2439,7 +2546,8 @@ ALTER TABLE `concourniveau`
 --
 ALTER TABLE `condidature`
   ADD CONSTRAINT `FK_CONDIDATURE_ANNEUNIVERSITAIRE_ID` FOREIGN KEY (`ANNEUNIVERSITAIRE_ID`) REFERENCES `anneuniversitaire` (`ID`),
-  ADD CONSTRAINT `FK_CONDIDATURE_CANDIDAT_CNE` FOREIGN KEY (`CANDIDAT_CNE`) REFERENCES `candidat` (`CNE`);
+  ADD CONSTRAINT `FK_CONDIDATURE_CANDIDAT_CNE` FOREIGN KEY (`CANDIDAT_CNE`) REFERENCES `candidat` (`CNE`),
+  ADD CONSTRAINT `FK_CONDIDATURE_FILIERE_ID` FOREIGN KEY (`FILIERE_ID`) REFERENCES `filiere` (`ID`);
 
 --
 -- Contraintes pour la table `demande`
@@ -2784,6 +2892,7 @@ ALTER TABLE `secure`
 --
 ALTER TABLE `semestre`
   ADD CONSTRAINT `FK_SEMESTRE_ANNEE_ID` FOREIGN KEY (`ANNEE_ID`) REFERENCES `annee` (`ID`),
+  ADD CONSTRAINT `FK_SEMESTRE_CANDIDAT_CNE` FOREIGN KEY (`CANDIDAT_CNE`) REFERENCES `candidat` (`CNE`),
   ADD CONSTRAINT `FK_SEMESTRE_FILIERE_ID` FOREIGN KEY (`FILIERE_ID`) REFERENCES `filiere` (`ID`);
 
 --

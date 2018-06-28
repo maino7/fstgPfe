@@ -318,6 +318,11 @@ public class ConnectionController implements Serializable {
              SessionUtil.redirect("../connexion/LoginAdminP.xhtml");
         }
     }
+    public void redirectIndex() throws IOException{
+       
+             SessionUtil.redirect("/connexion/LoginAdminP.xhtml");
+        
+    }
     public void redirectIfNotLoggedCand() throws IOException{
         if(SessionUtil.getAttribute("candidat") == null){
             

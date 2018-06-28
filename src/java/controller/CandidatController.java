@@ -291,7 +291,7 @@ public class CandidatController implements Serializable {
         Niveau n = concourNiveauFacade.findNiveauByCandidat(getLogeddCand());
         String d = DateUtil.format(new Date());
         return "../pdf/"+n.toString()+""+type+""+d+".pdf";
-
+        
     }
     
    

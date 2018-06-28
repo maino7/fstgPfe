@@ -452,14 +452,14 @@ public class CandidatFacade extends AbstractFacade<Candidat> {
         params.put("filiere", n.toString());
         params.put("typeC", typeC);
 
-        PdfUtil.generatePdfAddExportPath(c, params, "Admis-" + typeC + "-" + n.toString(), "/jasper/tetsTable.jasper", "C:\\Users\\ouss\\Documents\\NetBeansProjects\\stockfstg\\web\\pdf", fileName+".pdf");
+        PdfUtil.generatePdfAddExportPath(c, params, "Admis-" + typeC + "-" + n.toString(), "/jasper/tetsTable.jasper", "C:\\Users\\ouss\\Documents\\NetBeansProjects\\pdf", fileName+".pdf");
 //        C:\\Users\\ouss\\Desktop\\pfe
     }
     public void printPdfListFinal(Niveau n,List<Candidat> c, String fileName) throws JRException, IOException {
         Map<String, Object> params = new HashMap();
         params.put("filiere", n.toString());
         String d = DateUtil.format(new Date());
-        PdfUtil.generatePdfAddExportPath(c, params,"ListeAdmis"+n.toString()+"d", "/jasper/ListeAdmis.jasper", "C:\\Users\\ouss\\Documents\\NetBeansProjects\\stockfstg\\web\\pdf", fileName+".pdf");
+        PdfUtil.generatePdfAddExportPath(c, params,"ListeAdmis"+n.toString()+"d", "/jasper/ListeAdmis.jasper", "C:\\Users\\ouss\\Documents\\NetBeansProjects\\pdf", fileName+".pdf");
 //        C:\\Users\\ouss\\Desktop\\pfe
     }
     

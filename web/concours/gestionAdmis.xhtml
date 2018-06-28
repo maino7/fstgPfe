@@ -10,7 +10,9 @@
             Gestion des admis
         </ui:define>
         <ui:define name="content" >
-            
+            <f:metadata>
+                <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
+            </f:metadata> 
             
             <div class="container-fluid">
                 <div class="row">
