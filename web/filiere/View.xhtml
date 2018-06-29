@@ -12,6 +12,8 @@
             <h:form id="FiliereViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{filiereController.selected != null}">
+                        <h:outputText value="#{bundle.ViewFiliereLabel_section}"/>
+                        <h:outputText value="#{filiereController.selected.section}" title="#{bundle.ViewFiliereTitle_section}"/>
                         <h:outputText value="#{bundle.ViewFiliereLabel_typeFormation}"/>
                         <h:outputText value="#{filiereController.selected.typeFormation}" title="#{bundle.ViewFiliereTitle_typeFormation}"/>
                         <h:outputText value="#{bundle.ViewFiliereLabel_abreviation}"/>

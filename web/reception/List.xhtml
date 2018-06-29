@@ -29,6 +29,12 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListReceptionTitle_userStock}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userStock}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReceptionTitle_dateReception}"/>
                             </f:facet>
                             <h:outputText value="#{item.dateReception}">
@@ -43,9 +49,9 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="User Stock"/>
+                                <h:outputText value="#{bundle.ListReceptionTitle_user}"/>
                             </f:facet>
-                            <h:outputText value="#{item.userStock.nom} #{item.userStock.prenom}"/>
+                            <h:outputText value="#{item.user}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

@@ -12,6 +12,8 @@
             <h:form id="EtudiantEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{etudiantController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEtudiantLabel_etatDeust}" for="etatDeust" />
+                        <p:inputText id="etatDeust" value="#{etudiantController.selected.etatDeust}" title="#{bundle.EditEtudiantTitle_etatDeust}" />
                         <p:outputLabel value="#{bundle.EditEtudiantLabel_password}" for="password" />
                         <p:inputText id="password" value="#{etudiantController.selected.password}" title="#{bundle.EditEtudiantTitle_password}" />
                         <p:outputLabel value="#{bundle.EditEtudiantLabel_nbrCnx}" for="nbrCnx" />

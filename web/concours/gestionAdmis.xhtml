@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/template/adminTemplate.xhtml" >
+        <ui:define name="titre">
+            Gestion des admis
+        </ui:define>
+        <ui:define name="content" >
+            <f:metadata>
+                <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
+            </f:metadata> 
+            
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="orange">
+                                <i class="material-icons">content_copy</i>
+                            </div>
+                            <div class="card-content">
+                                <a href="./gestionDeCandidat.xhtml?faces-redirect=true"><p>Gestion des candidatures</p></a>
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="green">
+                                <i class="material-icons">person</i>
+                            </div>
+                            <div class="card-content">
+                                <a href="./gestionDesNotes.xhtml?faces-redirect=true"><p>Gestion de note</p></a>
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="red">
+                                <i class="material-icons">local_library</i>
+                            </div>
+                            <div class="card-content">
+
+                                <a href="./gestionAdmis.xhtml?faces-redirect=true"><p>List des admis a l'écrit</p></a>
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <h:form>
+                    <div class="container-fluid">
+
+
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">Recherche</div>
+
+                            <div class="panel-body">
+                                <h:panelGrid id="display" columns="10">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group col-lg-4">
+                                                <label class="control-label">cne:</label>
+                                                <div class="input-group">
+
+                                                    <b:inputText id="etudiant" value="" placeholder="CNE" required="true" requiredMessage="Veuillez saisir votre cin !" />
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group col-lg-4">
+                                                <label class="control-label">Filiere:</label>
+                                                <div class="input-group">
+
+                                                    <b:selectOneMenu id="type_insc" value="#{candidatController.typeInscription}" >
+
+                                                        <f:selectItem itemLabel="--Sélectionner la filiere--" itemValue=""/>
+                                                    </b:selectOneMenu>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group col-lg-2">
+
+                                                <div class="input-group">
+
+                                                    <b:commandButton value="rechercher" look="success" />
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group col-lg-2">
+
+                                                <div class="input-group">
+
+                                                    <b:commandButton value="imprimer" look="success"  />
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </h:panelGrid>
+                            </div>
+                        </div></div>
+                </h:form>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header" data-background-color="orange">
+                                <h4 class="title">List des admis pour passer l'écrit</h4>
+
+                            </div>
+                            <div class="card-content table-responsive">
+
+
+                                <f:view>
+
+
+
+                                    <h:form>
+                                        <b:dataTable value="#{candidatController.items}" var="item">
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Cin"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.cin}"/>
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Etablissement"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.etablissement.titre}"/>
+                                            </b:dataTableColumn>
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="NomLat"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.nomLat}"/>
+                                            </b:dataTableColumn>
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="PrenomLat"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.prenomLat}"/>
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Email"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.email}"/>
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="DernierDiplome"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.dernierDiplome}"/>
+                                            </b:dataTableColumn>
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Action"/>
+                                                </f:facet>
+                                                <b:commandButton look="warning" value="consulter" ajax="true" actionListener="#{candidatController.testwalo(item)}" oncomplete="$('.modalPseudoClass').modal('show')" />
+                                            </b:dataTableColumn>
+                                        </b:dataTable>
+
+
+
+                                        <ui:include src="waloo.xhtml" />
+                                    </h:form>
+                                </f:view>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+
+            </div>
+
+
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+

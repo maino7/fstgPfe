@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
+import org.apache.commons.io.FilenameUtils;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -28,7 +29,9 @@ public class ServerConfigUtil {
 
     private static String rootPath = "/Users/mac/NetBeansProjects/FSG_WebSite/web/resources/images/UploadedImages";
     private static String departPath = "pfe.files.path";//chemin dont laquelle on va creer le dosqsier globale qui aura pour bute de contenir la totalitees des dossier d un abonnee
-
+    public static String path1 = "/Users/HP/Documents/NetBeansProjects/Pfe/web/resources/pdfCycle";
+    public static String pdfPath = "C:\\Users\\ouss\\Documents\\NetBeansProjects\\stockfstg\\web\\resources\\pdfCycle";
+            //"C:\\Users\\HP\\Documents\\NetBeansProjects\\Pfe\\web\\resources\\pdfCycle";
     private static List<Item> articlePaths = new ArrayList();
 //    private static String pathPieceJoint = "resources";
 
@@ -66,6 +69,28 @@ public class ServerConfigUtil {
 
     public static String getDepartFilePath() {
         return departPath;
+    }
+
+    public static String uploadPdf(UploadedFile uploadedFile, String type, String uploadedFileName) {
+        try {
+            String nameOfUploadedFile = uploadedFile.getFileName();
+            File file = new File(nameOfUploadedFile.replace('\\', '/'));
+            System.out.println(nameOfUploadedFile);
+//            String fileSavePath = destinationPath + "\\" + nameOfUploadedFile;
+           // String fileName = uploadedFileName + "." + FilenameUtils.getExtension(nameOfUploadedFile);
+            String fileSavePath = pdfPath + "\\"+ nameOfUploadedFile;
+            System.out.println(fileSavePath);
+            InputStream fileContent = uploadedFile.getInputstream();
+            Path path = new File(fileSavePath).toPath();
+            System.out.println("ha lpath azin" +path);
+            Files.copy(fileContent, path, StandardCopyOption.REPLACE_EXISTING);
+            return "/resources/pdfCycle/" + nameOfUploadedFile;
+        } catch (IOException e) {
+            System.out.println("----- Mat uploada walo ==> No update==");
+            JsfUtil.addErrorMessage(e, "Erreur Upload");
+            return "";
+        }
+
     }
 
     public static void upload(UploadedFile uploadedFile, String destinationPath) {

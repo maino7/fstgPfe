@@ -29,27 +29,21 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPieceEtudiantTitle_condidature}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.condidature}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPieceEtudiantTitle_piecesParNiveau}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.piecesParNiveau}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPieceEtudiantTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPieceEtudiantTitle_nombre}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombre}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPieceEtudiantTitle_etudiantMaster}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.etudiantMaster}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPieceEtudiantTitle_piece}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.piece}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{pieceEtudiantController.prepareCreate}" update=":PieceEtudiantCreateForm" oncomplete="PF('PieceEtudiantCreateDialog').show()"/>

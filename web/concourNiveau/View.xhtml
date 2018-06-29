@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConcourNiveauViewDlg" widgetVar="ConcourNiveauViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewConcourNiveauTitle}">
+            <h:form id="ConcourNiveauViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{concourNiveauController.selected != null}">
+                        <h:outputText value="#{bundle.ViewConcourNiveauLabel_niveau}"/>
+                        <h:outputText value="#{concourNiveauController.selected.niveau}" title="#{bundle.ViewConcourNiveauTitle_niveau}"/>
+                        <h:outputText value="#{bundle.ViewConcourNiveauLabel_nbrDePladeAdmis}"/>
+                        <h:outputText value="#{concourNiveauController.selected.nbrDePladeAdmis}" title="#{bundle.ViewConcourNiveauTitle_nbrDePladeAdmis}"/>
+                        <h:outputText value="#{bundle.ViewConcourNiveauLabel_annee}"/>
+                        <h:outputText value="#{concourNiveauController.selected.annee}" title="#{bundle.ViewConcourNiveauTitle_annee}"/>
+                        <h:outputText value="#{bundle.ViewConcourNiveauLabel_description}"/>
+                        <h:outputText value="#{concourNiveauController.selected.description}" title="#{bundle.ViewConcourNiveauTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewConcourNiveauLabel_nbrDePlaceEcrit}"/>
+                        <h:outputText value="#{concourNiveauController.selected.nbrDePlaceEcrit}" title="#{bundle.ViewConcourNiveauTitle_nbrDePlaceEcrit}"/>
+                        <h:outputText value="#{bundle.ViewConcourNiveauLabel_nbrDePlaceOrale}"/>
+                        <h:outputText value="#{concourNiveauController.selected.nbrDePlaceOrale}" title="#{bundle.ViewConcourNiveauTitle_nbrDePlaceOrale}"/>
+                        <h:outputText value="#{bundle.ViewConcourNiveauLabel_id}"/>
+                        <h:outputText value="#{concourNiveauController.selected.id}" title="#{bundle.ViewConcourNiveauTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ConcourNiveauViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

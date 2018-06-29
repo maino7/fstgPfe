@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/template/candidatTemplate.xhtml" >
+        <ui:define name="titre">
+            #{candidatController.logeddCand.nomLat}
+        </ui:define>
+        <f:metadata>
+            <f:viewAction action="#{connectionController.redirectIfNotLoggedCand()}" />
+        </f:metadata>
+        <ui:define name="content" >
+            <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+                     show-detail="true" show-summary="false" allowDismiss="true"
+                     delay="3000" escape="true" />
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="orange">
+                                <i class="material-icons">content_copy</i>
+                            </div>
+                            <div class="card-content">
+                                <a href="./LesListes.xhtml"><p>Mes Listes</p></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <h:form>
+                    <div class="container-fluid">
+
+
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">Les listes :</div>
+                            <br/>
+                            <br/>
+                            <p:panel rendered="#{candidatController.renderList(1)}">
+                                <a href="#{candidatController.listPath('C')}">Liste des convoqués au concours</a>
+                            </p:panel>
+                            <p:panel rendered="#{candidatController.renderList(2)}">
+                                <a href="#{candidatController.listPath('O')}">Liste des admis pour passer l'examen oral</a>
+                            </p:panel>
+                            <p:panel rendered="#{candidatController.renderList(3)}">
+                                <a href="#{candidatController.listPath('F')}">Liste des admis</a>
+                            </p:panel>
+
+                            <div class="panel-body">
+
+                            </div>
+                        </div></div>
+                </h:form>
+            </div>
+
+
+
+        </ui:define>
+    </ui:composition>
+</html>
+

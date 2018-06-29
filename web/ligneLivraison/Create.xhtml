@@ -12,22 +12,22 @@
             <h:form id="LigneLivraisonCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ligneLivraisonController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateLigneLivraisonLabel_quantite}" for="quantite" />
-                        <p:inputText id="quantite" value="#{ligneLivraisonController.selected.quantite}" title="#{bundle.CreateLigneLivraisonTitle_quantite}" />
                         <p:outputLabel value="#{bundle.CreateLigneLivraisonLabel_livraison}" for="livraison" />
                         <p:selectOneMenu id="livraison" value="#{ligneLivraisonController.selected.livraison}" >
                             <f:selectItems value="#{livraisonController.itemsAvailableSelectOne}"
                                            var="livraisonItem"
                                            itemValue="#{livraisonItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateLigneLivraisonLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{ligneLivraisonController.selected.id}" title="#{bundle.CreateLigneLivraisonTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateLigneLivraisonLabel_quantite}" for="quantite" />
+                        <p:inputText id="quantite" value="#{ligneLivraisonController.selected.quantite}" title="#{bundle.CreateLigneLivraisonTitle_quantite}" />
                         <p:outputLabel value="#{bundle.CreateLigneLivraisonLabel_produit}" for="produit" />
                         <p:selectOneMenu id="produit" value="#{ligneLivraisonController.selected.produit}" >
                             <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
                                            var="produitItem"
                                            itemValue="#{produitItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateLigneLivraisonLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{ligneLivraisonController.selected.id}" title="#{bundle.CreateLigneLivraisonTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{ligneLivraisonController.create}" value="#{bundle.Save}" update="display,:LigneLivraisonListForm:datalist,:growl" oncomplete="handleSubmit(args,'LigneLivraisonCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LigneLivraisonCreateDialog.hide()"/>

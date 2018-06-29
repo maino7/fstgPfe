@@ -10,12 +10,10 @@
     </h:head>-->
     <ui:composition template="/template/simpleTemplate.xhtml">
         <ui:define name="head">
-            <f:metadata>
-                <f:viewAction action="#{templateController.redirect()}"></f:viewAction>
-            </f:metadata>
+            
         </ui:define>
         <ui:define name="title">
-            FSTG | Connexion STOCK
+            FSTG | Connexion ADMIN
         </ui:define>
         <ui:define name="content">
             <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
@@ -34,7 +32,7 @@
                         <p:password id="password" class="form-control" value="#{connectionController.selectedUserStock.password}" title="Password" />
                         <!--</p:panelGrid>-->
                         <br/>
-                        <!--<p:commandButton value="Se connecter" action="#{connectionController.signInStock()}" />-->
+                        <!--<p:commandButton value="Se connecter" action="" />-->
                         <p:commandButton value="Se connecter" style="background-color: #00cc33" class="btn center" action="#{connectionController.signInStock()}" update="" />
                         <br/>
                         <br/>

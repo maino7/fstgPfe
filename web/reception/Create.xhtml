@@ -12,6 +12,12 @@
             <h:form id="ReceptionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{receptionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateReceptionLabel_userStock}" for="userStock" />
+                        <p:selectOneMenu id="userStock" value="#{receptionController.selected.userStock}" >
+                            <f:selectItems value="#{userStockController.itemsAvailableSelectOne}"
+                                           var="userStockItem"
+                                           itemValue="#{userStockItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateReceptionLabel_dateReception}" for="dateReception" />
                         <p:calendar id="dateReception" pattern="MM/dd/yyyy" value="#{receptionController.selected.dateReception}" title="#{bundle.EditReceptionTitle_dateReception}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateReceptionLabel_expressionBesoin}" for="expressionBesoin" />

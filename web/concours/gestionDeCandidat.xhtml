@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template/adminTemplate.xhtml" >
+        <ui:define name="titre">
+            Gestion des candidats
+        </ui:define>
+        <f:metadata>
+            <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
+        </f:metadata>
+
+        <ui:define name="content" >
+            <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+                     show-detail="true" show-summary="false" allowDismiss="true"
+                     delay="3000" escape="true" />
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="orange">
+                                <i class="material-icons">content_copy</i>
+                            </div>
+                            <div class="card-content">
+                                <a href="./gestionDeCandidat.xhtml?faces-redirect=true"><p>Gestion des candidatures</p></a>
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="green">
+                                <i class="material-icons">person</i>
+                            </div>
+                            <div class="card-content">
+                                <a href="./gestionDesNotes.xhtml?faces-redirect=true"><p>Gestion de notes</p></a>
+                            </div>
+                            <div class="card-footer">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="container-fluid">
+
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">Recherche</div>
+
+                        <div class="panel-body">
+                            <h:form id="searchBar">
+                                <b:container>
+                                    <b:row>
+                                        <b:column span="4">
+                                            <b:selectOneMenu id="filiere" value="#{candidatController.section}" process="filiere" onchange="ajax:candidatController.niveauBySection()" update="niveau" label="Niveau :" >
+                                                <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                                <f:selectItems value="#{sectionController.items}" 
+                                                               var="sectionItem"
+                                                               itemValue="#{sectionItem}"/>
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                        <b:column span="4">
+                                            <b:selectOneMenu id="niveau" value="#{candidatController.niveau}" label="Filière:">
+                                                <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                                <f:selectItems value="#{candidatController.niveaus}" />
+                                            </b:selectOneMenu>
+
+                                        </b:column>
+                                        <b:column span="2">
+                                            <b:selectOneMenu id="typeCandid" value="#{candidatController.typeCandidature}" label="Type:">
+                                                <f:selectItem itemLabel="Convoqués" itemValue="1" />
+                                                <f:selectItem itemLabel="Validée par admin" itemValue="2" />
+                                                <f:selectItem itemLabel="non Validée" itemValue="0" />
+                                            </b:selectOneMenu> 
+
+                                        </b:column>
+                                        <b:column span="2">
+
+                                            <b:inputText value="#{candidatController.cne}" placeholder="cne.." label="CNE:" />
+
+                                        </b:column>
+                                        <b:column>
+                                            <b:commandButton look="success" value="ok" actionListener="#{candidatController.findBycreataria()}" />
+
+
+
+
+                                        </b:column>
+                                        <b:column offset-lg="10">
+                                            <p:commandButton value="Rejeter Tous" style="background-color: red;border-color: red" actionListener="#{candidatController.rejeterPlusieur()}" update=":datalistform:datalist">
+                                                <p:confirm header="Confirmation" message="Vous etes sur?" icon="ui-icon-alert" />
+                                            </p:commandButton>
+                                            <p:confirmDialog global="true" appendTo="@(body)">
+                                                <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            </p:confirmDialog>
+
+                                        </b:column>
+                                    </b:row>
+                                </b:container>
+                            </h:form>
+                        </div>
+                    </div></div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header" data-background-color="orange">
+                                <h4 class="title">Dossiers de candidature</h4>
+
+                            </div>
+                            <p:messages for="somekey"  />
+                            <div class="card-content table-responsive">
+
+
+                                <f:view>
+
+
+
+                                    <h:form id="datalistform" >
+                                        <b:dataTable id="datalist" value="#{candidatController.items}" var="item">
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="CNE"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.cne}"/>
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Etablissement"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.etablissement.titre}"/>
+                                            </b:dataTableColumn>
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Nom Latin"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.nomLat}"/>
+                                            </b:dataTableColumn>
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Prenom Latin"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.prenomLat}"/>
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Email"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.email}"/>
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Dernier Diplome"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.dernierDiplome.titre}"/>
+                                            </b:dataTableColumn>
+                                            <b:dataTableColumn>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Action"/>
+                                                </f:facet>
+                                                <b:commandButton look="warning" value="consulter" ajax="true" actionListener="#{candidatController.testwalo(item)}" oncomplete="$('.modalPseudoClass').modal('show')" />
+                                            </b:dataTableColumn>
+                                        </b:dataTable>
+
+
+                                        <ui:include src="waloo.xhtml" />
+                                    </h:form>
+                                </f:view>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+
+            </div>
+
+
+        </ui:define>
+    </ui:composition>
+</html>
+

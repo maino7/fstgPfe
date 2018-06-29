@@ -23,7 +23,7 @@
                         <p:outputLabel value="#{bundle.EditMessageLabel_sujet}" for="sujet" />
                         <p:inputText id="sujet" value="#{messageController.selected.sujet}" title="#{bundle.EditMessageTitle_sujet}" />
                         <p:outputLabel value="#{bundle.EditMessageLabel_dateEnvoi}" for="dateEnvoi" />
-                        <p:inputText id="dateEnvoi" value="#{messageController.selected.dateEnvoi}" title="#{bundle.EditMessageTitle_dateEnvoi}" />
+                        <p:calendar id="dateEnvoi" pattern="MM/dd/yyyy HH:mm:ss" value="#{messageController.selected.dateEnvoi}" title="#{bundle.EditMessageTitle_dateEnvoi}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditMessageLabel_email}" for="email" />
                         <p:inputText id="email" value="#{messageController.selected.email}" title="#{bundle.EditMessageTitle_email}" />
                     </p:panelGrid>

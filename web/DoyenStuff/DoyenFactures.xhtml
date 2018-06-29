@@ -12,8 +12,8 @@
 
 
 
-        <ui:define name="content" >
-            <h:form id="a"  rendered="#{demandeDerogationController.findDerogation()!=null}">
+        <ui:define name="content">
+            <h:form id="a"  >
                 <br></br>
                 <br></br>
                 #{demandeDerogationController.dDemandeEtud()}
@@ -75,7 +75,7 @@
 
             </h:form>
 
-            <h:form id="x"  rendered="#{demandeDerogationController.findDerogation()==null}">
+            <h:form id="x"  >
                 <div class="col-lg-10">
 
                     <p:messages for="successInfo" showDetail="false"/>

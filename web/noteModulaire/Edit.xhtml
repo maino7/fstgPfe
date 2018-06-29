@@ -12,6 +12,8 @@
             <h:form id="NoteModulaireEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{noteModulaireController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditNoteModulaireLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{noteModulaireController.selected.id}" title="#{bundle.EditNoteModulaireTitle_id}" />
                         <p:outputLabel value="#{bundle.EditNoteModulaireLabel_etudiant}" for="etudiant" />
                         <p:selectOneMenu id="etudiant" value="#{noteModulaireController.selected.etudiant}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -30,6 +32,14 @@
                         <p:inputText id="note" value="#{noteModulaireController.selected.note}" title="#{bundle.EditNoteModulaireTitle_note}" />
                         <p:outputLabel value="#{bundle.EditNoteModulaireLabel_mention}" for="mention" />
                         <p:inputText id="mention" value="#{noteModulaireController.selected.mention}" title="#{bundle.EditNoteModulaireTitle_mention}" />
+                        <p:outputLabel value="#{bundle.EditNoteModulaireLabel_etat}" for="etat" />
+                        <p:inputText id="etat" value="#{noteModulaireController.selected.etat}" title="#{bundle.EditNoteModulaireTitle_etat}" />
+                        <p:outputLabel value="#{bundle.EditNoteModulaireLabel_ptJury}" for="ptJury" />
+                        <p:inputText id="ptJury" value="#{noteModulaireController.selected.ptJury}" title="#{bundle.EditNoteModulaireTitle_ptJury}" />
+                        <p:outputLabel value="#{bundle.EditNoteModulaireLabel_noteBeforeJury}" for="noteBeforeJury" />
+                        <p:inputText id="noteBeforeJury" value="#{noteModulaireController.selected.noteBeforeJury}" title="#{bundle.EditNoteModulaireTitle_noteBeforeJury}" />
+                        <p:outputLabel value="#{bundle.EditNoteModulaireLabel_mentionBeforeJury}" for="mentionBeforeJury" />
+                        <p:inputText id="mentionBeforeJury" value="#{noteModulaireController.selected.mentionBeforeJury}" title="#{bundle.EditNoteModulaireTitle_mentionBeforeJury}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{noteModulaireController.update}" value="#{bundle.Save}" update="display,:NoteModulaireListForm:datalist,:growl" oncomplete="handleSubmit(args, 'NoteModulaireEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="NoteModulaireEditDialog.hide()"/>

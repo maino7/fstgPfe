@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PiecesParNiveauViewDlg" widgetVar="PiecesParNiveauViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPiecesParNiveauTitle}">
+            <h:form id="PiecesParNiveauViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{piecesParNiveauController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPiecesParNiveauLabel_nombre}"/>
+                        <h:outputText value="#{piecesParNiveauController.selected.nombre}" title="#{bundle.ViewPiecesParNiveauTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewPiecesParNiveauLabel_piecesJointe}"/>
+                        <h:outputText value="#{piecesParNiveauController.selected.piecesJointe}" title="#{bundle.ViewPiecesParNiveauTitle_piecesJointe}"/>
+                        <h:outputText value="#{bundle.ViewPiecesParNiveauLabel_niveau}"/>
+                        <h:outputText value="#{piecesParNiveauController.selected.niveau}" title="#{bundle.ViewPiecesParNiveauTitle_niveau}"/>
+                        <h:outputText value="#{bundle.ViewPiecesParNiveauLabel_id}"/>
+                        <h:outputText value="#{piecesParNiveauController.selected.id}" title="#{bundle.ViewPiecesParNiveauTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PiecesParNiveauViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

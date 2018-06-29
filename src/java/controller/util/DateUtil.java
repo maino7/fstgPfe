@@ -17,12 +17,13 @@ public class DateUtil {
 
     public static Date convert(String date) {
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy"); //yyyy-MM-dd
             return simpleDateFormat.parse(date);
         } catch (ParseException ex) {
             return null;
         }
     }
+
     public static Date convertForDaoLauncher(String date) {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -31,7 +32,7 @@ public class DateUtil {
             return null;
         }
     }
-    
+
     public static java.sql.Date getSqlDate(java.util.Date date) {
         return new java.sql.Date(date.getTime());
     }
@@ -40,12 +41,17 @@ public class DateUtil {
         return new java.sql.Timestamp(date.getTime());
     }
 
-    public static java.sql.Time getTime(java.util.Date date){
+    public static java.sql.Time getTime(java.util.Date date) {
         return new java.sql.Time(date.getTime());
     }
-    
+
     public static String format(Date date) {//"yyyy-MM-dd"
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy ");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+        return simpleDateFormat.format(date);
+    }
+
+    public static String format2(Date date) {//"yyyy-MM-dd"
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return simpleDateFormat.format(date);
     }
 

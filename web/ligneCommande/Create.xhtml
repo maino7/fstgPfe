@@ -12,22 +12,22 @@
             <h:form id="LigneCommandeCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ligneCommandeController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateLigneCommandeLabel_quantite}" for="quantite" />
-                        <p:inputText id="quantite" value="#{ligneCommandeController.selected.quantite}" title="#{bundle.CreateLigneCommandeTitle_quantite}" />
                         <p:outputLabel value="#{bundle.CreateLigneCommandeLabel_commande}" for="commande" />
                         <p:selectOneMenu id="commande" value="#{ligneCommandeController.selected.commande}" >
                             <f:selectItems value="#{commandeController.itemsAvailableSelectOne}"
                                            var="commandeItem"
                                            itemValue="#{commandeItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateLigneCommandeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{ligneCommandeController.selected.id}" title="#{bundle.CreateLigneCommandeTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateLigneCommandeLabel_quantite}" for="quantite" />
+                        <p:inputText id="quantite" value="#{ligneCommandeController.selected.quantite}" title="#{bundle.CreateLigneCommandeTitle_quantite}" />
                         <p:outputLabel value="#{bundle.CreateLigneCommandeLabel_produit}" for="produit" />
                         <p:selectOneMenu id="produit" value="#{ligneCommandeController.selected.produit}" >
                             <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
                                            var="produitItem"
                                            itemValue="#{produitItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateLigneCommandeLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{ligneCommandeController.selected.id}" title="#{bundle.CreateLigneCommandeTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{ligneCommandeController.create}" value="#{bundle.Save}" update="display,:LigneCommandeListForm:datalist,:growl" oncomplete="handleSubmit(args,'LigneCommandeCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LigneCommandeCreateDialog.hide()"/>

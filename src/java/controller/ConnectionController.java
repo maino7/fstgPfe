@@ -5,6 +5,7 @@
  */
 package controller;
 
+import bean.Candidat;
 import bean.Enseignant;
 import bean.Etudiant;
 import bean.UserStock;
@@ -16,7 +17,9 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import service.CandidatFacade;
 import service.EnseignantFacade;
 import service.EtudiantFacade;
 import service.UserFacade;
@@ -32,15 +35,19 @@ public class ConnectionController implements Serializable {
 
     private Enseignant selectedEns;
     private Etudiant selectedEtud;
+    private Candidat selectedCand;
     private UserStock selectedUserStock;
     private String messageConnection;
     private String key;
+    private int redirectO;
     @EJB
     private EnseignantFacade enseignantFacade;
     @EJB
     private EtudiantFacade etudiantFacade;
     @EJB
     private UserStockFacade userStockFacade;
+    @EJB
+    private CandidatFacade candidatFacade;
 
     /**
      * Creates a new instance of ConnectionController
@@ -50,8 +57,10 @@ public class ConnectionController implements Serializable {
 
     public boolean isConnected() {
         if (SessionUtil.getConnectedUser() != null) {
+            System.out.println("connected");
             return true;
         }
+        System.out.println("no connected");
         return false;
     }
 
@@ -172,6 +181,56 @@ public class ConnectionController implements Serializable {
         System.out.println("the test works");
     }
 
+    //=========ADMIN CNX===========//
+    public void signInAdmin() throws IOException {
+        System.out.println("======== controler signIn ========");
+       UserStock test = userStockFacade.cloneUserStock(selectedUserStock);
+        selectedUserStock = new UserStock();
+        int res = userStockFacade.adminSignUp(test);
+        if (res == 1) {
+              SessionUtil.redirect("../concours/preinscription.xhtml");
+        } else if (res == -5) {
+             FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"You didn't write anything", "You didn't write anything"));
+        } else if (res == -4) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR," This User doesn't exist ", " This User doesn't exist "));
+        } else if (res == -3) {
+             FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,"Wrong Password", "Wrong Password"));
+        } 
+        System.out.println("====  Start Sign In UserStock Controller  === ");
+      //  FacesContext.getCurrentInstance().responseComplete();
+
+    }
+
+    //============================//
+    //=========Candidat CNX===========//
+    public void signInCandiat() throws IOException {
+        System.out.println("======cand signIn=======");
+        int res = candidatFacade.candidatSignUp(selectedCand);
+      //  int res = candidatFacade.candidatSignUpTest();
+        
+        if (res == 1) {
+              SessionUtil.redirect("../candidat/MesInfo.xhtml");
+            
+        } else if (res == -5) {
+            messageConnection = "You didn't write anything";
+          
+        } else if (res == -4) {
+            messageConnection = " This User doesn't exist ";
+            
+        } else if (res == -3) {
+            messageConnection = "Wrong Password";
+           
+        } 
+        System.out.println("====  Start Sign In UserStock Controller  === ");
+        selectedCand = new Candidat();
+       // FacesContext.getCurrentInstance().responseComplete();
+
+    }
+
+    //============================//
     public void signInStock() throws IOException {
         System.out.println("====  Start Sign In Stock Controller  === ");
 
@@ -206,7 +265,6 @@ public class ConnectionController implements Serializable {
 //                // To Do Path : Interface Admin
 //                messageConnection = " You are Admin ";
 //            }
-
             // To Do Session
             // To Do Path : Interface Enseignant
             System.out.println("connected user");
@@ -242,8 +300,35 @@ public class ConnectionController implements Serializable {
         System.out.println("getConnected After === " + SessionUtil.getConnectedUser());
         SessionUtil.redirect("../template/Home.xhtml");
     }
+    public void logOutCand() throws IOException {
+        System.out.println("=== Log Out ===");
+        System.out.println("getConnected Before === " + SessionUtil.getAttribute("candidat"));
+        if (SessionUtil.getAttribute("candidat") != null) {
+            SessionUtil.deconnect("candidat");
+        }
+        //System.out.println("getConnected After === " + SessionUtil.getConnectedUser());
+        SessionUtil.redirect("../connexion/connexionEtudiant.xhtml");
+    }
 
     /*TEST*/
+    
+    public void redirectIfNotLogged() throws IOException{
+        if(SessionUtil.getConnectedUser() == null){
+            
+             SessionUtil.redirect("../connexion/LoginAdminP.xhtml");
+        }
+    }
+    public void redirectIndex() throws IOException{
+       
+             SessionUtil.redirect("/connexion/LoginAdminP.xhtml");
+        
+    }
+    public void redirectIfNotLoggedCand() throws IOException{
+        if(SessionUtil.getAttribute("candidat") == null){
+            
+             SessionUtil.redirect("../connexion/connexionEtudiant.xhtml");
+        }
+    }
     public void forgetPassEns() {
         enseignantFacade.sendEmailPassword(key);
     }
@@ -261,22 +346,8 @@ public class ConnectionController implements Serializable {
     }
 
     /*TEST*/
- /*
-    Test Controller 
-    Edit
-    
-    
-    public void editEns()
-    {
-        //enseignantFacade.editPass(selectedEns.getCin());
-        etudiantFacade.editPass(selectedEtud.getCne());
-        messageConnection = "Password Changed from EditEns";
-    }
-    
-    
-    Test Controller 
-    Edit
-     */
+ 
+     
     public String getKey() {
         return key;
     }
@@ -328,5 +399,27 @@ public class ConnectionController implements Serializable {
     public void setMessageConnection(String messageConnection) {
         this.messageConnection = messageConnection;
     }
+
+    public Candidat getSelectedCand() {
+        if(selectedCand == null){
+            selectedCand = new Candidat();
+        }
+        return selectedCand;
+    }
+
+    public void setSelectedCand(Candidat selectedCand) {
+        this.selectedCand = selectedCand;
+    }
+
+    public int getRedirectO() {
+        return redirectO;
+    }
+
+    public void setRedirectO(int redirectO) {
+        this.redirectO = redirectO;
+    }
+
+    
+    
 
 }

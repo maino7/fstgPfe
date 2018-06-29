@@ -1,0 +1,289 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template/adminTemplate.xhtml" >
+        <ui:define name="titre">
+            Les preinscription
+        </ui:define>
+        <ui:define name="content" >
+             <f:metadata>
+                <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
+            </f:metadata>
+           
+            <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+                     show-detail="true" show-summary="false" allowDismiss="true"
+                     delay="3000" escape="true" />
+
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="orange">
+                                <i class="material-icons">content_copy</i>
+                            </div>
+                            <div class="card-content">
+                                <a href="./preinscription.xhtml"><p>Les critère de pre-inscription</p></a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="red">
+                                <i class="material-icons">local_library</i>
+                            </div>
+                            <div class="card-content">
+
+                                <a href="./gestionDeConcours.xhtml"><p>Gestion des épreuves</p></a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <h:form>
+                        <div class="col-md-6">
+
+                            <div class="panel panel-danger" style="height:50% ">
+
+                                <div class="panel-heading"><h4>Créer un concours</h4></div>
+
+
+                                <div class="panel-body">
+                                    <dir class="form-group">
+                                        <p:messages id="msgCritere" for="@form" escape="true" autoUpdate="true" closable="true"/>
+                                    </dir>
+
+                                    <div class="form-group">
+                                        <label for="nbrEcrit">Filière </label>
+                                        <b:selectOneMenu id="niveauC" value="#{concourNiveauController.selected.niveau}" class="form-control" required="true">
+                                            <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                            <f:selectItems value="#{niveauController.itemsAvailableSelectOne}" 
+                                                           var="niveauItem"
+                                                           itemValue="#{niveauItem}"/>
+                                        </b:selectOneMenu>  
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="nbrEcrit">Nombre de Place pour l'écrit</label>
+                                        <b:inputText id="nbrEcrit" value="#{concourNiveauController.selected.nbrDePlaceEcrit}" class="form-control" required="true" >
+                                            <f:validateDoubleRange minimum="1" />
+                                        </b:inputText>
+                                        <span id="error_lastname" class="text-danger" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="nbronrale">Nombre de Places pour l'oral</label>
+                                        <b:inputText id="nbronrale" value="#{concourNiveauController.selected.nbrDePlaceOrale}" class="form-control" required="true" >
+                                            <f:validateDoubleRange minimum="1" />
+                                        </b:inputText>
+                                        <span id="error_age" class="text-danger" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="nbradmis">Nombre de places finales</label>
+                                        <b:inputText id="nbradmis" value="#{concourNiveauController.selected.nbrDePladeAdmis}" class="form-control" required="true" >
+                                            <f:validateDoubleRange minimum="1" />
+                                        </b:inputText>
+                                        <span id="error_dob" class="text-danger" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="disc">Description</label>
+                                        <b:inputTextarea id="desc" value="#{concourNiveauController.selected.description}" class="form-control" required="true">
+                                            <f:validateLength maximum="255" />
+                                        </b:inputTextarea>
+                                    </div>
+
+                                    <b:commandButton actionListener="#{concourNiveauController.creer()}" value="Creer" look="primary" />
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </h:form>    
+                    <div class="col-md-6">
+
+                        <h:form>
+                            <div class="panel panel-danger" style="height:50% ">
+
+                                <div class="panel-heading"><h4>Créer un Examen</h4></div>
+
+
+                                <div class="panel-body">
+                                    <dir class="form-group">
+                                        <p:messages id="msgExam" escape="true" autoUpdate="true" closable="true"/>
+                                    </dir>
+
+                                    <div class="form-group">
+                                        <label for="Exam">Choix de concours *</label>
+                                        <b:selectOneMenu id="Exam" value="#{concourNiveauController.concourExamMatiere.concourNiveau}" class="form-control" required="true">
+                                            <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                            <f:selectItems value="#{concourNiveauController.itemsAvailableSelectOne}" 
+                                                           var="concoursNiveauItem"
+                                                           itemValue="#{concoursNiveauItem}"/>
+                                        </b:selectOneMenu>  
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="matiereCo">Matiere :</label>
+                                        <b:selectOneMenu id="matiereCo" value="#{concourNiveauController.concourExamMatiere.matiereConcour}" class="form-control" required="true">
+                                            <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                            <f:selectItems value="#{matiereConcourController.itemsAvailableSelectOne}" 
+                                                           var="matiereConcourItem"
+                                                           itemValue="#{matiereConcourItem}"/>
+                                        </b:selectOneMenu> 
+                                        <a href="./AjoutMatiere.xhtml?faces-redirect=true" class="btn btn-default"><p>Ajouter Matiere</p></a>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>La date d'examen :</label>
+                                        <b:inputText value="#{concourNiveauController.dateExam}" placeholder="dd/mm/yyyy" >
+                                            <f:validateRegex pattern="[0-3]?[0-9]\/[0-1]?[0-9]\/[1-2][0-9][0-9][0-9]"  />
+                                        </b:inputText>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="coeffExam">Coefficient:</label>
+                                        <b:inputText id="coeffExam" value="#{concourNiveauController.concourExamMatiere.coeff}"  class="form-control" required="true" >
+                                            <f:validateRequired for="coeffExam" />
+                                        </b:inputText>
+
+                                    </div>
+
+
+
+                                    <b:commandButton actionListener="#{concourNiveauController.creerExam()}" value="Creer" look="primary" process="@form" update=":examForm:examDatalist" />
+
+
+                                </div>
+                            </div>
+
+                        </h:form>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header" data-background-color="orange">
+                                <h4 class="title">Les concours </h4>
+
+                            </div>
+                            <div class="card-content table-responsive">
+                                <f:view>
+
+
+                                    <h:form>
+
+                                        <p:dataTable  var="item" value="#{concourNiveauController.items}"  rows="5"
+                                                      paginator="true"
+                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                      rowsPerPageTemplate="5,10,15"
+                                                      editable="true">
+                                            <p:ajax event="rowEdit" listener="#{concourNiveauController.onRowEdit}" update="growlMsg" />
+                                            <p:ajax event="rowEditCancel" listener="#{concourNiveauController.onRowCancel}" update="growlMsg" />
+                                            <p:column headerText="Filière">
+                                                <h:outputText  value="#{item.niveau.filiere} #{item.niveau.semestre}" />
+                                            </p:column>
+                                            <p:column headerText="Nombre de place admis">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{item.nbrDePladeAdmis}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{item.nbrDePladeAdmis}" style="width:100%"/></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                                            <p:column headerText="Annee">
+                                                <h:outputText value="#{item.annee}" />
+                                            </p:column>
+                                            <p:column headerText="Description">
+                                                <h:outputText value="#{item.description}" />
+                                            </p:column>
+                                            <p:column headerText="Nombre de place Ecrit">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{item.nbrDePlaceEcrit}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{item.nbrDePlaceEcrit}" style="width:100%"/></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                                            <p:column headerText="Nombre de place orale">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{item.nbrDePlaceOrale}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{item.nbrDePlaceOrale}" style="width:100%"/></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                                            <p:column style="width:32px">
+                                                <p:rowEditor />
+                                            </p:column>
+
+                                        </p:dataTable>
+
+                                    </h:form>
+                                </f:view>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" >
+                        <div class="card">
+                            <div class="card-header" data-background-color="orange">
+                                <h4 class="title">Les Examens: </h4>
+
+                            </div>
+                            <div class="card-content table-responsive">
+                                <f:view>
+
+
+                                    <h:form id="examForm">
+
+                                        <p:dataTable id="examDatalist"  var="item" value="#{concourExamMatiereController.items}"  rows="5"
+                                                      paginator="true"
+                                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                      rowsPerPageTemplate="5,10,15"
+                                                      >
+                                            <p:column headerText="Filière">
+                                                <h:outputText  value="#{item.concourNiveau.niveau.filiere} #{item.concourNiveau.niveau.semestre}" />
+                                            </p:column>
+                                            <p:column headerText="Sujet">
+                                                <h:outputText value="#{item.matiereConcour.titre}" />
+                                            </p:column>
+                                            <p:column headerText="Coefficient">
+                                                <h:outputText value="#{item.coeff}" />
+                                            </p:column>
+
+                                        </p:dataTable>
+                                    </h:form>
+                                </f:view>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

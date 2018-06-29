@@ -8,17 +8,26 @@
 
     <ui:composition>
 
-        <p:dialog id="MessageViewDlg" widgetVar="MessageViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Le message texte :">
+        <p:dialog id="MessageViewDlg" widgetVar="MessageViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMessageTitle}">
             <h:form id="MessageViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{messageController.selected != null}">
-                        <h:outputText value="#{bundle.ViewMessageLabel_email}"/>
-                        <h:outputText value="#{messageController.selected.email}" title="#{bundle.ViewMessageTitle_email}"/>
-                        <h:outputText value="#{bundle.ViewMessageLabel_sujet}"/>
-                        <h:outputText value="#{messageController.selected.sujet}" title="#{bundle.ViewMessageTitle_sujet}"/>
+                        <h:outputText value="#{bundle.ViewMessageLabel_id}"/>
+                        <h:outputText value="#{messageController.selected.id}" title="#{bundle.ViewMessageTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewMessageLabel_nom}"/>
+                        <h:outputText value="#{messageController.selected.nom}" title="#{bundle.ViewMessageTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewMessageLabel_prenom}"/>
+                        <h:outputText value="#{messageController.selected.prenom}" title="#{bundle.ViewMessageTitle_prenom}"/>
                         <h:outputText value="#{bundle.ViewMessageLabel_textMessage}"/>
                         <h:outputText value="#{messageController.selected.textMessage}" title="#{bundle.ViewMessageTitle_textMessage}"/>
-
+                        <h:outputText value="#{bundle.ViewMessageLabel_sujet}"/>
+                        <h:outputText value="#{messageController.selected.sujet}" title="#{bundle.ViewMessageTitle_sujet}"/>
+                        <h:outputText value="#{bundle.ViewMessageLabel_dateEnvoi}"/>
+                        <h:outputText value="#{messageController.selected.dateEnvoi}" title="#{bundle.ViewMessageTitle_dateEnvoi}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewMessageLabel_email}"/>
+                        <h:outputText value="#{messageController.selected.email}" title="#{bundle.ViewMessageTitle_email}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="MessageViewDialog.hide()"/>
                 </h:panelGroup>

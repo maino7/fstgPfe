@@ -6,11 +6,13 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -24,10 +26,13 @@ public class AnneUniversitaire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String anneeUni;
     @OneToOne(cascade = CascadeType.PERSIST)
     private Annee anneeMin;
     @OneToOne(cascade = CascadeType.PERSIST)
     private Annee anneeMax;
+     @OneToMany(mappedBy = "anneUniversitaire")
+    private List<Condidature> condidatures;
 
     
     
@@ -45,6 +50,15 @@ public class AnneUniversitaire implements Serializable {
     public void setAnneeMin(Annee anneeMin) {
         this.anneeMin = anneeMin;
     }
+
+    public String getAnneeUni() {
+        return anneeUni;
+    }
+
+    public void setAnneeUni(String anneeUni) {
+        this.anneeUni = anneeUni;
+    }
+    
 
     public Annee getAnneeMax() {
         return anneeMax;

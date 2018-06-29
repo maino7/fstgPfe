@@ -12,14 +12,14 @@
             <h:form id="ModuleViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{moduleController.selected != null}">
+                        <h:outputText value="#{bundle.ViewModuleLabel_enseignant}"/>
+                        <h:outputText value="#{moduleController.selected.enseignant}" title="#{bundle.ViewModuleTitle_enseignant}"/>
                         <h:outputText value="#{bundle.ViewModuleLabel_id}"/>
                         <h:outputText value="#{moduleController.selected.id}" title="#{bundle.ViewModuleTitle_id}"/>
                         <h:outputText value="#{bundle.ViewModuleLabel_semestre}"/>
                         <h:outputText value="#{moduleController.selected.semestre}" title="#{bundle.ViewModuleTitle_semestre}"/>
                         <h:outputText value="#{bundle.ViewModuleLabel_nom}"/>
                         <h:outputText value="#{moduleController.selected.nom}" title="#{bundle.ViewModuleTitle_nom}"/>
-                        <h:outputText value="#{bundle.ViewModuleLabel_enseignant}"/>
-                        <h:outputText value="#{moduleController.selected.enseignant}" title="#{bundle.ViewModuleTitle_enseignant}"/>
                         <h:outputText value="#{bundle.ViewModuleLabel_filiere}"/>
                         <h:outputText value="#{moduleController.selected.filiere}" title="#{bundle.ViewModuleTitle_filiere}"/>
                     </p:panelGrid>

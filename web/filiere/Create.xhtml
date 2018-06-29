@@ -12,6 +12,12 @@
             <h:form id="FiliereCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{filiereController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFiliereLabel_section}" for="section" />
+                        <p:selectOneMenu id="section" value="#{filiereController.selected.section}" >
+                            <f:selectItems value="#{sectionController.itemsAvailableSelectOne}"
+                                           var="sectionItem"
+                                           itemValue="#{sectionItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateFiliereLabel_typeFormation}" for="typeFormation" />
                         <p:inputText id="typeFormation" value="#{filiereController.selected.typeFormation}" title="#{bundle.CreateFiliereTitle_typeFormation}" />
                         <p:outputLabel value="#{bundle.CreateFiliereLabel_abreviation}" for="abreviation" />

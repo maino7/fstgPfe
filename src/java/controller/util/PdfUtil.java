@@ -40,6 +40,17 @@ public class PdfUtil {
         OutputStream outputStream = getResponseOutput(outPoutFileName);
         JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
     }
+    public static void generatePdfAddExportPath(List myList, Map<String, Object> params, String outPoutFileName, String bilan, String exportPath,String pdfName) throws JRException, IOException {
+        if (myList == null || myList.isEmpty()) {
+            myList = new ArrayList();
+            myList.add(new Object());
+        }
+        JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(myList);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(PdfUtil.class.getResourceAsStream(bilan), params, jrBeanCollectionDataSource);
+        OutputStream outputStream = getResponseOutput(outPoutFileName);
+        JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, exportPath+"\\"+pdfName);
+    } 
     public static JasperPrint createJasperPrint(List myList, Map<String, Object> params, String bilan) throws JRException, IOException {
         JRBeanCollectionDataSource jrBeanCollectionDataSource = new JRBeanCollectionDataSource(myList);
         JasperPrint jasperPrint = JasperFillManager.fillReport(PdfUtil.class.getResourceAsStream(bilan), params, jrBeanCollectionDataSource);

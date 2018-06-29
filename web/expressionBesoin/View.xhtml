@@ -12,8 +12,12 @@
             <h:form id="ExpressionBesoinViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{expressionBesoinController.selected != null}">
+                        <h:outputText value="#{bundle.ViewExpressionBesoinLabel_recu}"/>
+                        <h:outputText value="#{expressionBesoinController.selected.recu}" title="#{bundle.ViewExpressionBesoinTitle_recu}"/>
                         <h:outputText value="#{bundle.ViewExpressionBesoinLabel_id}"/>
                         <h:outputText value="#{expressionBesoinController.selected.id}" title="#{bundle.ViewExpressionBesoinTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewExpressionBesoinLabel_userStock}"/>
+                        <h:outputText value="#{expressionBesoinController.selected.userStock}" title="#{bundle.ViewExpressionBesoinTitle_userStock}"/>
                         <h:outputText value="#{bundle.ViewExpressionBesoinLabel_dateExpressionBesoin}"/>
                         <h:outputText value="#{expressionBesoinController.selected.dateExpressionBesoin}" title="#{bundle.ViewExpressionBesoinTitle_dateExpressionBesoin}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />

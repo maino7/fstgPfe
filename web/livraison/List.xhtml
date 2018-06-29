@@ -26,11 +26,12 @@
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLivraisonTitle_id}"/>
+                                <h:outputText value="#{bundle.ListLivraisonTitle_userStock}"/>
                             </f:facet>
-                            <h:outputText value="#{item.id}"/>
+                            <h:outputText value="#{item.userStock}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -48,11 +49,16 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="User Stock"/>
+                                <h:outputText value="#{bundle.ListLivraisonTitle_user}"/>
                             </f:facet>
-                            <h:outputText value="#{item.userStock.nom} #{item.userStock.prenom}"/>
+                            <h:outputText value="#{item.user}"/>
                         </p:column>
-
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLivraisonTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{livraisonController.prepareCreate}" update=":LivraisonCreateForm" oncomplete="PF('LivraisonCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LivraisonViewForm" oncomplete="PF('LivraisonViewDialog').show()" disabled="#{empty livraisonController.selected}"/>

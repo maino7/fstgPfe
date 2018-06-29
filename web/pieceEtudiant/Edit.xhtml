@@ -12,24 +12,22 @@
             <h:form id="PieceEtudiantEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{pieceEtudiantController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPieceEtudiantLabel_condidature}" for="condidature" />
+                        <p:selectOneMenu id="condidature" value="#{pieceEtudiantController.selected.condidature}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{condidatureController.itemsAvailableSelectOne}"
+                                           var="condidatureItem"
+                                           itemValue="#{condidatureItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPieceEtudiantLabel_piecesParNiveau}" for="piecesParNiveau" />
+                        <p:selectOneMenu id="piecesParNiveau" value="#{pieceEtudiantController.selected.piecesParNiveau}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{piecesParNiveauController.itemsAvailableSelectOne}"
+                                           var="piecesParNiveauItem"
+                                           itemValue="#{piecesParNiveauItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditPieceEtudiantLabel_id}" for="id" />
                         <p:inputText id="id" value="#{pieceEtudiantController.selected.id}" title="#{bundle.EditPieceEtudiantTitle_id}" />
-                        <p:outputLabel value="#{bundle.EditPieceEtudiantLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{pieceEtudiantController.selected.nombre}" title="#{bundle.EditPieceEtudiantTitle_nombre}" />
-                        <p:outputLabel value="#{bundle.EditPieceEtudiantLabel_etudiantMaster}" for="etudiantMaster" />
-                        <p:selectOneMenu id="etudiantMaster" value="#{pieceEtudiantController.selected.etudiantMaster}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{etudiantMasterController.itemsAvailableSelectOne}"
-                                           var="etudiantMasterItem"
-                                           itemValue="#{etudiantMasterItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditPieceEtudiantLabel_piece}" for="piece" />
-                        <p:selectOneMenu id="piece" value="#{pieceEtudiantController.selected.piece}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{pieceController.itemsAvailableSelectOne}"
-                                           var="pieceItem"
-                                           itemValue="#{pieceItem}"/>
-                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{pieceEtudiantController.update}" value="#{bundle.Save}" update="display,:PieceEtudiantListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PieceEtudiantEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PieceEtudiantEditDialog.hide()"/>

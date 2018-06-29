@@ -12,6 +12,13 @@
             <h:form id="FiliereEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{filiereController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFiliereLabel_section}" for="section" />
+                        <p:selectOneMenu id="section" value="#{filiereController.selected.section}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{sectionController.itemsAvailableSelectOne}"
+                                           var="sectionItem"
+                                           itemValue="#{sectionItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditFiliereLabel_typeFormation}" for="typeFormation" />
                         <p:inputText id="typeFormation" value="#{filiereController.selected.typeFormation}" title="#{bundle.EditFiliereTitle_typeFormation}" />
                         <p:outputLabel value="#{bundle.EditFiliereLabel_abreviation}" for="abreviation" />

@@ -12,14 +12,14 @@
             <h:form id="LigneLivraisonViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ligneLivraisonController.selected != null}">
-                        <h:outputText value="#{bundle.ViewLigneLivraisonLabel_quantite}"/>
-                        <h:outputText value="#{ligneLivraisonController.selected.quantite}" title="#{bundle.ViewLigneLivraisonTitle_quantite}"/>
                         <h:outputText value="#{bundle.ViewLigneLivraisonLabel_livraison}"/>
                         <h:outputText value="#{ligneLivraisonController.selected.livraison}" title="#{bundle.ViewLigneLivraisonTitle_livraison}"/>
-                        <h:outputText value="#{bundle.ViewLigneLivraisonLabel_produit}"/>
-                        <h:outputText value="#{ligneLivraisonController.selected.produit}" title="#{bundle.ViewLigneLivraisonTitle_produit}"/>
                         <h:outputText value="#{bundle.ViewLigneLivraisonLabel_id}"/>
                         <h:outputText value="#{ligneLivraisonController.selected.id}" title="#{bundle.ViewLigneLivraisonTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewLigneLivraisonLabel_quantite}"/>
+                        <h:outputText value="#{ligneLivraisonController.selected.quantite}" title="#{bundle.ViewLigneLivraisonTitle_quantite}"/>
+                        <h:outputText value="#{bundle.ViewLigneLivraisonLabel_produit}"/>
+                        <h:outputText value="#{ligneLivraisonController.selected.produit}" title="#{bundle.ViewLigneLivraisonTitle_produit}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="LigneLivraisonViewDialog.hide()"/>
                 </h:panelGroup>

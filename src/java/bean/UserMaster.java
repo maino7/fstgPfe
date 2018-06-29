@@ -24,7 +24,7 @@ public class UserMaster implements Serializable {
     private Long id;
     private String login;
     private String pwd;
-    private int type;
+    private int type; 
     
     public Long getId() {
         return id;

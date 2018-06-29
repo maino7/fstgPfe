@@ -12,22 +12,22 @@
             <h:form id="LigneReceptionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ligneReceptionController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateLigneReceptionLabel_quantiteRecu}" for="quantiteRecu" />
-                        <p:inputText id="quantiteRecu" value="#{ligneReceptionController.selected.quantiteRecu}" title="#{bundle.CreateLigneReceptionTitle_quantiteRecu}" />
                         <p:outputLabel value="#{bundle.CreateLigneReceptionLabel_reception}" for="reception" />
                         <p:selectOneMenu id="reception" value="#{ligneReceptionController.selected.reception}" >
                             <f:selectItems value="#{receptionController.itemsAvailableSelectOne}"
                                            var="receptionItem"
                                            itemValue="#{receptionItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateLigneReceptionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{ligneReceptionController.selected.id}" title="#{bundle.CreateLigneReceptionTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateLigneReceptionLabel_quantite}" for="quantite" />
+                        <p:inputText id="quantite" value="#{ligneReceptionController.selected.quantite}" title="#{bundle.CreateLigneReceptionTitle_quantite}" />
                         <p:outputLabel value="#{bundle.CreateLigneReceptionLabel_produit}" for="produit" />
                         <p:selectOneMenu id="produit" value="#{ligneReceptionController.selected.produit}" >
                             <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
                                            var="produitItem"
                                            itemValue="#{produitItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateLigneReceptionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{ligneReceptionController.selected.id}" title="#{bundle.CreateLigneReceptionTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{ligneReceptionController.create}" value="#{bundle.Save}" update="display,:LigneReceptionListForm:datalist,:growl" oncomplete="handleSubmit(args,'LigneReceptionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LigneReceptionCreateDialog.hide()"/>

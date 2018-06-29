@@ -41,6 +41,12 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDernierDiplomeTitle_mentionDiplome}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mentionDiplome}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDernierDiplomeTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>

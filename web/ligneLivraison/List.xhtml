@@ -29,27 +29,27 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLigneLivraisonTitle_quantite}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.quantite}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListLigneLivraisonTitle_livraison}"/>
                             </f:facet>
                             <h:outputText value="#{item.livraison}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLigneLivraisonTitle_produit}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.produit.libelle}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListLigneLivraisonTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLigneLivraisonTitle_quantite}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.quantite}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLigneLivraisonTitle_produit}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produit}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{ligneLivraisonController.prepareCreate}" update=":LigneLivraisonCreateForm" oncomplete="PF('LigneLivraisonCreateDialog').show()"/>

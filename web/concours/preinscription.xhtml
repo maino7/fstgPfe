@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/template/adminTemplate.xhtml" >
+        <ui:define name="titre">
+            Les préinscriptions
+        </ui:define>
+        <ui:define name="content">
+            <f:metadata>
+                <f:viewAction action="#{connectionController.redirectIfNotLogged()}" />
+            </f:metadata>
+           
+            <b:growl id="growlMsg" globalOnly="true" placementFrom="bottom"
+                     show-detail="true" show-summary="false" allowDismiss="true"
+                     delay="3000" escape="true" />
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header" data-background-color="orange">
+                                <i class="material-icons">content_copy</i>
+                            </div>
+                            <div class="card-content">
+                                <a href="./preinscription.xhtml"><p>Les critère de pre-inscription</p></a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">    
+                            <div class="card-header" data-background-color="red">
+                                <i class="material-icons">local_library</i>
+                            </div>
+                            <div class="card-content">
+
+                                <a href="./gestionDeConcours.xhtml"><p>Gestion des épreuves</p></a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="container-fluid">
+
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">Recherche</div>
+
+                        <div class="panel-body">
+                            <h:form id="searchBar">
+                                <b:container>
+                                    <b:row>
+                                        <b:column span="2">
+                                            <b:selectOneMenu id="etablissement" value="#{coeffCalibrageController.et}" label="Etablissement">
+                                                <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                                <f:selectItems value="#{etablissementTypeController.itemsAvailableSelectOne}" 
+                                                               var="etablissementItem"
+                                                               itemValue="#{etablissementItem}"/>
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                        <b:column span="2">
+                                            <b:selectOneMenu id="anneeCoeff" value="#{coeffCalibrageController.annee}"  label="Annee">
+                                                <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                                <f:selectItem itemLabel="2017/2018" itemValue="2018" />
+                                                <f:selectItem itemLabel="2016/2017" itemValue="2017" />
+                                                <f:selectItem itemLabel="2015/2016" itemValue="2016" />
+
+                                            </b:selectOneMenu>
+                                        </b:column>
+                                        <b:column span="2">
+                                            <b:inputText value="#{coeffCalibrageController.coeffi}" label="Coefficient" />
+                                        </b:column>
+                                        <b:column span="2">
+                                            <b:inputText value="#{coeffCalibrageController.nbrMax}" label="nbr Max" />
+                                        </b:column>
+                                        <b:column span="2">
+                                            <b:inputText value="#{coeffCalibrageController.nbrMin}" label="nbr Min" />
+                                        </b:column>
+                                        <b:column>
+                                            <b:commandButton look="success" value="Rechercher" ajax="true" actionListener="#{coeffCalibrageController.findByCretar()}" update="preForm:preDatalist"  />
+
+
+
+                                        </b:column>
+                                    </b:row>
+                                </b:container>
+                            </h:form>
+                        </div>
+                    </div></div>
+                <h:form id="preForm">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="orange">
+                                    <h4 class="title">Coefficient de calibrage:</h4>
+
+                                </div>
+                                <div class="card-content table-responsive">
+                                    <f:view>
+
+                                        <p:dataTable id="preDatalist" var="item" value="#{coeffCalibrageController.items}" editable="true" style="margin-bottom:20px">
+
+                                            <p:ajax event="rowEdit" listener="#{coeffCalibrageController.onRowEdit}" update="growlMsg" />
+                                            <p:ajax event="rowEditCancel" listener="#{coeffCalibrageController.onRowCancel}" update="growlMsg" />
+
+                                            <p:column headerText="Coefficient">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{item.coeff}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText id="modelInput" value="#{item.coeff}" style="width:100%"/></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                                            <p:column headerText="Nombre minimum">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{item.nbrMin}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{item.nbrMin}" style="width:100%" label="Year"/></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                                            <p:column headerText="Nombre maximum">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{item.nbrMax}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{item.nbrMax}" style="width:100%" label="Year"/></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                                            <p:column headerText="Etablissement">
+                                                <h:outputText value="#{item.etablissement.titre}" />
+                                            </p:column>
+                                            <p:column headerText="Annee">
+                                                <h:outputText value="#{item.annee}" />
+                                            </p:column>
+                                            <p:column style="width:32px">
+                                                <p:rowEditor />
+                                            </p:column>
+                                        </p:dataTable>
+
+                                    </f:view>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <b:commandButton value="Ajouter" look="success" ajax="true" actionListener="#{coeffCalibrageController.prepareCreate()}"  oncomplete="$('.modalPseudoClass1').modal('show')" style="float: right;margin-right: 50px"  />
+                        </div>
+                    </div>
+                </h:form>
+
+            </div>
+
+
+            <ui:include src="newCritereModal.xhtml"/>
+        </ui:define>
+    </ui:composition>
+</html>
+

@@ -21,6 +21,8 @@
                                            var="etudiantItem"
                                            itemValue="#{etudiantItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandeReleveNoteLabel_etat}" for="etat" />
+                        <p:inputText id="etat" value="#{demandeReleveNoteController.selected.etat}" title="#{bundle.EditDemandeReleveNoteTitle_etat}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{demandeReleveNoteController.update}" value="#{bundle.Save}" update="display,:DemandeReleveNoteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandeReleveNoteEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DemandeReleveNoteEditDialog.hide()"/>

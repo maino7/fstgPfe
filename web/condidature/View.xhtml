@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CondidatureViewDlg" widgetVar="CondidatureViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCondidatureTitle}">
+            <h:form id="CondidatureViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{condidatureController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCondidatureLabel_anneUniversitaire}"/>
+                        <h:outputText value="#{condidatureController.selected.anneUniversitaire}" title="#{bundle.ViewCondidatureTitle_anneUniversitaire}"/>
+                        <h:outputText value="#{bundle.ViewCondidatureLabel_id}"/>
+                        <h:outputText value="#{condidatureController.selected.id}" title="#{bundle.ViewCondidatureTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCondidatureLabel_candidat}"/>
+                        <h:outputText value="#{condidatureController.selected.candidat}" title="#{bundle.ViewCondidatureTitle_candidat}"/>
+                        <h:outputText value="#{bundle.ViewCondidatureLabel_typeInscription}"/>
+                        <h:outputText value="#{condidatureController.selected.typeInscription}" title="#{bundle.ViewCondidatureTitle_typeInscription}"/>
+                        <h:outputText value="#{bundle.ViewCondidatureLabel_condidatureValide}"/>
+                        <h:outputText value="#{condidatureController.selected.condidatureValide}" title="#{bundle.ViewCondidatureTitle_condidatureValide}"/>
+                        <h:outputText value="#{bundle.ViewCondidatureLabel_pieceValide}"/>
+                        <h:outputText value="#{condidatureController.selected.pieceValide}" title="#{bundle.ViewCondidatureTitle_pieceValide}"/>
+                        <h:outputText value="#{bundle.ViewCondidatureLabel_moyenneEcrit}"/>
+                        <h:outputText value="#{condidatureController.selected.moyenneEcrit}" title="#{bundle.ViewCondidatureTitle_moyenneEcrit}"/>
+                        <h:outputText value="#{bundle.ViewCondidatureLabel_moyenneOrale}"/>
+                        <h:outputText value="#{condidatureController.selected.moyenneOrale}" title="#{bundle.ViewCondidatureTitle_moyenneOrale}"/>
+                        <h:outputText value="#{bundle.ViewCondidatureLabel_moyenneGenerale}"/>
+                        <h:outputText value="#{condidatureController.selected.moyenneGenerale}" title="#{bundle.ViewCondidatureTitle_moyenneGenerale}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CondidatureViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

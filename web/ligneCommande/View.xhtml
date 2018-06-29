@@ -12,14 +12,14 @@
             <h:form id="LigneCommandeViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ligneCommandeController.selected != null}">
-                        <h:outputText value="#{bundle.ViewLigneCommandeLabel_quantite}"/>
-                        <h:outputText value="#{ligneCommandeController.selected.quantite}" title="#{bundle.ViewLigneCommandeTitle_quantite}"/>
                         <h:outputText value="#{bundle.ViewLigneCommandeLabel_commande}"/>
                         <h:outputText value="#{ligneCommandeController.selected.commande}" title="#{bundle.ViewLigneCommandeTitle_commande}"/>
-                        <h:outputText value="#{bundle.ViewLigneCommandeLabel_produit}"/>
-                        <h:outputText value="#{ligneCommandeController.selected.produit}" title="#{bundle.ViewLigneCommandeTitle_produit}"/>
                         <h:outputText value="#{bundle.ViewLigneCommandeLabel_id}"/>
                         <h:outputText value="#{ligneCommandeController.selected.id}" title="#{bundle.ViewLigneCommandeTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewLigneCommandeLabel_quantite}"/>
+                        <h:outputText value="#{ligneCommandeController.selected.quantite}" title="#{bundle.ViewLigneCommandeTitle_quantite}"/>
+                        <h:outputText value="#{bundle.ViewLigneCommandeLabel_produit}"/>
+                        <h:outputText value="#{ligneCommandeController.selected.produit}" title="#{bundle.ViewLigneCommandeTitle_produit}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="LigneCommandeViewDialog.hide()"/>
                 </h:panelGroup>

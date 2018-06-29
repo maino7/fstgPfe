@@ -20,19 +20,12 @@
                                            var="etudiantItem"
                                            itemValue="#{etudiantItem}"/>
                         </p:selectOneMenu>
-
                         <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_description}" for="description" />
                         <p:inputText id="description" value="#{demandeDerogationController.selected.description}" title="#{bundle.CreateDemandeDerogationTitle_description}" />
                         <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_anne_baccalaureat}" for="anne_baccalaureat" />
                         <p:inputText id="anne_baccalaureat" value="#{demandeDerogationController.selected.anne_baccalaureat}" title="#{bundle.CreateDemandeDerogationTitle_anne_baccalaureat}" />
                         <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_anne_etude}" for="anne_etude" />
-                        <p:selectOneMenu id="anne_etude" value="#{demandeDerogationController.selected.anne_etude}" >
-                            <f:selectItem itemValue="0" itemLabel="Select Année d'etude "/>
-                            <f:selectItem itemValue="1" itemLabel="Premier Année"/>
-                            <f:selectItem itemValue="2" itemLabel="Deuxieme Année"/>
-                            <f:selectItem itemValue="3" itemLabel="Troixieme Année"/>
-                            <f:selectItem itemValue="4" itemLabel="Quatrieme Année"/>
-                        </p:selectOneMenu>
+                        <p:inputText id="anne_etude" value="#{demandeDerogationController.selected.anne_etude}" title="#{bundle.CreateDemandeDerogationTitle_anne_etude}" />
                         <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_nombreSemestresValide}" for="nombreSemestresValide" />
                         <p:inputText id="nombreSemestresValide" value="#{demandeDerogationController.selected.nombreSemestresValide}" title="#{bundle.CreateDemandeDerogationTitle_nombreSemestresValide}" />
                         <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_nombreMdulesValide}" for="nombreMdulesValide" />
@@ -43,6 +36,8 @@
                                            var="filiereItem"
                                            itemValue="#{filiereItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDemandeDerogationLabel_etat}" for="etat" />
+                        <p:inputText id="etat" value="#{demandeDerogationController.selected.etat}" title="#{bundle.CreateDemandeDerogationTitle_etat}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{demandeDerogationController.create}" value="#{bundle.Save}" update="display,:DemandeDerogationListForm:datalist,:growl" oncomplete="handleSubmit(args,'DemandeDerogationCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DemandeDerogationCreateDialog.hide()"/>

@@ -12,6 +12,8 @@
             <h:form id="DemandeEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{demandeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditDemandeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{demandeController.selected.id}" title="#{bundle.EditDemandeTitle_id}" />
                         <p:outputLabel value="#{bundle.EditDemandeLabel_etudiant}" for="etudiant" />
                         <p:selectOneMenu id="etudiant" value="#{demandeController.selected.etudiant}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -19,6 +21,10 @@
                                            var="etudiantItem"
                                            itemValue="#{etudiantItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditDemandeLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{demandeController.selected.description}" title="#{bundle.EditDemandeTitle_description}" />
+                        <p:outputLabel value="#{bundle.EditDemandeLabel_etat}" for="etat" />
+                        <p:inputText id="etat" value="#{demandeController.selected.etat}" title="#{bundle.EditDemandeTitle_etat}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{demandeController.update}" value="#{bundle.Save}" update="display,:DemandeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandeEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DemandeEditDialog.hide()"/>

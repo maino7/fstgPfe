@@ -26,13 +26,16 @@ public class Filiere implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String libelle;
     private String abreviation;
     private String objectif;
     @OneToMany(mappedBy = "filiere")
     private List<Enseignant> enseignants;
-    private int typeFiliere ;//1:TC ,2:licence ,3:cycle ,4:master
+    private int typeFiliere ;// laisser vide
     private int typeFormation ; // 1=>Initial , 2==> continue
+    @ManyToOne
+    private Section section;
     @ManyToOne
     private Departement departement;
     @OneToOne
@@ -44,6 +47,8 @@ public class Filiere implements Serializable {
 
     @OneToMany(mappedBy = "filiere")
     private List<Etudiant> etudiants;
+    @OneToMany(mappedBy = "filiere")
+    private List<Condidature> condidatures;
     
     
     public Filiere() {
@@ -56,6 +61,15 @@ public class Filiere implements Serializable {
     public void setSemestres(List<Semestre> semestres) {
         this.semestres = semestres;
     }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+    
 
     public List<Etudiant> getEtudiants() {
         return etudiants;
@@ -169,7 +183,7 @@ public class Filiere implements Serializable {
 
     @Override
     public String toString() {
-        return libelle;
+        return abreviation;
     }
 
 }

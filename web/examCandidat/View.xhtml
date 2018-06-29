@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ExamCandidatViewDlg" widgetVar="ExamCandidatViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewExamCandidatTitle}">
+            <h:form id="ExamCandidatViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{examCandidatController.selected != null}">
+                        <h:outputText value="#{bundle.ViewExamCandidatLabel_noteCalc}"/>
+                        <h:outputText value="#{examCandidatController.selected.noteCalc}" title="#{bundle.ViewExamCandidatTitle_noteCalc}"/>
+                        <h:outputText value="#{bundle.ViewExamCandidatLabel_condidature}"/>
+                        <h:outputText value="#{examCandidatController.selected.condidature}" title="#{bundle.ViewExamCandidatTitle_condidature}"/>
+                        <h:outputText value="#{bundle.ViewExamCandidatLabel_matiereConcour}"/>
+                        <h:outputText value="#{examCandidatController.selected.matiereConcour}" title="#{bundle.ViewExamCandidatTitle_matiereConcour}"/>
+                        <h:outputText value="#{bundle.ViewExamCandidatLabel_id}"/>
+                        <h:outputText value="#{examCandidatController.selected.id}" title="#{bundle.ViewExamCandidatTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ExamCandidatViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

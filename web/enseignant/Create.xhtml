@@ -14,8 +14,6 @@
                     <p:panelGrid columns="2" rendered="#{enseignantController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateEnseignantLabel_filiere}" for="filiere" />
                         <p:selectOneMenu id="filiere" value="#{enseignantController.selected.filiere}" >
-
-                            <f:selectItem itemValue="#{null}" itemLabel="select..."/>
                             <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
                                            var="filiereItem"
                                            itemValue="#{filiereItem}"/>
@@ -34,8 +32,6 @@
                         <p:inputText id="grade" value="#{enseignantController.selected.grade}" title="#{bundle.CreateEnseignantTitle_grade}" />
                         <p:outputLabel value="#{bundle.CreateEnseignantLabel_departement}" for="departement" />
                         <p:selectOneMenu id="departement" value="#{enseignantController.selected.departement}" >
-                            <f:selectItem itemValue="#{null}" itemLabel="select..."/>
-
                             <f:selectItems value="#{departementController.itemsAvailableSelectOne}"
                                            var="departementItem"
                                            itemValue="#{departementItem}"/>
@@ -46,8 +42,6 @@
                         <p:inputText id="prenom" value="#{enseignantController.selected.prenom}" title="#{bundle.CreateEnseignantTitle_prenom}" />
                         <p:outputLabel value="#{bundle.CreateEnseignantLabel_email}" for="email" />
                         <p:inputText id="email" value="#{enseignantController.selected.email}" title="#{bundle.CreateEnseignantTitle_email}" />
-                        <p:outputLabel value="ADMIN" for="admine" />
-                        <p:inputText id="admine" value="#{enseignantController.selected.admine}" title="#{bundle.CreateEnseignantTitle_cin}" />
                         <p:outputLabel value="#{bundle.CreateEnseignantLabel_cin}" for="cin" />
                         <p:inputText id="cin" value="#{enseignantController.selected.cin}" title="#{bundle.CreateEnseignantTitle_cin}" />
                     </p:panelGrid>

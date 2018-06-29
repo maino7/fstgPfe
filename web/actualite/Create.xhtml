@@ -8,60 +8,44 @@
 
     <ui:composition>
 
-        <p:dialog id="ActualiteCreateDlg" widgetVar="ActualiteCreateDialog" modal="true" resizable="false" appendTo="@(body)" maximizable="true"   >
-            <h:form id="ActualiteCreateForm" enctype="multipart/form-data">
+        <p:dialog id="ActualiteCreateDlg" widgetVar="ActualiteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateActualiteTitle}">
+            <h:form id="ActualiteCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{actualiteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateActualiteLabel_path}" for="path" />
+                        <p:inputText id="path" value="#{actualiteController.selected.path}" title="#{bundle.CreateActualiteTitle_path}" />
+                        <p:outputLabel value="#{bundle.CreateActualiteLabel_file}" for="file" />
+                        <p:inputText id="file" value="#{actualiteController.selected.file}" title="#{bundle.CreateActualiteTitle_file}" />
+                        <p:outputLabel value="#{bundle.CreateActualiteLabel_etat}" for="etat" />
+                        <p:inputText id="etat" value="#{actualiteController.selected.etat}" title="#{bundle.CreateActualiteTitle_etat}" />
+                        <p:outputLabel value="#{bundle.CreateActualiteLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{actualiteController.selected.description}" title="#{bundle.CreateActualiteTitle_description}" />
                         <p:outputLabel value="#{bundle.CreateActualiteLabel_position}" for="position" />
-                        <p:selectOneMenu id="position" value="#{actualiteController.selected.position}" title="#{bundle.CreateArticleTitle_position}" >
-                            <f:selectItem itemValue="#{null}" itemLabel="Select your Type"/>
-                            <f:selectItem itemValue="1" itemLabel="Gauche"/>
-                            <f:selectItem itemValue="2" itemLabel="Milieu "/>
-                            <f:selectItem itemValue="3" itemLabel="Droit"/>
-                        </p:selectOneMenu>
-                         <p:outputLabel value="#{bundle.CreateActualiteLabel_titre}" for="titre" />
+                        <p:inputText id="position" value="#{actualiteController.selected.position}" title="#{bundle.CreateActualiteTitle_position}" />
+                        <p:outputLabel value="#{bundle.CreateActualiteLabel_contenue}" for="contenue" />
+                        <p:inputText id="contenue" value="#{actualiteController.selected.contenue}" title="#{bundle.CreateActualiteTitle_contenue}" />
+                        <p:outputLabel value="#{bundle.CreateActualiteLabel_titre}" for="titre" />
                         <p:inputText id="titre" value="#{actualiteController.selected.titre}" title="#{bundle.CreateActualiteTitle_titre}" />
-                        
-                         <p:outputLabel value="images" for="img" />
-                         <p:fileUpload id="img" mode="simple" value="#{actualiteController.uploadedFile}"  sizeLimit="10000000" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$" ></p:fileUpload>
-
-                         <p:outputLabel value="#{bundle.CreateActualiteLabel_contenue}" for="contenue" />
-                         <p:editor id="contenue" value="#{actualiteController.selected.contenue}"   title="#{bundle.CreateActualiteTitle_contenue}"  />
-                        <p:outputLabel value="Description" for="description" />
-                        <p:inputText id="description" value="#{actualiteController.selected.description}" title="description" />
-                       
                         <p:outputLabel value="#{bundle.CreateActualiteLabel_priority}" for="priority" />
-                         <p:selectOneMenu id="priority" value="#{actualiteController.selected.priority}" title="#{bundle.CreateArticleTitle_priority}" >
-                            <f:selectItem itemValue="#{null}" itemLabel="Select your Priority"/>
-                            <f:selectItem itemValue="0" itemLabel="Max"/>
-                            <f:selectItem itemValue="1" itemLabel="Trés Fort"/>
-                            <f:selectItem itemValue="2" itemLabel="Fort"/>
-                            <f:selectItem itemValue="3" itemLabel="Normal"/>
-                            <f:selectItem itemValue="4" itemLabel="Faible"/>
-                            <f:selectItem itemValue="5" itemLabel="Trés Faible"/>
-                            <f:selectItem itemValue="6" itemLabel="Min"/>
-                        </p:selectOneMenu>
+                        <p:inputText id="priority" value="#{actualiteController.selected.priority}" title="#{bundle.CreateActualiteTitle_priority}" />
                         <p:outputLabel value="#{bundle.CreateActualiteLabel_auteur}" for="auteur" />
                         <p:selectOneMenu id="auteur" value="#{actualiteController.selected.auteur}" >
-                            <f:selectItem itemLabel="--Select--" itemValue="#{null}"/>
                             <f:selectItems value="#{enseignantController.itemsAvailableSelectOne}"
                                            var="auteurItem"
                                            itemValue="#{auteurItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateActualiteLabel_dateCreation}" for="dateCreation"/>
-                        <p:calendar id="dateCreation" pattern="MM/dd/yyyy" disabled="true" value="#{actualiteController.selected.dateCreation}" title="#{bundle.EditActualiteTitle_dateCreation}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateActualiteLabel_dateCreation}" for="dateCreation" />
+                        <p:calendar id="dateCreation" pattern="MM/dd/yyyy" value="#{actualiteController.selected.dateCreation}" title="#{bundle.EditActualiteTitle_dateCreation}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateActualiteLabel_dateDebut}" for="dateDebut" />
                         <p:calendar id="dateDebut" pattern="MM/dd/yyyy" value="#{actualiteController.selected.dateDebut}" title="#{bundle.EditActualiteTitle_dateDebut}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateActualiteLabel_dateExpiration}" for="dateExpiration" />
                         <p:calendar id="dateExpiration" pattern="MM/dd/yyyy" value="#{actualiteController.selected.dateExpiration}" title="#{bundle.EditActualiteTitle_dateExpiration}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateActualiteLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{actualiteController.selected.id}" title="#{bundle.CreateActualiteTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{actualiteController.create}" ajax="false" value="Enregistrer" update="display,:ActualiteListForm:datalist,:growl"  oncomplete="handleSubmit(args,'ActualiteCreateDialog');"/>
-                    <p:commandButton value="Annuler" onclick="ActualiteCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{actualiteController.create}" value="#{bundle.Save}" update="display,:ActualiteListForm:datalist,:growl" oncomplete="handleSubmit(args,'ActualiteCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ActualiteCreateDialog.hide()"/>
                 </h:panelGroup>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
             </h:form>
         </p:dialog>
 

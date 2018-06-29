@@ -12,14 +12,12 @@
             <h:form id="PieceEtudiantViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{pieceEtudiantController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPieceEtudiantLabel_condidature}"/>
+                        <h:outputText value="#{pieceEtudiantController.selected.condidature}" title="#{bundle.ViewPieceEtudiantTitle_condidature}"/>
+                        <h:outputText value="#{bundle.ViewPieceEtudiantLabel_piecesParNiveau}"/>
+                        <h:outputText value="#{pieceEtudiantController.selected.piecesParNiveau}" title="#{bundle.ViewPieceEtudiantTitle_piecesParNiveau}"/>
                         <h:outputText value="#{bundle.ViewPieceEtudiantLabel_id}"/>
                         <h:outputText value="#{pieceEtudiantController.selected.id}" title="#{bundle.ViewPieceEtudiantTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewPieceEtudiantLabel_nombre}"/>
-                        <h:outputText value="#{pieceEtudiantController.selected.nombre}" title="#{bundle.ViewPieceEtudiantTitle_nombre}"/>
-                        <h:outputText value="#{bundle.ViewPieceEtudiantLabel_etudiantMaster}"/>
-                        <h:outputText value="#{pieceEtudiantController.selected.etudiantMaster}" title="#{bundle.ViewPieceEtudiantTitle_etudiantMaster}"/>
-                        <h:outputText value="#{bundle.ViewPieceEtudiantLabel_piece}"/>
-                        <h:outputText value="#{pieceEtudiantController.selected.piece}" title="#{bundle.ViewPieceEtudiantTitle_piece}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="PieceEtudiantViewDialog.hide()"/>
                 </h:panelGroup>

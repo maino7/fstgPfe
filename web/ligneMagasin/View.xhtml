@@ -12,16 +12,16 @@
             <h:form id="LigneMagasinViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ligneMagasinController.selected != null}">
-                        <h:outputText value="#{bundle.ViewLigneMagasinLabel_quantite}"/>
-                        <h:outputText value="#{ligneMagasinController.selected.quantite}" title="#{bundle.ViewLigneMagasinTitle_quantite}"/>
                         <h:outputText value="#{bundle.ViewLigneMagasinLabel_quantitaDef}"/>
                         <h:outputText value="#{ligneMagasinController.selected.quantitaDef}" title="#{bundle.ViewLigneMagasinTitle_quantitaDef}"/>
-                        <h:outputText value="#{bundle.ViewLigneMagasinLabel_produit}"/>
-                        <h:outputText value="#{ligneMagasinController.selected.produit}" title="#{bundle.ViewLigneMagasinTitle_produit}"/>
                         <h:outputText value="#{bundle.ViewLigneMagasinLabel_magasin}"/>
                         <h:outputText value="#{ligneMagasinController.selected.magasin}" title="#{bundle.ViewLigneMagasinTitle_magasin}"/>
                         <h:outputText value="#{bundle.ViewLigneMagasinLabel_id}"/>
                         <h:outputText value="#{ligneMagasinController.selected.id}" title="#{bundle.ViewLigneMagasinTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewLigneMagasinLabel_quantite}"/>
+                        <h:outputText value="#{ligneMagasinController.selected.quantite}" title="#{bundle.ViewLigneMagasinTitle_quantite}"/>
+                        <h:outputText value="#{bundle.ViewLigneMagasinLabel_produit}"/>
+                        <h:outputText value="#{ligneMagasinController.selected.produit}" title="#{bundle.ViewLigneMagasinTitle_produit}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="LigneMagasinViewDialog.hide()"/>
                 </h:panelGroup>

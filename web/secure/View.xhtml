@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SecureViewDlg" widgetVar="SecureViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSecureTitle}">
+            <h:form id="SecureViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{secureController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSecureLabel_quest}"/>
+                        <h:outputText value="#{secureController.selected.quest}" title="#{bundle.ViewSecureTitle_quest}"/>
+                        <h:outputText value="#{bundle.ViewSecureLabel_resp}"/>
+                        <h:outputText value="#{secureController.selected.resp}" title="#{bundle.ViewSecureTitle_resp}"/>
+                        <h:outputText value="#{bundle.ViewSecureLabel_etudiant}"/>
+                        <h:outputText value="#{secureController.selected.etudiant}" title="#{bundle.ViewSecureTitle_etudiant}"/>
+                        <h:outputText value="#{bundle.ViewSecureLabel_enseignant}"/>
+                        <h:outputText value="#{secureController.selected.enseignant}" title="#{bundle.ViewSecureTitle_enseignant}"/>
+                        <h:outputText value="#{bundle.ViewSecureLabel_id}"/>
+                        <h:outputText value="#{secureController.selected.id}" title="#{bundle.ViewSecureTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SecureViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

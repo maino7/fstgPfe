@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MentionDiplomeEditDlg" widgetVar="MentionDiplomeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMentionDiplomeTitle}">
+            <h:form id="MentionDiplomeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mentionDiplomeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMentionDiplomeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{mentionDiplomeController.selected.id}" title="#{bundle.EditMentionDiplomeTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditMentionDiplomeLabel_titre}" for="titre" />
+                        <p:inputText id="titre" value="#{mentionDiplomeController.selected.titre}" title="#{bundle.EditMentionDiplomeTitle_titre}" />
+                        <p:outputLabel value="#{bundle.EditMentionDiplomeLabel_numApg}" for="numApg" />
+                        <p:inputText id="numApg" value="#{mentionDiplomeController.selected.numApg}" title="#{bundle.EditMentionDiplomeTitle_numApg}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mentionDiplomeController.update}" value="#{bundle.Save}" update="display,:MentionDiplomeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MentionDiplomeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MentionDiplomeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

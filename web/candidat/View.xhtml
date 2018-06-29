@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CandidatViewDlg" widgetVar="CandidatViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCandidatTitle}">
+            <h:form id="CandidatViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{candidatController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCandidatLabel_cin}"/>
+                        <h:outputText value="#{candidatController.selected.cin}" title="#{bundle.ViewCandidatTitle_cin}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_etudiant}"/>
+                        <h:outputText value="#{candidatController.selected.etudiant}" title="#{bundle.ViewCandidatTitle_etudiant}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_condidature}"/>
+                        <h:outputText value="#{candidatController.selected.condidature}" title="#{bundle.ViewCandidatTitle_condidature}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_etablissement}"/>
+                        <h:outputText value="#{candidatController.selected.etablissement}" title="#{bundle.ViewCandidatTitle_etablissement}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_nomLat}"/>
+                        <h:outputText value="#{candidatController.selected.nomLat}" title="#{bundle.ViewCandidatTitle_nomLat}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_prenomLat}"/>
+                        <h:outputText value="#{candidatController.selected.prenomLat}" title="#{bundle.ViewCandidatTitle_prenomLat}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_sexe}"/>
+                        <h:outputText value="#{candidatController.selected.sexe}" title="#{bundle.ViewCandidatTitle_sexe}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_email}"/>
+                        <h:outputText value="#{candidatController.selected.email}" title="#{bundle.ViewCandidatTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_telephone}"/>
+                        <h:outputText value="#{candidatController.selected.telephone}" title="#{bundle.ViewCandidatTitle_telephone}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_nomAr}"/>
+                        <h:outputText value="#{candidatController.selected.nomAr}" title="#{bundle.ViewCandidatTitle_nomAr}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_prenomAr}"/>
+                        <h:outputText value="#{candidatController.selected.prenomAr}" title="#{bundle.ViewCandidatTitle_prenomAr}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_dateNaissance}"/>
+                        <h:outputText value="#{candidatController.selected.dateNaissance}" title="#{bundle.ViewCandidatTitle_dateNaissance}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_lieuNaissance}"/>
+                        <h:outputText value="#{candidatController.selected.lieuNaissance}" title="#{bundle.ViewCandidatTitle_lieuNaissance}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_anneeBac}"/>
+                        <h:outputText value="#{candidatController.selected.anneeBac}" title="#{bundle.ViewCandidatTitle_anneeBac}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_dateInscription}"/>
+                        <h:outputText value="#{candidatController.selected.dateInscription}" title="#{bundle.ViewCandidatTitle_dateInscription}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_photo}"/>
+                        <h:outputText value="#{candidatController.selected.photo}" title="#{bundle.ViewCandidatTitle_photo}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_ip}"/>
+                        <h:outputText value="#{candidatController.selected.ip}" title="#{bundle.ViewCandidatTitle_ip}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_adresse}"/>
+                        <h:outputText value="#{candidatController.selected.adresse}" title="#{bundle.ViewCandidatTitle_adresse}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_lieuAr}"/>
+                        <h:outputText value="#{candidatController.selected.lieuAr}" title="#{bundle.ViewCandidatTitle_lieuAr}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_lastPdf}"/>
+                        <h:outputText value="#{candidatController.selected.lastPdf}" title="#{bundle.ViewCandidatTitle_lastPdf}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_anneeInscriptionEnsSup}"/>
+                        <h:outputText value="#{candidatController.selected.anneeInscriptionEnsSup}" title="#{bundle.ViewCandidatTitle_anneeInscriptionEnsSup}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_anneeInscriptionUniv}"/>
+                        <h:outputText value="#{candidatController.selected.anneeInscriptionUniv}" title="#{bundle.ViewCandidatTitle_anneeInscriptionUniv}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_anneeInscriptionEtab}"/>
+                        <h:outputText value="#{candidatController.selected.anneeInscriptionEtab}" title="#{bundle.ViewCandidatTitle_anneeInscriptionEtab}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_etablissementPreInsc}"/>
+                        <h:outputText value="#{candidatController.selected.etablissementPreInsc}" title="#{bundle.ViewCandidatTitle_etablissementPreInsc}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_secret}"/>
+                        <h:outputText value="#{candidatController.selected.secret}" title="#{bundle.ViewCandidatTitle_secret}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_optionBac}"/>
+                        <h:outputText value="#{candidatController.selected.optionBac}" title="#{bundle.ViewCandidatTitle_optionBac}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_dernierDiplome}"/>
+                        <h:outputText value="#{candidatController.selected.dernierDiplome}" title="#{bundle.ViewCandidatTitle_dernierDiplome}"/>
+                        <h:outputText value="#{bundle.ViewCandidatLabel_cne}"/>
+                        <h:outputText value="#{candidatController.selected.cne}" title="#{bundle.ViewCandidatTitle_cne}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CandidatViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

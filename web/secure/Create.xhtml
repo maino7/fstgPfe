@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SecureCreateDlg" widgetVar="SecureCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSecureTitle}">
+            <h:form id="SecureCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{secureController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSecureLabel_quest}" for="quest" />
+                        <p:inputText id="quest" value="#{secureController.selected.quest}" title="#{bundle.CreateSecureTitle_quest}" />
+                        <p:outputLabel value="#{bundle.CreateSecureLabel_resp}" for="resp" />
+                        <p:inputText id="resp" value="#{secureController.selected.resp}" title="#{bundle.CreateSecureTitle_resp}" />
+                        <p:outputLabel value="#{bundle.CreateSecureLabel_etudiant}" for="etudiant" />
+                        <p:selectOneMenu id="etudiant" value="#{secureController.selected.etudiant}" >
+                            <f:selectItems value="#{etudiantController.itemsAvailableSelectOne}"
+                                           var="etudiantItem"
+                                           itemValue="#{etudiantItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSecureLabel_enseignant}" for="enseignant" />
+                        <p:selectOneMenu id="enseignant" value="#{secureController.selected.enseignant}" >
+                            <f:selectItems value="#{enseignantController.itemsAvailableSelectOne}"
+                                           var="enseignantItem"
+                                           itemValue="#{enseignantItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSecureLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{secureController.selected.id}" title="#{bundle.CreateSecureTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{secureController.create}" value="#{bundle.Save}" update="display,:SecureListForm:datalist,:growl" oncomplete="handleSubmit(args,'SecureCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SecureCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

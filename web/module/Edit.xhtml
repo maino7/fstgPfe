@@ -12,23 +12,6 @@
             <h:form id="ModuleEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{moduleController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditModuleLabel_filiere}" for="filiere" />
-                        <p:selectOneMenu id="filiere" value="#{moduleController.selected.filiere}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
-                                           var="filiereItem"
-                                           itemValue="#{filiereItem}"/>
-                            <p:ajax process="filiere" update="semestre"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditModuleLabel_semestre}" for="semestre" />
-                        <p:selectOneMenu id="semestre" value="#{moduleController.selected.semestre}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{moduleController.semestresByFiliere()}"
-                                           var="semestreItem"
-                                           itemValue="#{semestreItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditModuleLabel_nom}" for="nom" />
-                        <p:inputText id="nom" value="#{moduleController.selected.nom}" title="#{bundle.EditModuleTitle_nom}" />
                         <p:outputLabel value="#{bundle.EditModuleLabel_enseignant}" for="enseignant" />
                         <p:selectOneMenu id="enseignant" value="#{moduleController.selected.enseignant}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -36,8 +19,26 @@
                                            var="enseignantItem"
                                            itemValue="#{enseignantItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditModuleLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{moduleController.selected.id}" title="#{bundle.EditModuleTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditModuleLabel_semestre}" for="semestre" />
+                        <p:selectOneMenu id="semestre" value="#{moduleController.selected.semestre}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"
+                                           var="semestreItem"
+                                           itemValue="#{semestreItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditModuleLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{moduleController.selected.nom}" title="#{bundle.EditModuleTitle_nom}" />
+                        <p:outputLabel value="#{bundle.EditModuleLabel_filiere}" for="filiere" />
+                        <p:selectOneMenu id="filiere" value="#{moduleController.selected.filiere}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
+                                           var="filiereItem"
+                                           itemValue="#{filiereItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{moduleController.update}" value="#{bundle.Save}" update="display,:ModuleListForm:datalist" oncomplete="handleSubmit(args, 'ModuleEditDialog');"/>
+                    <p:commandButton actionListener="#{moduleController.update}" value="#{bundle.Save}" update="display,:ModuleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ModuleEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ModuleEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

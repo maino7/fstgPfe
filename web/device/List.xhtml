@@ -41,6 +41,12 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDeviceTitle_userStock}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userStock}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDeviceTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>

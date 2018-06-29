@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConcourExamMatiereEditDlg" widgetVar="ConcourExamMatiereEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditConcourExamMatiereTitle}">
+            <h:form id="ConcourExamMatiereEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{concourExamMatiereController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditConcourExamMatiereLabel_coeff}" for="coeff" />
+                        <p:inputText id="coeff" value="#{concourExamMatiereController.selected.coeff}" title="#{bundle.EditConcourExamMatiereTitle_coeff}" />
+                        <p:outputLabel value="#{bundle.EditConcourExamMatiereLabel_dateExam}" for="dateExam" />
+                        <p:calendar id="dateExam" pattern="MM/dd/yyyy" value="#{concourExamMatiereController.selected.dateExam}" title="#{bundle.EditConcourExamMatiereTitle_dateExam}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditConcourExamMatiereLabel_matiereConcour}" for="matiereConcour" />
+                        <p:selectOneMenu id="matiereConcour" value="#{concourExamMatiereController.selected.matiereConcour}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{matiereConcourController.itemsAvailableSelectOne}"
+                                           var="matiereConcourItem"
+                                           itemValue="#{matiereConcourItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditConcourExamMatiereLabel_concourNiveau}" for="concourNiveau" />
+                        <p:selectOneMenu id="concourNiveau" value="#{concourExamMatiereController.selected.concourNiveau}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{concourNiveauController.itemsAvailableSelectOne}"
+                                           var="concourNiveauItem"
+                                           itemValue="#{concourNiveauItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditConcourExamMatiereLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{concourExamMatiereController.selected.id}" title="#{bundle.EditConcourExamMatiereTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{concourExamMatiereController.update}" value="#{bundle.Save}" update="display,:ConcourExamMatiereListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ConcourExamMatiereEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConcourExamMatiereEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

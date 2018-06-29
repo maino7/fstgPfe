@@ -2,48 +2,47 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="Pfe_FstgProjectPU" transaction-type="JTA">
     <jta-data-source>java:app/pfe_fstgProject</jta-data-source>
-    <class>bean.Article</class>
-    <class>bean.Departement</class>
-    <class>bean.Enseignant</class>
-    <class>bean.Filiere</class>
-    <class>bean.Laboratoire</class>
-    <class>bean.Module</class>
-    <class>bean.Ouvrage</class>
-    <class>bean.Rubrique</class>
-    <class>bean.Semestre</class>
-    <class>bean.EquipeRecherche</class>
-    <class>bean.Etudiant</class>
-    <class>bean.ThemeRecherche</class>
-    <class>bean.Message</class>
-    <class>bean.Annee</class>
-    <class>bean.Demande</class>
-    <class>bean.DemandeItem</class>
-    <class>bean.Device</class>
-    <class>bean.NoteAnnuelle</class>
-    <class>bean.NoteModulaire</class>
-    <class>bean.NoteSemestre</class>
     <class>bean.Academie</class>
     <class>bean.Actualite</class>
     <class>bean.AnneUniversitaire</class>
+    <class>bean.Annee</class>
     <class>bean.AnneeInscription</class>
+    <class>bean.Article</class>
+    <class>bean.Candidat</class>
     <class>bean.Categorie</class>
+    <class>bean.CoeffCalibrage</class>
     <class>bean.Commande</class>
+    <class>bean.ConcourExamMatiere</class>
+    <class>bean.ConcourNiveau</class>
+    <class>bean.ConcourOral</class>
+    <class>bean.Condidature</class>
+    <class>bean.Demande</class>
     <class>bean.DemandeAttestaion</class>
     <class>bean.DemandeDerogation</class>
+    <class>bean.DemandeItem</class>
     <class>bean.DemandeLicence</class>
     <class>bean.DemandeLicenceItem</class>
     <class>bean.DemandeReleveNote</class>
     <class>bean.DemandeReleveNoteItem</class>
+    <class>bean.Departement</class>
     <class>bean.DernierDiplome</class>
+    <class>bean.Device</class>
+    <class>bean.Enseignant</class>
     <class>bean.EntiteAdministrative</class>
+    <class>bean.EquipeRecherche</class>
     <class>bean.EtablissementType</class>
+    <class>bean.Etudiant</class>
     <class>bean.EtudiantMaster</class>
+    <class>bean.ExamCandidat</class>
     <class>bean.ExpressionBesoin</class>
     <class>bean.Facture</class>
+    <class>bean.Filiere</class>
     <class>bean.FiliereMaster</class>
     <class>bean.Fournisseur</class>
+    <class>bean.Laboratoire</class>
     <class>bean.Licence</class>
     <class>bean.Lieu</class>
+    <class>bean.Ligne</class>
     <class>bean.LigneCommande</class>
     <class>bean.LigneExpressionBesoin</class>
     <class>bean.LigneFacture</class>
@@ -54,24 +53,39 @@
     <class>bean.Lycee</class>
     <class>bean.Magasin</class>
     <class>bean.Marque</class>
-    <class>bean.MentionBac</class>
+    <class>bean.MatiereBac</class>
+    <class>bean.MatiereConcour</class>
+    <class>bean.MentionDiplome</class>
+    <class>bean.Message</class>
+    <class>bean.Module</class>
+    <class>bean.Niveau</class>
+    <class>bean.NoteAnnuelle</class>
+    <class>bean.NoteModulaire</class>
+    <class>bean.NoteSemestre</class>
     <class>bean.OptionBac</class>
+    <class>bean.Ouvrage</class>
     <class>bean.Pays</class>
     <class>bean.Piece</class>
     <class>bean.PieceEtudiant</class>
+    <class>bean.PiecesParNiveau</class>
     <class>bean.Produit</class>
     <class>bean.Profession</class>
     <class>bean.Pv</class>
     <class>bean.PvNoteModulaireItem</class>
     <class>bean.PvNoteSemestreItem</class>
     <class>bean.Reception</class>
+    <class>bean.Region</class>
+    <class>bean.Role</class>
+    <class>bean.Rubrique</class>
+    <class>bean.Section</class>
     <class>bean.Secure</class>
+    <class>bean.Semestre</class>
     <class>bean.Stock</class>
+    <class>bean.ThemeRecherche</class>
+    <class>bean.TimeLine</class>
     <class>bean.User</class>
     <class>bean.UserMaster</class>
     <class>bean.UserStock</class>
-    <class>bean.Role</class>
-    <class>bean.Ligne</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

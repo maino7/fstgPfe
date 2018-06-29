@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CoeffCalibrageEditDlg" widgetVar="CoeffCalibrageEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCoeffCalibrageTitle}">
+            <h:form id="CoeffCalibrageEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{coeffCalibrageController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCoeffCalibrageLabel_coeff}" for="coeff" />
+                        <p:inputText id="coeff" value="#{coeffCalibrageController.selected.coeff}" title="#{bundle.EditCoeffCalibrageTitle_coeff}" />
+                        <p:outputLabel value="#{bundle.EditCoeffCalibrageLabel_noteMinimal}" for="noteMinimal" />
+                        <p:inputText id="noteMinimal" value="#{coeffCalibrageController.selected.noteMinimal}" title="#{bundle.EditCoeffCalibrageTitle_noteMinimal}" />
+                        <p:outputLabel value="#{bundle.EditCoeffCalibrageLabel_nbrMin}" for="nbrMin" />
+                        <p:inputText id="nbrMin" value="#{coeffCalibrageController.selected.nbrMin}" title="#{bundle.EditCoeffCalibrageTitle_nbrMin}" />
+                        <p:outputLabel value="#{bundle.EditCoeffCalibrageLabel_nbrMax}" for="nbrMax" />
+                        <p:inputText id="nbrMax" value="#{coeffCalibrageController.selected.nbrMax}" title="#{bundle.EditCoeffCalibrageTitle_nbrMax}" />
+                        <p:outputLabel value="#{bundle.EditCoeffCalibrageLabel_etablissement}" for="etablissement" />
+                        <p:selectOneMenu id="etablissement" value="#{coeffCalibrageController.selected.etablissement}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{etablissementTypeController.itemsAvailableSelectOne}"
+                                           var="etablissementItem"
+                                           itemValue="#{etablissementItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditCoeffCalibrageLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{coeffCalibrageController.selected.id}" title="#{bundle.EditCoeffCalibrageTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{coeffCalibrageController.update}" value="#{bundle.Save}" update="display,:CoeffCalibrageListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CoeffCalibrageEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CoeffCalibrageEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

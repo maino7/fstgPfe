@@ -6,10 +6,13 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -18,16 +21,52 @@ import javax.persistence.Id;
 @Entity
 public class Academie implements Serializable {
 
+    @OneToMany(mappedBy = "academie")
+    private List<Candidat> candidats;
+
+    @OneToMany(mappedBy = "academie")
+    private List<EtablissementType> etablissementTypes;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String titre;
+    
+    @OneToOne
+    private Region region;
 
     public Long getId() {
         return id;
     }
 
+    public List<Candidat> getCandidats() {
+        return candidats;
+    }
+
+    public void setCandidats(List<Candidat> candidats) {
+        this.candidats = candidats;
+    }
+
+    public List<EtablissementType> getEtablissementTypes() {
+        return etablissementTypes;
+    }
+
+    public void setEtablissementTypes(List<EtablissementType> etablissementTypes) {
+        this.etablissementTypes = etablissementTypes;
+    }
+
+    public Region getRegion() {
+        if (region == null){
+            region = new Region();
+        }
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+   
     public void setId(Long id) {
         this.id = id;
     }

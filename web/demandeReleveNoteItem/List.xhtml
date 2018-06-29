@@ -45,12 +45,6 @@
                             </f:facet>
                             <h:outputText value="#{item.semestre}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDemandeReleveNoteItemTitle_delivred}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.delivred}"/>
-                        </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{demandeReleveNoteItemController.prepareCreate}" update=":DemandeReleveNoteItemCreateForm" oncomplete="PF('DemandeReleveNoteItemCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DemandeReleveNoteItemViewForm" oncomplete="PF('DemandeReleveNoteItemViewDialog').show()" disabled="#{empty demandeReleveNoteItemController.selected}"/>

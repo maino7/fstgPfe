@@ -12,6 +12,8 @@
             <h:form id="EtudiantCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{etudiantController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEtudiantLabel_etatDeust}" for="etatDeust" />
+                        <p:inputText id="etatDeust" value="#{etudiantController.selected.etatDeust}" title="#{bundle.CreateEtudiantTitle_etatDeust}" />
                         <p:outputLabel value="#{bundle.CreateEtudiantLabel_password}" for="password" />
                         <p:inputText id="password" value="#{etudiantController.selected.password}" title="#{bundle.CreateEtudiantTitle_password}" />
                         <p:outputLabel value="#{bundle.CreateEtudiantLabel_nbrCnx}" for="nbrCnx" />
@@ -21,14 +23,6 @@
                             <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"
                                            var="semestreActuelItem"
                                            itemValue="#{semestreActuelItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="Etat du deust" for="etatDeust" />
-                        <p:selectOneMenu id="etatDeust" value="#{etudiantController.selected.etatDeust}" >
-                            <f:selectItem itemLabel="----select---"/>
-                            <f:selectItem itemValue="1" itemLabel="ajrn reinscrit"/>
-                            <f:selectItem itemValue="2" itemLabel="ajrn non reinscrit"/>
-                            <f:selectItem itemValue="3" itemLabel="admis"/>
-                                           
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateEtudiantLabel_dateNaissance}" for="dateNaissance" />
                         <p:calendar id="dateNaissance" pattern="MM/dd/yyyy" value="#{etudiantController.selected.dateNaissance}" title="#{bundle.EditEtudiantTitle_dateNaissance}"  showOn="button"/>

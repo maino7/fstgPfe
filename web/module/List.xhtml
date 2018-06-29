@@ -29,9 +29,21 @@
 
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListModuleTitle_enseignant}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.enseignant}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListModuleTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListModuleTitle_semestre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.semestre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -41,21 +53,9 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListModuleTitle_semestre}"/>
-                            </f:facet>
-                            <h:outputText value="Semestre #{item.semestre.libelle} (#{item.semestre.filiere.libelle})"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListModuleTitle_filiere}"/>
                             </f:facet>
-                            <h:outputText value="#{item.filiere.libelle}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListModuleTitle_enseignant}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.enseignant}"/>
+                            <h:outputText value="#{item.filiere}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{moduleController.prepareCreate}" update=":ModuleCreateForm" oncomplete="PF('ModuleCreateDialog').show()"/>

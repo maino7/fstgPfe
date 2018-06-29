@@ -6,10 +6,14 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -18,12 +22,20 @@ import javax.persistence.Id;
 @Entity
 public class EtablissementType implements Serializable {
 
+    @OneToMany(mappedBy = "etablissement")
+    private List<Candidat> candidats;
+
+    @OneToOne(mappedBy = "etablissement")
+    private CoeffCalibrage coeffCalibrage;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String abrApg;
     private String titre;
+    @ManyToOne
+    private Academie academie;
     
 
     public Long getId() {
@@ -41,6 +53,15 @@ public class EtablissementType implements Serializable {
     public void setAbrApg(String abrApg) {
         this.abrApg = abrApg;
     }
+
+    public Academie getAcademie() {
+        return academie;
+    }
+
+    public void setAcademie(Academie academie) {
+        this.academie = academie;
+    }
+    
 
     public String getTitre() {
         return titre;
@@ -72,7 +93,7 @@ public class EtablissementType implements Serializable {
 
     @Override
     public String toString() {
-        return "bean.EtablissementType[ id=" + id + " ]";
+        return titre;
     }
     
 }

@@ -12,8 +12,16 @@
             <h:form id="ExpressionBesoinCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{expressionBesoinController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateExpressionBesoinLabel_recu}" for="recu" />
+                        <p:inputText id="recu" value="#{expressionBesoinController.selected.recu}" title="#{bundle.CreateExpressionBesoinTitle_recu}" />
                         <p:outputLabel value="#{bundle.CreateExpressionBesoinLabel_id}" for="id" />
                         <p:inputText id="id" value="#{expressionBesoinController.selected.id}" title="#{bundle.CreateExpressionBesoinTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateExpressionBesoinLabel_userStock}" for="userStock" />
+                        <p:selectOneMenu id="userStock" value="#{expressionBesoinController.selected.userStock}" >
+                            <f:selectItems value="#{userStockController.itemsAvailableSelectOne}"
+                                           var="userStockItem"
+                                           itemValue="#{userStockItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateExpressionBesoinLabel_dateExpressionBesoin}" for="dateExpressionBesoin" />
                         <p:calendar id="dateExpressionBesoin" pattern="MM/dd/yyyy" value="#{expressionBesoinController.selected.dateExpressionBesoin}" title="#{bundle.EditExpressionBesoinTitle_dateExpressionBesoin}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateExpressionBesoinLabel_user}" for="user" />

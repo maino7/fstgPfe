@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <b:modal id="amodal" title="Nouvelle Critere" styleClass="modalPseudoClass1" >
+        <h:form class="form-inline"><fieldset>
+                <div class="form-group col-md-12">
+                    <div class="row">
+                        <p:messages id="msgCritere" escape="true" autoUpdate="true" closable="true"/>
+                    </div>
+                    <div class="row">
+                    
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <b:inputText id="placemin" value="#{coeffCalibrageController.selected.nbrMin}" class="form-control" required="true" label="Place min">
+                                    <f:validateDoubleRange  minimum="1"  />
+                                </b:inputText>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <b:inputText value="#{coeffCalibrageController.selected.nbrMax}" class="form-control" label="Place Max">
+                                    <f:validateDoubleRange minimum="1" />
+                                </b:inputText>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <b:inputText value="#{coeffCalibrageController.selected.coeff}" class="form-control" required="true" label="Coefficient de calibrage"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <b:inputText value="#{coeffCalibrageController.selected.annee}" class="form-control" disabled="false" label="Annee"/>
+                            </div>
+                        </div>
+                      
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <label>Etablissement :</label>
+                                <b:selectOneMenu id="etabl" value="#{coeffCalibrageController.selected.etablissement}" required="true" requiredMessage="3afak !">
+                                                <f:selectItem itemLabel="--Selectionner--" itemValue="" />
+                                                <f:selectItems value="#{etablissementTypeController.items}" 
+                                                               var="etablissementType"
+                                                               itemValue="#{etablissementType}"/>
+                                            </b:selectOneMenu>
+                            </div>
+                        </div>
+                       
+
+                    </div>
+                    
+
+                </div>
+
+
+
+
+            </fieldset>
+            
+            <b:commandButton id="createbotn" value="enter" look="primary"  actionListener="#{coeffCalibrageController.creer()}" update="preForm:preDatalist growlMsg"  />
+
+        </h:form>
+    </b:modal>
+</html>
+

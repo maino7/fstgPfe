@@ -12,14 +12,14 @@
             <h:form id="LigneReceptionViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ligneReceptionController.selected != null}">
-                        <h:outputText value="#{bundle.ViewLigneReceptionLabel_quantiteRecu}"/>
-                        <h:outputText value="#{ligneReceptionController.selected.quantiteRecu}" title="#{bundle.ViewLigneReceptionTitle_quantiteRecu}"/>
                         <h:outputText value="#{bundle.ViewLigneReceptionLabel_reception}"/>
                         <h:outputText value="#{ligneReceptionController.selected.reception}" title="#{bundle.ViewLigneReceptionTitle_reception}"/>
-                        <h:outputText value="#{bundle.ViewLigneReceptionLabel_produit}"/>
-                        <h:outputText value="#{ligneReceptionController.selected.produit}" title="#{bundle.ViewLigneReceptionTitle_produit}"/>
                         <h:outputText value="#{bundle.ViewLigneReceptionLabel_id}"/>
                         <h:outputText value="#{ligneReceptionController.selected.id}" title="#{bundle.ViewLigneReceptionTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewLigneReceptionLabel_quantite}"/>
+                        <h:outputText value="#{ligneReceptionController.selected.quantite}" title="#{bundle.ViewLigneReceptionTitle_quantite}"/>
+                        <h:outputText value="#{bundle.ViewLigneReceptionLabel_produit}"/>
+                        <h:outputText value="#{ligneReceptionController.selected.produit}" title="#{bundle.ViewLigneReceptionTitle_produit}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="LigneReceptionViewDialog.hide()"/>
                 </h:panelGroup>

@@ -12,6 +12,8 @@
             <h:form id="EtudiantViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{etudiantController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEtudiantLabel_etatDeust}"/>
+                        <h:outputText value="#{etudiantController.selected.etatDeust}" title="#{bundle.ViewEtudiantTitle_etatDeust}"/>
                         <h:outputText value="#{bundle.ViewEtudiantLabel_password}"/>
                         <h:outputText value="#{etudiantController.selected.password}" title="#{bundle.ViewEtudiantTitle_password}"/>
                         <h:outputText value="#{bundle.ViewEtudiantLabel_nbrCnx}"/>

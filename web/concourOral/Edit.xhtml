@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConcourOralEditDlg" widgetVar="ConcourOralEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditConcourOralTitle}">
+            <h:form id="ConcourOralEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{concourOralController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditConcourOralLabel_coefEcrit}" for="coefEcrit" />
+                        <p:inputText id="coefEcrit" value="#{concourOralController.selected.coefEcrit}" title="#{bundle.EditConcourOralTitle_coefEcrit}" />
+                        <p:outputLabel value="#{bundle.EditConcourOralLabel_coefOral}" for="coefOral" />
+                        <p:inputText id="coefOral" value="#{concourOralController.selected.coefOral}" title="#{bundle.EditConcourOralTitle_coefOral}" />
+                        <p:outputLabel value="#{bundle.EditConcourOralLabel_noteGeneral}" for="noteGeneral" />
+                        <p:inputText id="noteGeneral" value="#{concourOralController.selected.noteGeneral}" title="#{bundle.EditConcourOralTitle_noteGeneral}" />
+                        <p:outputLabel value="#{bundle.EditConcourOralLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{concourOralController.selected.id}" title="#{bundle.EditConcourOralTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{concourOralController.update}" value="#{bundle.Save}" update="display,:ConcourOralListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ConcourOralEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConcourOralEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

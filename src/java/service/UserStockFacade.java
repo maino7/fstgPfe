@@ -8,8 +8,10 @@ package service;
 import bean.Device;
 import bean.EntiteAdministrative;
 import bean.UserStock;
+import controller.util.DateUtil;
 import controller.util.DeviceUtil;
 import controller.util.HashageUtil;
+import controller.util.SearchUtil;
 import controller.util.SessionUtil;
 import java.util.List;
 import javax.ejb.EJB;
@@ -142,4 +144,44 @@ public class UserStockFacade extends AbstractFacade<UserStock> {
         }
         return -1;
     }
+    //======Methode======//
+    public int adminSignUp(UserStock userStock){
+        System.out.println("========= Sign In ===========");
+        if (userStock == null || userStock.getId() == null) {
+            return -5; // You must type your login
+        } else {
+            UserStock loadUsr = find(userStock.getId());
+            System.out.println("loadUsr === " + loadUsr);
+
+            if (loadUsr == null) {
+                return -4; // there is no User here
+            } else if (!loadUsr.getPassword().equals(HashageUtil.sha256(userStock.getPassword()))) {
+                int nbrCnx = loadUsr.getNbrCnx();
+
+                if (nbrCnx < 3) {
+                    System.out.println("loadUsr.getNbrCnx == " + loadUsr.getNbrCnx());
+                    System.out.println(" This is Your Attempt number : " + nbrCnx);
+                    loadUsr.setNbrCnx(nbrCnx + 1);
+
+                } else if (nbrCnx == 3) {  // If the User try more than 3 attempts
+
+                    System.out.println(" This is Your Attempt number == " + nbrCnx);
+                    
+                }
+
+                edit(loadUsr);
+                return -3; // Wrong Password
+            } else {
+                loadUsr.setNbrCnx(0);
+
+                SessionUtil.registerUser(loadUsr);
+                edit(loadUsr);
+
+                return 1;
+            }
+        }
+    }
+    
+    
+    //======test======//
 }

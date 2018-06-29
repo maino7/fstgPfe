@@ -57,6 +57,13 @@ public class SessionUtil {
         FacesContext.getCurrentInstance().getExternalContext().redirect(pagePath);
 
     }
+    public static void redirect2(String pagePath) throws IOException {
+        if (!pagePath.endsWith(".xhtml")) {
+            pagePath += ".xhtml";
+        }
+        FacesContext.getCurrentInstance().getExternalContext().redirect(pagePath+"?includeViewParams=true");
+
+    }
 
     private static boolean isContextOk(FacesContext fc) {
         boolean res = (fc != null
@@ -90,6 +97,13 @@ public class SessionUtil {
         if (fc != null && fc.getExternalContext() != null) {
             getSession(fc).removeValue("user");
             getSession(fc).removeAttribute("user");
+        }
+    }
+    public static void deconnect(String key) {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        if (fc != null && fc.getExternalContext() != null) {
+            getSession(fc).removeValue(key);
+            getSession(fc).removeAttribute(key);
         }
     }
     public static void deconnectSelectedUser(String cle) {

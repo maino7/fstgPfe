@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NiveauCreateDlg" widgetVar="NiveauCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateNiveauTitle}">
+            <h:form id="NiveauCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{niveauController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateNiveauLabel_concourNiveau}" for="concourNiveau" />
+                        <p:selectOneMenu id="concourNiveau" value="#{niveauController.selected.concourNiveau}" >
+                            <f:selectItems value="#{concourNiveauController.itemsAvailableSelectOne}"
+                                           var="concourNiveauItem"
+                                           itemValue="#{concourNiveauItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateNiveauLabel_filiere}" for="filiere" />
+                        <p:selectOneMenu id="filiere" value="#{niveauController.selected.filiere}" >
+                            <f:selectItems value="#{filiereController.itemsAvailableSelectOne}"
+                                           var="filiereItem"
+                                           itemValue="#{filiereItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateNiveauLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{niveauController.selected.id}" title="#{bundle.CreateNiveauTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateNiveauLabel_semestre}" for="semestre" />
+                        <p:selectOneMenu id="semestre" value="#{niveauController.selected.semestre}" >
+                            <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"
+                                           var="semestreItem"
+                                           itemValue="#{semestreItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{niveauController.create}" value="#{bundle.Save}" update="display,:NiveauListForm:datalist,:growl" oncomplete="handleSubmit(args,'NiveauCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="NiveauCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

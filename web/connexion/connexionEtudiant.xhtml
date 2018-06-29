@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!--    <h:head>
+            
+        </h:head>-->
+    <ui:composition template="/template/simpleTemplate.xhtml">
+        <ui:define name="head">
+
+        </ui:define>
+        <ui:define name="title">
+            FSTG | Connexion Candidat
+        </ui:define>
+        <ui:define name="content">
+            <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+            <style>
+                .master button{
+                    background-color: blue;
+                }
+            </style>
+
+            <div class="row" >
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h:outputText value="Pour une première visite, cliquez sur s'inscrire "/><br></br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h:outputText value="Sinon utilisez votre adresse e-mail et votre mot de passe, fournis lors de la création de votre compte, pour vous connecter."/>
+
+                <div class="col-md-6">
+
+
+                    <div class="col-lg-6 col-lg-offset-1">
+                        <h:form class="form-group">
+                            <p:messages/>
+
+                            <h1><h:outputText value="Connexion"/></h1>
+                            <!--<p:panelGrid columns="2">-->
+
+                            <h5><b>Vous avez déjà créé un compte</b></h5>
+
+                            Connectez vous en utilisant votre CNE et votre mot de passe, fourni lors de la création de votre compte
+                            <br/>
+                            <br/>
+                            <p:outputLabel value="Adresse Mail:" for="id" />
+                            <p:inputText id="id" class="form-control" value="#{connectionController.selectedCand.cne}" />
+                            <p:outputLabel value="Mot de passe:" for="password" />
+                            <p:password id="password" class="form-control" value="#{connectionController.selectedCand.password}" title="Mot de passe" />
+
+                            <!--</p:panelGrid>-->
+                            <br/>
+                            <!--<p:commandButton value="Se connecter" action />-->
+                            <p:commandButton value="Se connecter"   class="btn center btn-info" action="#{connectionController.signInCandiat()}"/>
+                            <br/>
+                            <br/>
+
+                            <br/>
+                            <p:outputLabel id="messageConnection" value="#{connectionController.messageConnection}" style="color: red" />
+                        </h:form>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+
+                    <div class="col-lg-6 col-lg-offset-1">
+                        <h:form class="form-group">
+                            <p:messages/>
+                            <h5><b>Vous n'avez pas encore créé un compte</b> </h5>
+
+                            Cliquez sur le bouton ci-dessous pour commencer la création de votre compte
+
+
+
+                            <p:commandLink value="inscription au Master" class="btn btn-info"  action="#{connectionController.redirect('../concours/formInscriptionMaster.xhtml')}"></p:commandLink>
+                            <br></br>
+                            <br></br>
+                            <p:commandLink value="inscription au Cycle" class="btn btn-info"  action="#{connectionController.redirect('../concours/formInscriptionCycle.xhtml')}"></p:commandLink>
+
+                            <p:outputLabel id="messageConnection" value="#{connectionController.messageConnection}" style="color: red" />
+                        </h:form>
+
+                    </div>
+                </div>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

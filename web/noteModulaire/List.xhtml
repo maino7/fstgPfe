@@ -43,7 +43,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListNoteModulaireTitle_module}"/>
                             </f:facet>
-                            <h:outputText value="#{item.module.nom} (S#{item.module.semestre.libelle})"/>
+                            <h:outputText value="#{item.module}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -59,9 +59,27 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Etat"/>
+                                <h:outputText value="#{bundle.ListNoteModulaireTitle_etat}"/>
                             </f:facet>
                             <h:outputText value="#{item.etat}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNoteModulaireTitle_ptJury}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ptJury}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNoteModulaireTitle_noteBeforeJury}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.noteBeforeJury}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNoteModulaireTitle_mentionBeforeJury}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mentionBeforeJury}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{noteModulaireController.prepareCreate}" update=":NoteModulaireCreateForm" oncomplete="PF('NoteModulaireCreateDialog').show()"/>

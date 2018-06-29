@@ -12,17 +12,8 @@
             <h:form id="LigneMagasinEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ligneMagasinController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditLigneMagasinLabel_quantite}" for="quantite" />
-                        <p:inputText id="quantite" value="#{ligneMagasinController.selected.quantite}" title="#{bundle.EditLigneMagasinTitle_quantite}" />
                         <p:outputLabel value="#{bundle.EditLigneMagasinLabel_quantitaDef}" for="quantitaDef" />
                         <p:inputText id="quantitaDef" value="#{ligneMagasinController.selected.quantitaDef}" title="#{bundle.EditLigneMagasinTitle_quantitaDef}" />
-                        <p:outputLabel value="#{bundle.EditLigneMagasinLabel_produit}" for="produit" />
-                        <p:selectOneMenu id="produit" value="#{ligneMagasinController.selected.produit}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
-                                           var="produitItem"
-                                           itemValue="#{produitItem}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditLigneMagasinLabel_magasin}" for="magasin" />
                         <p:selectOneMenu id="magasin" value="#{ligneMagasinController.selected.magasin}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -32,6 +23,15 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditLigneMagasinLabel_id}" for="id" />
                         <p:inputText id="id" value="#{ligneMagasinController.selected.id}" title="#{bundle.EditLigneMagasinTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditLigneMagasinLabel_quantite}" for="quantite" />
+                        <p:inputText id="quantite" value="#{ligneMagasinController.selected.quantite}" title="#{bundle.EditLigneMagasinTitle_quantite}" />
+                        <p:outputLabel value="#{bundle.EditLigneMagasinLabel_produit}" for="produit" />
+                        <p:selectOneMenu id="produit" value="#{ligneMagasinController.selected.produit}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
+                                           var="produitItem"
+                                           itemValue="#{produitItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{ligneMagasinController.update}" value="#{bundle.Save}" update="display,:LigneMagasinListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LigneMagasinEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LigneMagasinEditDialog.hide()"/>

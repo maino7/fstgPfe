@@ -1,0 +1,987 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+
+        <ui:define name="title">
+            <h:outputText value="Profile"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+
+            <h:outputStylesheet name="bootstrap-3.3.6/css/bootstrap.min.css"/>
+            <h:outputStylesheet name="css/paper-bootstrap-wizard.css"/>
+            <h:outputStylesheet name="css/loginStyle.css"/>
+            <h:outputStylesheet name="css/themify-icons.css"/> 
+
+
+
+            <h:outputScript name="bootstrap-3.3.6/js/bootstrap.min.js" />
+            <h:outputScript name="js/jquery.bootstrap.wizard.js" />
+            <h:outputScript name="js/paper-bootstrap-wizard.js" />
+            <h:outputScript name="js/jquery.validatePaper.min.js" />
+
+            <title> Faculté des Sciences et Techniques Marrakech</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+            <meta charset="utf-8"/>
+            <link href="../resources/css/layout.css" rel="stylesheet" type="text/css" media="all"/>
+            <link rel="shortout icon" type="image/x-icon" href="#{resource['images/favicon.png']}" />
+            <link href="../resources/css/skdslider.css" rel="stylesheet" type="text/css"/>
+            <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBDNr0iHK-GjfC5Oj_D3Us6j6a1gxLDAg8" sensor="false"/>
+
+            <!--
+            had lbootstrap taykbber lketba dial les element .. mayzidha ta wa7d ta nbdlha ana < ABED AFRIAD >
+            <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>-->
+            <meta http-equiv="Content-Language" content="fr"/>
+            <meta name="Author" content="Faculté des Sciences et Techniques Marrakech"/>
+            <meta name="Identifier-URL" content="Faculté des Sciences et Techniques Marrakech"/>
+            <meta name="Copyright" content="© fstg-marrakech"/>
+            <style>
+                .hajar input{
+                    width: 250px;
+                }
+            </style>
+
+            <div class="image-container set-full-height" style="background-image: url('../resources/images/background-banner.jpg')">
+
+                <div class=" row2 menu-top">
+                    <a href="../template/Home.xhtml">
+                        <div id="logo" class="fl_left">
+                            <img src="../resources/images/logo.png" width="80%" alt=""/>
+
+                        </div>
+                    </a>
+                    <div class="fl_left">
+                        <h:form>
+                            <nav id="mainav" class="clear"> 
+                                <!-- ################################################################################################ -->
+                                <ul class="clear">
+                                    <li id="home" class=""><p:commandLink value='Acceuil' action="/template/Home.xhtml?faces-redirect=true"> </p:commandLink></li>
+                                    <li><a class="drop" href="#">Faculté</a>
+                                        <ul>
+                                            <li><p:commandLink value='Mot Du Doyen'  action="/article/MotDuDoyen.xhtml?faces-redirect=true"></p:commandLink></li>
+                                            <li><p:commandLink value="Architecture Pedagogique"  action='/article/architecturePedagogique.xhtml?faces-redirect=true'></p:commandLink></li>
+                                            <li> <p:commandLink value="FSTG En bref"  action='/article/FSTGEnBref.xhtml?faces-redirect=true' ></p:commandLink></li>
+                                            <li> <p:commandLink value="FSTG En chiffre"  action='/article/FSTGEnChiffr.xhtml?faces-redirect=true' ></p:commandLink></li>
+                                            <li><p:commandLink value="Departements" action="/departement/Departement.xhtml?faces-redirect=true"/></li>
+
+                                        </ul>
+                                    </li>
+
+                                    <li><a class="drop">Formation</a>
+                                        <ul>
+                                            <li><a href="#" class="drop">Formation Initiale &raquo;</a>
+
+                                                <ul>  
+                                                    <li><p:commandLink value="Tronc Commun" ></p:commandLink></li>
+                                                    <li><p:commandLink value="Licences" ></p:commandLink></li>
+                                                    <li><p:commandLink value="Filière d'Ingénieurs" ></p:commandLink></li>
+                                                    <li><p:commandLink value="Masters" ></p:commandLink></li>
+                                                </ul>
+                                            </li>
+                                            <li><a class="drop" href="#">Formation Continue &raquo;</a>
+                                                <ul>
+                                                    <!--<li><p:commandLink value="Licence Professionelle" action="#{filiereController.toLicenceContinu()}"></p:commandLink></li>-->
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="drop" href="#">Espace Etudiant</a>
+                                        <ul>
+                                            <li><p:commandLink value="Reglement Interieur"  action='/article/reglementInterieur.xhtml?faces-redirect=true'></p:commandLink></li>
+                                            <li><p:commandLink value="Planning Annuel"  action="/article/planningAnnuel.xhtml?faces-redirect=true"></p:commandLink></li>
+                                        </ul>
+                                    </li>
+
+                                    <li><a class="drop" href="#">Recherche Scientifique</a>
+                                        <ul>
+                                            <li><p:commandLink value="Laboratoires" action="/laboratoire/AllLaboratoire?faces-redirect=true"></p:commandLink></li>
+
+                                            <li><p:commandLink value="Equipes"  action='/article/Equipes.xhtml?faces-redirect=true'  ></p:commandLink></li>
+                                            <li><p:commandLink value="CED-SI"  action='/article/CED-SI.xhtml?faces-redirect=true'  ></p:commandLink></li>
+                                            <li><p:commandLink value="UFR"  action='/article/UFR.xhtml?faces-redirect=true' ></p:commandLink></li>
+                                            <li><p:commandLink value="Bourse d'Excellence"  action='/article/Bourse excellence.xhtml?faces-redirect=true' ></p:commandLink></li>
+
+                                        </ul>
+                                    </li>
+
+                                    <li><a class="drop" href="#">Activités</a>
+                                        <ul>
+                                            <li><p:commandLink value="Manifestations">Manifestations</p:commandLink></li>
+                                            <li><p:commandLink value="Culturelles">Culturelles</p:commandLink></li>
+                                            <li><p:commandLink value="Clubs et Associations"></p:commandLink></li>
+                                            <li><p:commandLink value="Sportives"></p:commandLink></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="drop" href="#">En Ligne</a>
+                                        <ul>
+                                            <li><a href="http://www.fstg-marrakech.ac.ma/moodle">Platform Moodle</a></li>
+                                            <li><p:commandLink value="Bibliothèque"  ></p:commandLink></li>
+                                            <li><p:commandLink value="Messagerie"   ></p:commandLink></li>
+                                            <li><p:commandLink value="Cours et Support"  ></p:commandLink></li>
+
+
+                                        </ul>
+                                    </li>
+
+
+
+                                </ul>
+                                <!-- ################################################################################################ --> 
+                            </nav>
+                        </h:form>
+                    </div>
+                </div>   
+                <!--   Big container   -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+
+                            <!--      Wizard container        -->
+                            <div class="wizard-container" >
+                                <div class="card wizard-card" data-color="orange" id="wizard">
+
+                                    <h:form>
+                                        <!--        You can switch " data-color="green" "  with one of the next bright colors: "blue", "azure", "orange", "red"       -->
+                                        <div class="wizard-header">
+                                            <h3 class="wizard-title"><b>Formulaire de Préinscription Master d'Université</b>    </h3>
+                                            <p class="category">date Actuelle</p>
+                                        </div>
+
+                                        <div class="wizard-navigation">
+                                            <div class="progress-with-circle">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" style="width: 15%;"></div>
+                                            </div>
+                                            <ul>
+                                                <li>
+                                                    <a href="#info" data-toggle="tab">
+                                                        <div class="icon-circle">
+                                                            <i class="ti-info"></i>
+                                                        </div>
+                                                        Informations Personnelles
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#company" data-toggle="tab">
+                                                        <div class="icon-circle">
+                                                            <i class="ti-home"></i>
+                                                        </div>
+                                                        Formations Universitaires
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#details" data-toggle="tab">
+                                                        <div class="icon-circle">
+                                                            <i class="ti-user"></i>
+                                                        </div>
+                                                        Choix de la filière
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#summary" data-toggle="tab">
+                                                        <div class="icon-circle">
+                                                            <i class="ti-clipboard"></i>
+                                                        </div>
+                                                        Téléchargement de l'attestation
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                        <div class="tab-content">
+                                            <div class="tab-pane" id="info">
+                                                <div class="row">
+
+                                                    <h5 class="info-text"> Informations Personnelles</h5>
+                                                    <div class="col-sm-12">
+                                                        <p:messages id="msgs" />
+                                                        <p:panelGrid id="infoGrid" styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
+                                                            <p:row>
+
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nom : " for="n" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="n" placeholder="tapez votre Nom ici" value="#{candidatController.selected.nomLat}" required="true" />
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:outputLabel for="nom" value="Nom : (arabe)" style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:inputTextarea   rows="1" style="width:250px;"   id="nom" placeholder="tapez votre Nom ici" value="#{candidatController.selected.nomAr}" required="true" />
+
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+
+                                                                <p:column>
+                                                                    <p:outputLabel value="Prénom :" for="pr" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:inputTextarea rows="1" style="width:250px;"   id="pr" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.prenomLat}" required="true" />
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:outputLabel for="p" value="Prénom : (arabe)" style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:inputTextarea rows="1" style="width:250px;"    id="p" placeholder="tapez votre Prénom ici" value="#{candidatController.selected.prenomAr}" required="true" />
+
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+
+                                                                <p:column>
+                                                                    <p:outputLabel value="Adresse mail :" for="ad" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:inputText style="width:250px;"   id="ad" placeholder="tapez votre E-mail ici" value="#{candidatController.selected.email}" required="true" >
+                                                                        <p:ajax event="keyup" update="out1" />
+                                                                    </p:inputText>
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:outputLabel for="pa" value="Lieu de naissance : " style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:inputTextarea rows="1" style="width:250px;"    id="pa" placeholder="tapez votre lieu de naissance ici" value="#{candidatController.selected.lieuNaissance}" required="true" />
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column style="width: 100px">
+                                                                    <p:outputLabel value="Nationnalité :" for="ana" style="padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px">
+                                                                    <p:selectOneMenu class="form-control" id="ana"  value="#{candidatController.selected.pays}" style="width: 250px;height: 40px" required="true" >
+                                                                        <f:selectItems value="#{paysController.itemsAvailableSelectOne}" 
+                                                                                       var="paysItem"
+                                                                                       itemValue="#{paysItem}"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Téléphone:" for="tel" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:inputText style="width:250px;"   id="tel" placeholder="06 XX XX XX XX" value="#{candidatController.selected.telephone}" required="true" >
+                                                                        <f:validateLength minimum="10" />
+                                                                        <p:ajax update="papati" event="keyup" />
+                                                                    </p:inputText>
+                                                                    <p:message for="tel" id="papati" display="icon" />
+                                                                </p:column>
+
+                                                            </p:row>
+
+                                                            <p:row>
+
+                                                                <p:column>
+                                                                    <p:outputLabel value="Sexe :" for="malee" style="text-align: left;padding-top: 10px;width: 200px" />
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:selectOneRadio id="malee" value="#{candidatController.selected.sexe}" required="true">
+                                                                        <f:selectItem itemLabel="male" itemValue="#{true}" />
+                                                                        <f:selectItem itemLabel="female" itemValue="#{false}" />
+
+                                                                    </p:selectOneRadio>
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:outputLabel value="Handicap :" for="mama" style="text-align: left;padding-top: 10px;width: 200px" />
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:selectOneRadio id="mama" value="#{candidatController.selected.handicap}" required="true">
+                                                                        <f:selectItem itemLabel="Handicap" itemValue="#{true}" />
+                                                                        <f:selectItem itemLabel="Non handicap" itemValue="#{false}" />
+
+                                                                    </p:selectOneRadio>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="CNE :" for="CNE" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:inputText style="width:250px;"   id="CNE" placeholder="Le CNE doit contenir 10 chiffres"  value="#{candidatController.selected.cne}" required="true">
+
+                                                                        <f:validateLength minimum="10" />
+                                                                        <p:ajax update="msgLastname" event="keyup" />
+                                                                    </p:inputText>
+                                                                    <p:message for="CNE" id="msgLastname" display="icon" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="CIN :(ou numéro de passport pour les étrangers)" for="CIN" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column>
+                                                                    <p:inputText  style="width:250px;"   id="CIN" placeholder="tapez votre CIN ici" value="#{candidatController.selected.cin}" required="true" >
+                                                                        <f:validateLength minimum="8" />
+                                                                        <p:ajax update="mamitaa" event="keyup" />
+                                                                    </p:inputText>
+                                                                    <p:message for="CIN" id="mamitaa" display="icon" />
+                                                                </p:column>
+
+                                                            </p:row>
+
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Date de Naissance" for="dateCreation" style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:calendar id="dateCreation" pattern="MM/dd/yyyy" value="#{candidatController.selected.dateNaissance}" styleClass="hajar" required="true" />
+                                                                </p:column>
+                                                                <p:column style="width: 100px">
+                                                                    <p:outputLabel value="Profession de la mère :" for="maman" style="padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px">
+                                                                    <p:selectOneMenu class="form-control" id="maman"  value="#{candidatController.selected.professionDeLaMere}" style="width: 250px;height: 40px" required="true" >
+                                                                        <f:selectItems value="#{professionController.itemsAvailableSelectOne}" 
+                                                                                       var="professionItem"
+                                                                                       itemValue="#{professionItem}"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+
+                                                                <p:column>
+                                                                    <p:outputLabel value="Adresse :" for="instructions" style="text-align: left;padding-top: 10px;width: 210px" />
+                                                                </p:column>
+                                                                <p:column colspan="3">
+                                                                    <p:inputTextarea rows="6" style="width: 100%"   id="instructions" placeholder="Adresse" value="#{candidatController.selected.adresse}" required="true" />
+                                                                </p:column>
+                                                            </p:row>
+                                                        </p:panelGrid>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="tab-pane" id="company">
+                                                <div class="row">
+                                                    <h5 class="info-text"> Formations universitaires </h5>
+
+                                                    <div class="col-sm-12">
+                                                        <p:panelGrid columns="2"  id="companyGrid" styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Année d'obtention du baccalauréat:" for="animal" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+                                                                <p:column style="width: 260px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control" id="animal"  value="#{candidatController.selected.anneeBac}" style="width: 250px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="2014" itemLabel="2014"/>
+                                                                        <f:selectItem itemValue="2015" itemLabel="2015"/>
+                                                                        <f:selectItem itemValue="2016" itemLabel="2016"/>
+                                                                        <f:selectItem itemValue="2017" itemLabel="2017"/>
+
+                                                                    </p:selectOneMenu>
+                                                                </p:column>  
+                                                                <p:column>
+                                                                    <p:outputLabel value="Mention Bac : " for="ouss" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control" id="ouss"  value="#{candidatController.selected.mentionBac}" style="width: 250px;height: 40px" required="true" >
+
+                                                                        <f:selectItem itemValue="Passable" itemLabel="Passable"/>
+                                                                        <f:selectItem itemValue="Assez Bien" itemLabel="Assez Bien"/>
+                                                                        <f:selectItem itemValue="Bien" itemLabel="Bien"/>
+                                                                        <f:selectItem itemValue="Très Bien" itemLabel="Très Bien"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="1ère inscription dans l'enseignement supérieur:" for="hans" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column style="padding-top: 10px">
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"   id="hans" placeholder="EX: 2016" required="true" value="#{candidatController.selected.anneeInscriptionEnsSup}" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Année d'obtention de licence:" for="c" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column style="padding-top: 10px">
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px" required="true"  id="c" placeholder="EX: 2016" value="#{candidatController.selected.anneeObtLicence}" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Fonctionnaire :" for="fction" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:selectBooleanButton id="fction" class="myBtn" required="true" value="#{candidatController.selected.fonctionnaire}" onLabel="Fonctionnaire" offLabel="Pas fonctionnaire" style="width:130px;height: 40px;text-align: center;padding: 8px 0;"  >
+                                                                    </p:selectBooleanButton>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel for="thursday" value="Spécialité Licence:" style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;">
+                                                                    <p:selectOneMenu class="form-control" id="thursday" required="true" value="#{candidatController.selected.specialite}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                        <f:selectItem itemValue="Chimie" itemLabel="Chimie"/>
+                                                                        <f:selectItem itemValue="Physiques" itemLabel="Physiques"/>
+                                                                        <f:selectItem itemValue="Informatiques" itemLabel="Informatiques"/>
+                                                                        <f:selectItem itemValue="Mathématiques" itemLabel="Mathematiques"/>
+
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Type Licence :" for="mamati" style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;">
+                                                                    <p:selectOneMenu class="form-control" id="mamati" required="true" value="#{candidatController.selected.licence}" style="width: 250px;height: 40px;padding-right: 00px;" >
+                                                                        <f:selectItems value="#{licenceController.itemsAvailableSelectOne}" 
+                                                                                       var="licenceItem"
+                                                                                       itemValue="#{licenceItem}"/>
+
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel for="b" value="option Licence:" style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column style="padding-top: 10px">
+                                                                    <p:inputTextarea rows="1" style="width:250px;padding-bottom: 10px"  required="true"  id="b" placeholder="EX: 2016" value="#{candidatController.selected.optionLicence}" />
+
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Mention Licence : " for="d" style="text-align: left;padding-top: 10px" />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;">
+                                                                    <p:selectOneMenu class="form-control" id="d" required="true" value="#{candidatController.selected.mentionDiplome}" style="width: 250px;height: 40px;padding-right: 00px;" >
+
+                                                                        <f:selectItems value="#{mentionDiplomeController.itemsAvailableSelectOne}" 
+                                                                                       var="mentionDiplomeItem"
+                                                                                       itemValue="#{mentionDiplomeItem}"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Etablissmenet ayant délivré la licence : " for="w" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+                                                                <p:column style="width: 260px;">
+                                                                    <p:selectOneMenu class="form-control" id="w"  required="true" value="#{candidatController.selected.etablissement}" style="width: 250px;height: 40px;padding-right: 00px;" >
+
+                                                                        <f:selectItems value="#{etablissementTypeController.itemsAvailableSelectOne}" 
+                                                                                       var="etablissementTypeItem"
+                                                                                       itemValue="#{etablissementTypeItem}"/>
+
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+
+                                                            </p:row>
+                                                        </p:panelGrid>
+                                                        <p:panelGrid columns="5"  styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
+
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Note S1:"  />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS1}" required="true" />
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Mode de validation :" />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation1}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="VPC" itemLabel="VPC"/>
+                                                                        <f:selectItem itemValue="Valide" itemLabel="Validé"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Année validation :"  />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation1}" style="width: 150px;height: 40px" required="true"  >
+                                                                        <f:selectItem itemValue="2012-2013" itemLabel="2012-2013"/>
+                                                                        <f:selectItem itemValue="2013-2014" itemLabel="2013-2014"/>
+                                                                        <f:selectItem itemValue="2014-2015" itemLabel="2014-2015"/>
+                                                                        <f:selectItem itemValue="2015-2016" itemLabel="2015-2016"/>
+                                                                        <f:selectItem itemValue="2016-2017" itemLabel="2016-2017"/>
+                                                                        <f:selectItem itemValue="2017-2018" itemLabel="2017-2018"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nombre d'inscription :"  />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription1}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="0" itemLabel="0"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="1"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="2"/>
+                                                                        <f:selectItem itemValue="3" itemLabel="3"/>
+                                                                        <f:selectItem itemValue="4" itemLabel="4"/>
+                                                                        <f:selectItem itemValue="5" itemLabel="5"/>
+                                                                        <f:selectItem itemValue="6" itemLabel="6"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nombre de modules validés par rattrapage pour ce semestre :"  />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage1}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="0" itemLabel="0"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="1"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="2"/>
+                                                                        <f:selectItem itemValue="3" itemLabel="3"/>
+                                                                        <f:selectItem itemValue="4" itemLabel="4"/>
+                                                                        <f:selectItem itemValue="5" itemLabel="5"/>
+                                                                        <f:selectItem itemValue="6" itemLabel="6"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                        </p:panelGrid>
+                                                        <p:panelGrid columns="5"  styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
+
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Note S2:"  />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS2}" required="true" />
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Mode de validation :" />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation2}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="VPC" itemLabel="VPC"/>
+                                                                        <f:selectItem itemValue="Valide" itemLabel="Validé"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Année validation :"  />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation2}" style="width: 150px;height: 40px" required="true">
+                                                                        <f:selectItem itemValue="2012-2013" itemLabel="2012-2013"/>
+                                                                        <f:selectItem itemValue="2013-2014" itemLabel="2013-2014"/>
+                                                                        <f:selectItem itemValue="2014-2015" itemLabel="2014-2015"/>
+                                                                        <f:selectItem itemValue="2015-2016" itemLabel="2015-2016"/>
+                                                                        <f:selectItem itemValue="2016-2017" itemLabel="2016-2017"/>
+                                                                        <f:selectItem itemValue="2017-2018" itemLabel="2017-2018"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nombre d'inscription :"  />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription2}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="0" itemLabel="0"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="1"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="2"/>
+                                                                        <f:selectItem itemValue="3" itemLabel="3"/>
+                                                                        <f:selectItem itemValue="4" itemLabel="4"/>
+                                                                        <f:selectItem itemValue="5" itemLabel="5"/>
+                                                                        <f:selectItem itemValue="6" itemLabel="6"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nombre de modules validés par rattrapage pour ce semestre :"  />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage2}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="0" itemLabel="0"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="1"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="2"/>
+                                                                        <f:selectItem itemValue="3" itemLabel="3"/>
+                                                                        <f:selectItem itemValue="4" itemLabel="4"/>
+                                                                        <f:selectItem itemValue="5" itemLabel="5"/>
+                                                                        <f:selectItem itemValue="6" itemLabel="6"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                        </p:panelGrid>
+                                                        <p:panelGrid columns="5"  styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
+
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Note S3:"  />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS3}" required="true" />
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Mode de validation :" />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation3}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="VPC" itemLabel="VPC"/>
+                                                                        <f:selectItem itemValue="Valide" itemLabel="Validé"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Année validation :"  />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation3}" style="width: 150px;height: 40px" required="true">
+                                                                        <f:selectItem itemValue="2012-2013" itemLabel="2012-2013"/>
+                                                                        <f:selectItem itemValue="2013-2014" itemLabel="2013-2014"/>
+                                                                        <f:selectItem itemValue="2014-2015" itemLabel="2014-2015"/>
+                                                                        <f:selectItem itemValue="2015-2016" itemLabel="2015-2016"/>
+                                                                        <f:selectItem itemValue="2016-2017" itemLabel="2016-2017"/>
+                                                                        <f:selectItem itemValue="2017-2018" itemLabel="2017-2018"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nombre d'inscription :"  />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription3}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="0" itemLabel="0"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="1"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="2"/>
+                                                                        <f:selectItem itemValue="3" itemLabel="3"/>
+                                                                        <f:selectItem itemValue="4" itemLabel="4"/>
+                                                                        <f:selectItem itemValue="5" itemLabel="5"/>
+                                                                        <f:selectItem itemValue="6" itemLabel="6"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nombre de modules validés par rattrapage pour ce semestre :"  />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage3}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="0" itemLabel="0"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="1"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="2"/>
+                                                                        <f:selectItem itemValue="3" itemLabel="3"/>
+                                                                        <f:selectItem itemValue="4" itemLabel="4"/>
+                                                                        <f:selectItem itemValue="5" itemLabel="5"/>
+                                                                        <f:selectItem itemValue="6" itemLabel="6"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                        </p:panelGrid>
+                                                        <p:panelGrid columns="5"  styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
+
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Note S4:"  />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS4}" required="true"/>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Mode de validation :" />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation4}" style="width: 150px;height: 40px" required="true">
+                                                                        <f:selectItem itemValue="VPC" itemLabel="VPC"/>
+                                                                        <f:selectItem itemValue="Valide" itemLabel="Validé"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Année validation :"  />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation4}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="2012-2013" itemLabel="2012-2013"/>
+                                                                        <f:selectItem itemValue="2013-2014" itemLabel="2013-2014"/>
+                                                                        <f:selectItem itemValue="2014-2015" itemLabel="2014-2015"/>
+                                                                        <f:selectItem itemValue="2015-2016" itemLabel="2015-2016"/>
+                                                                        <f:selectItem itemValue="2016-2017" itemLabel="2016-2017"/>
+                                                                        <f:selectItem itemValue="2017-2018" itemLabel="2017-2018"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nombre d'inscription :"  />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription4}" style="width: 150px;height: 40px" required="true">
+                                                                        <f:selectItem itemValue="0" itemLabel="0"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="1"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="2"/>
+                                                                        <f:selectItem itemValue="3" itemLabel="3"/>
+                                                                        <f:selectItem itemValue="4" itemLabel="4"/>
+                                                                        <f:selectItem itemValue="5" itemLabel="5"/>
+                                                                        <f:selectItem itemValue="6" itemLabel="6"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nombre de modules validés par rattrapage pour ce semestre :"  />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage4}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="0" itemLabel="0"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="1"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="2"/>
+                                                                        <f:selectItem itemValue="3" itemLabel="3"/>
+                                                                        <f:selectItem itemValue="4" itemLabel="4"/>
+                                                                        <f:selectItem itemValue="5" itemLabel="5"/>
+                                                                        <f:selectItem itemValue="6" itemLabel="6"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                        </p:panelGrid>
+                                                        <p:panelGrid columns="5"  styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
+
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Note S5:"  />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS5}" required="true" />
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Mode de validation :" />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation5}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="VPC" itemLabel="VPC"/>
+                                                                        <f:selectItem itemValue="Valide" itemLabel="Validé"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Année validation :"  />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation5}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="2012-2013" itemLabel="2012-2013"/>
+                                                                        <f:selectItem itemValue="2013-2014" itemLabel="2013-2014"/>
+                                                                        <f:selectItem itemValue="2014-2015" itemLabel="2014-2015"/>
+                                                                        <f:selectItem itemValue="2015-2016" itemLabel="2015-2016"/>
+                                                                        <f:selectItem itemValue="2016-2017" itemLabel="2016-2017"/>
+                                                                        <f:selectItem itemValue="2017-2018" itemLabel="2017-2018"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nombre d'inscription :"  />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription5}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="0" itemLabel="0"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="1"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="2"/>
+                                                                        <f:selectItem itemValue="3" itemLabel="3"/>
+                                                                        <f:selectItem itemValue="4" itemLabel="4"/>
+                                                                        <f:selectItem itemValue="5" itemLabel="5"/>
+                                                                        <f:selectItem itemValue="6" itemLabel="6"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nombre de modules validés par rattrapage pour ce semestre :"  />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage5}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="0" itemLabel="0"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="1"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="2"/>
+                                                                        <f:selectItem itemValue="3" itemLabel="3"/>
+                                                                        <f:selectItem itemValue="4" itemLabel="4"/>
+                                                                        <f:selectItem itemValue="5" itemLabel="5"/>
+                                                                        <f:selectItem itemValue="6" itemLabel="6"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                        </p:panelGrid>
+                                                        <p:panelGrid columns="5"  styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
+
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Note S6:"  /> required="true"
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:inputText  style="width:100px;" placeholder="XX,XX"   value="#{candidatController.noteS6}" required="true" />
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Mode de validation :" />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.modeDeValidation6}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="VPC" itemLabel="VPC"/>
+                                                                        <f:selectItem itemValue="Valide" itemLabel="Validé"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Année validation :"  />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.anneeDeValidation6}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="2012-2013" itemLabel="2012-2013"/>
+                                                                        <f:selectItem itemValue="2013-2014" itemLabel="2013-2014"/>
+                                                                        <f:selectItem itemValue="2014-2015" itemLabel="2014-2015"/>
+                                                                        <f:selectItem itemValue="2015-2016" itemLabel="2015-2016"/>
+                                                                        <f:selectItem itemValue="2016-2017" itemLabel="2016-2017"/>
+                                                                        <f:selectItem itemValue="2017-2018" itemLabel="2017-2018"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nombre d'inscription :"  />
+                                                                </p:column>
+                                                                <p:column style="width: 160px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.nombreDinscription6}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="0" itemLabel="0"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="1"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="2"/>
+                                                                        <f:selectItem itemValue="3" itemLabel="3"/>
+                                                                        <f:selectItem itemValue="4" itemLabel="4"/>
+                                                                        <f:selectItem itemValue="5" itemLabel="5"/>
+                                                                        <f:selectItem itemValue="6" itemLabel="6"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Nombre de modules validés par rattrapage pour ce semestre :"  />
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control"  value="#{candidatController.valideApresRattrapage6}" style="width: 150px;height: 40px" required="true" >
+                                                                        <f:selectItem itemValue="0" itemLabel="0"/>
+                                                                        <f:selectItem itemValue="1" itemLabel="1"/>
+                                                                        <f:selectItem itemValue="2" itemLabel="2"/>
+                                                                        <f:selectItem itemValue="3" itemLabel="3"/>
+                                                                        <f:selectItem itemValue="4" itemLabel="4"/>
+                                                                        <f:selectItem itemValue="5" itemLabel="5"/>
+                                                                        <f:selectItem itemValue="6" itemLabel="6"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                        </p:panelGrid>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane" id="details">
+
+                                                <h5 class="info-text">Your contact details and location</h5>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <p:panelGrid id="detailGrid" styleClass="ui-noborder" style="margin: 0 auto;width: 100%">
+
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="Filières : " for="choix1" style="text-align: left;padding-top: 10px;width: 200px"/>
+                                                                </p:column>
+
+                                                                <p:column style="width: 260px;padding-right: 360px;">
+                                                                    <p:selectOneMenu class="form-control" id="choix1"  value="#{candidatController.concourNiveau}" style="width: 250px;height: 40px" required="true" >
+                                                                        <f:selectItem itemLabel="walo" itemValue="#{null}" />
+                                                                        <f:selectItems value="#{concourNiveauController.itemsAvailableSelectOne}" 
+                                                                                       var="filiereItem"
+                                                                                       itemValue="#{filiereItem}"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+
+                                                            </p:row>
+                                                        </p:panelGrid>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="summary">
+                                                <h5 class="info-text">A summary of your booking. </h5>
+                                                <div class="row">
+                                                    Merci pour votre préinscription en ligne au concours  de Master de la F.S.T Marrakech, un e-mail vous sera envoyer sur votre email : 
+                                                    <h:outputText id="out1" value="#{candidatController.selected.email}" /> <br></br>
+                                                    Cliquez sur ce button pour recevoir un mail pour confirmer votre préinscription: <br></br>
+                                                    <p:commandButton ajax="false" actionListener="#{candidatController.saveMaster()}" update="display" value="Confirmer Votre préinscription" style="width:100%;height: 40px;text-align: center"  />  
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wizard-footer">
+                                            <div class="pull-right">
+                                                <input type='button' class='btn btn-next btn-fill btn-warning btn-wd' name='next' value='Next' />
+                                                <input type='button' class='btn btn-finish btn-fill btn-warning btn-wd' name='finish' value='Finish' />
+                                            </div>
+
+                                            <div class="pull-left">
+                                                <input type='button' class='btn btn-previous btn-default btn-wd' name='previous' value='Previous' />
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                    </h:form>
+                                </div>
+                            </div> <!-- wizard container -->
+                        </div>
+                    </div> <!-- row -->
+                </div> <!--  big container -->
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>

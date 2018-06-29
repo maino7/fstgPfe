@@ -21,6 +21,8 @@
                                            var="anneeMinItem"
                                            itemValue="#{anneeMinItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAnneUniversitaireLabel_anneeUni}" for="anneeUni" />
+                        <p:inputText id="anneeUni" value="#{anneUniversitaireController.selected.anneeUni}" title="#{bundle.EditAnneUniversitaireTitle_anneeUni}" />
                         <p:outputLabel value="#{bundle.EditAnneUniversitaireLabel_anneeMax}" for="anneeMax" />
                         <p:selectOneMenu id="anneeMax" value="#{anneUniversitaireController.selected.anneeMax}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
